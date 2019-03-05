@@ -1,21 +1,23 @@
 public class RegularTrans extends Transaction {
+    private final int fromAccNum;
+    private final int toAccNum;
 
     public RegularTrans(int fromAccNum, int toAccNum, double amount) {
         super(amount);
-        this.setFromAccNum(fromAccNum);
-        this.setToAccNum(toAccNum);
+        this.fromAccNum = fromAccNum;
+        this.toAccNum = toAccNum;
     }
 
     @Override
     void begin(){
-        Loader.getAccount(this.getFromAccNum()).transferOut(this.getAmount());
-        Loader.getAccount(this.getToAccNum()).transferIn(this.getAmount());
+        Loader.getAccount(this.fromAccNum).transferOut(this.getAmount());
+        Loader.getAccount(this.toAccNum).transferIn(this.getAmount());
     }
 
     @Override
     public Transaction reverse() {
-        int toAcc = this.getFromAccNum();
-        int fromAcc = this.getToAccNum();
+        int toAcc = this.fromAccNum;
+        int fromAcc = this.toAccNum;
         return new RegularTrans(fromAcc, toAcc, this.getAmount());
     }
 }

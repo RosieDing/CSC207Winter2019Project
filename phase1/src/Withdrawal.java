@@ -1,18 +1,19 @@
 public class Withdrawal extends Transaction {
+    private final int fromAccNum;
 
     public Withdrawal(int fromAccount, double amount) {
         super(amount);
-        this.setFromAccNum(fromAccount);
+        this.fromAccNum = fromAccount;
     }
 
     @Override
     void begin() {
-        Loader.getAccount(this.getFromAccNum()).transferOut(this.getAmount());
+        Loader.getAccount(this.fromAccNum).transferOut(this.getAmount());
     }
 
     @Override
     public Deposit reverse() {
-        int toAcc = this.getFromAccNum();
+        int toAcc = this.fromAccNum;
         return new Deposit(toAcc, this.getAmount());
     }
 }

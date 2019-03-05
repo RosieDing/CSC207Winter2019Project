@@ -1,15 +1,16 @@
 public class PayBill extends Transaction{
-    private String to;
+    private final String to;
+    private final int fromAccNum;
 
     public PayBill(int fromAccount, String to, double amount) {
         super(amount);
-        this.setFromAccNum(fromAccount);
+        this.fromAccNum = fromAccount;
         this.to = to;
     }
 
     @Override
     void begin() {
-        Loader.getAccount(this.getFromAccNum()).transferOut(this.getAmount());
+        Loader.getAccount(this.fromAccNum).transferOut(this.getAmount());
     }
 
     @Override
@@ -24,9 +25,9 @@ public class PayBill extends Transaction{
 
     @Override
     public String toString() {
-        Account acc = Loader.getAccount(this.getFromAccNum());
+        Account acc = Loader.getAccount(this.fromAccNum);
         int userId = acc.getOwnerID();
-        return (userId + "," + this.getFromAccNum() + "," + to + ","
+        return (userId + "," + this.fromAccNum + "," + to + ","
                 + "time" + "," + this.getAmount() + "\n")
                 ;
     }
