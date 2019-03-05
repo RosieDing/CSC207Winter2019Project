@@ -24,10 +24,10 @@ public class PayBill extends Transaction{
 
     @Override
     public String toString() {
-        String className = Loader.getAccount(this.getFromAccNum()).getClass().getName();
-        return ("time" + "pay " + this.getAmount() +
-                " to " + to + " from " + className + " "
-                + this.getFromAccNum() + "\n")
+        Account acc = Loader.getAccount(this.getFromAccNum());
+        int userId = acc.getOwnerID();
+        return (userId + "," + this.getFromAccNum() + "," + to + ","
+                + "time" + "," + this.getAmount() + "\n")
                 ;
     }
 }
