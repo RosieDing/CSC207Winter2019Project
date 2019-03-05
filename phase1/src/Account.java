@@ -4,22 +4,21 @@ import java.io.Serializable;
 public abstract class Account implements Withdrawable, TransferInable,Payable, Serializable {
     private int accountNum;
     private int balance;
-    private String dateOfCreationg;
+    private String dateOfCreation;
     private int ownerID;
 
     void Account(int ownerID){
         this.ownerID = ownerID;
     }
-
     abstract int getBalance();
 
     abstract void setBalance();
 
     void setDateOfCreation(String date){
-        this.dateOfCreationg = date;
+        this.dateOfCreation = date;
     }
     public String getDateOfCreation(){
-        return dateOfCreationg;
+        return dateOfCreation;
     }
     public abstract void transferIn(int amount);
 
@@ -30,7 +29,4 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
     abstract int getAccountNum();
 
     public int getOwnerID(){return ownerID;}
-
-    public void setOwnerID(int new_owner){ this.ownerID = new_owner;}
-
 }
