@@ -27,7 +27,7 @@ public abstract class Transaction {
         return amount;
     }
 
-    public abstract void begin();
+    abstract void begin();  //make it default
 
     public abstract Transaction reverse();
 

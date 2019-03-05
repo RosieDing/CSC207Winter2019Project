@@ -7,7 +7,7 @@ public class RegularTrans extends Transaction {
     }
 
     @Override
-    public void begin(){
+    void begin(){
         Loader.getAccount(this.getFromAccNum()).transferOut(this.getAmount());
         Loader.getAccount(this.getToAccNum()).transferIn(this.getAmount());
     }
@@ -16,8 +16,6 @@ public class RegularTrans extends Transaction {
     public Transaction reverse() {
         int toAcc = this.getFromAccNum();
         int fromAcc = this.getToAccNum();
-        RegularTrans e = new RegularTrans(fromAcc, toAcc, this.getAmount());
-        e.begin();
-        return e;
+        return new RegularTrans(fromAcc, toAcc, this.getAmount());
     }
 }
