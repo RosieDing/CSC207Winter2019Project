@@ -8,8 +8,12 @@ public class TransactionManager {
     // deposit writer
     // pay Bill writer
 
-    // to be fixed.
-    public void makeTransaction(){}
+    // factory method to be fixed.
+    public void makeTransaction(Transaction e){
+        if (e.getToAccNum() != 0) {
+
+        }
+    }
 
     public Transaction getUserLastTrans(int userId) {
         Transaction e = userTransList.get(userId).pop();
@@ -28,13 +32,13 @@ public class TransactionManager {
 
     public void addTrans(Transaction trans){
         if (trans instanceof Deposit) {
-            int userId = Loader.getAccount(trans.getToAccNum()).getOwnerId();
+            int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
             int accNum = trans.getToAccNum();
             addHelper(userId, accNum, trans);
             // call save TransactionManager
             // call save to deposit.txt
         } else {
-            int userId = Loader.getAccount(trans.getFromAccNum()).getOwnerId();
+            int userId = Loader.getAccount(trans.getFromAccNum()).getOwnerID();
             int accNum = trans.getFromAccNum();
             addHelper(userId, accNum, trans);
             // call save userTransManager
