@@ -1,0 +1,7 @@
+import java.io.Serializable;
+
+public abstract class DebtAccount implements Withdrawable, TransferInable,Payable, Serializable extends Account{
+    private int limit;
+    abstract int getLimit;
+    abstract void setLimit
+}
