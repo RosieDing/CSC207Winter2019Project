@@ -6,6 +6,10 @@ public class Withdrawal extends Transaction {
         this.fromAccNum = fromAccount;
     }
 
+    public int getFromAccNum() {
+        return fromAccNum;
+    }
+
     @Override
     void begin() {
         Loader.getAccount(this.fromAccNum).transferOut(this.getAmount());

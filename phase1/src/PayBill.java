@@ -8,6 +8,8 @@ public class PayBill extends Transaction{
         this.to = to;
     }
 
+    public int getFromAccNum(){ return fromAccNum; }
+
     @Override
     void begin() {
         Loader.getAccount(this.fromAccNum).transferOut(this.getAmount());

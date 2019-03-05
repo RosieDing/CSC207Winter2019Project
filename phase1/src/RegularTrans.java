@@ -8,6 +8,14 @@ public class RegularTrans extends Transaction {
         this.toAccNum = toAccNum;
     }
 
+    public int getFromAccNum() {
+        return fromAccNum;
+    }
+
+    public int getToAccNum() {
+        return toAccNum;
+    }
+
     @Override
     void begin(){
         Loader.getAccount(this.fromAccNum).transferOut(this.getAmount());

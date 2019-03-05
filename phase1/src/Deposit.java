@@ -6,6 +6,10 @@ public class Deposit extends Transaction{
         this.toAccNum = toAccount;
     }
 
+    public int getToAccNum() {
+        return toAccNum;
+    }
+
     @Override
     void begin() {
         Loader.getAccount(this.toAccNum).transferIn(this.getAmount());
