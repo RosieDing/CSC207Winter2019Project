@@ -1,3 +1,4 @@
+import javax.print.attribute.standard.DateTimeAtCreation;
 import java.io.Serializable;
 
 public abstract class Account implements Withdrawable, TransferInable,Payable, Serializable {
@@ -6,12 +7,30 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
     private String dateOfCreationg;
     private int ownerID;
 
-    abstract void Account(int id, int ownerID);
+    void Account(int id, int ownerID){
+        this.ownerID = ownerID;
+    }
+
     abstract int getBalance();
+
     abstract void setBalance();
-    abstract String getDateOfCreationg();
+
+    void setDateOfCreation(String date){
+        this.dateOfCreationg = date;
+    }
+    public String getDateOfCreation(){
+        return dateOfCreationg;
+    }
     public abstract void transferIn(int amount);
+
     public abstract void pay(int amount);
+
     public abstract void withdraw(int amount);
+
     abstract int getAccountNum();
+
+    public int getOwnerID(){return ownerID;}
+
+    public void setOwnerID(int new_owner){ this.ownerID = new_owner;}
+
 }
