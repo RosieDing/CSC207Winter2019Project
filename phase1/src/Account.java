@@ -7,7 +7,7 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
     private String dateOfCreationg;
     private int ownerID;
 
-    void Account(int id, int ownerID){
+    void Account(int ownerID){
         this.ownerID = ownerID;
     }
 
