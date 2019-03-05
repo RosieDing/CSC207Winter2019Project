@@ -10,7 +10,7 @@ public class Withdrawal extends Transaction {
     }
 
     @Override
-    public Transaction reverse() {
+    public Deposit reverse() {
         int toAcc = this.getFromAccNum();
         Deposit e = new Deposit(toAcc, this.getAmount());
         e.begin();

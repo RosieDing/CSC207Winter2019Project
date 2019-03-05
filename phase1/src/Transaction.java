@@ -29,6 +29,6 @@ public abstract class Transaction {
 
     public abstract void begin();
 
-    public abstract Transaction reverse() throws PayBill.PayBillReverseException;
+    public abstract Transaction reverse();
 
 }
