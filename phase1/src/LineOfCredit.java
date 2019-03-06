@@ -1,4 +1,4 @@
-public class CreditAccount extends DebtAccount {
+public class LineOfCredit extends DebtAccount {
     private int accountNum;
     private double balance;
     private String dateOfCreation;
@@ -6,7 +6,7 @@ public class CreditAccount extends DebtAccount {
     private double limit;
 
 
-    public CreditAccount(int ownerID, int limit){
+    public LineOfCredit(int ownerID, int limit){
         super(ownerID, limit);
     }
     public int getBalance(){
@@ -22,6 +22,11 @@ public class CreditAccount extends DebtAccount {
     @Override
     public void transferIn(double amount){
         this.balance -= amount;
+    }
+
+    @Override
+    public void transferOut(double amount){
+        this.balance += amount;
     }
 
     @Override
@@ -49,7 +54,7 @@ public class CreditAccount extends DebtAccount {
 
     @Override
     public String toString() {
-        return ("CreditAccount" + ", "  + this.accountNum + ", " + this.balance;
+        return ("LineOfCredit" + ", "  + this.accountNum + ", " + this.balance;
     }
 
 }
