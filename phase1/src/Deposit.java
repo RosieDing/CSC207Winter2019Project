@@ -35,12 +35,4 @@ public class Deposit extends Transaction{
                 + "," + this.getAmount() + "\n");
     }
 
-    @Override
-    public boolean selfCheck() {
-        boolean possible = false;
-        if (Loader.getAccount(this.toAccNum) instanceof TransferInable) {
-            possible = true;
-        }
-        return possible;
-    }
 }

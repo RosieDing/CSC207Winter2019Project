@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -10,9 +11,52 @@ public class TransactionManager {
 
     // factory method to be fixed.
     public void makeTransaction(Transaction e){
-        if (e.getToAccNum() != 0) {
-
+        if ((e.getFromAccNum()!=0) && checkFrom(e)) {
+            if (e.getToAccNum()!=0){
+                if (checkTo(e)){ e.begin(); }
+            } else {e.begin();}
+        } else if ((e instanceof Deposit) && checkTo(e)) {
+            e.begin();
         }
+    }
+
+    private boolean checkTo(Transaction e){
+        boolean possible = false;
+        if (Loader.getAccount(e.getToAccNum()) instanceof TransferInable) {
+            possible = true;
+        }
+        return possible;
+    }
+
+    private boolean checkFrom(Transaction e) {
+        boolean possible  = false;
+        Account accF = Loader.getAccount(e.getFromAccNum());
+        int balance = accF.getBalance();
+        double amount = e.getAmount();
+        if (accF instanceof TransferOutable) {
+            if (accF instanceof DebtAccount) {
+                possible = debtCheck((DebtAccount)accF, amount, balance);
+            } else if (accF instanceof ChequingAccount) {
+                possible = chequingCheck((ChequingAccount)accF, amount, balance);
+            } else if (accF instanceof SacingAccount) {
+                possible = savingCheck(amount, balance);
+            }
+        }
+        return possible;
+    }
+
+    private boolean debtCheck(DebtAccount acc, double amount, int balance){
+        int limit = acc.getLimit();
+        return (balance + amount - limit) <= 0;
+    }
+
+    private boolean chequingCheck(ChequingAccount acc, double amount, int balance){
+        int limit = acc.overDraftLimit();
+        return ((balance - amount >= limit) && (balance >= 0));
+    }
+
+    private boolean savingCheck(double amount, int balance){
+        return (balance - amount) >= 0;
     }
 
     public Transaction getUserLastTrans(int userId) {
@@ -31,7 +75,7 @@ public class TransactionManager {
     }
 
     public void addTrans(Transaction trans){
-        if (trans instanceof Deposit) {
+        if (trans.getFromAccNum() == 0) {
             int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
             int accNum = trans.getToAccNum();
             addHelper(userId, accNum, trans);

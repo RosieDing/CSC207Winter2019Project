@@ -17,6 +17,4 @@ public abstract class Transaction {
 
     public abstract Transaction reverse();
 
-    public abstract boolean selfCheck();
-
 }
