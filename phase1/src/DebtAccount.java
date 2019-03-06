@@ -12,6 +12,6 @@ public abstract class DebtAccount extends Account {
     }
 
     abstract void setLimit;
-
+    abstract  double getLimit;
 
 }

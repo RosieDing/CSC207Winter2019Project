@@ -28,17 +28,29 @@ public class LineOfCredit extends DebtAccount {
 
     @Override
     public void transferOut(double amount){
-        this.balance += amount;
+        double overornot;
+        overornot = this.balance + amount;
+        if (overornot <= this.limit) {
+            this.balance += amount;
+        }
     }
 
     @Override
     public void pay(double amount){
-        this.balance += amount;
+        double overornot;
+        overornot = this.balance + amount;
+        if (overornot <= this.limit){
+            this.balance += amount;
+        }
     }
 
     @Override
     public void withdraw(double amount){
-        this.balance += amount;
+        double overornot;
+        overornot = this.balance + amount;
+        if (overornot <= this.limit){
+            this.balance += amount;
+        }
     }
     public int getAccountNum(){
         return this.accountNum;
