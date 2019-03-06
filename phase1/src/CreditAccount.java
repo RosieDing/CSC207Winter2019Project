@@ -1,0 +1,57 @@
+import javax.print.attribute.standard.DateTimeAtCreation;
+import java.io.Serializable;
+public class CreditAccount extends DebtAccount {
+    private int accountNum;
+    private double balance;
+    private String dateOfCreation;
+    private int ownerID;
+    private double limit;
+
+
+    public CreditAccount(int ownerID, int limit){
+        super(ownerID, limit);
+    }
+    public int getBalance(){
+        return this.balance
+    }
+    public void setBalance(double newBalance){
+        this.balance = newBalance
+    }
+    public String getDateOfCreation() {
+        return dateOfCreation;
+    }
+
+    @Override
+    public void transferIn(double amount){
+        this.balance -= amount;
+    }
+
+    @Override
+    public void pay(double amount){
+        this.balance += amount;
+    }
+
+    @Override
+    public void withdraw(double amount){
+        this.balance += amount;
+    }
+    public int getAccountNum(){
+        return this.accountNum;
+    }
+    public int getOwnerID(){
+        return this.ownerID;
+    }
+
+    public int getLimit(){
+        return this.limit;
+    }
+    public void setLimit(double newLimit){
+        this.limit = newLimit;
+    }
+
+    @Override
+    public String toString() {
+        return ("CreditAccount" + ", "  + this.accountNum + ", " + this.balance;
+    }
+
+}
