@@ -9,7 +9,7 @@ public class TransactionManager {
     // deposit writer
     // pay Bill writer
 
-    // factory method to be fixed.
+
     public void makeTransaction(Transaction e){
         if ((e.getFromAccNum()!=0) && checkFrom(e)) {
             if (e.getToAccNum()!=0){
@@ -18,6 +18,7 @@ public class TransactionManager {
         } else if ((e instanceof Deposit) && checkTo(e)) {
             e.begin();
         }
+        //raise exception
     }
 
     private boolean checkTo(Transaction e){
