@@ -1,11 +1,17 @@
 public class PayBill extends Transaction{
     private final String to;
     private final int fromAccNum;
+    private final int toAccNum;
 
     public PayBill(int fromAccount, String to, double amount) {
         super(amount);
         this.fromAccNum = fromAccount;
+        this.toAccNum = 0;
         this.to = to;
+    }
+
+    public int getToAccNum() {
+        return toAccNum;
     }
 
     public int getFromAccNum(){ return fromAccNum; }

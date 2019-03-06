@@ -1,9 +1,15 @@
 public class Deposit extends Transaction{
+    private final int fromAccNum;
     private final int toAccNum;
 
     public Deposit(int toAccount, double amount) {
         super(amount);
         this.toAccNum = toAccount;
+        this.fromAccNum = 0;
+    }
+
+    public int getFromAccNum() {
+        return fromAccNum;
     }
 
     public int getToAccNum() {
@@ -26,7 +32,6 @@ public class Deposit extends Transaction{
         Account acc = Loader.getAccount(this.toAccNum);
         int userId = acc.getOwnerID();
         return (userId + "," + this.toAccNum + "time"
-                + "," + this.getAmount() + "\n")
-                ;
+                + "," + this.getAmount() + "\n");
     }
 }

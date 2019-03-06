@@ -5,6 +5,10 @@ public abstract class Transaction {
         this.amount = amount;
     }
 
+    public abstract int getFromAccNum();
+
+    public abstract int getToAccNum();
+
     public double getAmount() {
         return amount;
     }
@@ -12,5 +16,7 @@ public abstract class Transaction {
     abstract void begin();  //make it default
 
     public abstract Transaction reverse();
+
+    public abstract
 
 }

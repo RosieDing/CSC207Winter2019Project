@@ -1,9 +1,15 @@
 public class Withdrawal extends Transaction {
     private final int fromAccNum;
+    private final int toAccNum;
 
     public Withdrawal(int fromAccount, double amount) {
         super(amount);
         this.fromAccNum = fromAccount;
+        this.toAccNum = 0;
+    }
+
+    public int getToAccNum() {
+        return toAccNum;
     }
 
     public int getFromAccNum() {
