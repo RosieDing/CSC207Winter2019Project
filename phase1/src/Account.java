@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 public abstract class Account implements Withdrawable, TransferInable,Payable, Serializable {
     private int accountNum;
-    private int balance;
+    private double balance;
     private String dateOfCreation;
     private int ownerID;
 
