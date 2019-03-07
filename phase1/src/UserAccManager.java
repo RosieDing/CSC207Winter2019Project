@@ -1,7 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class UserAccManager{
+public class UserAccManager extends Observable{
     private Map<String, ArrayList<Account>> listOfAcc = new HashMap<>();
     private int ownedUserId;
 
@@ -19,6 +19,8 @@ public class UserAccManager{
             list.add(acc);
             listOfAcc.put(name, list);
         }
+        setChanged();
+        notifyObservers();
     }
 
     public Account getAccount(int accNum) {
