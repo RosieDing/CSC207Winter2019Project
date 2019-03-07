@@ -8,7 +8,7 @@ public class BankManager extends BankIdentity {
         this.setId(Integer.valueOf(id));
     }
 
-    public User createUser(){
+    public void createUser(){
         User u = new User();
         Random r = new Random();
         int randomPass = r.nextInt(100000000);
@@ -19,7 +19,6 @@ public class BankManager extends BankIdentity {
         u.setPassManager(passM);
         System.out.println("New user created! user ID: " + u.getId()
                 + " initial Password: " + randomPass);
-        return u;
     }
 
     public void restock(CashMachine machine, Money money){
