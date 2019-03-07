@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class TransactionManager {
     private Map<Integer, Stack<Transaction>> accTransList = new HashMap<>();
-    private Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
+    // private Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
     // deposit writer
     // pay Bill writer
 
@@ -60,32 +60,32 @@ public class TransactionManager {
         return (balance - amount) >= 0;
     }
 
-    public Transaction getUserLastTrans(int userId) {
+    /*public Transaction getUserLastTrans(int userId) {
         Transaction e = userTransList.get(userId).pop();
         return e;
-    }
+    }*/
 
     public Transaction getAccLastTrans(int accNum) {
         Transaction e = accTransList.get(accNum).pop();
         return e;
     }
 
-    private void addHelper(int userId, int accNum, Transaction trans) {
+    /*private void addHelper(int userId, int accNum, Transaction trans) {
         accTransList.get(accNum).add(trans);
         userTransList.get(userId).add(trans);
-    }
+    }*/
 
     public void addTrans(Transaction trans){
         if (trans.getFromAccNum() == 0) {
-            int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
-            int accNum = trans.getToAccNum();
-            addHelper(userId, accNum, trans);
+            //int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
+            //int accNum = trans.getToAccNum();
+            accTransList.get(trans.getToAccNum()).add(trans);
             // call save TransactionManager
             // call save to deposit.txt
         } else {
-            int userId = Loader.getAccount(trans.getFromAccNum()).getOwnerID();
-            int accNum = trans.getFromAccNum();
-            addHelper(userId, accNum, trans);
+            //int userId = Loader.getAccount(trans.getFromAccNum()).getOwnerID();
+            //int accNum = trans.getFromAccNum();
+            accTransList.get(trans.getFromAccNum()).add(trans);
             // call save userTransManager
         }
 
