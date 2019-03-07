@@ -10,7 +10,7 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
     private final LocalDateTime dateOfCreation = currentTime;
     private int ownerID;
 
-    void Account(int ownerID){
+    Account(int ownerID){
         this.ownerID = ownerID;
     }
 
