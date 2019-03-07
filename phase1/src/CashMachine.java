@@ -1,7 +1,8 @@
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Observable;
 
-public class CashMachine {
+public class CashMachine extends Observable {
     private int numFiveD;
     private int numTenD;
     private int numTwentyD;
@@ -15,6 +16,8 @@ public class CashMachine {
         numFiftyD = money.getNumFifty();
         numTenD = money.getNumTen();
         numTwentyD = money.getNumTwenty();
+        setChanged();
+        notifyObservers();
     }
 
     public int getNumFiveD() {
