@@ -1,9 +1,10 @@
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 import java.util.Stack;
 
-public class TransactionManager {
+public class TransactionManager extends Observable {
     private Map<Integer, Stack<Transaction>> accTransList = new HashMap<>();
     // private Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
     // deposit writer
@@ -89,6 +90,7 @@ public class TransactionManager {
             accTransList.get(trans.getFromAccNum()).add(trans);
             // call save userTransManager
         }
-
+        setChanged();
+        notifyObservers();
     }
 }
