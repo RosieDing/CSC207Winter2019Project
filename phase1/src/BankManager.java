@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class BankManager extends BankIdentity {
 
     public BankManager() {
@@ -8,9 +10,15 @@ public class BankManager extends BankIdentity {
 
     public User createUser(){
         User u = new User();
-        //create password
+        Random r = new Random();
+        int randomPass = r.nextInt(100000000);
         UserAccManager accM = new UserAccManager(u.getId());
         u.setAccManager(accM);
+        PasswordManager passM = new PasswordManager(u.getId());
+        passM.setPassword(String.valueOf(randomPass));
+        u.setPassManager(passM);
+        System.out.println("New user created! user ID: " + u.getId()
+                + " initial Password: " + randomPass);
         return u;
     }
 
