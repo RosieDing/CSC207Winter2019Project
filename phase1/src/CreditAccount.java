@@ -12,10 +12,10 @@ public class CreditAccount extends DebtAccount {
         super(ownerID, limit);
     }
     public int getBalance(){
-        return this.balance
+        return this.balance;
     }
     public void setBalance(double newBalance){
-        this.balance = newBalance
+        this.balance = newBalance;
     }
     public String getDateOfCreation() {
         return dateOfCreation;
