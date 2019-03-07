@@ -1,11 +1,13 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Month;
 
 
 public abstract class Account implements Withdrawable, TransferInable,Payable, Serializable {
     private int accountNum;
     private double balance;
-    private String dateOfCreation;
+    private LocalDate currentTime = LocalDate.now();
+    private final LocalDate dateOfCreation = currentTime;
     private int ownerID;
 
     void Account(int ownerID){
@@ -15,12 +17,23 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
 
     abstract void setBalance();
 
-    void setDateOfCreation(String date){
-        this.dateOfCreation = date;
+    private int getDate(LocalDate date){
+        String day = String.valueOf(date.getDayOfMonth());
+        String month = String.valueOf(date.getMonthValue());
+        String year = String.valueOf(date.getYear());
+        String stringdate = day+ month+ year;
+        return Integer.valueOf(stringdate);
+
     }
-    public String getDateOfCreation(){
-        return dateOfCreation;
+
+    public int getCurrentDate(){
+        return getDate(currentTime);
     }
+
+    public int getDateOfCreation(){
+        return getDate(dateOfCreation);
+    }
+
     public abstract void transferIn(int amount);
 
     public abstract void pay(int amount);
