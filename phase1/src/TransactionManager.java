@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class TransactionManager extends Observable {
     private Map<Integer, Stack<Transaction>> accTransList = new HashMap<>();
-    // private Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
+    private Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
     // deposit writer
     // pay Bill writer
 
@@ -34,38 +34,19 @@ public class TransactionManager extends Observable {
     private boolean checkFrom(Transaction e) {
         boolean possible  = false;
         Account accF = Loader.getAccount(e.getFromAccNum());
-        int balance = accF.getBalance();
+        double availableCredit = accF.getAvailableCredit();
         double amount = e.getAmount();
-        if (accF instanceof TransferOutable) {
-            if (accF instanceof DebtAccount) {
-                possible = debtCheck((DebtAccount)accF, amount, balance);
-            } else if (accF instanceof ChequingAccount) {
-                possible = chequingCheck((ChequingAccount)accF, amount, balance);
-            } else if (accF instanceof SacingAccount) {
-                possible = savingCheck(amount, balance);
-            }
+        if ((accF instanceof TransferOutable) && (amount <= availableCredit)) {
+            possible = true;
         }
         return possible;
     }
 
-    private boolean debtCheck(DebtAccount acc, double amount, int balance){
-        int limit = acc.getLimit();
-        return (balance + amount - limit) <= 0;
-    }
-
-    private boolean chequingCheck(ChequingAccount acc, double amount, int balance){
-        int limit = acc.overDraftLimit();
-        return ((balance - amount >= limit) && (balance >= 0));
-    }
-
-    private boolean savingCheck(double amount, int balance){
-        return (balance - amount) >= 0;
-    }
-
-    /*public Transaction getUserLastTrans(int userId) {
+    public Transaction getUserLastTrans(int userId) {
         Transaction e = userTransList.get(userId).pop();
+        addTrans(e);
         return e;
-    }*/
+    }
 
     public Transaction getAccLastTrans(int accNum) {
         Transaction e = accTransList.get(accNum).pop();
@@ -73,23 +54,23 @@ public class TransactionManager extends Observable {
         return e;
     }
 
-    /*private void addHelper(int userId, int accNum, Transaction trans) {
+    private void addHelper(int userId, int accNum, Transaction trans) {
         accTransList.get(accNum).add(trans);
         userTransList.get(userId).add(trans);
-    }*/
+    }
 
     private void addTrans(Transaction trans){
         if (trans.getFromAccNum() == 0) {
-            //int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
-            //int accNum = trans.getToAccNum();
-            accTransList.get(trans.getToAccNum()).add(trans);
+            int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
+            int accNum = trans.getToAccNum();
+            addHelper(userId, accNum, trans);
             // call save TransactionManager
             // call save to deposit.txt
         } else {
-            //int userId = Loader.getAccount(trans.getFromAccNum()).getOwnerID();
-            //int accNum = trans.getFromAccNum();
-            accTransList.get(trans.getFromAccNum()).add(trans);
-            // call save userTransManager
+            int userId = Loader.getAccount(trans.getFromAccNum()).getOwnerID();
+            int accNum = trans.getFromAccNum();
+            addHelper(userId, accNum, trans);
+            // call save TransactionManager
         }
         setChanged();
         notifyObservers();
