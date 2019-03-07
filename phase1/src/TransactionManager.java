@@ -67,6 +67,7 @@ public class TransactionManager {
 
     public Transaction getAccLastTrans(int accNum) {
         Transaction e = accTransList.get(accNum).pop();
+        addTrans(e);
         return e;
     }
 
