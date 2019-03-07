@@ -13,11 +13,12 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
     void Account(int ownerID){
         this.ownerID = ownerID;
     }
-    abstract int getBalance();
 
     abstract void setBalance();
 
-    abstract void getAvailableCredit();
+    abstract double getAvailableCredit();
+
+    abstract double getBalance();
 
 //    private int getDate(LocalDateTime date){
 //        String day = String.valueOf(date.getDayOfMonth());
