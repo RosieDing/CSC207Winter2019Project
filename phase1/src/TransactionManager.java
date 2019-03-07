@@ -19,6 +19,7 @@ public class TransactionManager extends Observable {
         } else if ((e instanceof Deposit) && checkTo(e)) {
             e.begin();
         }
+        addTrans(e);
         //raise exception
     }
 
@@ -77,7 +78,7 @@ public class TransactionManager extends Observable {
         userTransList.get(userId).add(trans);
     }*/
 
-    public void addTrans(Transaction trans){
+    private void addTrans(Transaction trans){
         if (trans.getFromAccNum() == 0) {
             //int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
             //int accNum = trans.getToAccNum();
