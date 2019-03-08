@@ -7,7 +7,6 @@ public class ChequingAccount extends AssetAccount{
     private double overDraftLimit = 100;
     private double availableCredit = overDraftLimit + balance;
     private int ownerID;
-    private boolean isPrimary = false;
     private User owner= Loader.get(ownerID);
     private String id = "003" + ownerID + String.valueOf(owner.getAccountNum + 1);
     private final int AccountNum = Integer.valueOf(id);
@@ -28,15 +27,6 @@ public class ChequingAccount extends AssetAccount{
         return overDraftLimit;
     }
 
-    public void setPrimary(boolean primary) {
-        isPrimary = primary;
-        setChanged();
-        notifyObservers();
-    }
-
-    public boolean getPrimary(){
-        return isPrimary;
-    }
 
     @Override
     public void setBalance(double balance) {
