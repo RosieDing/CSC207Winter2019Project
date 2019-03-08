@@ -9,6 +9,14 @@ public class User extends BankIdentity {
         this.setId(Integer.valueOf(id));
     }
 
+    public UserAccManager getAccManager() {
+        return accManager;
+    }
+
+    public PasswordManager getPassManager() {
+        return passManager;
+    }
+
     public void setAccManager(UserAccManager accManager) {
         this.accManager = accManager;
     }
