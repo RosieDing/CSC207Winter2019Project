@@ -36,6 +36,24 @@ public class UserAccManager extends Observable{
         // fix this?
     }
 
+    public ArrayList<Account> getTypeAccounts(String type) {
+        return listOfAcc.get(type);
+        // try catch exception
+    }
+
+    public void setPrimaryChq(int accNum){
+        Account acc = Loader.getAccount(accNum);
+        User user = Loader.getUser(ownedUserId);
+        if ((acc instanceof ChequingAccount) && (acc.getOwnerID() == ownedUserId)) {
+            if (acc.getAccountNum() == getPrimaryChq().getAccountNum()) {
+                //throws exception
+            } else {
+                getPrimaryChq().setPrimary(false);
+                acc.setPrimary(true);
+            }
+        }
+    }
+
     public ChequingAccount getPrimaryChq(){
         ArrayList<Account> list = listOfAcc.get("ChequingAccount");
         ChequingAccount pc = null;

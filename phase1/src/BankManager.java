@@ -45,6 +45,10 @@ public class BankManager extends BankIdentity {
             case "Chequing":
                 acc = new ChequingAccount(userID);
                 m.addAccount(acc);
+                m.getTypeAccounts("ChequingAccount");
+                if (m.getTypeAccounts("ChequingAccount").size() == 0) {
+                    acc.setPrimary(true);
+                }
                 result = acc.getAccountNum();
                 break;
             case "Line of Credit":
