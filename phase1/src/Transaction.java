@@ -12,8 +12,6 @@ public abstract class Transaction {
 
     //public abstract int getToAccNum();
 
-    public Date getDate() { return date; }
-
     public double getAmount() {
         return amount;
     }
