@@ -13,12 +13,7 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
     Account(int ownerID){
         this.ownerID = ownerID;
     }
-
-    abstract void setBalance();
-
-    abstract double getAvailableCredit();
-
-    abstract double getBalance();
+    public int getOwnerID(){ return ownerID;}
 
 //    private int getDate(LocalDateTime date){
 //        String day = String.valueOf(date.getDayOfMonth());
@@ -33,8 +28,13 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
     }
 
     public LocalDateTime getDateOfCreation(){
-        return dateOfCreation;
-    }
+        return dateOfCreation;}
+
+    abstract double getAvailableCredit();
+
+    public abstract int getAccountNum();
+
+    abstract double getBalance();
 
     public abstract void transferIn(int amount);
 
@@ -42,7 +42,5 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
 
     public abstract void withdraw(int amount);
 
-    abstract int getAccountNum();
-
-    public int getOwnerID(){return ownerID;}
+    public abstract void inversewithdraw(int amount);
 }
