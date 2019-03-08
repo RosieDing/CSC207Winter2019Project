@@ -1,8 +1,8 @@
 public class PasswordManager {
 
-    private int ownerId;
+    private final int ownerId;
     private String password;
-    private boolean islogin;
+    private boolean authority;
 
     public PasswordManager(int ownerId) {
         this.ownerId = ownerId;
@@ -12,12 +12,12 @@ public class PasswordManager {
         return password;
     }
 
-    public boolean isIslogin() {
-        return islogin;
+    public boolean isLogin() {
+        return authority;
     }
 
     public void setPassword(String newPass) {
-        if (islogin) {
+        if (authority) {
             this.password = newPass;
         } else {//return not login exception
         }
@@ -25,11 +25,15 @@ public class PasswordManager {
 
     public void login(String inputPass) {
         if (inputPass.equals(getPassword())) {
-            islogin = true;
+            authority = true;
         }
     }
 
     public void logout(){
-        islogin = false;
+        authority = false;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
     }
 }
