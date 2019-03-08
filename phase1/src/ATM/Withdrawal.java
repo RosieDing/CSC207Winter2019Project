@@ -1,3 +1,5 @@
+package ATM;
+
 import java.time.LocalDateTime;
 
 public class Withdrawal extends Transaction {
@@ -41,7 +43,7 @@ public class Withdrawal extends Transaction {
 
     @Override
     public String toString() {
-        return "Withdrawal{" +
+        return "ATM.Withdrawal{" +
                 "from: " + getFromAcc() +
                 ", time: " + getTime() +
                 ", amount: " + getAmount() +

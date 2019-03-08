@@ -1,3 +1,5 @@
+package ATM;
+
 public class User extends BankIdentity {
 
     private UserAccManager accManager;

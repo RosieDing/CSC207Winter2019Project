@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+package ATM;
+
 import java.util.*;
 
 public class UserAccManager extends Observable{
@@ -55,7 +56,7 @@ public class UserAccManager extends Observable{
     }
 
     public ChequingAccount getPrimaryChq(){
-        ArrayList<Account> list = listOfAcc.get("ChequingAccount");
+        ArrayList<Account> list = listOfAcc.get("ATM.ChequingAccount");
         ChequingAccount pc = null;
         for (Account acc: list) {
             if (acc.isPrimary()) {

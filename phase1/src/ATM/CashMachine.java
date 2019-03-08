@@ -1,5 +1,6 @@
+package ATM;
+
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Observable;
 
 public class CashMachine extends Observable {

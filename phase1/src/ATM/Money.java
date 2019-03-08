@@ -1,3 +1,5 @@
+package ATM;
+
 public class Money {
     private int numFive;
     private int numTen;

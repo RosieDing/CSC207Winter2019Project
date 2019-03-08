@@ -1,3 +1,5 @@
+package ATM;
+
 public class ChequingAccount extends AssetAccount{
     private int accountNum;
     private double balance;

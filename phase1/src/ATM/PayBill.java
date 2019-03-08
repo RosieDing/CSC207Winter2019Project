@@ -1,3 +1,5 @@
+package ATM;
+
 import java.time.LocalDateTime;
 
 public class PayBill extends Transaction{
@@ -52,7 +54,7 @@ public class PayBill extends Transaction{
 
     @Override
     public String toString() {
-        return "PayBill{" +
+        return "ATM.PayBill{" +
                 "from: " + getFromAcc() +
                 ", to: " + getTo()  +
                 ", time: " + getTime() +

@@ -1,3 +1,5 @@
+package ATM;
+
 import java.util.Observable;
 
 public class PasswordManager extends Observable {
