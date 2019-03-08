@@ -65,7 +65,7 @@ public class UserAccManager extends Observable{
         ArrayList<Account> list = getTypeAccounts("ChequingAccount");
         ChequingAccount pc = null;
         for (Account acc: list) {
-            if (acc.isPrimary()) {
+            if (((ChequingAccount)acc).isPrimary()) {
                 // Can we cancel casting?
                 pc = (ChequingAccount)acc;
             }
