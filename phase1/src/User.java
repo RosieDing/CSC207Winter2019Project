@@ -5,7 +5,7 @@ public class User extends BankIdentity {
 
     public User() {
         String id = "";
-        id = id + "020" + (Loader.getUser() + 1);
+        id = id + "020" + (Loader.getUserNum() + 1);
         this.setId(Integer.valueOf(id));
     }
 
