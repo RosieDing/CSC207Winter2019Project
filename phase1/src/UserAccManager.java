@@ -36,26 +36,32 @@ public class UserAccManager extends Observable{
         // fix this?
     }
 
+    public Map<String, ArrayList<Account>> getListOfAcc() {
+        return listOfAcc;
+    }
+
     public ArrayList<Account> getTypeAccounts(String type) {
         return listOfAcc.get(type);
         // try catch exception
     }
 
     public void setPrimaryChq(int accNum){
-        Account acc = Loader.getAccount(accNum);
-        User user = Loader.getUser(ownedUserId);
-        if ((acc instanceof ChequingAccount) && (acc.getOwnerID() == ownedUserId)) {
-            if (acc.getAccountNum() == getPrimaryChq().getAccountNum()) {
-                //throws exception
-            } else {
-                getPrimaryChq().setPrimary(false);
-                acc.setPrimary(true);
+        Account acc = getAccount(accNum);
+        if (!(acc instanceof ChequingAccount)) {
+            if (acc.getOwnerID() == ownedUserId) {
+                if (acc.getAccountNum() == getPrimaryChq().getAccountNum()) {
+                    //throws exception
+                } else {
+                    getPrimaryChq().setPrimary(false);
+                    ((ChequingAccount)acc).setPrimary(true);
+                }
             }
         }
+        //exceptions
     }
 
     public ChequingAccount getPrimaryChq(){
-        ArrayList<Account> list = listOfAcc.get("ChequingAccount");
+        ArrayList<Account> list = getTypeAccounts("ChequingAccount");
         ChequingAccount pc = null;
         for (Account acc: list) {
             if (acc.isPrimary()) {
@@ -70,7 +76,7 @@ public class UserAccManager extends Observable{
 
     public String getDateOfCreation(int accNum){
         Account a = getAccount(accNum);
-        return a.getDateOfCreationg();
+        return a.getDateOfCreation().toString();
     }
 
     public String getSummary(){
