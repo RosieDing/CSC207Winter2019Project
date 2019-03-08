@@ -1,74 +1,35 @@
 package ATM;
 
-public class LineOfCredit extends DebtAccount {
-    private int accountNum;
-    private double balance;
-    private String dateOfCreation;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
+
+public class LineOfCredit extends DebtAccount implements TransferOutable{
     private int ownerID;
-    private double limit;
+    private User owner= Loader.get(ownerID);
+    private String id = "002" + ownerID + String.valueOf(owner.getAccountNum + 1);
+    private final int accountNum = Integer.valueOf(id);
 
 
     public LineOfCredit(int ownerID, int limit){
         super(ownerID, limit);
-    }
-    public int getBalance(){
-        return this.balance
-    }
-    public void setBalance(double newBalance){
-        this.balance = newBalance
-    }
-    public String getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    @Override
-    public void transferIn(double amount){
-        this.balance -= amount;
+        this.ownerID = ownerID;
     }
 
     @Override
     public void transferOut(double amount){
-        double overornot;
-        overornot = this.balance + amount;
-        if (overornot <= this.limit) {
-            this.balance += amount;
-        }
+        double newbalance = getBalance() + amount;
+        setBalance(newbalance);
+        setChanged();
+        notifyObservers();
     }
 
-    @Override
-    public void pay(double amount){
-        double overornot;
-        overornot = this.balance + amount;
-        if (overornot <= this.limit){
-            this.balance += amount;
-        }
-    }
-
-    @Override
-    public void withdraw(double amount){
-        double overornot;
-        overornot = this.balance + amount;
-        if (overornot <= this.limit){
-            this.balance += amount;
-        }
-    }
     public int getAccountNum(){
         return this.accountNum;
     }
-    public int getOwnerID(){
-        return this.ownerID;
-    }
 
-    public int getLimit(){
-        return this.limit;
-    }
-    public void setLimit(double newLimit){
-        this.limit = newLimit;
-    }
 
     @Override
     public String toString() {
-        return ("ATM.LineOfCredit" + ", "  + this.accountNum + ", " + this.balance;
+        return ("ATM.LineOfCredit" + ", "  + this.accountNum + ", " + this.balance);
     }
 
 }
