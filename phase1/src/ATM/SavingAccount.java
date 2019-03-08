@@ -8,7 +8,7 @@ public class SavingAccount extends AssetAccount{
     private double balance;
     private User owner= Loader.get(ownerID);
     private String id = "004" + ownerID + String.valueOf(owner.getAccountNum + 1);
-    private final int AccountNum = Integer.valueOf(id);
+    private final int accountNum = Integer.valueOf(id);
 
     public SavingAccount(int ownerID){
         super(ownerID);
@@ -16,7 +16,29 @@ public class SavingAccount extends AssetAccount{
         payinterest(balance);
     }
 
+    @Override
+    double getAvailableCredit() {
+        return balance;
+    }
 
+    @Override
+    public double getBalance() {
+        return balance;
+    }
+
+    @Override
+    public void transferIn(double amount) {
+        balance += amount;
+        setChanged();
+        notifyObservers();
+    }
+
+    @Override
+    public void transferOut(double amount) {
+        balance -= amount;
+        setChanged();
+        notifyObservers();
+    }
 
     @Override
     public void setBalance(double balance) {
@@ -26,47 +48,24 @@ public class SavingAccount extends AssetAccount{
     }
 
     @Override
-    public double getAvailableCredit(){
-        return balance;
+    public void pay(double amount) {
+        balance -= amount;
+        setChanged();
+        notifyObservers();
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        balance -= amount;
+        setChanged();
+        notifyObservers();
     }
 
     @Override
     public int getAccountNum(){
-        return AccountNum;
+        return accountNum;
     }
 
-    @Override
-    public void transferOut(double amount){
-        balance += amount;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public double getBalance(){
-        return balance;
-    }
-
-    @Override
-    public void transferIn(double amount){
-        balance -= amount;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public void pay(double amount){
-        balance -= amount;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public void withdraw(double amount){
-        balance -= amount;
-        setChanged();
-        notifyObservers();
-    }
 
     private void payinterest(double balance){
         if (getCurrentTime().getDayOfMonth() == 1){
@@ -78,6 +77,9 @@ public class SavingAccount extends AssetAccount{
 
     public void setInterestRate(double interestRate) {
         this.interestRate = interestRate;
+        setChanged();
+        notifyObservers();
+
     }
 
 }

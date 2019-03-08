@@ -9,7 +9,7 @@ public class ChequingAccount extends AssetAccount{
     private int ownerID;
     private User owner= Loader.get(ownerID);
     private String id = "003" + ownerID + String.valueOf(owner.getAccountNum + 1);
-    private final int AccountNum = Integer.valueOf(id);
+    private final int accountNum = Integer.valueOf(id);
 
     ChequingAccount(int ownerID){
         super(ownerID);
@@ -27,10 +27,42 @@ public class ChequingAccount extends AssetAccount{
         return overDraftLimit;
     }
 
+    @Override
+    public double getBalance() {
+        return balance;
+    }
+
+    @Override
+    public void transferIn(double amount) {
+        balance += amount;
+        setChanged();
+        notifyObservers();
+    }
+
+    @Override
+    public void transferOut(double amount) {
+        balance -= amount;
+        setChanged();
+        notifyObservers();
+    }
 
     @Override
     public void setBalance(double balance) {
         this.balance = balance;
+        setChanged();
+        notifyObservers();
+    }
+
+    @Override
+    public void pay(double amount) {
+        balance -= amount;
+        setChanged();
+        notifyObservers();
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        balance -= amount;
         setChanged();
         notifyObservers();
     }
@@ -41,41 +73,7 @@ public class ChequingAccount extends AssetAccount{
     }
     @Override
     public int getAccountNum(){
-        return AccountNum;
+        return accountNum;
     }
-
-    @Override
-    public void transferOut(double amount){
-        balance += amount;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public double getBalance(){
-        return balance;
-    }
-
-    @Override
-    public void transferIn(double amount){
-        balance -= amount;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public void pay(double amount){
-        balance -= amount;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public void withdraw(double amount){
-        balance -= amount;
-        setChanged();
-        notifyObservers();
-    }
-
 
 }
