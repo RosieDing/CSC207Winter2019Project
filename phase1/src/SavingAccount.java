@@ -4,7 +4,8 @@ public class SavingAccount extends AssetAccount{
     private int ownerID;
     private double interestRate = 0.001;
     private double balance;
-    private String id = "003" + ownerID + String.valueOf(Loader[ownerID].getAccountNum + 1);
+    private User owner= Loader.get(ownerID);
+    private String id = "003" + ownerID + String.valueOf(owner.getAccountNum + 1);
     private final int AccountNum = Integer.valueOf(id);
 
     public SavingAccount(int ownerID){
