@@ -61,6 +61,10 @@ public class CashMachine extends Observable {
             setAmount(m);
 
         }
+        checkAmount();
+        /**
+        need to write the warning function.
+         **/
     }
 
     private int[] possibleD(int amount) {
