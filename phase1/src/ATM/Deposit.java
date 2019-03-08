@@ -1,5 +1,6 @@
+package ATM;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Deposit extends Transaction{
     private final Account fromAcc;
@@ -55,7 +56,7 @@ public class Deposit extends Transaction{
 
     @Override
     public String toString() {
-        return "Deposit{" +
+        return "ATM.Deposit{" +
                 "to: " + getToAcc() +
                 ", time:  " + getTime() +
                 ", amount:" + getAmount() +

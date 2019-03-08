@@ -1,5 +1,5 @@
-import javax.print.attribute.standard.DateTimeAtCreation;
-import java.io.Serializable;
+package ATM;
+
 public class CreditAccount extends DebtAccount {
     private int accountNum;
     private double balance;
@@ -59,7 +59,7 @@ public class CreditAccount extends DebtAccount {
 
     @Override
     public String toString() {
-        return ("CreditAccount" + ", "  + this.accountNum + ", " + this.balance;
+        return ("ATM.CreditAccount" + ", "  + this.accountNum + ", " + this.balance;
     }
 
 }

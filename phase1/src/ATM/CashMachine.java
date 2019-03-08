@@ -1,5 +1,6 @@
+package ATM;
+
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Observable;
 
 public class CashMachine extends Observable {
@@ -60,6 +61,10 @@ public class CashMachine extends Observable {
             setAmount(m);
 
         }
+        checkAmount();
+        /**
+        need to write the warning function.
+         **/
     }
 
     private int[] possibleD(int amount) {

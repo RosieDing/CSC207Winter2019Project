@@ -1,3 +1,5 @@
+package ATM;
+
 import java.util.Observable;
 
 public abstract class BankIdentity extends Observable {

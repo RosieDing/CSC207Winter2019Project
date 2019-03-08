@@ -1,3 +1,5 @@
+package ATM;
+
 import java.util.Observable;
 
 public class PasswordManager extends Observable {
@@ -5,6 +7,9 @@ public class PasswordManager extends Observable {
     private final int ownerId;
     private String password;
     private boolean authority;
+    /*
+    Password will be a 4 bit numerical string
+     */
 
     public PasswordManager(int ownerId) {
         this.ownerId = ownerId;

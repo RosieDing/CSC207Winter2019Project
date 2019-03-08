@@ -1,4 +1,4 @@
-import java.util.Random;
+package ATM;
 
 public class BankManager extends BankIdentity {
 
@@ -9,13 +9,14 @@ public class BankManager extends BankIdentity {
     }
 
     public void createUser(){
+        /*
+        need to add to the loader list.
+         */
         User u = new User();
-        Random r = new Random();
-        int randomPass = r.nextInt(100000000);
         UserAccManager accM = new UserAccManager(u.getId());
         u.setAccManager(accM);
         PasswordManager passM = new PasswordManager(u.getId());
-        passM.setPassword(String.valueOf(randomPass));
+        passM.setPassword("1234");
         u.setPassManager(passM);
         System.out.println("New user created! user ID: " + u.getId()
                 + " initial Password: " + randomPass);
@@ -25,7 +26,9 @@ public class BankManager extends BankIdentity {
         machine.setAmount(money);
         // how to prevent other identities from touching cash machine setter?
     }
-
+    /*
+    May need to write the exception
+     */
     public void undoMostRecentTrans(int accNum) {
         Transaction e = Loader.getAccount(accNum).getTransManager().getLastTrans().reverse();
         // try catch where pay bill can't be reversed.
@@ -45,8 +48,8 @@ public class BankManager extends BankIdentity {
             case "Chequing":
                 acc = new ChequingAccount(userID);
                 m.addAccount(acc);
-                m.getTypeAccounts("ChequingAccount");
-                if (m.getTypeAccounts("ChequingAccount").size() == 0) {
+                m.getTypeAccounts("ATM.ChequingAccount");
+                if (m.getTypeAccounts("ATM.ChequingAccount").size() == 0) {
                     acc.setPrimary(true);
                 }
                 result = acc.getAccountNum();

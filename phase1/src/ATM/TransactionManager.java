@@ -1,4 +1,5 @@
-import java.io.IOException;
+package ATM;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -64,13 +65,13 @@ public class TransactionManager extends Observable {
             int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
             int accNum = trans.getToAccNum();
             addHelper(userId, accNum, trans);
-            // call save TransactionManager
+            // call save ATM.TransactionManager
             // call save to deposit.txt
         } else {
             int userId = Loader.getAccount(trans.getFromAccNum()).getOwnerID();
             int accNum = trans.getFromAccNum();
             addHelper(userId, accNum, trans);
-            // call save TransactionManager
+            // call save ATM.TransactionManager
         }
         setChanged();
         notifyObservers();

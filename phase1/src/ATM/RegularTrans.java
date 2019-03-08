@@ -1,3 +1,5 @@
+package ATM;
+
 import java.time.LocalDateTime;
 
 public class RegularTrans extends Transaction {
@@ -16,7 +18,7 @@ public class RegularTrans extends Transaction {
         return fromAcc;
     }
 
-    public Account getToAcc() {
+    public ATM.Account getToAcc() {
         return toAcc;
     }*/
 
@@ -47,7 +49,7 @@ public class RegularTrans extends Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "ATM.Transaction{" +
                 "from: " + getFromAcc() +
                 ", to: " + getToAcc() +
                 ", time: " + getTime() +
