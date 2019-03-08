@@ -36,11 +36,9 @@ public abstract class Account implements Withdrawable, TransferInable,Payable, S
 
     abstract double getBalance();
 
-    public abstract void transferIn(int amount);
+    public abstract void transferIn(double amount);
 
-    public abstract void pay(int amount);
+    public abstract void pay(double amount);
 
-    public abstract void withdraw(int amount);
-
-    public abstract void inversewithdraw(int amount);
+    public abstract void withdraw(double amount);
 }
