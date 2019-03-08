@@ -1,4 +1,6 @@
-public class PasswordManager {
+import java.util.Observable;
+
+public class PasswordManager extends Observable {
 
     private final int ownerId;
     private String password;
@@ -21,6 +23,8 @@ public class PasswordManager {
             this.password = newPass;
         } else {//return not login exception
         }
+        setChanged();
+        notifyObservers();
     }
 
     public void login(String inputPass) {

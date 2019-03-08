@@ -1,4 +1,6 @@
-public abstract class BankIdentity {
+import java.util.Observable;
+
+public abstract class BankIdentity extends Observable {
     private int id;
 
     public int getId() {
@@ -7,5 +9,7 @@ public abstract class BankIdentity {
 
     public void setId(int id) {
         this.id = id;
+        setChanged();
+        notifyObservers();
     }
 }

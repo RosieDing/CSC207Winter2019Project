@@ -1,7 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class UserAccManager{
+public class UserAccManager extends Observable{
     private Map<String, ArrayList<Account>> listOfAcc = new HashMap<>();
     private int ownedUserId;
 
@@ -19,6 +19,8 @@ public class UserAccManager{
             list.add(acc);
             listOfAcc.put(name, list);
         }
+        setChanged();
+        notifyObservers();
     }
 
     public Account getAccount(int accNum) {
@@ -32,6 +34,24 @@ public class UserAccManager{
         }
         //throw new NoSuchElementException();
         // fix this?
+    }
+
+    public ArrayList<Account> getTypeAccounts(String type) {
+        return listOfAcc.get(type);
+        // try catch exception
+    }
+
+    public void setPrimaryChq(int accNum){
+        Account acc = Loader.getAccount(accNum);
+        User user = Loader.getUser(ownedUserId);
+        if ((acc instanceof ChequingAccount) && (acc.getOwnerID() == ownedUserId)) {
+            if (acc.getAccountNum() == getPrimaryChq().getAccountNum()) {
+                //throws exception
+            } else {
+                getPrimaryChq().setPrimary(false);
+                acc.setPrimary(true);
+            }
+        }
     }
 
     public ChequingAccount getPrimaryChq(){
