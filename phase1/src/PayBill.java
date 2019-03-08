@@ -1,24 +1,36 @@
+import java.time.LocalDateTime;
+
 public class PayBill extends Transaction{
     private final String to;
-    private final int fromAccNum;
-    private final int toAccNum;
+    private final Account fromAcc;
+    private final Account toAcc;
+    private final LocalDateTime time;
 
-    public PayBill(int fromAccount, String to, double amount) {
+    public PayBill(Account fromAccount, String to, double amount) {
         super(amount);
-        this.fromAccNum = fromAccount;
-        this.toAccNum = 0;
+        this.fromAcc = fromAccount;
+        this.toAcc = null;
         this.to = to;
+        this.time = fromAcc.getCurrentTime();
     }
 
-    public int getToAccNum() {
+    /*public int getToAccNum() {
         return toAccNum;
     }
 
-    public int getFromAccNum(){ return fromAccNum; }
+    public int getFromAccNum(){ return fromAccNum; }*/
+
+    public Account getFromAcc() {
+        return fromAcc;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
 
     @Override
     void begin() {
-        Loader.getAccount(this.fromAccNum).transferOut(this.getAmount());
+        getFromAcc().pay(this.getAmount());
     }
 
     @Override
@@ -31,12 +43,20 @@ public class PayBill extends Transaction{
         return to;
     }
 
+    public String record() {
+        int userId = getFromAcc().getOwnerID();
+        return (userId + "," + getFromAcc() + "," + getTo() + ","
+                + getTime() + "," + getAmount() + "\n")
+                ;
+    }
+
     @Override
     public String toString() {
-        Account acc = Loader.getAccount(this.fromAccNum);
-        int userId = acc.getOwnerID();
-        return (userId + "," + this.fromAccNum + "," + to + ","
-                + "time" + "," + this.getAmount() + "\n")
-                ;
+        return "PayBill{" +
+                "from: " + getFromAcc() +
+                ", to: " + getTo()  +
+                ", time: " + getTime() +
+                ", amount: " + getAmount() +
+                "}\n";
     }
 }

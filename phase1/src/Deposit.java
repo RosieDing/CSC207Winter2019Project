@@ -1,38 +1,64 @@
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class Deposit extends Transaction{
-    private final int fromAccNum;
-    private final int toAccNum;
+    private final Account fromAcc;
+    private final Account toAcc;
+    private final LocalDateTime time;
 
-    public Deposit(int toAccount, double amount) {
+    public Deposit(Account toAccount, double amount) {
         super(amount);
-        this.toAccNum = toAccount;
-        this.fromAccNum = 0;
+        this.toAcc = toAccount;
+        this.fromAcc = null;
+        this.time = toAcc.getCurrentTime();
     }
 
-    public int getFromAccNum() {
+    public Deposit(User user, double amount) {
+        super(amount);
+        this.toAcc = user.getAccManager().getPrimaryChq();
+        this.fromAcc = null;
+        this.time = toAcc.getCurrentTime();
+    }
+
+    /*public int getFromAccNum() {
         return fromAccNum;
+    }*/
+
+    /*public int getToAccNum() {
+        return toAccNum;
+    }*/
+
+    public Account getToAcc() {
+        return toAcc;
     }
 
-    public int getToAccNum() {
-        return toAccNum;
+    public LocalDateTime getTime() {
+        return time;
     }
 
     @Override
     void begin() {
-        Loader.getAccount(this.toAccNum).transferIn(this.getAmount());
+        getToAcc().transferIn(this.getAmount());
     }
 
     @Override
     public Withdrawal reverse() {
-        int fromAcc = this.toAccNum;
+        Account fromAcc = getToAcc();
         return new Withdrawal(fromAcc, this.getAmount());
+    }
+
+    public String record() {
+        int userId = getToAcc().getOwnerID();
+        return (userId + "," + getToAcc() + "," + getTime()
+                + "," + this.getAmount() + "\n");
     }
 
     @Override
     public String toString() {
-        Account acc = Loader.getAccount(this.toAccNum);
-        int userId = acc.getOwnerID();
-        return (userId + "," + this.toAccNum + "time"
-                + "," + this.getAmount() + "\n");
+        return "Deposit{" +
+                "to: " + getToAcc() +
+                ", time:  " + getTime() +
+                ", amount:" + getAmount() +
+                '}';
     }
-
 }
