@@ -4,8 +4,8 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 
 public class SavingAccount extends AssetAccount{
     private int ownerID;
+    private double availableCredit = getBalance();
     private double interestRate = 0.001;
-
     private User owner= Loader.get(ownerID);
     private String id = "004" + ownerID + String.valueOf(owner.getAccountNum() + 1);
     private final int accountNum = Integer.valueOf(id);
@@ -19,7 +19,7 @@ public class SavingAccount extends AssetAccount{
 
     @Override
     double getAvailableCredit() {
-        return getBalance();
+        return availableCredit;
     }
 
     @Override
