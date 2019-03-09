@@ -3,7 +3,7 @@ package ATM;
 import java.time.LocalDate;
 
 public class MonthlyInterest implements ISaverPlan {
-    double interestRate;
+    double interestRate = 00.01;
     LocalDate currentDate = LocalDate.now();
 
 

@@ -35,8 +35,8 @@ public class SavingAccount extends AssetAccount{
         return accountNum;
     }
 
-    public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
+    public void setiSaverPlan(ISaverPlan s) {
+        this.iSaverPlan = s;
         setChanged();
         notifyObservers();
     }
