@@ -12,35 +12,32 @@ public class TransactionManager extends Observable {
     // pay Bill writer
 
 
-    public void makeTransaction(Transaction e){
-        if ((e.getFromAccNum()!=0) && checkFrom(e)) {
-            if (e.getToAccNum()!=0){
-                if (checkTo(e)){ e.begin(); }
-            } else {e.begin();}
-        } else if ((e instanceof Deposit) && checkTo(e)) {
+    public Transaction makeTransaction(Map<String, Object> map) {
+        Transaction e = null;
+        switch((String)map.get("Type")) {
+            case "Deposit":
+                e = new Deposit((Account)map.get("toAccount"), (Double)map.get("amount"));
+                break;
+            case "PayBill":
+                e = new PayBill((Account)map.get("fromAccount"), (String)map.get("to"),
+                        (Double)map.get("amount"));
+                break;
+            case "Withdrawal":
+                e = new Withdrawal((Account)map.get("fromAccount"), (Double)map.get("amount"));
+                break;
+            case "Regular":
+                e = new RegularTrans((TransferOutable)map.get("fromAccount"),
+                        (TransferInable)map.get("toAccount"), (Double)map.get("Amount"));
+                break;
+        }
+        try{
             e.begin();
+        } catch (TransactionAmountOverLimitException a) {
+            System.out.println("Not enough balance to complete transaction.");
+        } catch (NullPointerException b) {
+            System.out.println("Transaction is not possible.");
         }
-        addTrans(e);
-        //raise exception
-    }
-
-    private boolean checkTo(Transaction e){
-        boolean possible = false;
-        if (Loader.getAccount(e.getToAccNum()) instanceof TransferInable) {
-            possible = true;
-        }
-        return possible;
-    }
-
-    private boolean checkFrom(Transaction e) {
-        boolean possible  = false;
-        Account accF = Loader.getAccount(e.getFromAccNum());
-        double availableCredit = accF.getAvailableCredit();
-        double amount = e.getAmount();
-        if ((accF instanceof TransferOutable) && (amount <= availableCredit)) {
-            possible = true;
-        }
-        return possible;
+        return e;
     }
 
     public Transaction getUserLastTrans(int userId) {
@@ -61,15 +58,15 @@ public class TransactionManager extends Observable {
     }
 
     private void addTrans(Transaction trans){
-        if (trans.getFromAccNum() == 0) {
-            int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
-            int accNum = trans.getToAccNum();
+        if (trans.getFromAcc() == null) {
+            int userId = trans.getToAcc().getOwnerID();
+            int accNum = trans.getToAcc().getAccountNum();
             addHelper(userId, accNum, trans);
             // call save ATM.TransactionManager
             // call save to deposit.txt
         } else {
-            int userId = Loader.getAccount(trans.getFromAccNum()).getOwnerID();
-            int accNum = trans.getFromAccNum();
+            int userId = trans.getFromAcc().getOwnerID();
+            int accNum = trans.getFromAcc().getAccountNum();
             addHelper(userId, accNum, trans);
             // call save ATM.TransactionManager
         }
