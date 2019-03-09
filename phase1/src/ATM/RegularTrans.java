@@ -1,17 +1,18 @@
 package ATM;
 
+import javax.security.auth.login.AccountException;
 import java.time.LocalDateTime;
 
 public class RegularTrans extends Transaction {
-    private final Account fromAcc;
-    private final Account toAcc;
+    private final TransferOutable fromAcc;
+    private final TransferInable toAcc;
     private final LocalDateTime time;
 
-    public RegularTrans(Account fromAcc, Account toAcc, double amount) {
+    public RegularTrans(TransferOutable fromAcc, TransferInable toAcc, double amount) {
         super(amount);
         this.fromAcc = fromAcc;
         this.toAcc = toAcc;
-        time = this.fromAcc.getCurrentTime();
+        time = LocalDateTime.now();
     }
 /*
     public int getFromAccNum() {
@@ -23,11 +24,11 @@ public class RegularTrans extends Transaction {
     }*/
 
     public Account getFromAcc() {
-        return fromAcc;
+        return ((Account)fromAcc);
     }
 
     public Account getToAcc() {
-        return toAcc;
+        return ((Account)toAcc);
     }
 
     public LocalDateTime getTime() {
@@ -38,18 +39,21 @@ public class RegularTrans extends Transaction {
     void begin(){
         fromAcc.transferOut(this.getAmount());
         toAcc.transferIn(this.getAmount());
+
     }
 
     @Override
     public Transaction reverse() {
-        Account toAcc = this.fromAcc;
-        Account fromAcc = this.toAcc;
+        TransferInable toAcc = getFromAcc();
+        if (getToAcc() instanceof TransferOutable){
+            TransferOutable fromAcc = (TransferOutable)getToAcc();
+        }
         return new RegularTrans(fromAcc, toAcc, this.getAmount());
     }
 
     @Override
     public String toString() {
-        return "ATM.Transaction{" +
+        return "Transaction{" +
                 "from: " + getFromAcc() +
                 ", to: " + getToAcc() +
                 ", time: " + getTime() +

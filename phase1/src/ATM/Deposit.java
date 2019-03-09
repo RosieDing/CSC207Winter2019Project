@@ -14,12 +14,12 @@ public class Deposit extends Transaction{
         this.time = toAcc.getCurrentTime();
     }
 
-    public Deposit(User user, double amount) {
+    /*public Deposit(User user, double amount) {
         super(amount);
         this.toAcc = user.getAccManager().getPrimaryChq();
         this.fromAcc = null;
         this.time = toAcc.getCurrentTime();
-    }
+    }*/
 
     /*public int getFromAccNum() {
         return fromAccNum;
@@ -45,6 +45,7 @@ public class Deposit extends Transaction{
     @Override
     public Withdrawal reverse() {
         Account fromAcc = getToAcc();
+        // raise exception not Withdrawable
         return new Withdrawal(fromAcc, this.getAmount());
     }
 
@@ -56,7 +57,7 @@ public class Deposit extends Transaction{
 
     @Override
     public String toString() {
-        return "ATM.Deposit{" +
+        return "Deposit{" +
                 "to: " + getToAcc() +
                 ", time:  " + getTime() +
                 ", amount:" + getAmount() +
