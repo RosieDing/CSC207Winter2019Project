@@ -1,5 +1,6 @@
-package ATM;
-import java.lang.reflect.Array;
+package ATM.BankIdentities;
+import ATM.Accounts.*;
+
 import java.util.*;
 
 public class UserAccManager extends Observable{

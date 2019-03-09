@@ -1,4 +1,4 @@
-package ATM;
+package ATM.Transactions;
 
 public class TransactionAmountOverLimitException extends Exception {
 

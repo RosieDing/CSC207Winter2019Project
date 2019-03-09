@@ -1,4 +1,9 @@
-package ATM;
+package ATM.Transactions;
+
+import ATM.Accounts.Account;
+import ATM.Accounts.TransferInable;
+import ATM.Accounts.TransferOutable;
+import ATM.loading.Loader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -65,13 +70,13 @@ public class TransactionManager extends Observable {
             int userId = Loader.getAccount(trans.getToAccNum()).getOwnerID();
             int accNum = trans.getToAccNum();
             addHelper(userId, accNum, trans);
-            // call save ATM.TransactionManager
+            // call save ATM.Transactions.TransactionManager
             // call save to deposit.txt
         } else {
             int userId = Loader.getAccount(trans.getFromAccNum()).getOwnerID();
             int accNum = trans.getFromAccNum();
             addHelper(userId, accNum, trans);
-            // call save ATM.TransactionManager
+            // call save ATM.Transactions.TransactionManager
         }
         setChanged();
         notifyObservers();

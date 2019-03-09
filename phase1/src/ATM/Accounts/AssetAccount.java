@@ -1,4 +1,4 @@
-package ATM;
+package ATM.Accounts;
 
 public abstract class AssetAccount extends Account implements TransferOutable {
     private double balance;

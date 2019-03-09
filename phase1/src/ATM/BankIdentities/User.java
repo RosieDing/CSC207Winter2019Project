@@ -1,4 +1,6 @@
-package ATM;
+package ATM.BankIdentities;
+
+import ATM.loading.Loader;
 
 public class User extends BankIdentity {
 

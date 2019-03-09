@@ -1,8 +1,11 @@
-package ATM;
+package ATM.Accounts;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 
-public class LineOfCredit extends DebtAccount implements TransferOutable{
+import ATM.BankIdentities.User;
+import ATM.loading.Loader;
+
+
+public class LineOfCredit extends DebtAccount implements TransferOutable {
     private int ownerID;
     private User owner= Loader.get(ownerID);
     private String id = "002" + ownerID + String.valueOf(owner.getAccountNum() + 1);
@@ -29,7 +32,7 @@ public class LineOfCredit extends DebtAccount implements TransferOutable{
 
     @Override
     public String toString() {
-        return ("ATM.LineOfCredit" + ", "  + this.accountNum + ", " + getBalance());
+        return ("LineOfCredit" + ", "  + this.accountNum + ", " + getBalance());
     }
 
 }
