@@ -1,6 +1,9 @@
 package ATM.Accounts;
 
 import java.time.LocalDate;
+/**
+ * The plan with monthly interest 1%
+ */
 
 public class MonthlyInterest implements ISaverPlan {
     double interestRate = 00.01;
