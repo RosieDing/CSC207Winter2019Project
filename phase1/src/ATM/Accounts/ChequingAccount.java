@@ -4,7 +4,9 @@ package ATM.Accounts;
 import ATM.BankIdentities.User;
 import ATM.loading.Loader;
 
-
+/**
+ * Chequing account class
+ */
 public class ChequingAccount extends AssetAccount{
     private double overDraftLimit = 100;
     private double availableCredit = overDraftLimit + getBalance();

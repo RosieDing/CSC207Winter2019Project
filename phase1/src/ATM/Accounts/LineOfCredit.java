@@ -1,6 +1,8 @@
 package ATM.Accounts;
 
-
+/**
+ * Line of credit account class
+ */
 import ATM.BankIdentities.User;
 import ATM.loading.Loader;
 

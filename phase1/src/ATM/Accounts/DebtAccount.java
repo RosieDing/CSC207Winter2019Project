@@ -1,11 +1,13 @@
 package ATM.Accounts;
 
+/**
+ * Debt account abstract class
+ */
 public abstract class DebtAccount extends Account {
     private double limit;
     private int ownerID;
     private double balance;
     private double availableCredit = limit - balance;
-
 
 
     public DebtAccount(int ownerID, double limit){

@@ -3,6 +3,9 @@ package ATM.Accounts;
 import ATM.BankIdentities.User;
 import ATM.loading.Loader;
 
+/**
+ * Credit account class
+ */
 public class CreditAccount extends DebtAccount {
     private int ownerID;
     private User owner= Loader.get(ownerID);
