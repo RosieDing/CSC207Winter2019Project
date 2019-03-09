@@ -10,11 +10,18 @@ public class SavingAccount extends AssetAccount{
     private String id = "004" + ownerID + String.valueOf(owner.getAccountNum() + 1);
     private final int accountNum = Integer.valueOf(id);
 
-    public SavingAccount(int ownerID){
+    private SavingAccount(int ownerID){
         super(ownerID);
         this.ownerID = ownerID;
         double balance = getBalance();
-        setBalance(payinterest(balance));
+        setBalance(payinterest(interestRate,balance));
+    }
+
+    private double payinterest(double interestRate, double balance){
+        if (getCurrentTime().getDayOfMonth() == 1){
+            return balance * interestRate;
+        }
+        return balance;
     }
 
     @Override
@@ -25,13 +32,6 @@ public class SavingAccount extends AssetAccount{
     @Override
     public int getAccountNum(){
         return accountNum;
-    }
-
-
-    private double payinterest(double balance){
-        if (getCurrentTime().getDayOfMonth() == 1){
-            return balance * interestRate;
-        }
     }
 
     public void setInterestRate(double interestRate) {
