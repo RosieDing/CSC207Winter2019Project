@@ -8,7 +8,10 @@ public class UserAccManager extends Observable{
     private ChequingAccount primaryChq;
 
     public UserAccManager(int ownedUserId) {
+
         this.ownedUserId = ownedUserId;
+        listOfAcc.put("TransferOutable", new ArrayList<>());
+        listOfAcc.put("TransferInable", new ArrayList<>());
     }
 
     public void addAccount(Account acc){
@@ -20,6 +23,12 @@ public class UserAccManager extends Observable{
             ArrayList<Account> list = new ArrayList<>();
             list.add(acc);
             listOfAcc.put(name, list);
+        }
+        if (acc instanceof TransferOutable) {
+            listOfAcc.get("TransferOutable").add(acc);
+        }
+        if (acc instanceof TransferInable) {
+            listOfAcc.get("TransferInable").add(acc);
         }
         setChanged();
         notifyObservers();
@@ -50,7 +59,7 @@ public class UserAccManager extends Observable{
     public void setPrimaryChq(Account acc){
         if (acc instanceof ChequingAccount) {
             if (acc.getOwnerID() == ownedUserId) {
-                if (acc == getPrimaryChq()) {
+                if (acc==getPrimaryChq() && getPrimaryChq()!=null) {
                     //throws exception
                 } else {
                     this.primaryChq = ((ChequingAccount)acc);
@@ -71,17 +80,17 @@ public class UserAccManager extends Observable{
     }
 
     public String getSummary(){
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (String s: listOfAcc.keySet()) {
             String name = String.join(" ", s.split("(?==\\p{Upper})"));
-            result = result + name + ":\n";
+            result.append(name + ":\n");
             ArrayList<Account> list = listOfAcc.get(s);
             for (Account acc: list) {
-                result = result + "account " + acc.getAccountNum()
-                        + " with balance " + acc.getBalance() + "\n";
+                result.append("account " + acc.getAccountNum()
+                        + " with balance " + acc.getBalance() + "\n");
             }
         }
-        return result;
+        return result.toString();
 
         // exception
     }
