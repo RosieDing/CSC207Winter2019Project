@@ -45,6 +45,7 @@ public class RegularTrans extends Transaction{
         }
         fromAcc.transferOut(this.getAmount());
         toAcc.transferIn(this.getAmount());
+        setHappened(true);
     }
 
     @Override
