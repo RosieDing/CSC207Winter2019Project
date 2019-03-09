@@ -6,11 +6,22 @@ import java.util.Observable;
 import java.util.Stack;
 
 public class TransactionManager extends Observable {
-    private Map<Integer, Stack<Transaction>> accTransList = new HashMap<>();
-    private Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
+    static private TransactionManager m;
+    static private Map<Integer, Stack<Transaction>> accTransList = new HashMap<>();
+    static private Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
     // deposit writer
     // pay Bill writer
 
+
+    private TransactionManager() {
+    }
+
+    public static TransactionManager getTransactionManager(){
+        if (accTransList == null && userTransList == null) {
+            TransactionManager m = new TransactionManager();
+        }
+        return m;
+    }
 
     public Transaction makeTransaction(Map<String, Object> map) {
         Transaction e = null;
@@ -41,20 +52,20 @@ public class TransactionManager extends Observable {
     }
 
     public Transaction getUserLastTrans(int userId) {
-        Transaction e = userTransList.get(userId).pop();
+        Transaction e = this.userTransList.get(userId).pop();
         addTrans(e);
         return e;
     }
 
     public Transaction getAccLastTrans(int accNum) {
-        Transaction e = accTransList.get(accNum).pop();
+        Transaction e = this.accTransList.get(accNum).pop();
         addTrans(e);
         return e;
     }
 
     private void addHelper(int userId, int accNum, Transaction trans) {
-        accTransList.get(accNum).add(trans);
-        userTransList.get(userId).add(trans);
+        this.accTransList.get(accNum).add(trans);
+        this.userTransList.get(userId).add(trans);
     }
 
     private void addTrans(Transaction trans){
