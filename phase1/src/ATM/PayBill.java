@@ -4,16 +4,16 @@ import java.time.LocalDateTime;
 
 public class PayBill extends Transaction{
     private final String to;
-    private final Account fromAcc;
+    private final Payable fromAcc;
     private final Account toAcc;
     private final LocalDateTime time;
 
-    public PayBill(Account fromAccount, String to, double amount) {
+    public PayBill(Payable fromAccount, String to, double amount) {
         super(amount);
         this.fromAcc = fromAccount;
         this.toAcc = null;
         this.to = to;
-        this.time = fromAcc.getCurrentTime();
+        this.time = LocalDateTime.now();
     }
 
     /*public int getToAccNum() {
@@ -23,7 +23,7 @@ public class PayBill extends Transaction{
     public int getFromAccNum(){ return fromAccNum; }*/
 
     public Account getFromAcc() {
-        return fromAcc;
+        return (Account)fromAcc;
     }
 
     public LocalDateTime getTime() {
@@ -32,7 +32,7 @@ public class PayBill extends Transaction{
 
     @Override
     void begin() {
-        getFromAcc().pay(this.getAmount());
+        fromAcc.pay(this.getAmount());
     }
 
     @Override
@@ -54,7 +54,7 @@ public class PayBill extends Transaction{
 
     @Override
     public String toString() {
-        return "ATM.PayBill{" +
+        return "PayBill{" +
                 "from: " + getFromAcc() +
                 ", to: " + getTo()  +
                 ", time: " + getTime() +

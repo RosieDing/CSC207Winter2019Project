@@ -1,48 +1,20 @@
 package ATM;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
+
 public class CreditAccount extends DebtAccount {
-    private int accountNum;
-    private double balance;
-    private String dateOfCreation;
     private int ownerID;
-    private double limit;
+    private User owner= Loader.get(ownerID);
+    private String id = "001" + ownerID + String.valueOf(owner.getAccountNum() + 1);
+    private final int accountNum = Integer.valueOf(id);
 
 
-    public CreditAccount(int ownerID, int limit){
+    public CreditAccount(int ownerID, double limit){
         super(ownerID, limit);
-    }
-    public int getBalance(){
-        return this.balance;
-    }
-    public void setBalance(double newBalance){
-        this.balance = newBalance;
-    }
-    public String getDateOfCreation() {
-        return dateOfCreation;
+        this.ownerID = ownerID;
     }
 
-    @Override
-    public void transferIn(double amount){
-        this.balance -= amount;
-    }
 
-    @Override
-    public void pay(double amount){
-        double overornot;
-        overornot = this.balance + amount;
-        if (overornot <= this.limit){
-            this.balance += amount;
-        }
-    }
-
-    @Override
-    public void withdraw(double amount){
-        double overornot;
-        overornot = this.balance + amount;
-        if (overornot <= this.limit){
-            this.balance += amount;
-        }
-    }
     public int getAccountNum(){
         return this.accountNum;
     }
@@ -50,16 +22,11 @@ public class CreditAccount extends DebtAccount {
         return this.ownerID;
     }
 
-    public int getLimit(){
-        return this.limit;
-    }
-    public void setLimit(double newLimit){
-        this.limit = newLimit;
-    }
+
 
     @Override
     public String toString() {
-        return ("ATM.CreditAccount" + ", "  + this.accountNum + ", " + this.balance;
+        return ("ATM.CreditAccount" + ", "  + this.accountNum + ", " + getBalance());
     }
 
 }

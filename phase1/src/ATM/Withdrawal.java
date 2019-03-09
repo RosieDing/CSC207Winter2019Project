@@ -3,19 +3,19 @@ package ATM;
 import java.time.LocalDateTime;
 
 public class Withdrawal extends Transaction {
-    private final Account fromAcc;
+    private final Withdrawable fromAcc;
     private final Account toAcc;
     private final LocalDateTime time;
 
-    public Withdrawal(Account fromAcc, double amount) {
+    public Withdrawal(Withdrawable fromAcc, double amount) {
         super(amount);
         this.fromAcc = fromAcc;
         this.toAcc = null;
-        this.time = fromAcc.getCurrentTime();
+        this.time = LocalDateTime.now();
     }
 
     public Account getFromAcc() {
-        return fromAcc;
+        return (Account)fromAcc;
     }
 
     public LocalDateTime getTime() {
@@ -43,7 +43,7 @@ public class Withdrawal extends Transaction {
 
     @Override
     public String toString() {
-        return "ATM.Withdrawal{" +
+        return "Withdrawal{" +
                 "from: " + getFromAcc() +
                 ", time: " + getTime() +
                 ", amount: " + getAmount() +

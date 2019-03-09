@@ -5,6 +5,7 @@ import java.util.*;
 public class UserAccManager extends Observable{
     private Map<String, ArrayList<Account>> listOfAcc = new HashMap<>();
     private int ownedUserId;
+    private ChequingAccount primaryChq;
 
     public UserAccManager(int ownedUserId) {
         this.ownedUserId = ownedUserId;
@@ -46,15 +47,13 @@ public class UserAccManager extends Observable{
         // try catch exception
     }
 
-    public void setPrimaryChq(int accNum){
-        Account acc = getAccount(accNum);
-        if (!(acc instanceof ChequingAccount)) {
+    public void setPrimaryChq(Account acc){
+        if (acc instanceof ChequingAccount) {
             if (acc.getOwnerID() == ownedUserId) {
-                if (acc.getAccountNum() == getPrimaryChq().getAccountNum()) {
+                if (acc == getPrimaryChq()) {
                     //throws exception
                 } else {
-                    getPrimaryChq().setPrimary(false);
-                    ((ChequingAccount)acc).setPrimary(true);
+                    this.primaryChq = ((ChequingAccount)acc);
                 }
             }
         }
@@ -62,16 +61,7 @@ public class UserAccManager extends Observable{
     }
 
     public ChequingAccount getPrimaryChq(){
-        ArrayList<Account> list = getTypeAccounts("ChequingAccount");
-        ChequingAccount pc = null;
-        for (Account acc: list) {
-            if (((ChequingAccount)acc).isPrimary()) {
-                // Can we cancel casting?
-                pc = (ChequingAccount)acc;
-            }
-        }
-        return pc;
-
+        return primaryChq;
         // exception
     }
 
