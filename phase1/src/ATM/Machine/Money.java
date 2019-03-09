@@ -1,4 +1,4 @@
-package ATM;
+package ATM.Machine;
 
 public class Money {
     private int numFive;

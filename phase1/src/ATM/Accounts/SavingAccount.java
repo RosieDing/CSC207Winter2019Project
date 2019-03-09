@@ -1,8 +1,11 @@
-package ATM;
+package ATM.Accounts;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 
-public class SavingAccount extends AssetAccount{
+import ATM.BankIdentities.User;
+import ATM.loading.Loader;
+
+
+public class SavingAccount extends AssetAccount {
     private int ownerID;
     private double availableCredit = getBalance();
 //    private double interestRate = 0.001;
@@ -43,7 +46,7 @@ public class SavingAccount extends AssetAccount{
 
     @Override
     public String toString() {
-        return ("ATM.SavingAccount" + ", "  + this.accountNum + ", " + getBalance());
+        return ("SavingAccount" + ", "  + this.accountNum + ", " + getBalance());
     }
 
 }

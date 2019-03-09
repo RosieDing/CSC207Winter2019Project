@@ -1,4 +1,8 @@
-package ATM;
+package ATM.Transactions;
+
+import ATM.Accounts.Account;
+import ATM.Accounts.ChequingAccount;
+import ATM.Accounts.Withdrawable;
 
 import java.time.LocalDateTime;
 
@@ -46,6 +50,7 @@ public class Withdrawal extends Transaction {
             throw new TransactionAmountOverLimitException();
         }
         getFromAcc().withdraw(this.getAmount());
+        setHappened(true);
     }
 
     @Override

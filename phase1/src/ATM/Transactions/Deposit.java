@@ -1,4 +1,6 @@
-package ATM;
+package ATM.Transactions;
+
+import ATM.Accounts.Account;
 
 import java.time.LocalDateTime;
 
@@ -42,6 +44,7 @@ public class Deposit extends Transaction{
     @Override
     void begin() {
         getToAcc().transferIn(this.getAmount());
+        setHappened(true);
     }
 
     @Override

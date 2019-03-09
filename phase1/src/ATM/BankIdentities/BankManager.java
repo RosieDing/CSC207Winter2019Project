@@ -1,4 +1,11 @@
-package ATM;
+package ATM.BankIdentities;
+
+import ATM.Accounts.*;
+import ATM.Machine.CashMachine;
+import ATM.Machine.Money;
+import ATM.Transactions.Transaction;
+import ATM.Transactions.TransactionManager;
+import ATM.loading.Loader;
 
 public class BankManager extends BankIdentity {
 
@@ -8,7 +15,7 @@ public class BankManager extends BankIdentity {
         this.setId(Integer.valueOf(id));
     }
 
-    public void createUser(){
+    public void createUser() {
         /*
         need to add to the loader list.
          */
@@ -22,10 +29,11 @@ public class BankManager extends BankIdentity {
                 + " initial Password: " + "1234");
     }
 
-    public void restock(CashMachine machine, Money money){
+    public void restock(CashMachine machine, Money money) {
         machine.setAmount(money);
         // how to prevent other identities from touching cash machine setter?
     }
+
     /*
     May need to write the exception
      */
@@ -48,8 +56,8 @@ public class BankManager extends BankIdentity {
             case "Chequing":
                 acc = new ChequingAccount(userID);
                 m.addAccount(acc);
-                m.getTypeAccounts("ATM.ChequingAccount");
-                if (m.getTypeAccounts("ATM.ChequingAccount").size() == 0) {
+                m.getTypeAccounts("ATM.Accounts.ChequingAccount");
+                if (m.getTypeAccounts("ATM.Accounts.ChequingAccount").size() == 0) {
                     acc.setPrimary(true);
                 }
                 result = acc.getAccountNum();
@@ -57,14 +65,14 @@ public class BankManager extends BankIdentity {
             case "Line of Credit":
                 int limit;
                 //scanner get limit
-                acc = new LineOfCredit(userID,limit);
+                acc = new LineOfCredit(userID, limit);
                 m.addAccount(acc);
                 result = acc.getAccountNum();
                 break;
             case "Credit":
                 int limit;
                 //scanner get limit
-                acc = new CreditAccount(userID,limit);
+                acc = new CreditAccount(userID, limit);
                 m.addAccount(acc);
                 result = acc.getAccountNum();
                 break;
@@ -76,4 +84,18 @@ public class BankManager extends BankIdentity {
         }
         return result; // raise exception if result==0
     }
+
+    public void createNewChequingAccount(int userID, String accountType) {
+        User u = Loader.getUser(userID);
+        UserAccManager m = u.getAccManager();
+        Account acc;
+        acc = new ChequingAccount(userID);
+        if (m.getTypeAccounts("ChequingAccount").size() == 0){
+
+        }
+        m.addAccount(acc);
+
+
+    }
+}
 }

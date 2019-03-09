@@ -1,4 +1,4 @@
-package ATM;
+package ATM.Machine;
 
 import java.util.Arrays;
 import java.util.Observable;

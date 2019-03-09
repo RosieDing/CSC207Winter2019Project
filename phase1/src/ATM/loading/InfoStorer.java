@@ -1,7 +1,7 @@
 package ATM.loading;
 
-import ATM.Account;
-import ATM.User;
+import ATM.Accounts.Account;
+import ATM.BankIdentities.User;
 
 import java.util.HashMap;
 import java.util.Map;

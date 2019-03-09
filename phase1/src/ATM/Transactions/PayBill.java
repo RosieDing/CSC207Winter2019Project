@@ -1,4 +1,7 @@
-package ATM;
+package ATM.Transactions;
+
+import ATM.Accounts.Account;
+import ATM.Accounts.Payable;
 
 import java.time.LocalDateTime;
 
@@ -40,6 +43,7 @@ public class PayBill extends Transaction{
             throw new TransactionAmountOverLimitException();
         }
         fromAcc.pay(this.getAmount());
+        setHappened(true);
     }
 
     @Override

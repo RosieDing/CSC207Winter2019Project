@@ -1,6 +1,9 @@
-package ATM;
+package ATM.Accounts;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
+
+import ATM.BankIdentities.User;
+import ATM.loading.Loader;
+
 
 public class ChequingAccount extends AssetAccount{
     private double overDraftLimit = 100;
@@ -36,7 +39,7 @@ public class ChequingAccount extends AssetAccount{
     }
     @Override
     public String toString() {
-        return ("ATM.ChequingAccount" + ", "  + this.accountNum + ", " + getBalance());
+        return ("ATM.Accounts.ChequingAccount" + ", "  + this.accountNum + ", " + getBalance());
     }
 
 }
