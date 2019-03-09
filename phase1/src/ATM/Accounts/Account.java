@@ -6,9 +6,6 @@ import java.util.Observable;
 
 
 public abstract class Account extends Observable implements Withdrawable, TransferInable,Payable, Serializable {
-    private int accountNum;
-    private double balance;
-    private double availableCredit;
     private LocalDateTime currentTime = LocalDateTime.now();
     private final LocalDateTime dateOfCreation = currentTime;
     private int ownerID;
