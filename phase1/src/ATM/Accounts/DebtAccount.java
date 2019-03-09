@@ -11,6 +11,8 @@ public abstract class DebtAccount extends Account {
     public DebtAccount(int ownerID, double limit){
         super(ownerID);
         this.limit = limit;
+        this.availableCredit = limit - balance;
+        this.balance = 0;
     }
 
     public double getBalance(){
