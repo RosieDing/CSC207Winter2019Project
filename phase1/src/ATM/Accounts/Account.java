@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Observable;
 
-
+/**
+ * Account abstract class
+ */
 public abstract class Account extends Observable implements Withdrawable, TransferInable,Payable, Serializable {
     private LocalDateTime currentTime = LocalDateTime.now();
     private final LocalDateTime dateOfCreation = currentTime;

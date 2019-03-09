@@ -9,7 +9,7 @@ public abstract class DebtAccount extends Account {
     private double balance;
     private double availableCredit = limit - balance;
 
-
+    /**Constructor for debt account class */
     public DebtAccount(int ownerID, double limit){
         super(ownerID);
         this.limit = limit;
@@ -17,20 +17,25 @@ public abstract class DebtAccount extends Account {
         this.balance = 0;
     }
 
+    /**Getter for account balance */
     public double getBalance(){
         return this.balance;
     }
+
+    /**Setter for account balance */
     public void setBalance(double newBalance){
         this.balance = newBalance;
         setChanged();
         notifyObservers();
     }
 
+    /**Getter for account available credit to spend*/
     @Override
     public double getAvailableCredit() {
         return availableCredit;
     }
 
+    /**Transfer in method for transfering money into debt accounts*/
     @Override
     public void transferIn(double amount){
         this.balance -= amount;

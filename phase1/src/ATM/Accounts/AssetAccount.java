@@ -1,7 +1,7 @@
 package ATM.Accounts;
 
 /**
- * Asset account class
+ * Asset account abstract class
  */
 public abstract class AssetAccount extends Account implements TransferOutable {
     private double balance;
