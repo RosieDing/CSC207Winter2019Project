@@ -46,6 +46,7 @@ public class Withdrawal extends Transaction {
             throw new TransactionAmountOverLimitException();
         }
         getFromAcc().withdraw(this.getAmount());
+        setHappened(true);
     }
 
     @Override

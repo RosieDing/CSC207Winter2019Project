@@ -2,6 +2,7 @@ package ATM;
 
 public abstract class Transaction {
     private final double amount;
+    private boolean happened;
 
     public Transaction(double amount) {
         this.amount = amount;
@@ -17,6 +18,14 @@ public abstract class Transaction {
 
     public double getAmount() {
         return amount;
+    }
+
+    public void setHappened(boolean happened) {
+        this.happened = happened;
+    }
+
+    public boolean isHappened(){
+        return happened;
     }
 
     abstract void begin() throws TransactionAmountOverLimitException;  //make it default

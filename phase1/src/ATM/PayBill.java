@@ -40,6 +40,7 @@ public class PayBill extends Transaction{
             throw new TransactionAmountOverLimitException();
         }
         fromAcc.pay(this.getAmount());
+        setHappened(true);
     }
 
     @Override

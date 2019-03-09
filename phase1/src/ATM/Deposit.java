@@ -42,6 +42,7 @@ public class Deposit extends Transaction{
     @Override
     void begin() {
         getToAcc().transferIn(this.getAmount());
+        setHappened(true);
     }
 
     @Override
