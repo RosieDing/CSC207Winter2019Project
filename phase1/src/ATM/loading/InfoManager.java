@@ -5,12 +5,12 @@ import ATM.BankIdentities.User;
 
 import java.io.*;
 
-public class Loader {
+public class InfoManager {
     private static String filePath;
     private static InfoStorer info;
-    private static Loader loader;
+    private static InfoManager loader;
 
-    private Loader() throws ClassNotFoundException{
+    private InfoManager() throws ClassNotFoundException{
         info = new InfoStorer();
         File file = new File(filePath);
         if (file.exists()) {
@@ -24,9 +24,9 @@ public class Loader {
         }
     }
 
-    public static Loader getLoader() throws ClassNotFoundException{
+    public static InfoManager getInfoManager() throws ClassNotFoundException{
         if (loader == null){
-            loader = new Loader();
+            loader = new InfoManager();
         }
         return loader;
     }
