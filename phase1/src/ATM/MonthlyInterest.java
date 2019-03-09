@@ -17,7 +17,11 @@ public class MonthlyInterest implements ISaverPlan {
                 return amount * interestRate;
             }
             return amount;
-        }
+    }
+
+    String ToString(){
+        return "This is a SavingPlan with monthly interest 1%";
+    }
 
     }
-}
+
