@@ -14,15 +14,17 @@ public class CreditAccount extends DebtAccount {
     private double availableCredit = limit - balance;
 
 
-
+    /**Constructor for credit account class */
     public CreditAccount(int ownerID, double limit){
         super(ownerID, limit, availableCredit);
     }
 
-
+    /**Getter method for credit account number*/
     public int getAccountNum(){
         return this.accountNum;
     }
+
+    /**Getter method for owner id*/
     public int getOwnerID(){
         return this.ownerID;
     }
