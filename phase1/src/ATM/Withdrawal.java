@@ -18,6 +18,10 @@ public class Withdrawal extends Transaction {
         return (Account)fromAcc;
     }
 
+    public Account getToAcc() {
+        return toAcc;
+    }
+
     public LocalDateTime getTime() {
         return time;
     }
@@ -31,7 +35,16 @@ public class Withdrawal extends Transaction {
     }*/
 
     @Override
-    void begin() {
+    void begin() throws TransactionAmountOverLimitException{
+        Account acc = getFromAcc();
+        if (acc instanceof ChequingAccount) {
+            if (acc.getBalance() <= 0) {
+                throw new TransactionAmountOverLimitException();
+            }
+        }
+        if (getAmount() > acc.getAvailableCredit()) {
+            throw new TransactionAmountOverLimitException();
+        }
         getFromAcc().withdraw(this.getAmount());
     }
 

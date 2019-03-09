@@ -26,19 +26,25 @@ public class PayBill extends Transaction{
         return (Account)fromAcc;
     }
 
+    public Account getToAcc() {
+        return toAcc;
+    }
+
     public LocalDateTime getTime() {
         return time;
     }
 
     @Override
-    void begin() {
+    void begin() throws TransactionAmountOverLimitException{
+        if (getAmount() > getFromAcc().getAvailableCredit()) {
+            throw new TransactionAmountOverLimitException();
+        }
         fromAcc.pay(this.getAmount());
     }
 
     @Override
-    public Transaction reverse(){
-        return null;
-        //throws exception?
+    public Transaction reverse() throws ReverseNotPossibleException{
+        throw new ReverseNotPossibleException();
     }
 
     public String getTo() {

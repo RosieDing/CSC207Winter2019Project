@@ -3,7 +3,7 @@ package ATM;
 import javax.security.auth.login.AccountException;
 import java.time.LocalDateTime;
 
-public class RegularTrans extends Transaction {
+public class RegularTrans extends Transaction{
     private final TransferOutable fromAcc;
     private final TransferInable toAcc;
     private final LocalDateTime time;
@@ -36,17 +36,21 @@ public class RegularTrans extends Transaction {
     }
 
     @Override
-    void begin(){
+    void begin() throws TransactionAmountOverLimitException{
+        if (getAmount() > getFromAcc().getAvailableCredit()) {
+            throw new TransactionAmountOverLimitException();
+        }
         fromAcc.transferOut(this.getAmount());
         toAcc.transferIn(this.getAmount());
-
     }
 
     @Override
-    public Transaction reverse() {
+    public Transaction reverse() throws ReverseNotPossibleException{
         TransferInable toAcc = getFromAcc();
         if (getToAcc() instanceof TransferOutable){
             TransferOutable fromAcc = (TransferOutable)getToAcc();
+        } else {
+            throw new ReverseNotPossibleException();
         }
         return new RegularTrans(fromAcc, toAcc, this.getAmount());
     }

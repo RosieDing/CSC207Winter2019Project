@@ -11,12 +11,16 @@ public abstract class Transaction {
 
     //public abstract int getToAccNum();
 
+    public abstract Account getFromAcc();
+
+    public abstract Account getToAcc();
+
     public double getAmount() {
         return amount;
     }
 
-    abstract void begin();  //make it default
+    abstract void begin() throws TransactionAmountOverLimitException;  //make it default
 
-    public abstract Transaction reverse();
+    public abstract Transaction reverse() throws ReverseNotPossibleException;
 
 }

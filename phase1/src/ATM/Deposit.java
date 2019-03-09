@@ -29,6 +29,8 @@ public class Deposit extends Transaction{
         return toAccNum;
     }*/
 
+    public Account getFromAcc() { return fromAcc; }
+
     public Account getToAcc() {
         return toAcc;
     }
@@ -43,9 +45,11 @@ public class Deposit extends Transaction{
     }
 
     @Override
-    public Withdrawal reverse() {
+    public Withdrawal reverse() throws ReverseNotPossibleException{
         Account fromAcc = getToAcc();
-        // raise exception not Withdrawable
+        if (getAmount() > fromAcc.getBalance()) {
+            throw new ReverseNotPossibleException();
+        }
         return new Withdrawal(fromAcc, this.getAmount());
     }
 
