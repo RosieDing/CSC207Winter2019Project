@@ -1,4 +1,7 @@
-package ATM;
+package ATM.loading;
+
+import ATM.Account;
+import ATM.User;
 
 import java.io.*;
 
