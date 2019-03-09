@@ -15,10 +15,13 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
     private double availableCredit = limit - balance;
     private double balance;
 
+    /**Constructor for debt account class */
     public LineOfCredit(int ownerID, int limit) {
         super(ownerID, limit, availableCredit);
     }
     @Override
+
+    /**Transferout method for */
     public void transferOut(double amount){
         double newbalance = getBalance() + amount;
         setBalance(newbalance);
