@@ -5,16 +5,17 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 public class SavingAccount extends AssetAccount{
     private int ownerID;
     private double availableCredit = getBalance();
-    private double interestRate = 0.001;
+//    private double interestRate = 0.001;
+    private ISaverPlan iSaverPlan;
     private User owner= Loader.get(ownerID);
     private String id = "004" + ownerID + String.valueOf(owner.getAccountNum() + 1);
     private final int accountNum = Integer.valueOf(id);
 
-    private SavingAccount(int ownerID){
+    public SavingAccount(int ownerID, ISaverPlan s){
         super(ownerID);
         this.ownerID = ownerID;
-        double balance = getBalance();
-        setBalance(payinterest(interestRate,balance));
+        this.iSaverPlan = s;
+        setBalance(iSaverPlan.compute(getBalance()));
     }
 
     private double payinterest(double interestRate, double balance){
