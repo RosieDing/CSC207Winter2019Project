@@ -18,14 +18,6 @@ public abstract class Account extends Observable implements Withdrawable, Transf
     }
     public int getOwnerID(){ return ownerID;}
 
-//    private int getDate(LocalDateTime date){
-//        String day = String.valueOf(date.getDayOfMonth());
-//        String month = String.valueOf(date.getMonthValue());
-//        String year = String.valueOf(date.getYear());
-//        String stringdate = day+ month+ year;
-//        return Integer.valueOf(stringdate);
-//    }
-
     public LocalDateTime getCurrentTime(){
         return currentTime;
     }
