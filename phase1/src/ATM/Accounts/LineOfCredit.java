@@ -1,12 +1,12 @@
 package ATM.Accounts;
 
-/**
- * Line of credit account class
- */
+
 import ATM.BankIdentities.User;
 import ATM.loading.InfoManager;
 
-
+/**
+ * Line of credit account class
+ */
 public class LineOfCredit extends DebtAccount implements TransferOutable {
     private int ownerID;
     private User owner= InfoManager.get(ownerID);
@@ -21,7 +21,7 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
     }
     @Override
 
-    /**Transferout method for */
+    /**Transferout method for transfering money out of line of credit account */
     public void transferOut(double amount){
         double newbalance = getBalance() + amount;
         setBalance(newbalance);
@@ -29,11 +29,12 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
         notifyObservers();
     }
 
+    /**Getter for getting line of credit account number*/
     public int getAccountNum(){
         return this.accountNum;
     }
 
-
+    /**To string method*/
     @Override
     public String toString() {
         return ("LineOfCredit" + ", "  + this.accountNum + ", " + getBalance());
