@@ -19,7 +19,7 @@ public class BankManager extends BankIdentity {
         passM.setPassword("1234");
         u.setPassManager(passM);
         System.out.println("New user created! user ID: " + u.getId()
-                + " initial Password: " + randomPass);
+                + " initial Password: " + "1234");
     }
 
     public void restock(CashMachine machine, Money money){
