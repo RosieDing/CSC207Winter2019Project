@@ -34,5 +34,9 @@ public class ChequingAccount extends AssetAccount{
     public int getAccountNum(){
         return accountNum;
     }
+    @Override
+    public String toString() {
+        return ("ATM.ChequingAccount" + ", "  + this.accountNum + ", " + getBalance());
+    }
 
 }

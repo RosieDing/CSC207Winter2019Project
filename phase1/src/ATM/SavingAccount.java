@@ -7,7 +7,7 @@ public class SavingAccount extends AssetAccount{
     private double interestRate = 0.001;
 
     private User owner= Loader.get(ownerID);
-    private String id = "004" + ownerID + String.valueOf(owner.getAccountNum + 1);
+    private String id = "004" + ownerID + String.valueOf(owner.getAccountNum() + 1);
     private final int accountNum = Integer.valueOf(id);
 
     public SavingAccount(int ownerID){
@@ -38,6 +38,11 @@ public class SavingAccount extends AssetAccount{
         this.interestRate = interestRate;
         setChanged();
         notifyObservers();
+    }
+
+    @Override
+    public String toString() {
+        return ("ATM.SavingAccount" + ", "  + this.accountNum + ", " + getBalance());
     }
 
 }
