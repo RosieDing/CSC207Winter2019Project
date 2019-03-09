@@ -1,4 +1,4 @@
-package ATM;
+package ATM.Accounts;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -25,11 +25,11 @@ public abstract class Account extends Observable implements Withdrawable, Transf
     public LocalDateTime getDateOfCreation(){
         return dateOfCreation;}
 
-    abstract double getAvailableCredit();
+    public abstract double getAvailableCredit();
 
     public abstract int getAccountNum();
 
-    abstract double getBalance();
+    public abstract double getBalance();
 
     public abstract void transferIn(double amount);
 

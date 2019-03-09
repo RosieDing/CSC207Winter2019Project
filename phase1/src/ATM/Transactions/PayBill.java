@@ -1,4 +1,7 @@
-package ATM;
+package ATM.Transactions;
+
+import ATM.Accounts.Account;
+import ATM.Accounts.Payable;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package ATM;
+package ATM.Accounts;
 
 public abstract class DebtAccount extends Account {
     private double limit;

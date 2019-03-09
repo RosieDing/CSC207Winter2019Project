@@ -1,6 +1,9 @@
-package ATM;
+package ATM.Transactions;
 
-import javax.security.auth.login.AccountException;
+import ATM.Accounts.Account;
+import ATM.Accounts.TransferInable;
+import ATM.Accounts.TransferOutable;
+
 import java.time.LocalDateTime;
 
 public class RegularTrans extends Transaction{
@@ -19,7 +22,7 @@ public class RegularTrans extends Transaction{
         return fromAcc;
     }
 
-    public ATM.Account getToAcc() {
+    public ATM.Accounts.Account getToAcc() {
         return toAcc;
     }*/
 

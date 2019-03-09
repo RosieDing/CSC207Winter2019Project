@@ -1,4 +1,4 @@
-package ATM;
+package ATM.BankIdentities;
 
 import java.util.Observable;
 

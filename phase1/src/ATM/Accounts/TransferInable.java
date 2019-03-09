@@ -1,4 +1,4 @@
-package ATM;
+package ATM.Accounts;
 
 /** a transferin_able interface for the accounts which could be transferin */
 public interface TransferInable {

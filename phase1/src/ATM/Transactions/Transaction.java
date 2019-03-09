@@ -1,4 +1,6 @@
-package ATM;
+package ATM.Transactions;
+
+import ATM.Accounts.Account;
 
 public abstract class Transaction {
     private final double amount;

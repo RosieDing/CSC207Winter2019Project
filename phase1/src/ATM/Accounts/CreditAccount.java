@@ -1,6 +1,7 @@
-package ATM;
+package ATM.Accounts;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
+import ATM.BankIdentities.User;
+import ATM.loading.Loader;
 
 public class CreditAccount extends DebtAccount {
     private int ownerID;
@@ -26,7 +27,7 @@ public class CreditAccount extends DebtAccount {
 
     @Override
     public String toString() {
-        return ("ATM.CreditAccount" + ", "  + this.accountNum + ", " + getBalance());
+        return ("ATM.Accounts.CreditAccount" + ", "  + this.accountNum + ", " + getBalance());
     }
 
 }

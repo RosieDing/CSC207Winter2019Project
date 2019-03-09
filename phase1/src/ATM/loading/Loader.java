@@ -1,14 +1,16 @@
 package ATM.loading;
 
-import ATM.Account;
-import ATM.User;
+import ATM.Accounts.Account;
+import ATM.BankIdentities.User;
 
 import java.io.*;
 
 public class Loader {
-    private InfoStorer info;
+    private static InfoStorer info;
 
-    public Loader(String filePath) throws ClassNotFoundException{
+    private static Loader loader;
+
+    private Loader(String filePath) throws ClassNotFoundException{
         info = new InfoStorer();
         File file = new File(filePath);
         if (file.exists()) {
@@ -22,7 +24,14 @@ public class Loader {
         }
     }
 
-    public void readFromFile(String path) throws ClassNotFoundException {
+    public static Loader getLoader(String filePath) throws ClassNotFoundException{
+        if (loader == null){
+            loader = new Loader(filePath);
+        }
+        return loader;
+    }
+
+    public static void readFromFile(String path) throws ClassNotFoundException {
         try {
             InputStream file = new FileInputStream(path);
             InputStream buffer = new BufferedInputStream(file);
