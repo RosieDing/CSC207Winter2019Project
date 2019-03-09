@@ -3,9 +3,6 @@ package ATM.Accounts;
 
 import ATM.BankIdentities.User;
 import ATM.loading.Loader;
-/**
- * Saving account class
- */
 
 
 public class SavingAccount extends AssetAccount {

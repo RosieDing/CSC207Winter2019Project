@@ -2,7 +2,7 @@ package ATM.Accounts;
 
 
 import ATM.BankIdentities.User;
-import ATM.loading.Loader;
+import ATM.loading.InfoManager;
 
 /**
  * Chequing account class
@@ -11,8 +11,8 @@ public class ChequingAccount extends AssetAccount{
     private double overDraftLimit = 100;
     private double availableCredit = overDraftLimit + getBalance();
     private int ownerID;
-    private Loader l = Loader.getLoader();
-    private User owner= Loader.getUser(ownerID);
+    private InfoManager l = InfoManager.getLoader();
+    private User owner= InfoManager.getUser(ownerID);
     private String id = "003" + ownerID + String.valueOf(owner.getAccountNum + 1);
     private final int accountNum = Integer.valueOf(id);
 

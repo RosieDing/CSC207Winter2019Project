@@ -3,7 +3,6 @@ package ATM.Transactions;
 import ATM.Accounts.Account;
 import ATM.Accounts.TransferInable;
 import ATM.Accounts.TransferOutable;
-import ATM.loading.Loader;
 
 import java.util.HashMap;
 import java.util.Map;
