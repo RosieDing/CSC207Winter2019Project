@@ -11,7 +11,7 @@ public class UserAccManager extends Observable{
 
         this.ownedUserId = ownedUserId;
         listOfAcc.put("TransferOutable", new ArrayList<>());
-        listOfAcc.put("TransferInable", new ArrayList<>());
+        //listOfAcc.put("TransferInable", new ArrayList<>());
     }
 
     public void addAccount(Account acc){
@@ -27,9 +27,9 @@ public class UserAccManager extends Observable{
         if (acc instanceof TransferOutable) {
             listOfAcc.get("TransferOutable").add(acc);
         }
-        if (acc instanceof TransferInable) {
+        /*if (acc instanceof TransferInable) {
             listOfAcc.get("TransferInable").add(acc);
-        }
+        }*/
         setChanged();
         notifyObservers();
     }
@@ -47,8 +47,12 @@ public class UserAccManager extends Observable{
         // fix this?
     }
 
-    public Map<String, ArrayList<Account>> getListOfAcc() {
-        return listOfAcc;
+    public ArrayList<Account> getAllAccounts() {
+        ArrayList<Account> all = new ArrayList<>();
+        for (ArrayList<Account> list: listOfAcc.values()) {
+            all.addAll(list);
+        }
+        return all;
     }
 
     public ArrayList<Account> getTypeAccounts(String type) {
