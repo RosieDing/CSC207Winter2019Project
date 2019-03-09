@@ -5,7 +5,7 @@ import com.sun.xml.internal.bind.v2.runtime.unmarshaller.Loader;
 public class SavingAccount extends AssetAccount{
     private int ownerID;
     private double interestRate = 0.001;
-    private double balance;
+
     private User owner= Loader.get(ownerID);
     private String id = "004" + ownerID + String.valueOf(owner.getAccountNum + 1);
     private final int accountNum = Integer.valueOf(id);
@@ -13,52 +13,13 @@ public class SavingAccount extends AssetAccount{
     public SavingAccount(int ownerID){
         super(ownerID);
         this.ownerID = ownerID;
-        payinterest(balance);
+        double balance = getBalance();
+        setBalance(payinterest(balance));
     }
 
     @Override
     double getAvailableCredit() {
-        return balance;
-    }
-
-    @Override
-    public double getBalance() {
-        return balance;
-    }
-
-    @Override
-    public void transferIn(double amount) {
-        balance += amount;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public void transferOut(double amount) {
-        balance -= amount;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public void setBalance(double balance) {
-        this.balance = balance;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public void pay(double amount) {
-        balance -= amount;
-        setChanged();
-        notifyObservers();
-    }
-
-    @Override
-    public void withdraw(double amount) {
-        balance -= amount;
-        setChanged();
-        notifyObservers();
+        return getBalance();
     }
 
     @Override
@@ -67,11 +28,9 @@ public class SavingAccount extends AssetAccount{
     }
 
 
-    private void payinterest(double balance){
+    private double payinterest(double balance){
         if (getCurrentTime().getDayOfMonth() == 1){
-            this.balance = this.balance * interestRate;
-            setChanged();
-            notifyObservers();
+            return balance * interestRate;
         }
     }
 
@@ -79,7 +38,6 @@ public class SavingAccount extends AssetAccount{
         this.interestRate = interestRate;
         setChanged();
         notifyObservers();
-
     }
 
 }
