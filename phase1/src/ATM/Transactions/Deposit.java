@@ -43,7 +43,7 @@ public class Deposit extends Transaction{
 
     @Override
     void begin() {
-        getToAcc().transferIn(this.getAmount());
+        getToAcc().deposit(this.getAmount());
         setHappened(true);
     }
 
