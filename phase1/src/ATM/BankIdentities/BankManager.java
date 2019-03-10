@@ -13,7 +13,7 @@ import ATM.InfoHandling.InfoManager;
 public class BankManager extends BankIdentity {
     private final String id;
     public BankManager() {
-        this.id = "510" + (InfoManager.getBankManagerNum() + 1);
+        this.id = "510" + (InfoManager.getInfoManager().getBankManagerNum() + 1);
     }
     public String getId(){
         return id;
@@ -40,19 +40,22 @@ public class BankManager extends BankIdentity {
     /*
     May need to write the exception
      */
-    public void undoMostRecentTrans(int accNum) {
+    public void undoMostRecentTrans(String accNum) {
         try {
             Transaction e = InfoManager.getInfoManager().getTransactionManager().getAccLastTrans(accNum).reverse();
             // try catch where pay bill can't be reversed.
             TransactionManager manager = InfoManager.getInfoManager().getTransactionManager();
             manager.makeTransaction(e);
+            if (e.isHappened()) {
+                manager.addTrans(e);
+            }
             // try catch if transaction cant be processed.
         } catch (ReverseNotPossibleException e) {
-            System.out.println("Impossible to undo this transaction.");;
+            System.out.println("Impossible to undo this transaction.");
         }
     }
 
-    public void createNewChequingAccount(int userID) {
+    public void createNewChequingAccount(String userID) {
         User u = InfoManager.getUser(userID);
         UserAccManager m = u.getAccManager();
         ChequingAccount acc = new ChequingAccount(userID);
@@ -67,22 +70,22 @@ public class BankManager extends BankIdentity {
 
     }
 
-    public void createNewSavingAccount(int userID){
-        User u = InfoManager.getUser(userID);
+    public void createNewSavingAccount(String userID){
+        User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m = u.getAccManager();
         MonthlyInterest interest = new MonthlyInterest(0.01);
         SavingAccount acc = new SavingAccount(userID, interest);
         m.addAccount(acc);
     }
 
-    public void createNewCreditAccount(int userID, double limit){
+    public void createNewCreditAccount(String userID, double limit){
         User u = InfoManager.getUser(userID);
         UserAccManager m = u.getAccManager();
         CreditAccount acc = new CreditAccount(userID, limit);
         m.addAccount(acc);
     }
 
-    public void createNewLineOfCreadit(int userID, double limit){
+    public void createNewLineOfCreadit(String userID, double limit){
         User u = InfoManager.getUser(userID);
         UserAccManager m =u.getAccManager();
         LineOfCredit acc = new LineOfCredit(userID, limit);

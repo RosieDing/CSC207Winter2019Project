@@ -1,9 +1,13 @@
 package ATM.BankIdentities;
 import ATM.Accounts.*;
+import ATM.InfoHandling.InfoManager;
 
 import java.util.*;
 
 public class UserAccManager{
+    /**
+    A map that have account type as key and an arraylist of Accounts that fit the type of key.
+     */
     private Map<String, ArrayList<Account>> listOfAcc = new HashMap<>();
     private String ownedUserId;
     private ChequingAccount primaryChq;
@@ -27,6 +31,7 @@ public class UserAccManager{
         if (acc instanceof TransferOutable) {
             listOfAcc.get("TransferOutable").add(acc);
         }
+        InfoManager.getInfoManager().add(acc);
     }
 
     public Account getAccount(int accNum) throws NoSuchAccountException{
@@ -62,9 +67,8 @@ public class UserAccManager{
 
     public void setPrimaryChq(Account acc) throws AlreadyPrimaryException{
         if (acc instanceof ChequingAccount) {
-            if (acc.getOwnerID().equals(ownedUserId) {
-                ChequingAccount pc = getPrimaryChq();
-                if (acc == pc) {
+            if (acc.getOwnerID().equals(ownedUserId)) {
+                if (acc == getPrimaryChq()) {
                     throw new AlreadyPrimaryException("This account is already " +
                             "a primary chequing account.");
                 } else {
@@ -78,13 +82,13 @@ public class UserAccManager{
         return primaryChq;
     }
 
-    public String getDateOfCreation(int accNum){
+    public String getDateOfCreation(String accNum){
         String result = "";
         try {
             Account a = getAccount(accNum);
             result = a.getDateOfCreation().toString();
         }catch (NoSuchAccountException e) {
-            System.out.println("Can not get date of creation.");
+            System.out.println("There is no such account");
         }
         return result;
     }
@@ -93,11 +97,10 @@ public class UserAccManager{
         StringBuilder result = new StringBuilder();
         for (String s: listOfAcc.keySet()) {
             String name = String.join(" ", s.split("(?==\\p{Upper})"));
-            result.append(name + ":\n");
+            result.append(name).append(":\n");
             ArrayList<Account> list = listOfAcc.get(s);
             for (Account acc: list) {
-                result.append("account " + acc.getAccountNum()
-                        + " with balance " + acc.getBalance() + "\n");
+                result.append(acc.toString()).append("\n");
             }
         }
         return result.toString();

@@ -8,7 +8,7 @@ public class User extends BankIdentity {
     private PasswordManager passManager;
 
     public User() {
-        this.id = "020" + (InfoManager.getUserNum() + 1);
+        this.id = "020" + (InfoManager.getInfoManager().getUserNum() + 1);
     }
     public String getId(){
         return id;
@@ -29,7 +29,5 @@ public class User extends BankIdentity {
         this.passManager = passManager;
     }
 
-    public int getAccountNum() {
-        return getAccManager().getAllAccounts().size();
-    }
+
 }
