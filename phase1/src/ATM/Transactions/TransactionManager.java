@@ -23,6 +23,11 @@ public class TransactionManager{
         return m;
     }
 
+    /***
+     *
+     * @param map
+     * @return
+     */
     public Transaction makeTransaction(Map<String, Object> map) {
         Transaction e = null;
         switch((String)map.get("Type")) {
@@ -41,14 +46,7 @@ public class TransactionManager{
                         (TransferInable)map.get("toAccount"), (Double)map.get("Amount"));
                 break;
         }
-        try{
-            e.begin();
-        } catch (TransactionAmountOverLimitException a) {
-            System.out.println("Not enough balance to complete transaction.");
-        } catch (NullPointerException b) {
-            System.out.println("Transaction is not possible.");
-        }
-        return e;
+        return makeTransaction(e);
     }
 
     public Transaction makeTransaction(Transaction e) {
@@ -74,7 +72,7 @@ public class TransactionManager{
         return e;
     }
 
-    private void addHelper(String userId, String accNum, Transaction trans) {
+    private void helper(String userId, String accNum, Transaction trans) {
         accTransList.get(accNum).add(trans);
         userTransList.get(userId).add(trans);
     }
@@ -83,11 +81,11 @@ public class TransactionManager{
         if (trans.getFromAcc() == null) {
             String userId = trans.getToAcc().getOwnerID();
             String accNum = trans.getToAcc().getAccountNum();
-            addHelper(userId, accNum, trans);
+            helper(userId, accNum, trans);
         } else {
             String userId = trans.getFromAcc().getOwnerID();
             String accNum = trans.getFromAcc().getAccountNum();
-            addHelper(userId, accNum, trans);
+            helper(userId, accNum, trans);
 
         }
     }
