@@ -5,7 +5,7 @@ import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
 import ATM.Transactions.Transaction;
 import ATM.Transactions.TransactionManager;
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 public class BankManager extends BankIdentity {
 

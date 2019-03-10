@@ -1,7 +1,7 @@
 package ATM.Accounts;
 
 import ATM.BankIdentities.User;
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 /**
  * Credit account class
@@ -11,22 +11,24 @@ public class CreditAccount extends DebtAccount {
     private String id = "001" + ownerID + (InfoManager.getAccountNum() + 1);
     private final int accountNum = Integer.valueOf(id);
 
-
+    /**Constructor for credit account class */
     public CreditAccount(int ownerID, double limit){
         super(ownerID, limit);
         this.ownerID = ownerID;
     }
 
-
+    /**Getter method for credit account number*/
     public int getAccountNum(){
         return this.accountNum;
     }
+
+    /**Getter method for owner id*/
     public int getOwnerID(){
         return this.ownerID;
     }
 
 
-
+    /**To string method that will return a string combined with account type, account number, and account balance*/
     @Override
     public String toString() {
         return ("ATM.Accounts.CreditAccount" + ", "  + this.accountNum + ", " + getBalance());

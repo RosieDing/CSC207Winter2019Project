@@ -1,6 +1,6 @@
 package ATM.BankIdentities;
 
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 public class User extends BankIdentity {
 
@@ -9,7 +9,8 @@ public class User extends BankIdentity {
 
     public User() {
         String id = "";
-        id = id + "020" + (InfoManager.getUserNum() + 1);
+        loader =InfoManager.getInfoManager();
+        id = id + "020" + (loader.getUserNum() + 1);
         this.setId(Integer.valueOf(id));
     }
 

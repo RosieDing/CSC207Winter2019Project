@@ -1,4 +1,4 @@
-package ATM.loading;
+package ATM.InfoHandling;
 
 import ATM.Accounts.Account;
 import ATM.BankIdentities.User;
@@ -7,40 +7,40 @@ import java.io.*;
 
 public class InfoManager {
     private static String filePath;
-    private static InfoStorer info;
-    private static InfoManager loader;
+    private static InfoStorer infoStorer;
+    private static InfoManager infoManager;
 
-    private InfoManager() throws ClassNotFoundException{
-        info = new InfoStorer();
+    private InfoManager(){
+        infoStorer = new InfoStorer();
         File file = new File(filePath);
         if (file.exists()) {
             readFromFile(filePath);
         } else {
             try {
                 file.createNewFile();
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 System.out.println(ex);;
             }
         }
     }
 
-    public static InfoManager getInfoManager() throws ClassNotFoundException{
-        if (loader == null){
-            loader = new InfoManager();
+    public static InfoManager getInfoManager(){
+        if (infoManager == null){
+            infoManager = new InfoManager();
         }
-        return loader;
+        return infoManager;
     }
 
-    public static void readFromFile(String path) throws ClassNotFoundException {
+    public static void readFromFile(String path) {
         try {
             InputStream file = new FileInputStream(path);
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
 
             //deserialize the InfoStorer
-            info = (InfoStorer) input.readObject();
+            infoStorer = (InfoStorer) input.readObject();
             input.close();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(ex);
         }
     }
@@ -52,38 +52,38 @@ public class InfoManager {
         ObjectOutput output = new ObjectOutputStream(buffer);
 
         // serialize the Map
-        output.writeObject(info);
+        output.writeObject(infoStorer);
         output.close();
     }
 
-    public static InfoStorer getInfo() {
-        return info;
+    public static InfoStorer getInfoStorer() {
+        return infoStorer;
     }
 
     public static User getUser(int id){
         String key = String.valueOf(id);
-        return info.getUserMap().get(key);
+        return infoStorer.getUserMap().get(key);
     }
 
     public static Account getAccount(int id){
         String key = String.valueOf(id);
-        return info.getAccountMap().get(key);
+        return infoStorer.getAccountMap().get(key);
     }
 
     public static int getUserNum(){
-        return info.getUserMap().size();
+        return infoStorer.getUserMap().size();
     }
 
     public static int getAccountNum(){
-        return info.getAccountMap().size();
+        return infoStorer.getAccountMap().size();
     }
 
     public static void add(User newUser){
-        info.addUser(newUser);
+        infoStorer.addUser(newUser);
     }
 
     public static void add(Account newAccount){
-        info.addAccount(newAccount);
+        infoStorer.addAccount(newAccount);
     }
 }
 
