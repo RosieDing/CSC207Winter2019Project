@@ -21,12 +21,12 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
         setBalance(new_balance);
     }
 
-    /**Getter for getting line of credit account number*/
+    /**Getter for getting line of credit account number */
     public String getAccountNum(){
         return this.accountNum;
     }
 
-    /**To string method*/
+    /**To string method */
     @Override
     public String toString() {
         return ("LineOfCredit" + ", "  + this.accountNum + ", " + getBalance());
