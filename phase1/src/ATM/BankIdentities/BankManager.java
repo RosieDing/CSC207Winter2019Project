@@ -65,6 +65,7 @@ public class BankManager extends BankIdentity {
         passM.addObserver(InfoManager.getInfoManager());
         createNewChequingAccount(u.getId());
 
+
     }
 
     /** Restocking the CashMachine
