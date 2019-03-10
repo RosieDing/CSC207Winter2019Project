@@ -12,7 +12,6 @@ public class UserAccManager extends Observable{
 
         this.ownedUserId = ownedUserId;
         listOfAcc.put("TransferOutable", new ArrayList<>());
-        //listOfAcc.put("TransferInable", new ArrayList<>());
     }
 
     public void addAccount(Account acc){
@@ -28,27 +27,27 @@ public class UserAccManager extends Observable{
         if (acc instanceof TransferOutable) {
             listOfAcc.get("TransferOutable").add(acc);
         }
-        /*if (acc instanceof TransferInable) {
-            listOfAcc.get("TransferInable").add(acc);
-        }*/
         setChanged();
         notifyObservers();
     }
 
-    public Account getAccount(int accNum) {
+    public Account getAccount(int accNum) throws NoSuchAccountException{
+        Account result = null;
         for (ArrayList<Account> list: listOfAcc.values()) {
             for (Account acc: list) {
                 if (acc.getAccountNum() == accNum) {
-                    return acc;
+                    result = acc;
                     break;
                 }
             }
         }
-        //throw new NoSuchElementException();
-        // fix this?
+        if (result == null) {
+            throw new NoSuchAccountException("Can not find this account!");
+        }
+        return result;
     }
 
-    public ArrayList<Account> getAllAccounts() {
+    public ArrayList<Account> getAllAccounts(){
         ArrayList<Account> all = new ArrayList<>();
         for (ArrayList<Account> list: listOfAcc.values()) {
             all.addAll(list);
@@ -56,32 +55,47 @@ public class UserAccManager extends Observable{
         return all;
     }
 
-    public ArrayList<Account> getTypeAccounts(String type) {
+    public ArrayList<Account> getTypeAccounts(String type) throws NoSuchTypeException{
+        if (!(listOfAcc.keySet().contains(type))) {
+            throw new NoSuchTypeException("You entered a wrong type!");
+        }
         return listOfAcc.get(type);
-        // try catch exception
     }
 
-    public void setPrimaryChq(Account acc){
+    public void setPrimaryChq(Account acc) throws AlreadyPrimaryException{
         if (acc instanceof ChequingAccount) {
             if (acc.getOwnerID() == ownedUserId) {
-                if (acc==getPrimaryChq() && getPrimaryChq()!=null) {
-                    //throws exception
-                } else {
-                    this.primaryChq = ((ChequingAccount)acc);
+                try {
+                    ChequingAccount pc = getPrimaryChq();
+                    if (acc == pc) {
+                        throw new AlreadyPrimaryException("This account is already " +
+                                "a primary chequing account.");
+                    } else {
+                        this.primaryChq = ((ChequingAccount)acc);
+                    }
+                } catch (NoPrimaryException e) {
+                    System.out.println("Can not set this account as the primary.");
                 }
             }
         }
-        //exceptions
     }
 
-    public ChequingAccount getPrimaryChq(){
+    public ChequingAccount getPrimaryChq() throws NoPrimaryException{
+        if (primaryChq == null) {
+            throw new NoPrimaryException("This user has no chequing account");
+        }
         return primaryChq;
-        // exception
     }
 
     public String getDateOfCreation(int accNum){
-        Account a = getAccount(accNum);
-        return a.getDateOfCreation().toString();
+        String result = "";
+        try {
+            Account a = getAccount(accNum);
+            result = a.getDateOfCreation().toString();
+        }catch (NoSuchAccountException e) {
+            System.out.println("Can not get date of creation.");
+        }
+        return result;
     }
 
     public String getSummary(){
@@ -96,8 +110,6 @@ public class UserAccManager extends Observable{
             }
         }
         return result.toString();
-
-        // exception
     }
 
     public int getNetTotal(){
