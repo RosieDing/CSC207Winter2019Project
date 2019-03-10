@@ -1,8 +1,9 @@
 package ATM.BankIdentities;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public class PasswordManager extends Observable {
+public class PasswordManager extends Observable implements Serializable {
 
     private final String ownerId;
     private String password;

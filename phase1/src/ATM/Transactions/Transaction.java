@@ -2,7 +2,9 @@ package ATM.Transactions;
 
 import ATM.Accounts.Account;
 
-public abstract class Transaction {
+import java.io.Serializable;
+
+public abstract class Transaction implements Serializable {
     private final double amount;
     private boolean happened;
 

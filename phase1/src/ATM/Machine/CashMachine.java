@@ -2,10 +2,11 @@ package ATM.Machine;
 
 import ATM.InfoHandling.AlertWriter;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 
-public class CashMachine{
+public class CashMachine implements Serializable {
     private int numFiveD;
     private int numTenD;
     private int numTwentyD;

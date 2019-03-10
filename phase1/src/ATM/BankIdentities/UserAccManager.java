@@ -2,9 +2,10 @@ package ATM.BankIdentities;
 import ATM.Accounts.*;
 import ATM.InfoHandling.InfoManager;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class UserAccManager{
+public class UserAccManager implements Serializable {
     /**
     A map that have account type as key and an arraylist of Accounts that fit the type of key.
      */

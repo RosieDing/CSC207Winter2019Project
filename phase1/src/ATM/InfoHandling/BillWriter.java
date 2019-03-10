@@ -1,11 +1,8 @@
 package ATM.InfoHandling;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
-public class BillWriter implements WriteTXT{
+public class BillWriter implements WriteTXT, Serializable {
     private String path = "./outgoing.txt";
 
     public void write(String content){
