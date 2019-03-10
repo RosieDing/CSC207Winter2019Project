@@ -8,17 +8,24 @@ import java.util.*;
 public class UserAccManager implements Serializable {
     /**
     A map that have account type as key and an arraylist of Accounts that fit the type of key.
+     <"accountType",<Accounts>>
      */
     private Map<String, ArrayList<Account>> listOfAcc = new HashMap<>();
     private String ownedUserId;
     private ChequingAccount primaryChq;
 
+    /** Create a new userAccountManager
+     *
+     * @param ownedUserId the Id of the user of the userAccount manager*/
     public UserAccManager(String ownedUserId) {
 
         this.ownedUserId = ownedUserId;
         listOfAcc.put("TransferOutable", new ArrayList<>());
     }
 
+    /** Adding the accounts in the Account Manager
+     *
+     * @param acc the account be added*/
     public void addAccount(Account acc){
         Class c = acc.getClass();
         String name = c.getName();
@@ -34,7 +41,10 @@ public class UserAccManager implements Serializable {
         }
         InfoManager.getInfoManager().add(acc);
     }
-
+    /** Use the account number to get the account
+     *
+     * @param accNum the accNum of the account we want to find
+     * @throws NoSuchAccountException*/
     public Account getAccount(String accNum) throws NoSuchAccountException{
         Account result = null;
         for (ArrayList<Account> list: listOfAcc.values()) {
@@ -52,6 +62,7 @@ public class UserAccManager implements Serializable {
     }
 
 
+    /** get all the accounts */
     public ArrayList<Account> getAllAccounts(){
         ArrayList<Account> all = new ArrayList<>();
         for (ArrayList<Account> list: listOfAcc.values()) {
@@ -73,6 +84,11 @@ public class UserAccManager implements Serializable {
         return listOfAcc.get(type);
     }
 
+    /** Set the primary chequing account
+     *
+     * @param acc the account we want to set as primary
+     * @throws AlreadyPrimaryException
+     * */
     public void setPrimaryChq(Account acc) throws AlreadyPrimaryException{
         if (acc instanceof ChequingAccount) {
             if (acc.getOwnerID().equals(ownedUserId)) {
@@ -86,10 +102,13 @@ public class UserAccManager implements Serializable {
         }
     }
 
+    /** Get primary chequing account */
     public ChequingAccount getPrimaryChq(){
         return primaryChq;
     }
 
+    /** get the date of cration of the user acc manager
+     * @param  accNum the account number*/
     public String getDateOfCreation(String accNum){
         String result = "";
         try {
@@ -101,6 +120,7 @@ public class UserAccManager implements Serializable {
         return result;
     }
 
+    /** get the summary of all the account under user account manager */
     public String getSummary(){
         StringBuilder result = new StringBuilder();
         for (String s: listOfAcc.keySet()) {
@@ -114,6 +134,7 @@ public class UserAccManager implements Serializable {
         return result.toString();
     }
 
+    /** Get the net total balance */
     public int getNetTotal(){
         int net = 0;
         for (ArrayList<Account> list: listOfAcc.values()) {
