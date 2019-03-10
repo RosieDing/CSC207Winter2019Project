@@ -22,9 +22,8 @@ public class MonthlyInterest implements ISaverPlan {
             return amount;
     }
 
-    String ToString(){
-        return "This is a SavingPlan with monthly interest"+interestRate;
-    }
+    public String toString(){
+        return "This is a SavingPlan with monthly interest; "+interestRate;}
 
     }
 

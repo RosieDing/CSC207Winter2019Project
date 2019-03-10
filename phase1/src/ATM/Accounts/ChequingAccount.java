@@ -9,36 +9,30 @@ import ATM.InfoHandling.InfoManager;
 public class ChequingAccount extends AssetAccount{
     private double overDraftLimit = 100;
     private double availableCredit = overDraftLimit + getBalance();
-    private String ownerID;
-    private String id = "003" + ownerID + (InfoManager.getInfoManager().getAccountNum() + 1);
-    private final String accountNum = id;
+    private final String accountNum = "003" + getOwnerID() + (InfoManager.getInfoManager().getAccountNum() + 1);
 
     /**Constructor for chequing account class*/
     public ChequingAccount(String ownerID){
         super(ownerID);
-        this.ownerID = ownerID;
     }
 
 
-    public void setoverDraftLimit(double limit){
+    public void setOverDraftLimit(double limit){
         this.overDraftLimit = limit;
     }
 
-    public double getOverDraftLimit() {
-        return overDraftLimit;
+    public double getOverDraftLimit() {return overDraftLimit;
     }
 
     @Override
-    public double getAvailableCredit(){
-        return availableCredit;
-    }
+    public double getAvailableCredit(){return availableCredit;}
     @Override
     public String getAccountNum(){
         return accountNum;
     }
     @Override
     public String toString() {
-        return ("ATM.Accounts.ChequingAccount" + ", "  + this.accountNum + ", " + getBalance());
+        return ("ChequingAccount" + ", "  + this.accountNum + ", " + getBalance());
     }
 
 }
