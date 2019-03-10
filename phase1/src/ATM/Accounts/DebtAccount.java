@@ -15,7 +15,6 @@ public abstract class DebtAccount extends Account {
         this.ownerID = ownerID;
         this.limit = limit;
         this.availableCredit = limit - balance;
-        this.balance = 0;
     }
 
     /**Getter method for account balance */
