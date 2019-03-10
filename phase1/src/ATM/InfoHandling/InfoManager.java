@@ -115,6 +115,10 @@ public class InfoManager implements Observer {
         infoStorer.addBankManager(newBankManager);
     }
 
+    public void add(String userID, String type) { infoStorer.addRequest(userID, type);}
+
+    public void removeRequest(String userID, String type) { infoStorer.getAccountCreationRequest().remove(userID, type); }
+
     @Override
     public void update(Observable o, Object arg) {
         saveToFile();
