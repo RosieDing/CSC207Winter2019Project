@@ -9,12 +9,12 @@ import ATM.InfoHandling.InfoManager;
 public class ChequingAccount extends AssetAccount{
     private double overDraftLimit = 100;
     private double availableCredit = overDraftLimit + getBalance();
-    private int ownerID;
-    private String id = "003" + ownerID + (InfoManager.getAccountNum() + 1);
+    private String ownerID;
+    private String id = "003" + ownerID + (InfoManager.getInfoManager().getAccountNum() + 1);
     private final String accountNum = id;
 
     /**Constructor for chequing account class*/
-    public ChequingAccount(int ownerID){
+    public ChequingAccount(String ownerID){
         super(ownerID);
         this.ownerID = ownerID;
     }
