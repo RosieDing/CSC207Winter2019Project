@@ -32,15 +32,12 @@ public class BankSystem {
         if (infoManager.getBankManagerNum() == 0) {
             BankManager defaultManager = new BankManager("1234");
         }
+        BankSystem bs = new BankSystem();
         while (SystemOn) {
-            BankSystem bs = new BankSystem();
-            bs.run();
+            bs.identityLog();
         }
     }
 
-    /**Running the system */
-    public void run() {
-    }
 
     /**Ask whichever bankIdentity is using the system for an ID
      * identify them as User or Manager
@@ -51,8 +48,8 @@ public class BankSystem {
         while (!isFound) {
             String id = promptUser("Please enter your ID: ");
             if (infoManager.getInfoStorer().getBankManagerMap().containsKey(id)) {
-                managerLog(id);
                 isFound = true;
+                managerLog(id);
             } else if (infoManager.getInfoStorer().getUserMap().containsKey(id)) {
                 userLog(id);
                 isFound = true;
