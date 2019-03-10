@@ -1,14 +1,15 @@
-package ATM.loading;
+package ATM.InfoHandling;
 
 import ATM.Accounts.Account;
 import ATM.BankIdentities.User;
+import ATM.Transactions.TransactionManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Managing the saving and loading of all information
- * Including accounts, users
+ * Managing the saving and InfoHandling of all information
+ * Including accounts, users, transactions
  */
 public class InfoStorer {
     /**A mapping of Account ID to Account */
@@ -17,9 +18,13 @@ public class InfoStorer {
     /**A mapping of User ID to User */
     private Map<String, User> userMap;
 
+    /**A TransactionManager which has all the transaction information*/
+    private TransactionManager transactionManager;
+
     public InfoStorer(){
         this.accountMap = new HashMap<String, Account>();
         this.userMap = new HashMap<String, User>();
+        this.transactionManager = TransactionManager.getTransactionManager();
     }
 
     public Map<String, Account> getAccountMap() {
@@ -28,6 +33,10 @@ public class InfoStorer {
 
     public Map<String, User> getUserMap() {
         return userMap;
+    }
+
+    public TransactionManager getTransactionManager() {
+        return transactionManager;
     }
 
     public void addUser(User newUser){

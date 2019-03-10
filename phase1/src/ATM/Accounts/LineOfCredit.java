@@ -4,7 +4,7 @@ package ATM.Accounts;
  * Line of credit account class
  */
 import ATM.BankIdentities.User;
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 
 public class LineOfCredit extends DebtAccount implements TransferOutable {

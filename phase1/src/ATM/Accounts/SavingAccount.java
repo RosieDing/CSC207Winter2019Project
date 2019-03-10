@@ -2,7 +2,7 @@ package ATM.Accounts;
 
 
 import ATM.BankIdentities.User;
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 
 public class SavingAccount extends AssetAccount {

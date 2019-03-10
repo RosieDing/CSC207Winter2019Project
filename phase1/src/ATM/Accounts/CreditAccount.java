@@ -1,7 +1,7 @@
 package ATM.Accounts;
 
 import ATM.BankIdentities.User;
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 /**
  * Credit account class
