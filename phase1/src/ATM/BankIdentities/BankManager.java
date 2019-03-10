@@ -11,13 +11,13 @@ import ATM.InfoHandling.InfoManager;
 
 
 public class BankManager extends BankIdentity {
-
+    private final String id;
     public BankManager() {
-        String id = "";
-        id = id + "510" + (InfoManager.getBankManagerNum() + 1);
-        this.setId(Integer.valueOf(id));
+        this.id = "510" + (InfoManager.getBankManagerNum() + 1);
     }
-
+    public String getId(){
+        return id;
+    }
     public void createUser() {
         /*
         need to add to the loader list.
@@ -42,9 +42,9 @@ public class BankManager extends BankIdentity {
      */
     public void undoMostRecentTrans(int accNum) {
         try {
-            Transaction e = InfoManager.getTransactionManager().getAccLastTrans(accNum).reverse();
+            Transaction e = InfoManager.getInfoManager().getTransactionManager().getAccLastTrans(accNum).reverse();
             // try catch where pay bill can't be reversed.
-            TransactionManager manager = InfoManager.getTransactionManager();
+            TransactionManager manager = InfoManager.getInfoManager().getTransactionManager();
             manager.makeTransaction(e);
             // try catch if transaction cant be processed.
         } catch (ReverseNotPossibleException e) {

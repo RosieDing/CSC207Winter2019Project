@@ -3,16 +3,16 @@ package ATM.BankIdentities;
 import ATM.InfoHandling.InfoManager;
 
 public class User extends BankIdentity {
-
+    private final String id;
     private UserAccManager accManager;
     private PasswordManager passManager;
 
     public User() {
-        String id = "";
-        id = id + "020" + (InfoManager.getUserNum() + 1);
-        this.setId(Integer.valueOf(id));
+        this.id = "020" + (InfoManager.getUserNum() + 1);
     }
-
+    public String getId(){
+        return id;
+    }
     public UserAccManager getAccManager() {
         return accManager;
     }

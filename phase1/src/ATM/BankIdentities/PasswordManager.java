@@ -4,14 +4,14 @@ import java.util.Observable;
 
 public class PasswordManager extends Observable {
 
-    private final int ownerId;
+    private final String ownerId;
     private String password;
     private boolean authority;
     /*
     Password will be a 4 bit numerical string
      */
 
-    public PasswordManager(int ownerId) {
+    public PasswordManager(String ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -42,7 +42,7 @@ public class PasswordManager extends Observable {
         notifyObservers();
     }
 
-    public int getOwnerId() {
+    public String getOwnerId() {
         return ownerId;
     }
 }
