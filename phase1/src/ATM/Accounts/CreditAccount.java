@@ -8,7 +8,13 @@ import ATM.InfoHandling.InfoManager;
 public class CreditAccount extends DebtAccount {
     private final String accountNum = "001" + getOwnerID()+ (InfoManager.getInfoManager().getAccountNum() + 1);
 
-    /**Constructor for credit account class */
+    /**
+     * Constructor of credit account
+     * Create a new credit account with ownerID and limit
+     *
+     * @param ownerID the ID of the owner
+     * @param limit the limit of this credit account
+     */
     public CreditAccount(String ownerID, double limit){
         super(ownerID, limit);
     }
