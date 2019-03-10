@@ -34,11 +34,11 @@ public class UserAccManager{
         InfoManager.getInfoManager().add(acc);
     }
 
-    public Account getAccount(int accNum) throws NoSuchAccountException{
+    public Account getAccount(String accNum) throws NoSuchAccountException{
         Account result = null;
         for (ArrayList<Account> list: listOfAcc.values()) {
             for (Account acc: list) {
-                if (acc.getAccountNum() == accNum) {
+                if (acc.getAccountNum().equals(accNum)) {
                     result = acc;
                     break;
                 }
