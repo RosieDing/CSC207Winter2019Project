@@ -56,7 +56,7 @@ public class BankManager extends BankIdentity {
     }
 
     public void createNewChequingAccount(String userID) {
-        User u = InfoManager.getUser(userID);
+        User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m = u.getAccManager();
         ChequingAccount acc = new ChequingAccount(userID);
         if (m.getPrimaryChq() == null){
@@ -79,14 +79,14 @@ public class BankManager extends BankIdentity {
     }
 
     public void createNewCreditAccount(String userID, double limit){
-        User u = InfoManager.getUser(userID);
+        User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m = u.getAccManager();
         CreditAccount acc = new CreditAccount(userID, limit);
         m.addAccount(acc);
     }
 
     public void createNewLineOfCreadit(String userID, double limit){
-        User u = InfoManager.getUser(userID);
+        User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m =u.getAccManager();
         LineOfCredit acc = new LineOfCredit(userID, limit);
         m.addAccount(acc);
