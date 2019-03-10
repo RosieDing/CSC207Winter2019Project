@@ -11,22 +11,10 @@ import java.util.Observable;
 import java.util.Stack;
 
 public class TransactionManager extends Observable {
-    static private TransactionManager m;
-    static private Map<Integer, Stack<Transaction>> accTransList = new HashMap<>();
-    static private Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
+    private Map<Integer, Stack<Transaction>> accTransList = new HashMap<>();
+    private Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
     // deposit writer
     // pay Bill writer
-
-
-    private TransactionManager() {
-    }
-
-    public static TransactionManager getTransactionManager(){
-        if (accTransList == null && userTransList == null) {
-            TransactionManager m = new TransactionManager();
-        }
-        return m;
-    }
 
     public Transaction makeTransaction(Map<String, Object> map) {
         Transaction e = null;
