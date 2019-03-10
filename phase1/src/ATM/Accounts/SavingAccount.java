@@ -10,10 +10,16 @@ public class SavingAccount extends AssetAccount {
     private ISaverPlan iSaverPlan;
     private final String accountNum = "004" + getOwnerID() + (InfoManager.getInfoManager().getAccountNum() + 1);
 
-    /**Constructor for saving account */
-    public SavingAccount(String ownerID, ISaverPlan s){
+    /**
+     * Constructor of saving account
+     * Create a new saving account with ownerID and ISaverPlan
+     *
+     * @param ownerID the ID of the owner
+     * @param the_plan the plan which result in the value of interest
+     */
+    public SavingAccount(String ownerID, ISaverPlan the_plan){
         super(ownerID);
-        this.iSaverPlan = s;
+        this.iSaverPlan = the_plan;
         setBalance(iSaverPlan.compute(getBalance()));
     }
 

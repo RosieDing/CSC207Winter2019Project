@@ -4,11 +4,12 @@ import ATM.Accounts.Account;
 import ATM.Accounts.TransferInable;
 import ATM.Accounts.TransferOutable;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-public class TransactionManager{
+public class TransactionManager implements Serializable {
     private static TransactionManager m;
     private Map<String, Stack<Transaction>> accTransList = new HashMap<>();
     private Map<String, Stack<Transaction>> userTransList = new HashMap<>();

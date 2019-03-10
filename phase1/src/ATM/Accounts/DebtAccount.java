@@ -9,7 +9,13 @@ public abstract class DebtAccount extends Account {
     private double balance;
     private double availableCredit;
 
-    /**Constructor for debt account class */
+    /**
+     * Constructor of debt account
+     * Create a new debt account with ownerID and limit
+     *
+     * @param ownerID the ID of the owner
+     * @param  limit the limit of the debt account
+     */
     public DebtAccount(String ownerID, double limit){
         super(ownerID);
         this.ownerID = ownerID;

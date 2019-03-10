@@ -1,24 +1,29 @@
 package ATM.BankIdentities;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public class PasswordManager extends Observable {
+/** The passWordManager class */
+public class PasswordManager extends Observable implements Serializable {
 
     private final String ownerId;
     private String password;
     private boolean authority;
-    /*
-    Password will be a 4 bit numerical string
-     */
 
+    /** Create a new PassWordManager
+     *
+     * @param ownerId the Id of the passwordManager
+     * */
     public PasswordManager(String ownerId) {
         this.ownerId = ownerId;
     }
 
+    /** get the password of the password manager */
     private String getPassword() {
         return password;
     }
 
+    /** return the authority */
     public boolean isLogin() {
         return authority;
     }
