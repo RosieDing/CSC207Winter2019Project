@@ -1,6 +1,6 @@
 package ATM.Accounts;
 
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 /**
  * Line of credit account class

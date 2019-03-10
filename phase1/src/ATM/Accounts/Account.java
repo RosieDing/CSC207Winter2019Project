@@ -32,7 +32,7 @@ public abstract class Account extends Observable implements Withdrawable, Transf
     }
 
     /**Return the date of Creation */
-    public LocalDateTime getDateOfCreation(){
+    protected LocalDateTime getDateOfCreation(){
         return dateOfCreation;}
 
     public abstract double getAvailableCredit();

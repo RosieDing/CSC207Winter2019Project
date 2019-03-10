@@ -1,7 +1,7 @@
 package ATM.Accounts;
 
 
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 /**
  * Chequing account class
@@ -13,7 +13,7 @@ public class ChequingAccount extends AssetAccount{
     private String id = "003" + ownerID + (InfoManager.getAccountNum() + 1);
     private final int accountNum = Integer.valueOf(id);
 
-    ChequingAccount(int ownerID){
+    public ChequingAccount(int ownerID){
         super(ownerID);
         this.ownerID = ownerID;
     }
