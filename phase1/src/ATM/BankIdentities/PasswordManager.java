@@ -28,8 +28,6 @@ public class PasswordManager extends Observable {
             this.password = newPass;
         } else {//return not login exception
         }
-        setChanged();
-        notifyObservers();
     }
 
     public void login(String inputPass) {
@@ -40,6 +38,8 @@ public class PasswordManager extends Observable {
 
     public void logout(){
         authority = false;
+        setChanged();
+        notifyObservers();
     }
 
     public int getOwnerId() {
