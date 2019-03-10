@@ -140,7 +140,7 @@ public class BankSystem {
                     break;
                 case "4":
                     Double limitN = ensureDouble("Please enter an account limit: ");
-                    bankManager.createNewLineOfCreadit(userID, limitN);
+                    bankManager.createNewLineOfCredit(userID, limitN);
                     break;
         }
         }
