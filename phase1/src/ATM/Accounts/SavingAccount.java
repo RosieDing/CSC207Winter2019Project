@@ -9,7 +9,7 @@ public class SavingAccount extends AssetAccount {
     private double availableCredit = getBalance();
     private ISaverPlan iSaverPlan;
     private String id = "004" + ownerID + (InfoManager.getAccountNum() + 1);
-    private final int accountNum = Integer.valueOf(id);
+    private final String accountNum = id;
 
     public SavingAccount(int ownerID, ISaverPlan s){
         super(ownerID);
@@ -25,7 +25,7 @@ public class SavingAccount extends AssetAccount {
     }
 
     @Override
-    public int getAccountNum(){
+    public String getAccountNum(){
         return accountNum;
     }
 
