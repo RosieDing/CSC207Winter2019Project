@@ -50,6 +50,7 @@ public class UserAccManager{
         return result;
     }
 
+
     public ArrayList<Account> getAllAccounts(){
         ArrayList<Account> all = new ArrayList<>();
         for (ArrayList<Account> list: listOfAcc.values()) {
@@ -58,6 +59,12 @@ public class UserAccManager{
         return all;
     }
 
+    /** Return a Arraylist of account that is a specific type
+     *
+     * @param type (type of account)
+     * @return  ArrayList of account
+     * @throws NoSuchTypeException
+     */
     public ArrayList<Account> getTypeAccounts(String type) throws NoSuchTypeException{
         if (!(listOfAcc.keySet().contains(type))) {
             throw new NoSuchTypeException("You entered a wrong type!");

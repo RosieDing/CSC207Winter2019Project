@@ -9,11 +9,8 @@ import java.time.LocalDateTime;
  */
 public abstract class Account implements Withdrawable, TransferInable, Payable, Depositable, Serializable {
 
-    /**Current system time */
-    private LocalDateTime currentTime = LocalDateTime.now();
-
     /**The time when an account is created */
-    private final LocalDateTime dateOfCreation = currentTime;
+    private final LocalDateTime dateOfCreation = LocalDateTime.now();
 
     /**The ID of the User whom this account belongs to */
     private String ownerID;
@@ -26,10 +23,6 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
     /**Return the User ID */
     public String getOwnerID(){ return ownerID;}
 
-    /**Return the current time */
-    public LocalDateTime getCurrentTime(){
-        return currentTime;
-    }
 
     /**Return the date of Creation */
     public LocalDateTime getDateOfCreation(){
