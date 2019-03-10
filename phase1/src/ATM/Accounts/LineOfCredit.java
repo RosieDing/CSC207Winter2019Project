@@ -12,7 +12,7 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
 
 
     /**Constructor for debt account class */
-    public LineOfCredit(int ownerID, int limit) {
+    public LineOfCredit(int ownerID, double limit) {
         super(ownerID, limit);
         this.ownerID = ownerID;
     }

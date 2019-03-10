@@ -1,7 +1,9 @@
 package ATM.InfoHandling;
 
 import ATM.Accounts.Account;
+import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.User;
+import ATM.Transactions.TransactionManager;
 
 import java.io.*;
 
@@ -70,6 +72,15 @@ public class InfoManager {
         return infoStorer.getAccountMap().get(key);
     }
 
+    public static BankManager getBankManager(int id){
+        String key = String.valueOf(id);
+        return infoStorer.getBankManagerMap().get(key);
+    }
+
+    public static TransactionManager getTransactionManager(){
+        return getInfoStorer().getTransactionManager();
+    }
+
     public static int getUserNum(){
         return infoStorer.getUserMap().size();
     }
@@ -78,12 +89,20 @@ public class InfoManager {
         return infoStorer.getAccountMap().size();
     }
 
+    public static int getBankManagerNum(){
+        return infoStorer.getBankManagerMap().size();
+    }
+
     public static void add(User newUser){
         infoStorer.addUser(newUser);
     }
 
     public static void add(Account newAccount){
         infoStorer.addAccount(newAccount);
+    }
+
+    public static void add(BankManager newBankManager){
+        infoStorer.addBankManager(newBankManager);
     }
 }
 
