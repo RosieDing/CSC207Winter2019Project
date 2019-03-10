@@ -2,9 +2,20 @@ package ATM.InfoHandling;
 
 import java.io.*;
 
+/***
+ * AlertWriter class
+ */
 public class AlertWriter implements WriteTXT, Serializable {
+    /***
+     * path of file to be written
+     */
     private String path = "./alerts.txt";
 
+    /***
+     * Write the file with content.
+     * If the file does not exist, create a new one.
+     * @param content
+     */
     public void write(String content){
         File file = new File(path);
         try{
@@ -20,6 +31,10 @@ public class AlertWriter implements WriteTXT, Serializable {
         }
     }
 
+    /***
+     * Set the path of file to be written
+     * @param newPath (String) path of expected file
+     */
     public void setPath(String newPath) {
         this.path = newPath;
     }
