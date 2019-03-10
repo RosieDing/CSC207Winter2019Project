@@ -15,7 +15,7 @@ with the id of 5101 and the initial password of 1234.
 ________________________________________________________________________________________________
 
 What you can do:
-    1. As a user. After log into your account, you will see a menu with 8 options ordered by number. Type the
+    1. As a user: After log into your account, you will see a menu with 8 options ordered by number. Type the
      correspond number on keyboard and press enter.
      Choose "1": You will get a summary of all of your accounts.
      Choose "2": You will get a Net total of your balance.
@@ -30,3 +30,5 @@ What you can do:
      Choose "6": You can request a creation of a type of account by entering the type.
      Choose "7": You can reset your password (must be numeric and 4 digit long).
      Choose "8": You will log out.
+     At each level of menu you will have an option to go back to prier menu.
+     Thing to new: you will initially have a chequing account and it is also your primary account.
