@@ -175,8 +175,9 @@ public class BankSystem {
                     userReqAccSubMenu();
                     break;
                 case "7":
-                    String accNum = promptUser("Please enter an account number: ");
-                    bankManager.undoMostRecentTrans(accNum);
+                    System.out.println("Enter a password:");
+                    String password = ensurePassword(4);
+                    user.getPassManager().setPassword(password);
                     break;
                 case "8":
                     user.getPassManager().logout();
@@ -232,6 +233,7 @@ public class BankSystem {
     private void printReqAccSubMenu() {
 
     }
+    userReqAccSubMenu()
 
 
     private Double ensureDouble(String prompt) {
