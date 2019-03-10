@@ -23,11 +23,14 @@ public class PasswordManager extends Observable implements Serializable {
         return password;
     }
 
-    /** return the authority */
+    /** return the authority to confirm the login*/
     public boolean isLogin() {
         return authority;
     }
 
+    /** Set the password of the password Manager
+     * @param newPass the new password to assign
+     * */
     public void setPassword(String newPass) {
         if (authority) {
             this.password = newPass;
@@ -36,6 +39,10 @@ public class PasswordManager extends Observable implements Serializable {
         }
     }
 
+    /** Check the entering input of users with the password
+     *
+     * @param inputPass the entering string from user
+     * */
     public void login(String inputPass) {
         if (inputPass.equals(getPassword())) {
             authority = true;
@@ -44,12 +51,14 @@ public class PasswordManager extends Observable implements Serializable {
         }
     }
 
+    /** The password Manager log out the cycle */
     public void logout(){
         authority = false;
         setChanged();
         notifyObservers();
     }
 
+    /** get the id of the owner */
     public String getOwnerId() {
         return ownerId;
     }

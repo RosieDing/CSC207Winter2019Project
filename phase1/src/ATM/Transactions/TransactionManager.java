@@ -9,14 +9,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+/***
+ * TransactionManager class
+ */
 public class TransactionManager implements Serializable {
     private static TransactionManager m;
+    /***
+     * accTransList record history of Transaction of specific accounts.
+     */
     private Map<String, Stack<Transaction>> accTransList = new HashMap<>();
+    /***
+     * userTransList record history of Transaction of specific users.
+     */
     private Map<String, Stack<Transaction>> userTransList = new HashMap<>();
 
 
     private TransactionManager(){}
 
+    /***
+     * Singleton pattern. get the only TransactionManager.
+     * If there is not one, create a new TransactionManager.
+     * @return the only TransactionManger
+     */
     public static TransactionManager getTransactionManager() {
         if (m == null) {
             m = new TransactionManager();
@@ -25,9 +39,10 @@ public class TransactionManager implements Serializable {
     }
 
     /***
-     *
-     * @param map
-     * @return
+     * Take in a map recording the request from user, and make
+     * corresponding transaction.
+     * @param map the map recorded user's request
+     * @return a corresponding new Transaction
      */
     public Transaction makeTransaction(Map<String, Object> map) {
         Transaction e = null;
@@ -50,6 +65,11 @@ public class TransactionManager implements Serializable {
         return makeTransaction(e);
     }
 
+    /***
+     * Overrloading method. Catch possible Exceptions when making a transaction.
+     * @param e Transaction
+     * @return Transaction
+     */
     public Transaction makeTransaction(Transaction e) {
         try{
             e.begin();
@@ -61,12 +81,22 @@ public class TransactionManager implements Serializable {
         return e;
     }
 
+    /***
+     * Return the most recent transaction of a certain user.
+     * @param userId id of the user
+     * @return the most recent Transaction
+     */
     public Transaction getUserLastTrans(String userId) {
         Transaction e = userTransList.get(userId).pop();
         addTrans(e);
         return e;
     }
 
+    /***
+     * Return the most recent transaction of a certain account.
+     * @param accNum account number of the account
+     * @return the most recent Transaction
+     */
     public Transaction getAccLastTrans(String accNum) {
         Transaction e = accTransList.get(accNum).pop();
         addTrans(e);
@@ -78,6 +108,10 @@ public class TransactionManager implements Serializable {
         userTransList.get(userId).add(trans);
     }
 
+    /***
+     * Add a transaction to history of transaction.
+     * @param trans the Transaction to be added.
+     */
     public void addTrans(Transaction trans){
         if (trans.getFromAcc() == null) {
             String userId = trans.getToAcc().getOwnerID();

@@ -22,6 +22,7 @@ public class BankManager extends BankIdentity {
         this.id = "510" + (InfoManager.getInfoManager().getBankManagerNum() + 1);
         manager = new PasswordManager(this.id);
         manager.setPassword(password);
+        InfoManager.getInfoManager().add(this);
     }
 
     /** get the PassManager
@@ -74,6 +75,7 @@ public class BankManager extends BankIdentity {
     /** Undo the most recent transaction for the Account
      *
      * @param accNum the AccountNumber of the account which you want to undo
+     * @throws ReverseNotPossibleException
      *  */
     public void undoMostRecentTrans(String accNum) {
         try {
@@ -93,6 +95,7 @@ public class BankManager extends BankIdentity {
     /** Create New Chequing Account for the User
      *
      * @param userID the userID of the user
+     * @throws AlreadyPrimaryException
      *  */
     public void createNewChequingAccount(String userID) {
         User u = InfoManager.getInfoManager().getUser(userID);
