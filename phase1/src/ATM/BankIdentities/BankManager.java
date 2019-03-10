@@ -145,7 +145,7 @@ public class BankManager extends BankIdentity {
      * @param userID the userID of the user
      * @param limit the limit of the line of credit account
      *  */
-    public void createNewLineOfCreadit(String userID, double limit){
+    public void createNewLineOfCredit(String userID, double limit){
         User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m =u.getAccManager();
         LineOfCredit acc = new LineOfCredit(userID, limit);

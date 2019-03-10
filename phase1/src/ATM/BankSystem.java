@@ -71,7 +71,13 @@ public class BankSystem {
     }
 
     public void printManagerMenu(){
-
+        String[] list = {"Create User", "Undo Account's Most Recent Transaction",
+                "Create an account for user", "Restock Cash Machine", "Log out"};
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i<6; i++) {
+            s.append("Option " + i +" : " + list[i-1] +"\n");
+        }
+        System.out.println(s);
     }
 
     public void managerMainMenu(BankManager bankManager){
@@ -104,13 +110,23 @@ public class BankSystem {
     }
 
     private void printManagerSubMenu(){
-
-
+        String[] list = {"Chequing Account", "Saving Account",
+                "Credit Account", "Line of Credit Account", "Back to previous menu"};
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i<6; i++) {
+            s.append("Option " + i +" : " + list[i-1] +"\n");
+        }
+        System.out.println(s);
     }
     private void managerSubMenu(BankManager bankManager){
         printManagerSubMenu();
-        String chosen = ensureOption(1, 4);
-        String userID = promptUser("Please enter a user ID: ");
+        boolean stay = true;
+        String chosen = ensureOption(1, 5);
+        if (chosen.equals("5")) {
+            stay = false;
+        }
+        if (stay) {
+            String userID = promptUser("Please enter a user ID: ");
             switch(chosen){
                 case "1":
                     bankManager.createNewChequingAccount(userID);
@@ -126,6 +142,7 @@ public class BankSystem {
                     Double limitN = ensureDouble("Please enter an account limit: ");
                     bankManager.createNewLineOfCreadit(userID, limitN);
                     break;
+        }
         }
     }
 
