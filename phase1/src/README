@@ -50,4 +50,7 @@ What you can do:
 *****************************************************************************************************************************
 How file store:
     This program has two txt output file. One is outgoing.txt which will be modified when paying bill.
-    Another is alert.txt which will be modified when
+    Another is alert.txt which will be modified when Cash machine detects that amount of one of its face value less than
+    20.
+    All other information is store in a serializable file call InfoStorer. All change to user, account, transaction, etc
+    will be record and store into this serializable file and when we start the program this file will be deserialize.
