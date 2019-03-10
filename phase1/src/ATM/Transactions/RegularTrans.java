@@ -51,12 +51,13 @@ public class RegularTrans extends Transaction{
     @Override
     public Transaction reverse() throws ReverseNotPossibleException{
         TransferInable toAcc = getFromAcc();
+        TransferOutable from;
         if (getToAcc() instanceof TransferOutable){
-            TransferOutable fromAcc = (TransferOutable)getToAcc();
+            from = (TransferOutable)getToAcc();
         } else {
             throw new ReverseNotPossibleException();
         }
-        return new RegularTrans(fromAcc, toAcc, this.getAmount());
+        return new RegularTrans(from, toAcc, this.getAmount());
     }
 
     @Override
@@ -66,6 +67,6 @@ public class RegularTrans extends Transaction{
                 ", to: " + getToAcc() +
                 ", time: " + getTime() +
                 ", amount: " + getAmount() +
-                "}\n";
+                "}";
     }
 }
