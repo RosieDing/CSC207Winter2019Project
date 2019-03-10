@@ -65,25 +65,18 @@ public class UserAccManager extends Observable{
     public void setPrimaryChq(Account acc) throws AlreadyPrimaryException{
         if (acc instanceof ChequingAccount) {
             if (acc.getOwnerID() == ownedUserId) {
-                try {
-                    ChequingAccount pc = getPrimaryChq();
-                    if (acc == pc) {
-                        throw new AlreadyPrimaryException("This account is already " +
-                                "a primary chequing account.");
-                    } else {
-                        this.primaryChq = ((ChequingAccount)acc);
-                    }
-                } catch (NoPrimaryException e) {
-                    System.out.println("Can not set this account as the primary.");
+                ChequingAccount pc = getPrimaryChq();
+                if (acc == pc) {
+                    throw new AlreadyPrimaryException("This account is already " +
+                            "a primary chequing account.");
+                } else {
+                    this.primaryChq = ((ChequingAccount)acc);
                 }
             }
         }
     }
 
-    public ChequingAccount getPrimaryChq() throws NoPrimaryException{
-        if (primaryChq == null) {
-            throw new NoPrimaryException("This user has no chequing account");
-        }
+    public ChequingAccount getPrimaryChq(){
         return primaryChq;
     }
 
