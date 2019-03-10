@@ -126,36 +126,74 @@ public class InfoManager implements Observer {
         return getInfoStorer().getCashMachine();
     }
 
-
+    /***
+     * Get number of users already stored in infoStorer
+     * @return int
+     */
     public int getUserNum(){
         return infoStorer.getUserMap().size();
     }
 
+    /***
+     * Get number of account already stored in infoStorer.
+     * @return int
+     */
     public int getAccountNum(){
         return infoStorer.getAccountMap().size();
     }
 
+    /***
+     * Get number of bank managers already stored in infoStorer.
+     * @return int
+     */
     public int getBankManagerNum(){
         return infoStorer.getBankManagerMap().size();
     }
 
+    /***
+     * Add a new user to infoStorer.
+     * @param newUser User to be added.
+     */
     public void add(User newUser){
         infoStorer.addUser(newUser);
     }
 
+    /***
+     * Add a new account to infoStorer.
+     * @param newAccount Account to be added.
+     */
     public void add(Account newAccount){
         infoStorer.addAccount(newAccount);
     }
 
+    /***
+     * Add a new bank manager to infoStorer.
+     * @param newBankManager BankManager to be added.
+     */
     public void add(BankManager newBankManager){
         infoStorer.addBankManager(newBankManager);
     }
 
+    /***
+     * Add a new request of account creation to infoStorer.
+     * @param userID id of user who sent request
+     * @param type type of account requested
+     */
     public void add(String userID, String type) { infoStorer.
     getAccountCreationRequest().put(userID, type);}
 
+    /***
+     * Remove a request of account creation from infoStorer.
+     * @param userID id of user who sent request
+     * @param type type of account requested
+     */
     public void removeRequest(String userID, String type) { infoStorer.getAccountCreationRequest().remove(userID, type); }
 
+    /***
+     * Update method. Serialize infoStorer if it is called.
+     * @param o Observable item which infoManager is observing
+     * @param arg Object arugument
+     */
     @Override
     public void update(Observable o, Object arg) {
         saveToFile();
