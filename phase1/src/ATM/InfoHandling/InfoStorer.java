@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Managing the saving and InfoHandling of all information
+ * Managing the saving and loading of all information
  * Including accounts, users, transactions
  */
 public class InfoStorer {
