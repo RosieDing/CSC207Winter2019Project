@@ -31,7 +31,7 @@ What you can do:
      Choose "7": You can reset your password (must be numeric and 4 digit long).
      Choose "8": You will log out.
      At each level of menu you will have an option to go back to previous menu.
-     Thing to new: you will initially have a chequing account and it is also your primary account.
+     Things to know: you will initially have a chequing account and it is also your primary account.
 
     2. As a manager: After log into your account. You will see a menu with 5 options ordered by numbers.
      Type the correspond number on the keyboard and press enter.
@@ -46,3 +46,8 @@ What you can do:
      Choose “5”: You will log out.
 
      At each level of menu you will have an option to go back to previous menu.
+
+*****************************************************************************************************************************
+How file store:
+    This program has two txt output file. One is outgoing.txt which will be modified when paying bill.
+    Another is alert.txt which will be modified when
