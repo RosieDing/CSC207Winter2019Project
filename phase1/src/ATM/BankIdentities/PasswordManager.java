@@ -32,11 +32,12 @@ public class PasswordManager extends Observable implements Serializable {
      * @param newPass the new password to assign
      * */
     public void setPassword(String newPass) {
-        if (authority) {
+        /*if (authority) {
             this.password = newPass;
         } else {
             System.out.println("You don't have authority to modify this.");
-        }
+        }*/
+        this.password = newPass;
     }
 
     /** Check the entering input of users with the password
@@ -44,7 +45,7 @@ public class PasswordManager extends Observable implements Serializable {
      * @param inputPass the entering string from user
      * */
     public void login(String inputPass) {
-        if (inputPass.equals(getPassword())) {
+        if (getPassword().equals(inputPass)) {
             authority = true;
         }else{
             System.out.println("Password is wrong!");
