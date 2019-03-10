@@ -33,6 +33,8 @@ public class PasswordManager extends Observable {
     public void login(String inputPass) {
         if (inputPass.equals(getPassword())) {
             authority = true;
+        }else{
+            System.out.println("Password is wrong!");
         }
     }
 
