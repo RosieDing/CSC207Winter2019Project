@@ -43,7 +43,7 @@ What you can do:
                  be selected: “Credit Account”, “Line of Credit Account”, “Saving Account”, “Checking Account”.
                  After choosing account, you need to entering some features to complete the initialization of new accounts.
      Choose “4”: You can choose to restock the ATM machine. There are five bills:”$5”,”$10”,”$20”,”$50”.
-                 You can adding the amount of different denomination by entering the amount add.
+                 You can add the amount of certain denomination by entering the amount and the denomination.
      Choose “5”: You will log out.
 
      At each level of menu you will have an option to go back to previous menu.
