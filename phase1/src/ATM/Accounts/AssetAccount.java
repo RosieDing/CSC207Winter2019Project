@@ -6,7 +6,12 @@ package ATM.Accounts;
 public abstract class AssetAccount extends Account implements TransferOutable {
     private double balance;
 
-    /**Constructor for asset account class */
+    /**
+     * Constructor of asset account
+     * Create a new asset account with ownerID
+     *
+     * @param ownerID the ID of the owner
+     */
     AssetAccount(String ownerID){
            super(ownerID);
     }
