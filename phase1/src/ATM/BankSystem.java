@@ -167,7 +167,7 @@ public class BankSystem {
                     userAccountInfoSubMenu();
                     break;
                 case "4":
-                    userPriChqSubMenu();
+                    userPriChqSubMenu(userAccManager);
                     break;
                 case "5":
                     userTransSubMenu();
@@ -194,7 +194,7 @@ public class BankSystem {
         printAccountInfoSubMenu();
     }
 
-    private void printPriChqSubMenu(UserAccManager manager) {
+    private ArrayList printPriChqSubMenu(UserAccManager manager) {
         StringBuilder message = new StringBuilder();
         int length = 1;
         ArrayList acclist = new ArrayList();
@@ -205,13 +205,20 @@ public class BankSystem {
             System.out.println("You do not have chequing account.");
         }
         for (int i = 1; i < length; i++) {
-            message.append("Option" + i + ((ChequingAccount)acclist.get(i)).getAccountNum() + "\n");
+            message.append("Option").append(i).append(((ChequingAccount) acclist.get(i)).getAccountNum()).append("\n");
         }
         System.out.println(message);
+        return acclist;
     }
 
-    private void userPriChqSubMenu() {
-        printPriChqSubMenu();
+    private void userPriChqSubMenu(UserAccManager manager) {
+       ArrayList acclist = printPriChqSubMenu(manager);
+       String chosen = ensureOption(1, acclist.size());
+       try{
+        manager.setPrimaryChq((ChequingAccount)acclist.get(Integer.valueOf(chosen)));}
+       catch (AlreadyPrimaryException e){
+           System.out.println("This is already a primary account.");
+       }
     }
 
     private void printTransSubMenu() {
