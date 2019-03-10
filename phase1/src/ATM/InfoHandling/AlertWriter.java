@@ -1,11 +1,8 @@
 package ATM.InfoHandling;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
-public class AlertWriter implements WriteTXT {
+public class AlertWriter implements WriteTXT, Serializable {
     private String path = "./alerts.txt";
 
     public void write(String content){
