@@ -1,5 +1,7 @@
 package ATM.Machine;
 
+import ATM.InfoHandling.AlertWriter;
+
 import java.util.Arrays;
 import java.util.Observable;
 
@@ -8,7 +10,7 @@ public class CashMachine extends Observable {
     private int numTenD;
     private int numTwentyD;
     private int numFiftyD;
-    private WriteTXT alertFile;
+    private AlertWriter writer = new AlertWriter();
 
     public CashMachine(){}
 
@@ -90,5 +92,9 @@ public class CashMachine extends Observable {
         if (m.getNumTen() < 20) { warning("Ten"); }
         if (m.getNumTwenty() < 20) { warning("Twenty"); }
         if (m.getNumFifty() < 20) { warning("Fifty"); }
+    }
+
+    public void warning(String value){
+        writer.write("Amount of "+ value + "dollar domination is under 20!");
     }
 }
