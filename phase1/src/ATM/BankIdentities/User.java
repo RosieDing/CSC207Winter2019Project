@@ -40,7 +40,9 @@ public class User extends BankIdentity {
         this.passManager = passManager;
     }
 
-    /** the user send the request to the Manager to add the account */
+    /** the user send the request to the Manager to add the account
+     * @param type the account type needed be added
+     * */
     public void sendRequest(String type){
         InfoManager.getInfoManager().add(getId(), type);
     }

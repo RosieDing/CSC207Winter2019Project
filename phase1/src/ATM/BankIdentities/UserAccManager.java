@@ -62,7 +62,8 @@ public class UserAccManager implements Serializable {
     }
 
 
-    /** get all the accounts */
+    /** get all the accounts
+     * @return  all the account of the userAccManager*/
     public ArrayList<Account> getAllAccounts(){
         ArrayList<Account> all = new ArrayList<>();
         for (ArrayList<Account> list: listOfAcc.values()) {
