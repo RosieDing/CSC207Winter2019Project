@@ -12,23 +12,37 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/**A simulation of the banking system */
 public class BankSystem {
-    private static boolean SystemOn;
+
+    /**A boolean that indicates the system is turned on */
+    private static boolean SystemOn = true;
+
+    /**A singleton infoManager where are the information is handled
+     * Here we deserialize all the information
+     */
     private static InfoManager infoManager = InfoManager.getInfoManager();
 
     public static void main(String[] args) {
+        // In case this is the first time that the system has ever runs (never met any user or manager before)
+        // We set a default manager into the system
         if (infoManager.getBankManagerNum() == 0) {
             BankManager defaultManager = new BankManager("1234");
         }
-        while (true) {
+        while (SystemOn) {
             BankSystem bs = new BankSystem();
             bs.run();
         }
     }
 
+    /**Running the system */
     public void run() {
     }
 
+    /**Ask whichever bankIdentity is using the system for an ID
+     * identify them as User or Manager
+     * and direct them to different login mechanism for checking password
+     */
     public void identityLog() {
         boolean isFound = false;
         while (!isFound) {
@@ -44,6 +58,9 @@ public class BankSystem {
         }
     }
 
+    /**Ask the manager for an password and verify it
+     * If it goes through verification, the method direct manager to the manager main menu
+     */
     public void managerLog(String id) {
         BankManager bankManager = infoManager.getBankManager(id);
         PasswordManager passwordManager = bankManager.getPassManager();
@@ -57,6 +74,8 @@ public class BankSystem {
         managerMainMenu(bankManager);
     }
 
+    /**Ask the user for an password and verify it
+     * If it goes through verification, the method direct user to the user main menu*/
     public void userLog(String id) {
         User user = infoManager.getUser(id);
         PasswordManager passwordManager = user.getPassManager();
@@ -70,6 +89,8 @@ public class BankSystem {
         userMainMenu(user);
     }
 
+    /**Displays the manager main menu to manager
+     */
     public void printManagerMenu() {
         String[] list = {"Create User", "Undo Account's Most Recent Transaction",
                 "Create an account for user", "Restock Cash Machine", "Log out"};
@@ -80,22 +101,27 @@ public class BankSystem {
         System.out.println(s);
     }
 
+    /**Ask the manager to select an action within the main menu*/
     public void managerMainMenu(BankManager bankManager) {
         while (bankManager.getPassManager().isLogin()) {
             printManagerMenu();
             String chosen = ensureOption(1, 5);
             switch (chosen) {
                 case "1":
+                    //create a new user
                     bankManager.createUser();
                     break;
                 case "2":
+                    //undo the last transaction of a certain account
                     String accNum = promptUser("Please enter an account number: ");
                     bankManager.undoMostRecentTrans(accNum);
                     break;
                 case "3":
+                    //create a new account
                     managerSubMenu(bankManager);
                     break;
                 case "4":
+                    //restock the ATM machine.
                     int numFive = ensureInt("Please enter the amount of five dolloars you want to restock");
                     int numTen = ensureInt("Please enter the amount of ten dolloars you want to restock");
                     int numTwenty = ensureInt("Please enter the amount of twenty dolloars you want to restock");
@@ -104,11 +130,13 @@ public class BankSystem {
                     bankManager.restock(infoManager.getCashMachine(), m);
                     break;
                 case "5":
+                    //log out
                     bankManager.getPassManager().logout();
             }
         }
     }
 
+    /**Display the account sub menu to allow for selection */
     private void printManagerSubMenu() {
         String[] list = {"Chequing Account", "Saving Account",
                 "Credit Account", "Line of Credit Account", "Back to previous menu"};
@@ -119,6 +147,9 @@ public class BankSystem {
         System.out.println(s);
     }
 
+    /**Sub menu for the case 3 in the manager main menu
+     * Allow manager to create different types of account
+     */
     private void managerSubMenu(BankManager bankManager) {
         printManagerSubMenu();
         boolean stay = true;
@@ -147,10 +178,12 @@ public class BankSystem {
         }
     }
 
+    /**Display the main menu for user */
     private void printUserMenu() {
 
     }
 
+    /**Allow user to select different action to complete */
     public void userMainMenu(User user) {
         while (user.getPassManager().isLogin()) {
             UserAccManager userAccManager = user.getAccManager();
@@ -158,18 +191,24 @@ public class BankSystem {
             String chosen = ensureOption(1, 8);
             switch (chosen) {
                 case "1":
+                    //get a summary of all accounts of the user
                     System.out.println(userAccManager.getSummary());
                     break;
                 case "2":
+                    //get a Net total of your balance
                     System.out.println(userAccManager.getNetTotal());
                     break;
                 case "3":
+                    //enter to a new menu that have options of all types of accounts that you have
                     userAccountInfoSubMenu();
                     break;
                 case "4":
+                    //have a menu of options of all chequing accounts that user has,
+                    //set one to primary chequing account
                     userPriChqSubMenu(userAccManager);
                     break;
                 case "5":
+                    //enter a transaction menu to make a transaction
                     userTransSubMenu();
                 case "6":
                     userReqAccSubMenu();
