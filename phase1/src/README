@@ -32,3 +32,18 @@ What you can do:
      Choose "8": You will log out.
      At each level of menu you will have an option to go back to prier menu.
      Thing to new: you will initially have a chequing account and it is also your primary account.
+
+    2.As a manager. After log into your account.
+     You will see a menu with 5 options ordered by numbers. Type the correspond number on the keyboard and press enter.
+     Choose “1”: You can create a new user.
+
+     Choose “2”: You can choose to undo the last transaction of certain account.
+                 Then, you need to enter the accountNumber of the account you want to undo.
+     Choose ”3”: You can choose to create a new account. Then, there are 5 kinds of accounts in ordered and available to
+                 be selected: “Credit Account”, “Line of Credit Account”, “Saving Account”, “Checking Account”.
+                 After choosing account, you need to entering some features to complete the initialization of new accounts.
+     Choose “4”: You can choose to restock the ATM machine. There are five bills:”$5”,”$10”,”$20”,”$50”.
+                 You can adding the amount of different denomination by entering the amount add.
+     Choose “5”: You will log out.
+
+     At each level of menu you will have an option to go back to previous menu.
