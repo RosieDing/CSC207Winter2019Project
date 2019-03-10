@@ -18,3 +18,8 @@
 8. User toString()
 
 9. Bankmanager possible Factory pattern
+
+10. deposit, paybill Comments
+
+11. Interface
+ Paybill - outgoing.txt method
