@@ -8,13 +8,15 @@ import ATM.Transactions.Transaction;
 import ATM.Transactions.TransactionManager;
 import ATM.InfoHandling.InfoManager;
 
+import java.sql.SQLOutput;
+
 
 /** BankManger class */
 public class BankManager extends BankIdentity {
     private final String id;
     private PasswordManager manager;
 
-    /** Creates a new BankManager with a password.
+    /** Creates a new BankManager with a password. Print its id and password out.
      *
      * @param password the password of the bankManager.
      * */
@@ -23,6 +25,7 @@ public class BankManager extends BankIdentity {
         manager = new PasswordManager(this.id);
         manager.setPassword(password);
         InfoManager.getInfoManager().add(this);
+        System.out.println("Bank Manager ID: " + this.id + " , Password: " + password);
     }
 
     /** get the PassManager
