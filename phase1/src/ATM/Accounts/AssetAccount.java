@@ -7,7 +7,7 @@ public abstract class AssetAccount extends Account implements TransferOutable {
     private double balance;
 
     /**Constructor for asset account class */
-    AssetAccount(int ownerID){
+    AssetAccount(String ownerID){
            super(ownerID);
     }
 

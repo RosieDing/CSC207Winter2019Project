@@ -5,13 +5,12 @@ import ATM.InfoHandling.InfoManager;
 
 
 public class SavingAccount extends AssetAccount {
-    private int ownerID;
+    private String ownerID;
     private double availableCredit = getBalance();
     private ISaverPlan iSaverPlan;
-    private String id = "004" + ownerID + (InfoManager.getAccountNum() + 1);
-    private final String accountNum = id;
+    private final String accountNum = "004" + ownerID + (InfoManager.getInfoManager().getAccountNum() + 1);
 
-    public SavingAccount(int ownerID, ISaverPlan s){
+    public SavingAccount(String ownerID, ISaverPlan s){
         super(ownerID);
         this.ownerID = ownerID;
         this.iSaverPlan = s;

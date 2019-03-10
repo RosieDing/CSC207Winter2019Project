@@ -6,13 +6,12 @@ import ATM.InfoHandling.InfoManager;
  * Line of credit account class
  */
 public class LineOfCredit extends DebtAccount implements TransferOutable {
-    private int ownerID;
-    private String id = "002" + ownerID + (InfoManager.getAccountNum() + 1);
-    private final String accountNum = id;
+    private String ownerID;
+    private final String accountNum = "002" + ownerID + (InfoManager.getInfoManager().getAccountNum() + 1);
 
 
     /**Constructor for debt account class */
-    public LineOfCredit(int ownerID, double limit) {
+    public LineOfCredit(String ownerID, double limit) {
         super(ownerID, limit);
         this.ownerID = ownerID;
     }

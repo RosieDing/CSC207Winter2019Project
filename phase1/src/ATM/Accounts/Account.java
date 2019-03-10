@@ -16,15 +16,15 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
     private final LocalDateTime dateOfCreation = currentTime;
 
     /**The ID of the User whom this account belongs to */
-    private int ownerID;
+    private String ownerID;
 
     /**Constructor of account */
-    public Account(int ownerID){
+    public Account(String ownerID){
         this.ownerID = ownerID;
     }
 
     /**Return the User ID */
-    public int getOwnerID(){ return ownerID;}
+    public String getOwnerID(){ return ownerID;}
 
     /**Return the current time */
     public LocalDateTime getCurrentTime(){

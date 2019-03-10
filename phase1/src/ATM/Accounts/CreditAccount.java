@@ -6,12 +6,11 @@ import ATM.InfoHandling.InfoManager;
  * Credit account class
  */
 public class CreditAccount extends DebtAccount {
-    private int ownerID;
-    private String id = "001" + ownerID + (InfoManager.getAccountNum() + 1);
-    private final String accountNum = id;
+    private String ownerID;
+    private final String accountNum = "001" + ownerID + (InfoManager.getInfoManager().getAccountNum() + 1);
 
     /**Constructor for credit account class */
-    public CreditAccount(int ownerID, double limit){
+    public CreditAccount(String ownerID, double limit){
         super(ownerID, limit);
         this.ownerID = ownerID;
     }
@@ -22,7 +21,7 @@ public class CreditAccount extends DebtAccount {
     }
 
     /**Getter method for owner id*/
-    public int getOwnerID(){
+    public String getOwnerID(){
         return this.ownerID;
     }
 

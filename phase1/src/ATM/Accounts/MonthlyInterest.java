@@ -6,8 +6,8 @@ import java.time.LocalDate;
  */
 
 public class MonthlyInterest implements ISaverPlan {
-    double interestRate = 00.01;
-    LocalDate currentDate = LocalDate.now();
+    private double interestRate;
+    private LocalDate currentDate = LocalDate.now();
 
 
     public MonthlyInterest(double interestRate){
@@ -23,7 +23,7 @@ public class MonthlyInterest implements ISaverPlan {
     }
 
     String ToString(){
-        return "This is a SavingPlan with monthly interest 1%";
+        return "This is a SavingPlan with monthly interest"+interestRate;
     }
 
     }

@@ -5,12 +5,12 @@ package ATM.Accounts;
  */
 public abstract class DebtAccount extends Account {
     private double limit;
-    private int ownerID;
+    private String ownerID;
     private double balance;
     private double availableCredit;
 
     /**Constructor for debt account class */
-    public DebtAccount(int ownerID, double limit){
+    public DebtAccount(String ownerID, double limit){
         super(ownerID);
         this.ownerID = ownerID;
         this.limit = limit;
