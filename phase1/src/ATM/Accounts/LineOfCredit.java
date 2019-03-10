@@ -9,7 +9,13 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
     private final String accountNum = "002" + getOwnerID() + (InfoManager.getInfoManager().getAccountNum() + 1);
 
 
-    /**Constructor for debt account class */
+    /**
+     * Constructor of line of credit account
+     * Create a new line of credit account with ownerID and limit
+     *
+     * @param ownerID the ID of the owner
+     * @param limit the limit of this line of credit account
+     */
     public LineOfCredit(String ownerID, double limit) {
         super(ownerID, limit);
     }
