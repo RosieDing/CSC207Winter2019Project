@@ -6,8 +6,6 @@ import ATM.BankIdentities.*;
 import ATM.InfoHandling.InfoManager;
 import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
-
-import javax.sound.sampled.Line;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,18 +22,26 @@ public class BankSystem {
     /**A singleton infoManager where are the information is handled
      * Here we deserialize all the information
      */
+    //private static InfoManager infoManager = InfoManager.getInfoManager();
     private static InfoManager infoManager = InfoManager.getInfoManager();
+
 
     public static void main(String[] args) {
         // In case this is the first time that the system has ever runs (never met any user or manager before)
         // We set a default manager into the system
+        BankSystem bs = new BankSystem();
         if (infoManager.getBankManagerNum() == 0) {
             BankManager defaultManager = new BankManager("1234");
+            infoManager.add(defaultManager);
         }
-        BankSystem bs = new BankSystem();
-        while (SystemOn) {
+        //System.out.println(infoManager.getInfoStorer().getBankManagerMap());
+        System.out.println(infoManager.getInfoStorer().getBankManagerMap().containsKey("5101"));
+        //System.out.println(infoManager.getBankManagerNum());
+        //System.out.println(infoManager.getBankManager("5101"));
+        /*while (SystemOn) {
             bs.identityLog();
-        }
+        }*/
+        bs.identityLog();
     }
 
 
@@ -48,13 +54,13 @@ public class BankSystem {
         while (!isFound) {
             String id = promptUser("Please enter your ID: ");
             if (infoManager.getInfoStorer().getBankManagerMap().containsKey(id)) {
-                isFound = true;
                 managerLog(id);
+                isFound = true;
             } else if (infoManager.getInfoStorer().getUserMap().containsKey(id)) {
                 userLog(id);
                 isFound = true;
-            }
 
+            }
         }
     }
 
