@@ -52,15 +52,15 @@ public class InfoStorer {
     }
 
     public void addUser(User newUser){
-        this.userMap.put(String.valueOf(newUser.getId()), newUser);
+        this.userMap.put(newUser.getId(), newUser);
     }
 
     public void addBankManager(BankManager newBankManager){
-        this.bankManagerMap.put(String.valueOf(newBankManager.getId()), newBankManager);
+        this.bankManagerMap.put(newBankManager.getId(), newBankManager);
     }
 
     public void addAccount(Account newAccount){
-        this.accountMap.put(String.valueOf(newAccount.getAccountNum()), newAccount);
+        this.accountMap.put(newAccount.getAccountNum(), newAccount);
     }
 
     public Map<String, String> getAccountCreationRequest() {

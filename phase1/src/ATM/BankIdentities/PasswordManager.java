@@ -26,7 +26,8 @@ public class PasswordManager extends Observable {
     public void setPassword(String newPass) {
         if (authority) {
             this.password = newPass;
-        } else {//return not login exception
+        } else {
+            System.out.println("You don't have authority to modify this.");
         }
     }
 
