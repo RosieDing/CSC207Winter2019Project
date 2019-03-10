@@ -2,7 +2,7 @@ package ATM.Accounts;
 
 
 import ATM.BankIdentities.User;
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 /**
  * Line of credit account class
