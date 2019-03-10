@@ -23,6 +23,7 @@ public abstract class AssetAccount extends Account implements TransferOutable {
         balance += amount;
     }
 
+    /**Method for deposit money to the asset account*/
     @Override
     public void deposit(double amount){
         balance += amount;
@@ -46,6 +47,7 @@ public abstract class AssetAccount extends Account implements TransferOutable {
         balance -= amount;
     }
 
+    /**Method for withdraw money from the asset account*/
     @Override
     public void withdraw(double amount) {
         balance -= amount;
