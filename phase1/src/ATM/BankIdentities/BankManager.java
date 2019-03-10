@@ -1,6 +1,7 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.*;
+import ATM.InfoHandling.InfoStorer;
 import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
 import ATM.Transactions.Transaction;
@@ -38,9 +39,9 @@ public class BankManager extends BankIdentity {
     May need to write the exception
      */
     public void undoMostRecentTrans(int accNum) {
-        Transaction e = InfoManager.getAccount(accNum).getTransManager().getLastTrans().reverse();
+        Transaction e = InfoManager.getTransactionManager().getAccLastTrans(accNum).reverse();
         // try catch where pay bill can't be reversed.
-        TransactionManager manager = InfoManager.getTransManager();
+        TransactionManager manager = InfoManager.getTransactionManager();
         manager.makeTransaction(e);
         // try catch if transaction cant be processed.
     }
@@ -56,7 +57,7 @@ public class BankManager extends BankIdentity {
             case "Chequing":
                 acc = new ChequingAccount(userID);
                 m.addAccount(acc);
-                m.getTypeAccounts("ATM.Accounts.ChequingAccount");
+                m.getTypeAccounts("ChequingAccount");
                 if (m.getTypeAccounts("ATM.Accounts.ChequingAccount").size() == 0) {
                     acc.setPrimary(true);
                 }

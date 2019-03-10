@@ -9,8 +9,7 @@ public class User extends BankIdentity {
 
     public User() {
         String id = "";
-        loader =InfoManager.getInfoManager();
-        id = id + "020" + (loader.getUserNum() + 1);
+        id = id + "020" + (InfoManager.getUserNum() + 1);
         this.setId(Integer.valueOf(id));
     }
 
@@ -28,5 +27,9 @@ public class User extends BankIdentity {
 
     public void setPassManager(PasswordManager passManager) {
         this.passManager = passManager;
+    }
+
+    public int getAccountNum() {
+        return getAccManager().getAllAccounts().size();
     }
 }

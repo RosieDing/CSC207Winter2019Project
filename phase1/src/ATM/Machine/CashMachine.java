@@ -12,7 +12,7 @@ public class CashMachine extends Observable {
 
     public CashMachine(){}
 
-    void setAmount(Money money) {
+    public void setAmount(Money money) {
         numFiveD = money.getNumFive();
         numFiftyD = money.getNumFifty();
         numTenD = money.getNumTen();
@@ -41,8 +41,10 @@ public class CashMachine extends Observable {
         return new Money(getNumFiveD(), getNumTenD(), getNumTwentyD(),getNumFiftyD());
     }
 
-    public void withdrawCash(int amount) {
-        // throws exception if amount is not multiple of 5;
+    public void withdrawCash(int amount) throws CashNotWithdrawableException, NotEnoughMoneyException{
+        if (amount % 5 != 0) {
+            throw new CashNotWithdrawableException("Amount entered should be multiple of 5.");
+        }
         int[] Dbox = possibleD(amount);
         int[] DAmount = {getNumFiveD(), getNumTenD(), getNumTwentyD(), getNumFiftyD()};
         int[] Dnum = new int[Dbox.length];
@@ -53,7 +55,7 @@ public class CashMachine extends Observable {
             }
         }
         if (amount != 0) {
-            //throws exception
+            throw new NotEnoughMoneyException("Not enough bills in the machine.");
         } else {
             int[] numCopy = Arrays.copyOf(Dnum, 4);
             Money m = new Money(DAmount[0] - numCopy[0], DAmount[1] - numCopy[1],
