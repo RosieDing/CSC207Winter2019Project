@@ -1,0 +1,20 @@
+This is a instruction of the ATM:
+**************************************************************************
+                             START     UP
+**************************************************************************
+ To start up the program(initial the ATM):
+    1. You must run it and it will automatically construct a new BankManager
+with the id of 5101 and the initial password of 1234.
+    2. Log into the initial BankManager account
+    3. Create several user and their account
+    4. Restock the cash machine(well, honestly, here is to initial the amount of money in the cash machine )
+    Now you can log out the Bank Manager Account and you are good to go!
+
+
+
+________________________________________________________________________________________________
+
+What you can do:
+    1. As a user. After log into your account, you will see a menu with 8 options ordered by number. Type the
+     correspond number on keyboard and press enter.
+     Choose "1": you will get a summary of all of your accounts
