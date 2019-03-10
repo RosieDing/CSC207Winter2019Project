@@ -22,8 +22,6 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
     public void transferOut(double amount){
         double newbalance = getBalance() + amount;
         setBalance(newbalance);
-        setChanged();
-        notifyObservers();
     }
 
     /**Getter for getting line of credit account number*/
