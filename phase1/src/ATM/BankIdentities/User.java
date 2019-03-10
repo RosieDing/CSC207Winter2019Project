@@ -29,5 +29,7 @@ public class User extends BankIdentity {
         this.passManager = passManager;
     }
 
-
+    public void sendrequest(String type){
+        InfoManager.getInfoManager().add(getId(), type);
+    }
 }

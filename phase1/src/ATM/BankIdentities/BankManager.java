@@ -12,12 +12,20 @@ import ATM.InfoHandling.InfoManager;
 
 public class BankManager extends BankIdentity {
     private final String id;
-    public BankManager() {
+    private PasswordManager manager;
+    public BankManager(String password) {
         this.id = "510" + (InfoManager.getInfoManager().getBankManagerNum() + 1);
+        manager = new PasswordManager(this.id);
+        manager.setPassword(password);
+    }
+    public PasswordManager getPassManager(){
+        return manager;
     }
     public String getId(){
         return id;
     }
+
+
     public void createUser() {
         /*
         need to add to the loader list.

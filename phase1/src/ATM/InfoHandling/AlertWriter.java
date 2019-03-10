@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class AlertWriter implements WriteTXT {
-    private String path = "./alert.txt";
+    private String path = "./alerts.txt";
 
     public void write(String content){
         File file = new File(path);

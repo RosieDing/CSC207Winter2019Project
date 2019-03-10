@@ -65,6 +65,6 @@ public class Withdrawal extends Transaction {
                 "from: " + getFromAcc() +
                 ", time: " + getTime() +
                 ", amount: " + getAmount() +
-                "}\n";
+                "}";
     }
 }

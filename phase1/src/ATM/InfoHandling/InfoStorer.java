@@ -5,8 +5,10 @@ import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.User;
 import ATM.Transactions.TransactionManager;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Managing the saving and loading of all information
@@ -25,11 +27,14 @@ public class InfoStorer {
     /**A TransactionManager which has all the transaction information*/
     private TransactionManager transactionManager;
 
+    private Map<String, String> accountCreationRequest;
+
     public InfoStorer(){
         this.accountMap = new HashMap<String, Account>();
         this.userMap = new HashMap<String, User>();
         this.bankManagerMap = new HashMap<String, BankManager>();
         this.transactionManager = TransactionManager.getTransactionManager();
+        this.accountCreationRequest = new HashMap<>();
     }
 
     public Map<String, Account> getAccountMap() {
@@ -47,14 +52,18 @@ public class InfoStorer {
     }
 
     public void addUser(User newUser){
-        this.userMap.put(String.valueOf(newUser.getId()), newUser);
+        this.userMap.put(newUser.getId(), newUser);
     }
 
     public void addBankManager(BankManager newBankManager){
-        this.bankManagerMap.put(String.valueOf(newBankManager.getId()), newBankManager);
+        this.bankManagerMap.put(newBankManager.getId(), newBankManager);
     }
 
     public void addAccount(Account newAccount){
-        this.accountMap.put(String.valueOf(newAccount.getAccountNum()), newAccount);
+        this.accountMap.put(newAccount.getAccountNum(), newAccount);
+    }
+
+    public Map<String, String> getAccountCreationRequest() {
+        return accountCreationRequest;
     }
 }
