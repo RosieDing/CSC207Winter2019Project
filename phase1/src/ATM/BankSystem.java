@@ -1,5 +1,6 @@
 package ATM;
 
+import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
 import ATM.BankIdentities.*;
 import ATM.InfoHandling.InfoManager;
@@ -200,7 +201,7 @@ public class BankSystem {
                     break;
                 case "3":
                     //enter to a new menu that have options of all types of accounts that you have
-                    userAccountInfoSubMenu();
+                    userAccountInfoSubMenu(userAccManager);
                     break;
                 case "4":
                     //have a menu of options of all chequing accounts that user has,
@@ -214,8 +215,9 @@ public class BankSystem {
                     userReqAccSubMenu();
                     break;
                 case "7":
-                    String accNum = promptUser("Please enter an account number: ");
-                    bankManager.undoMostRecentTrans(accNum);
+                    System.out.println("Enter a password:");
+                    String password = ensurePassword(4);
+                    user.getPassManager().setPassword(password);
                     break;
                 case "8":
                     user.getPassManager().logout();
@@ -225,12 +227,61 @@ public class BankSystem {
 
     }
 
-    private void printAccountInfoSubMenu() {
+    private void printAllAccountList(ArrayList<Account> list){
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i < list.size(); i++) {
+            s.append("Option " + i + " : " + list.get(i-1).toString() + "\n");
+        }
+        s.append("Option "+ (list.size()+1) + ": Back to previous menu");
+        System.out.println(s);
+    }
+
+    private void printAccountInfoSubSubMenu() {
+        String[] list = {"View account balance", "View last transaction",
+                "View date of creation", "Back to previous menu"};
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i < 4; i++) {
+            s.append("Option " + i + " : " + list[i - 1] + "\n");
+        }
+        System.out.println(s);
 
     }
 
-    private void userAccountInfoSubMenu() {
-        printAccountInfoSubMenu();
+    private void userAccountInfoSubMenu(UserAccManager uam) {
+        ArrayList<Account> list = uam.getAllAccounts();
+        printAllAccountList(list);
+        boolean stay = true;
+        String chosen = ensureOption(1, list.size()+1);
+        if (chosen.equals(String.valueOf((list.size()+1)))) {
+            stay = false;
+        }
+        if (stay) {
+            Account acc = list.get(Integer.valueOf(chosen));
+            userAccountInfoSubSubMenu(acc);
+        }
+    }
+
+    private void userAccountInfoSubSubMenu(Account acc){
+        printAccountInfoSubSubMenu();
+        boolean stay = true;
+        String chosen = ensureOption(1, 4);
+        if (chosen.equals(String.valueOf(4))) {
+            stay = false;
+        }
+        if (stay) {
+            switch (chosen) {
+                case "1":
+                    System.out.println(acc.getBalance());
+                    break;
+                case "2":
+                    System.out.println(infoManager.getTransactionManager().getAccLastTrans(acc.getAccountNum()));
+                    break;
+                case "3":
+                    System.out.println(acc.getDateOfCreation());
+                    break;
+            }
+
+        }
     }
 
     private ArrayList printPriChqSubMenu(UserAccManager manager) {
@@ -271,6 +322,7 @@ public class BankSystem {
     private void printReqAccSubMenu() {
 
     }
+    userReqAccSubMenu()
 
 
     private Double ensureDouble(String prompt) {
