@@ -13,7 +13,7 @@ public class Deposit extends Transaction{
         super(amount);
         this.toAcc = toAccount;
         this.fromAcc = null;
-        this.time = toAcc.getCurrentTime();
+        this.time = LocalDateTime.now();
     }
 
     /*public Deposit(User user, double amount) {
@@ -54,12 +54,6 @@ public class Deposit extends Transaction{
             throw new ReverseNotPossibleException();
         }
         return new Withdrawal(fromAcc, this.getAmount());
-    }
-
-    public String record() {
-        int userId = getToAcc().getOwnerID();
-        return (userId + "," + getToAcc() + "," + getTime()
-                + "," + this.getAmount() + "\n");
     }
 
     @Override
