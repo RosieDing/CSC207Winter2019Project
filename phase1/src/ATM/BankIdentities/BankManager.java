@@ -63,6 +63,8 @@ public class BankManager extends BankIdentity {
         System.out.println("New user created! user ID: " + u.getId()
                 + " initial Password: " + "1234");
         passM.addObserver(InfoManager.getInfoManager());
+        createNewChequingAccount(u.getId());
+
     }
 
     /** Restocking the CashMachine
@@ -112,6 +114,7 @@ public class BankManager extends BankIdentity {
             }
         }
         m.addAccount(acc);
+
 
     }
 
