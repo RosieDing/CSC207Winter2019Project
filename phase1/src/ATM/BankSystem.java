@@ -35,14 +35,9 @@ public class BankSystem {
             BankManager defaultManager = new BankManager("1234");
             infoManager.add(defaultManager);
         }
-        //System.out.println(infoManager.getInfoStorer().getBankManagerMap());
-        System.out.println(infoManager.getInfoStorer().getBankManagerMap().containsKey("5101"));
-        //System.out.println(infoManager.getBankManagerNum());
-        //System.out.println(infoManager.getBankManager("5101"));
-        /*while (SystemOn) {
+        while (SystemOn) {
             bs.identityLog();
-        }*/
-        bs.identityLog();
+        }
     }
 
 
