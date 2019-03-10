@@ -24,7 +24,7 @@ public class BankManager extends BankIdentity {
         this.id = "510" + (InfoManager.getInfoManager().getBankManagerNum() + 1);
         manager = new PasswordManager(this.id);
         manager.setPassword(password);
-        InfoManager.getInfoManager().add(this);
+        //InfoManager.getInfoManager().add(this);
         System.out.println("Bank Manager ID: " + this.id + " , Password: " + password);
     }
 
@@ -65,6 +65,7 @@ public class BankManager extends BankIdentity {
         InfoManager.getInfoManager().add(u);
         passM.addObserver(InfoManager.getInfoManager());
         createNewChequingAccount(u.getId());
+
 
     }
 
