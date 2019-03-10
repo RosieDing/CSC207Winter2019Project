@@ -5,10 +5,10 @@ import java.util.*;
 
 public class UserAccManager{
     private Map<String, ArrayList<Account>> listOfAcc = new HashMap<>();
-    private int ownedUserId;
+    private String ownedUserId;
     private ChequingAccount primaryChq;
 
-    public UserAccManager(int ownedUserId) {
+    public UserAccManager(String ownedUserId) {
 
         this.ownedUserId = ownedUserId;
         listOfAcc.put("TransferOutable", new ArrayList<>());
@@ -62,7 +62,7 @@ public class UserAccManager{
 
     public void setPrimaryChq(Account acc) throws AlreadyPrimaryException{
         if (acc instanceof ChequingAccount) {
-            if (acc.getOwnerID() == ownedUserId) {
+            if (acc.getOwnerID().equals(ownedUserId) {
                 ChequingAccount pc = getPrimaryChq();
                 if (acc == pc) {
                     throw new AlreadyPrimaryException("This account is already " +
