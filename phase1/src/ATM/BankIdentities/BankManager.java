@@ -1,14 +1,14 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.*;
-import ATM.InfoHandling.InfoStorer;
 import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
+import ATM.Transactions.ReverseNotPossibleException;
 import ATM.Transactions.Transaction;
 import ATM.Transactions.TransactionManager;
 import ATM.InfoHandling.InfoManager;
 
-import javax.sound.sampled.Line;
+
 
 public class BankManager extends BankIdentity {
 
@@ -41,11 +41,15 @@ public class BankManager extends BankIdentity {
     May need to write the exception
      */
     public void undoMostRecentTrans(int accNum) {
-        Transaction e = InfoManager.getTransactionManager().getAccLastTrans(accNum).reverse();
-        // try catch where pay bill can't be reversed.
-        TransactionManager manager = InfoManager.getTransactionManager();
-        manager.makeTransaction(e);
-        // try catch if transaction cant be processed.
+        try {
+            Transaction e = InfoManager.getTransactionManager().getAccLastTrans(accNum).reverse();
+            // try catch where pay bill can't be reversed.
+            TransactionManager manager = InfoManager.getTransactionManager();
+            manager.makeTransaction(e);
+            // try catch if transaction cant be processed.
+        } catch (ReverseNotPossibleException e) {
+            System.out.println("Impossible to undo this transaction.");;
+        }
     }
 
     public void createNewChequingAccount(int userID) {
