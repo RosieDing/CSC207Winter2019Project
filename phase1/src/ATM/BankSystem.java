@@ -280,10 +280,21 @@ public class BankSystem {
         printTransSubMenu();
     }
 
-    private void printReqAccSubMenu() {
 
+    private void userReqAccSubMenu(User user){
+        printManagerSubMenu();
+        String chosen = ensureOption(1, 6);
+        switch (chosen){
+            case "1":
+                user.sendRequest("Chequing Account");
+            case "2":
+                user.sendRequest("Saving Account");
+            case "3":
+                user.sendRequest("Credit Account");
+            case "4":
+                user.sendRequest("Line of Credit");
+        }
     }
-    userReqAccSubMenu()
 
 
     private Double ensureDouble(String prompt) {
