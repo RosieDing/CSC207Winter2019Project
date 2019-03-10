@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**A simulation of the banking system */
 public class BankSystem {
@@ -551,15 +552,10 @@ public class BankSystem {
     }
 
     private String promptUser(String prompt) {
-        BufferedReader kbd = new BufferedReader(new InputStreamReader(System.in));
+        Scanner keyboard = new Scanner(System.in);
         System.out.println(prompt);
-        try {
-            String input = kbd.readLine();
-            kbd.close();
-            return input;
-        } catch (IOException ex) {
-            return ex.toString();
-        }
+        String input = keyboard.nextLine();
+        return input;
     }
 }
 
