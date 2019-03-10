@@ -7,6 +7,9 @@ import java.util.Arrays;
 
 
 public class CashMachine implements Serializable {
+    /***
+     * Amounts of dominations the CashMachine has.
+     */
     private int numFiveD;
     private int numTenD;
     private int numTwentyD;
@@ -15,6 +18,10 @@ public class CashMachine implements Serializable {
 
     public CashMachine(){}
 
+    /***
+     * Set the number of dominations in CashMachine.
+     * @param money record of number of dominations.
+     */
     public void setAmount(Money money) {
         numFiveD = money.getNumFive();
         numFiftyD = money.getNumFifty();
@@ -22,26 +29,52 @@ public class CashMachine implements Serializable {
         numTwentyD = money.getNumTwenty();
     }
 
+    /***
+     * Return a integer of number of $5.
+     * @return int
+     */
     public int getNumFiveD() {
         return numFiveD;
     }
 
+    /***
+     * Return a integer of number of $10.
+     * @return int
+     */
     public int getNumTenD() {
         return numTenD;
     }
 
+    /***
+     * Return a integer of number of $20.
+     * @return int
+     */
     public int getNumTwentyD() {
         return numTwentyD;
     }
 
+    /***
+     * Return a integer of number of $50.
+     * @return int
+     */
     public int getNumFiftyD() {
         return numFiftyD;
     }
 
+    /***
+     * Return amount of dominations stored in the CashMachine.
+     * @return Money as record of dominations
+     */
     public Money getAmount(){
         return new Money(getNumFiveD(), getNumTenD(), getNumTwentyD(),getNumFiftyD());
     }
 
+    /***
+     * Withdraw cash from the machine with a requested amount.
+     * @param amount integer shows the amount of money needed to be withdrawn.
+     * @throws CashNotWithdrawableException if the entered amount is not multiple of 5.
+     * @throws NotEnoughMoneyException if the machine has not enough money to complete withdrawal.
+     */
     public void withdrawCash(int amount) throws CashNotWithdrawableException, NotEnoughMoneyException{
         if (amount % 5 != 0) {
             throw new CashNotWithdrawableException("Amount entered should be multiple of 5.");
@@ -83,6 +116,10 @@ public class CashMachine implements Serializable {
         return doms;
     }
 
+    /***
+     * Check the current amount of dominations in the machine.
+     * Call warning if the amount is under 20.
+     */
     public void checkAmount() {
         Money m = getAmount();
         if (m.getNumFive() < 20) { warning("Five"); }
@@ -91,6 +128,10 @@ public class CashMachine implements Serializable {
         if (m.getNumFifty() < 20) { warning("Fifty"); }
     }
 
+    /***
+     * Send alert in order to ask BankManager to restock the machine
+     * @param value the domination whose amount is under 20.
+     */
     public void warning(String value){
         writer.write("Amount of "+ value + "dollar domination is under 20!");
     }
