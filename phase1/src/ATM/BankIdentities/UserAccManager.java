@@ -21,6 +21,7 @@ public class UserAccManager implements Serializable {
 
         this.ownedUserId = ownedUserId;
         listOfAcc.put("TransferOutable", new ArrayList<>());
+        listOfAcc.put("TransferInable",new ArrayList<>());
     }
 
     /** Adding the accounts in the Account Manager
@@ -39,6 +40,7 @@ public class UserAccManager implements Serializable {
         if (acc instanceof TransferOutable) {
             listOfAcc.get("TransferOutable").add(acc);
         }
+        listOfAcc.get("TransferInable").add(acc);
         InfoManager.getInfoManager().add(acc);
     }
     /** Use the account number to get the account
