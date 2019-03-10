@@ -6,21 +6,19 @@ import ATM.Accounts.TransferOutable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;
 import java.util.Stack;
 
 public class TransactionManager{
     private static TransactionManager m;
-    private static Map<Integer, Stack<Transaction>> accTransList = new HashMap<>();
-    private static Map<Integer, Stack<Transaction>> userTransList = new HashMap<>();
-    // deposit writer
-    // pay Bill writer
+    private Map<String, Stack<Transaction>> accTransList = new HashMap<>();
+    private Map<String, Stack<Transaction>> userTransList = new HashMap<>();
+
 
     private TransactionManager(){}
 
     public static TransactionManager getTransactionManager() {
-        if (accTransList == null && userTransList == null) {
-            TransactionManager m = new TransactionManager();
+        if (m == null) {
+            m = new TransactionManager();
         }
         return m;
     }
