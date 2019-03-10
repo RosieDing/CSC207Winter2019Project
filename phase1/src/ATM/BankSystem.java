@@ -181,6 +181,12 @@ public class BankSystem {
 
     /**Display the main menu for user */
     private void printUserMenu() {
+        String[] list = {"Get All Accounts Summary", "See Net Total of Balance", "View Account",
+                "Set Primary Account", "Make Transaction", "Request Creation of Account", "Reset Password", "Log Out"};
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i < 9; i++) {
+            s.append("Option " + i + " : " + list[i - 1] + "\n");
+        }
 
     }
 
