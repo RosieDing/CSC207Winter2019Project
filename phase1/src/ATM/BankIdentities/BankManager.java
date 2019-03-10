@@ -62,6 +62,7 @@ public class BankManager extends BankIdentity {
         u.setPassManager(passM);
         System.out.println("New user created! user ID: " + u.getId()
                 + " initial Password: " + "1234");
+        InfoManager.getInfoManager().add(u);
         passM.addObserver(InfoManager.getInfoManager());
         createNewChequingAccount(u.getId());
 
