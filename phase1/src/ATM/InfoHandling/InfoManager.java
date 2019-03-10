@@ -3,6 +3,7 @@ package ATM.InfoHandling;
 import ATM.Accounts.Account;
 import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.User;
+import ATM.Transactions.TransactionManager;
 
 import java.io.*;
 
@@ -74,6 +75,10 @@ public class InfoManager {
     public static BankManager getBankManager(int id){
         String key = String.valueOf(id);
         return infoStorer.getBankManagerMap().get(key);
+    }
+
+    public static TransactionManager getTransactionManager(){
+        return getInfoStorer().getTransactionManager();
     }
 
     public static int getUserNum(){
