@@ -53,6 +53,17 @@ public class TransactionManager{
         return e;
     }
 
+    public Transaction makeTransaction(Transaction e) {
+        try{
+            e.begin();
+        } catch (TransactionAmountOverLimitException a) {
+            System.out.println("Not enough balance to complete transaction.");
+        } catch (NullPointerException b) {
+            System.out.println("Transaction is not possible.");
+        }
+        return e;
+    }
+
     public Transaction getUserLastTrans(int userId) {
         Transaction e = userTransList.get(userId).pop();
         addTrans(e);
