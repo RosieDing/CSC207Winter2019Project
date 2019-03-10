@@ -26,8 +26,6 @@ public abstract class DebtAccount extends Account {
     /**Setter method for account balance */
     public void setBalance(double newBalance){
         this.balance = newBalance;
-        setChanged();
-        notifyObservers();
     }
 
     /**Getter method for account available credit to spend*/
@@ -38,26 +36,25 @@ public abstract class DebtAccount extends Account {
 
     /**Transfer in method for transfering money into debt accounts*/
     @Override
-    public void transferIn(double amount){
+    public void transferIn(double amount) {
         this.balance -= amount;
-        setChanged();
-        notifyObservers();
+    }
+
+    @Override
+    public void deposit(double amount){
+        this.balance -= amount;
     }
 
     /**Pay method for paying with debt account*/
     @Override
     public void pay(double amount){
         this.balance += amount;
-        setChanged();
-        notifyObservers();
     }
 
     /**Withdraw method for withdrawing with debt account*/
     @Override
     public void withdraw(double amount){
         this.balance += amount;
-        setChanged();
-        notifyObservers();
     }
 
     /**Getter method for limit of the debt account */
@@ -68,7 +65,5 @@ public abstract class DebtAccount extends Account {
     /**Setter method for limit of the debt account*/
     public void setLimit(double newLimit){
         this.limit = newLimit;
-        setChanged();
-        notifyObservers();
     }
 }

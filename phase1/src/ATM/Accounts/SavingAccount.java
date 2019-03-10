@@ -31,8 +31,6 @@ public class SavingAccount extends AssetAccount {
 
     public void setiSaverPlan(ISaverPlan s) {
         this.iSaverPlan = s;
-        setChanged();
-        notifyObservers();
     }
 
     @Override
