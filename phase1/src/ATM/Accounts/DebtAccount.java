@@ -7,11 +7,12 @@ public abstract class DebtAccount extends Account {
     private double limit;
     private int ownerID;
     private double balance;
-    private double availableCredit = limit - balance;
+    private double availableCredit;
 
     /**Constructor for debt account class */
     public DebtAccount(int ownerID, double limit){
         super(ownerID);
+        this.ownerID = ownerID;
         this.limit = limit;
         this.availableCredit = limit - balance;
         this.balance = 0;
