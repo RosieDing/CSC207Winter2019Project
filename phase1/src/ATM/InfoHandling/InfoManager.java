@@ -8,7 +8,7 @@ import ATM.Transactions.TransactionManager;
 import java.io.*;
 
 public class InfoManager {
-    private static String filePath;
+    private static String filePath = "./serializedinfo.ser";
     private static InfoStorer infoStorer;
     private static InfoManager infoManager;
 
@@ -33,7 +33,7 @@ public class InfoManager {
         return infoManager;
     }
 
-    public static void readFromFile(String path) {
+    public void readFromFile(String path) {
         try {
             InputStream file = new FileInputStream(path);
             InputStream buffer = new BufferedInputStream(file);
@@ -47,7 +47,7 @@ public class InfoManager {
         }
     }
 
-    public static void saveToFile() throws IOException {
+    public void saveToFile() throws IOException {
 
         OutputStream file = new FileOutputStream(filePath);
         OutputStream buffer = new BufferedOutputStream(file);
@@ -58,50 +58,47 @@ public class InfoManager {
         output.close();
     }
 
-    public static InfoStorer getInfoStorer() {
+    public InfoStorer getInfoStorer() {
         return infoStorer;
     }
 
-    public static User getUser(int id){
-        String key = String.valueOf(id);
-        return infoStorer.getUserMap().get(key);
+    public User getUser(String s){
+        return infoStorer.getUserMap().get(s);
     }
 
-    public static Account getAccount(int id){
-        String key = String.valueOf(id);
-        return infoStorer.getAccountMap().get(key);
+    public Account getAccount(String s){
+        return infoStorer.getAccountMap().get(s);
     }
 
-    public static BankManager getBankManager(int id){
-        String key = String.valueOf(id);
-        return infoStorer.getBankManagerMap().get(key);
+    public BankManager getBankManager(String s){
+        return infoStorer.getBankManagerMap().get(s);
     }
 
     public TransactionManager getTransactionManager(){
         return getInfoStorer().getTransactionManager();
     }
 
-    public static int getUserNum(){
+    public int getUserNum(){
         return infoStorer.getUserMap().size();
     }
 
-    public static int getAccountNum(){
+    public int getAccountNum(){
         return infoStorer.getAccountMap().size();
     }
 
-    public static int getBankManagerNum(){
+    public int getBankManagerNum(){
         return infoStorer.getBankManagerMap().size();
     }
 
-    public static void add(User newUser){
+    public void add(User newUser){
         infoStorer.addUser(newUser);
     }
 
-    public static void add(Account newAccount){
+    public void add(Account newAccount){
         infoStorer.addAccount(newAccount);
     }
 
-    public static void add(BankManager newBankManager){
+    public void add(BankManager newBankManager){
         infoStorer.addBankManager(newBankManager);
     }
 }
