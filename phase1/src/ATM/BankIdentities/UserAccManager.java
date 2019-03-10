@@ -128,8 +128,8 @@ public class UserAccManager implements Serializable {
         StringBuilder result = new StringBuilder();
         for (String s: listOfAcc.keySet()) {
             String name = String.join(" ", s.split("(?==\\p{Upper})"));
-            name.replace("ATM.Account.", "");
-            result.append(name).append(":\n");
+            String hey = name.replace("ATM.Account.", "");
+            result.append(hey).append(":\n");
             ArrayList<Account> list = listOfAcc.get(s);
             for (Account acc: list) {
                 result.append(acc.toString()).append("\n");
