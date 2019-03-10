@@ -1,9 +1,6 @@
 package ATM;
 
-import ATM.BankIdentities.BankIdentity;
-import ATM.BankIdentities.BankManager;
-import ATM.BankIdentities.PasswordManager;
-import ATM.BankIdentities.User;
+import ATM.BankIdentities.*;
 import ATM.InfoHandling.InfoManager;
 import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
@@ -126,7 +123,7 @@ public class BankSystem {
             stay = false;
         }
         if (stay) {
-            String userID = promptUser("Please enter a user ID: ");
+            String userID = ensureID();
             switch(chosen){
                 case "1":
                     bankManager.createNewChequingAccount(userID);
@@ -146,9 +143,74 @@ public class BankSystem {
         }
     }
 
-    public void userMainMenu(User user){
+    private void printUserMenu(){
 
     }
+
+    public void userMainMenu(User user){
+        while (user.getPassManager().isLogin()){
+            UserAccManager userAccManager = user.getAccManager();
+            printUserMenu();
+            String chosen = ensureOption(1, 8);
+            switch (chosen){
+                case "1":
+                    System.out.println(userAccManager.getSummary());
+                    break;
+                case "2":
+                    System.out.println(userAccManager.getNetTotal());
+                    break;
+                case "3":
+                    userAccountInfoSubMenu();
+                    break;
+                case "4":
+                    userPriChqSubMenu();
+                    break;
+                case "5":
+                    userTransSubMenu();
+                case "6":
+                    userReqAccSubMenu();
+                    break;
+                case "7":
+                    String accNum = promptUser("Please enter an account number: ");
+                    bankManager.undoMostRecentTrans(accNum);
+                    break;
+                case "8":
+                    managerSubMenu(bankManager);
+                    break;
+            }
+        }
+
+    }
+
+    private void printAccountInfoSubMenu(){
+
+    }
+
+    private void userAccountInfoSubMenu(){
+        printAccountInfoSubMenu();
+    }
+
+    private void printPriChqSubMenu(){
+
+    }
+
+    private void userPriChqSubMenu(){
+        printPriChqSubMenu();
+    }
+
+    private void printTransSubMenu(){
+
+    }
+
+    private void userTransSubMenu(){
+        printTransSubMenu();
+    }
+
+    private void printReqAccSubMenu(){
+
+    }
+
+    private
 
     private Double ensureDouble(String prompt){
         boolean isEnsured = false;
@@ -178,6 +240,39 @@ public class BankSystem {
             }
         }
         return Integer.valueOf(input);
+    }
+
+    private String ensureID(){
+        boolean isEnsured = false;
+        String input = "";
+        while (!isEnsured) {
+            input = promptUser("Please enter a user ID: ");
+            if (infoManager.getInfoStorer().getUserMap().containsKey(input)){
+                isEnsured = true;
+            } else{
+                System.out.println("You did not enter a existing user id!");
+            }
+        }
+        return input;
+    }
+
+    private String ensurePassword(int length){
+        boolean isEnsured = false;
+        String input = "";
+        while (!isEnsured) {
+            input = promptUser("Please enter a password (a 4 digit integer): ");
+            if (input.length() == length){
+                try{
+                    Integer i = Integer.valueOf(input);
+                    isEnsured = true;
+                } catch (NumberFormatException nfe){
+                    System.out.println("Please remember to enter a integer!");
+                }
+            } else{
+                System.out.println("Please remember to enter a 4 digit integer!");
+            }
+        }
+        return input;
     }
 
     private String ensureOption(int min, int max){
