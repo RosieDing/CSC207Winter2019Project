@@ -3,7 +3,7 @@ import ATM.Accounts.*;
 
 import java.util.*;
 
-public class UserAccManager extends Observable{
+public class UserAccManager{
     private Map<String, ArrayList<Account>> listOfAcc = new HashMap<>();
     private int ownedUserId;
     private ChequingAccount primaryChq;
@@ -27,8 +27,6 @@ public class UserAccManager extends Observable{
         if (acc instanceof TransferOutable) {
             listOfAcc.get("TransferOutable").add(acc);
         }
-        setChanged();
-        notifyObservers();
     }
 
     public Account getAccount(int accNum) throws NoSuchAccountException{
@@ -117,8 +115,6 @@ public class UserAccManager extends Observable{
             }
         }
         return net;
-
-        //exception
     }
 
 }
