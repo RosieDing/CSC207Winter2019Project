@@ -1,7 +1,9 @@
 package ATM.Transactions;
 
+
 import ATM.Accounts.Account;
 import ATM.Accounts.Payable;
+import ATM.InfoHandling.BillWriter;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +12,7 @@ public class PayBill extends Transaction{
     private final Payable fromAcc;
     private final Account toAcc;
     private final LocalDateTime time;
+    private  BillWriter writer = new BillWriter();
 
     public PayBill(Payable fromAccount, String to, double amount) {
         super(amount);
@@ -44,6 +47,7 @@ public class PayBill extends Transaction{
         }
         fromAcc.pay(this.getAmount());
         setHappened(true);
+        writer.write(this.toString());
     }
 
     @Override
@@ -55,7 +59,8 @@ public class PayBill extends Transaction{
         return to;
     }
 
-    /*public String record() {
+    /*public String record(String cont) {
+        writer.write();
         String userId = getFromAcc().getOwnerID();
         return (userId + "," + getFromAcc() + "," + getTo() + ","
                 + getTime() + "," + getAmount() + "\n")
@@ -69,6 +74,6 @@ public class PayBill extends Transaction{
                 ", to: " + getTo()  +
                 ", time: " + getTime() +
                 ", amount: " + getAmount() +
-                "}\n";
+                "}";
     }
 }

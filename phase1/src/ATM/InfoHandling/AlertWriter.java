@@ -5,8 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class PayBillWriter implements WriteTXT{
-    private String path = "./outgoing.txt";
+public class AlertWriter implements WriteTXT {
+    private String path = "./alert.txt";
 
     public void write(String content){
         File file = new File(path);
@@ -19,7 +19,7 @@ public class PayBillWriter implements WriteTXT{
             out.append(content + "\n");
             out.close();
         }catch(IOException e){
-            System.out.println("Pay Bill is not recorded.");
+            System.out.println("Alert is not recorded.");
         }
     }
 
