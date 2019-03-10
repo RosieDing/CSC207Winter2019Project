@@ -40,9 +40,15 @@ public class ChequingAccount extends AssetAccount{
         return accountNum;
     }
 
+    /**@string a string combined with account type, account number */
     @Override
     public String toString() {
-        return ("ChequingAccount" + ", "  + this.accountNum + ", " + getBalance());
+        return ("ChquingAccount" + ": "  + this.accountNum);
+    }
+
+    /** @return a String that includes the summary of chequing account: type, number, balance */
+    public String getSummary() {
+        return (this.toString() + " , Remaining Balance: " + getBalance());
     }
 
 }

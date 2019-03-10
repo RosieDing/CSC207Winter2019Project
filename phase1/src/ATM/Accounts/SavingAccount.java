@@ -40,9 +40,14 @@ public class SavingAccount extends AssetAccount {
         this.iSaverPlan = s;
     }
 
+    /**@string a string combined with account type, account number */
     @Override
     public String toString() {
-        return ("SavingAccount" + ", "  + this.accountNum + ", " + getBalance());
+        return ("SavingAccount" + ": "  + this.accountNum);
     }
 
+    /** @return a String that includes the summary of saving account: type, number, balance */
+    public String getSummary() {
+        return (this.toString() + " , Remaining Balance: " + getBalance());
+    }
 }

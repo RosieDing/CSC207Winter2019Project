@@ -32,10 +32,15 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
         return this.accountNum;
     }
 
-    /**To string method */
+    /**@string a string combined with account type, account number */
     @Override
     public String toString() {
-        return ("LineOfCredit" + ", "  + this.accountNum + ", " + getBalance());
+        return ("CreditAccount" + ": "  + this.accountNum);
+    }
+
+    /** @return a String that includes the summary of line of credit account: type, number, balance */
+    public String getSummary() {
+        return (this.toString() + " , Remaining Balance: " + getBalance());
     }
 
 }
