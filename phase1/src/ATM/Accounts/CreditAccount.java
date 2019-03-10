@@ -1,7 +1,7 @@
 package ATM.Accounts;
 
 import ATM.BankIdentities.User;
-import ATM.loading.InfoManager;
+import ATM.InfoHandling.InfoManager;
 
 /**
  * Credit account class
@@ -30,7 +30,7 @@ public class CreditAccount extends DebtAccount {
     }
 
 
-
+    /**To string method that will return a string combined with account type, account number, and account balance*/
     @Override
     public String toString() {
         return ("ATM.Accounts.CreditAccount" + ", "  + this.accountNum + ", " + getBalance());
