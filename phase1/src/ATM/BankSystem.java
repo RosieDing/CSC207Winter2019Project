@@ -187,6 +187,7 @@ public class BankSystem {
         for (int i = 1; i < 9; i++) {
             s.append("Option " + i + " : " + list[i - 1] + "\n");
         }
+        System.out.println(s);
 
     }
 
