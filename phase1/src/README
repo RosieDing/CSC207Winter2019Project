@@ -17,4 +17,16 @@ ________________________________________________________________________________
 What you can do:
     1. As a user. After log into your account, you will see a menu with 8 options ordered by number. Type the
      correspond number on keyboard and press enter.
-     Choose "1": you will get a summary of all of your accounts
+     Choose "1": You will get a summary of all of your accounts.
+     Choose "2": You will get a Net total of your balance.
+     Choose "3": You will enter to a new menu that have options of all types of accounts that you have. you will have some
+                 options that ordered by number.
+                 After choose the type of account you can choose the specific account that you want to view then you
+                 can choose to see its balance, date of creation and last transaction.
+     Choose "4": You will have a menu of options of all chequing accounts that you have. You can pick one to set it to
+                 be your primary account.
+     Choose "5": You will enter to a menu that have options of deposit, withdraw, regular transaction. Choose the one
+                 you want and enter the necessary input.
+     Choose "6": You can request a creation of a type of account by entering the type.
+     Choose "7": You can reset your password (must be numeric and 4 digit long).
+     Choose "8": You will log out.
