@@ -40,7 +40,7 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
 
     public abstract double getAvailableCredit();
 
-    public abstract int getAccountNum();
+    public abstract String getAccountNum();
 
     public abstract double getBalance();
 

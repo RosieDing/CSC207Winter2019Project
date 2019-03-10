@@ -64,31 +64,31 @@ public class TransactionManager{
         return e;
     }
 
-    public Transaction getUserLastTrans(int userId) {
+    public Transaction getUserLastTrans(String userId) {
         Transaction e = userTransList.get(userId).pop();
         addTrans(e);
         return e;
     }
 
-    public Transaction getAccLastTrans(int accNum) {
+    public Transaction getAccLastTrans(String accNum) {
         Transaction e = accTransList.get(accNum).pop();
         addTrans(e);
         return e;
     }
 
-    private void addHelper(int userId, int accNum, Transaction trans) {
+    private void addHelper(String userId, String accNum, Transaction trans) {
         accTransList.get(accNum).add(trans);
         userTransList.get(userId).add(trans);
     }
 
-    private void addTrans(Transaction trans){
+    public void addTrans(Transaction trans){
         if (trans.getFromAcc() == null) {
-            int userId = trans.getToAcc().getOwnerID();
-            int accNum = trans.getToAcc().getAccountNum();
+            String userId = trans.getToAcc().getOwnerID();
+            String accNum = trans.getToAcc().getAccountNum();
             addHelper(userId, accNum, trans);
         } else {
-            int userId = trans.getFromAcc().getOwnerID();
-            int accNum = trans.getFromAcc().getAccountNum();
+            String userId = trans.getFromAcc().getOwnerID();
+            String accNum = trans.getFromAcc().getAccountNum();
             addHelper(userId, accNum, trans);
 
         }

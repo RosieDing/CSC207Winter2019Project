@@ -11,7 +11,7 @@ public class ChequingAccount extends AssetAccount{
     private double availableCredit = overDraftLimit + getBalance();
     private int ownerID;
     private String id = "003" + ownerID + (InfoManager.getAccountNum() + 1);
-    private final int accountNum = Integer.valueOf(id);
+    private final String accountNum = id;
 
     /**Constructor for chequing account class*/
     public ChequingAccount(int ownerID){
@@ -33,7 +33,7 @@ public class ChequingAccount extends AssetAccount{
         return availableCredit;
     }
     @Override
-    public int getAccountNum(){
+    public String getAccountNum(){
         return accountNum;
     }
     @Override
