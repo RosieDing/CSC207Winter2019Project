@@ -5,12 +5,12 @@ import ATM.BankIdentities.User;
 
 import java.io.*;
 
-public class Loader {
+public class InfoManager {
+    private static String filePath;
     private static InfoStorer info;
+    private static InfoManager loader;
 
-    private static Loader loader;
-
-    private Loader(String filePath) throws ClassNotFoundException{
+    private InfoManager() throws ClassNotFoundException{
         info = new InfoStorer();
         File file = new File(filePath);
         if (file.exists()) {
@@ -24,9 +24,9 @@ public class Loader {
         }
     }
 
-    public static Loader getLoader(String filePath) throws ClassNotFoundException{
+    public static InfoManager getInfoManager() throws ClassNotFoundException{
         if (loader == null){
-            loader = new Loader(filePath);
+            loader = new InfoManager();
         }
         return loader;
     }
@@ -45,7 +45,7 @@ public class Loader {
         }
     }
 
-    public void saveToFile(String filePath) throws IOException {
+    public static void saveToFile() throws IOException {
 
         OutputStream file = new FileOutputStream(filePath);
         OutputStream buffer = new BufferedOutputStream(file);
@@ -56,33 +56,33 @@ public class Loader {
         output.close();
     }
 
-    public InfoStorer getInfo() {
+    public static InfoStorer getInfo() {
         return info;
     }
 
-    public User getUser(int id){
+    public static User getUser(int id){
         String key = String.valueOf(id);
         return info.getUserMap().get(key);
     }
 
-    public Account getAccount(int id){
+    public static Account getAccount(int id){
         String key = String.valueOf(id);
         return info.getAccountMap().get(key);
     }
 
-    public int getUserNum(){
+    public static int getUserNum(){
         return info.getUserMap().size();
     }
 
-    public int getAccountNum(){
+    public static int getAccountNum(){
         return info.getAccountMap().size();
     }
 
-    public void add(User newUser){
+    public static void add(User newUser){
         info.addUser(newUser);
     }
 
-    public void add(Account newAccount){
+    public static void add(Account newAccount){
         info.addAccount(newAccount);
     }
 }

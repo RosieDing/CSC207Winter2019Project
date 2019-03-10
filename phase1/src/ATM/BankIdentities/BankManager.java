@@ -5,13 +5,13 @@ import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
 import ATM.Transactions.Transaction;
 import ATM.Transactions.TransactionManager;
-import ATM.loading.Loader;
+import ATM.loading.InfoManager;
 
 public class BankManager extends BankIdentity {
 
     public BankManager() {
         String id = "";
-        id = id + "510" + (Loader.getBankManagerNum() + 1);
+        id = id + "510" + (InfoManager.getBankManagerNum() + 1);
         this.setId(Integer.valueOf(id));
     }
 
@@ -38,9 +38,9 @@ public class BankManager extends BankIdentity {
     May need to write the exception
      */
     public void undoMostRecentTrans(int accNum) {
-        Transaction e = Loader.getAccount(accNum).getTransManager().getLastTrans().reverse();
+        Transaction e = InfoManager.getAccount(accNum).getTransManager().getLastTrans().reverse();
         // try catch where pay bill can't be reversed.
-        TransactionManager manager = Loader.getTransManager();
+        TransactionManager manager = InfoManager.getTransManager();
         manager.makeTransaction(e);
         // try catch if transaction cant be processed.
     }
@@ -48,7 +48,7 @@ public class BankManager extends BankIdentity {
 
     //code smell to be fixed.
     public int createNewAccount(int userID, String accountType) {
-        User u = Loader.getUser(userID);
+        User u = InfoManager.getUser(userID);
         UserAccManager m = u.getAccManager();
         int result = 0;
         Account acc;
@@ -86,7 +86,7 @@ public class BankManager extends BankIdentity {
     }
 
     public void createNewChequingAccount(int userID, String accountType) {
-        User u = Loader.getUser(userID);
+        User u = InfoManager.getUser(userID);
         UserAccManager m = u.getAccManager();
         Account acc;
         acc = new ChequingAccount(userID);
