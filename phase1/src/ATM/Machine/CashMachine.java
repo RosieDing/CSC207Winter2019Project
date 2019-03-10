@@ -3,9 +3,9 @@ package ATM.Machine;
 import ATM.InfoHandling.AlertWriter;
 
 import java.util.Arrays;
-import java.util.Observable;
 
-public class CashMachine extends Observable {
+
+public class CashMachine{
     private int numFiveD;
     private int numTenD;
     private int numTwentyD;
@@ -19,8 +19,6 @@ public class CashMachine extends Observable {
         numFiftyD = money.getNumFifty();
         numTenD = money.getNumTen();
         numTwentyD = money.getNumTwenty();
-        setChanged();
-        notifyObservers();
     }
 
     public int getNumFiveD() {
