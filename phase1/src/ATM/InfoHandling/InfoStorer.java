@@ -66,8 +66,4 @@ public class InfoStorer {
     public Map<String, String> getAccountCreationRequest() {
         return accountCreationRequest;
     }
-
-    public void addRequest(String userID, String type) {
-        this.accountCreationRequest.put(userID, type);
-    }
 }
