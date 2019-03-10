@@ -22,8 +22,6 @@ public class ChequingAccount extends AssetAccount{
 
     public void setoverDraftLimit(double limit){
         this.overDraftLimit = limit;
-        setChanged();
-        notifyObservers();
     }
 
     public double getOverDraftLimit() {

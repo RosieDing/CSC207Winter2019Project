@@ -2,12 +2,12 @@ package ATM.Accounts;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Observable;
+
 
 /**
  * An abstract class that represents a bank account
  */
-public abstract class Account extends Observable implements Withdrawable, TransferInable,Payable, Serializable {
+public abstract class Account implements Withdrawable, TransferInable, Payable, Depositable, Serializable {
 
     /**Current system time */
     private LocalDateTime currentTime = LocalDateTime.now();
@@ -33,7 +33,10 @@ public abstract class Account extends Observable implements Withdrawable, Transf
 
     /**Return the date of Creation */
     public LocalDateTime getDateOfCreation(){
-        return dateOfCreation;}
+        return dateOfCreation;
+    }
+
+    public abstract void deposit(double amount);
 
     public abstract double getAvailableCredit();
 

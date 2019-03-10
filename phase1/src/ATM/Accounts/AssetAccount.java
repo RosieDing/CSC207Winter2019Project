@@ -21,38 +21,33 @@ public abstract class AssetAccount extends Account implements TransferOutable {
     @Override
     public void transferIn(double amount) {
         balance += amount;
-        setChanged();
-        notifyObservers();
+    }
+
+    @Override
+    public void deposit(double amount){
+        balance += amount;
     }
 
     /**Method for Transfer out money from the asset account*/
     @Override
     public void transferOut(double amount) {
         balance -= amount;
-        setChanged();
-        notifyObservers();
     }
 
     /**Setter method for the balance of the asset account*/
     @Override
     public void setBalance(double balance) {
         this.balance = balance;
-        setChanged();
-        notifyObservers();
     }
 
     /**Method for pay money from the asset account*/
     @Override
     public void pay(double amount) {
         balance -= amount;
-        setChanged();
-        notifyObservers();
     }
 
     @Override
     public void withdraw(double amount) {
         balance -= amount;
-        setChanged();
-        notifyObservers();
     }
 }
