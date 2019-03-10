@@ -55,12 +55,12 @@ public class PayBill extends Transaction{
         return to;
     }
 
-    public String record() {
-        int userId = getFromAcc().getOwnerID();
+    /*public String record() {
+        String userId = getFromAcc().getOwnerID();
         return (userId + "," + getFromAcc() + "," + getTo() + ","
                 + getTime() + "," + getAmount() + "\n")
                 ;
-    }
+    }*/
 
     @Override
     public String toString() {
