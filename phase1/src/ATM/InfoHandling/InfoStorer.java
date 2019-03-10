@@ -51,6 +51,10 @@ public class InfoStorer {
         return transactionManager;
     }
 
+    public Map<String, String> getAccountCreationRequest() {
+        return accountCreationRequest;
+    }
+
     public void addUser(User newUser){
         this.userMap.put(newUser.getId(), newUser);
     }
@@ -61,9 +65,5 @@ public class InfoStorer {
 
     public void addAccount(Account newAccount){
         this.accountMap.put(newAccount.getAccountNum(), newAccount);
-    }
-
-    public Map<String, String> getAccountCreationRequest() {
-        return accountCreationRequest;
     }
 }
