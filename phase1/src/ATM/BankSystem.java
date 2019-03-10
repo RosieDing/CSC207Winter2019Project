@@ -12,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BankSystem {
     private static boolean SystemOn;
@@ -171,7 +173,7 @@ public class BankSystem {
                     userPriChqSubMenu(userAccManager);
                     break;
                 case "5":
-                    userTransSubMenu();
+                    userTransSubMenu(userAccManager);
                 case "6":
                     userReqAccSubMenu();
                     break;
@@ -194,6 +196,14 @@ public class BankSystem {
             s.append("Option " + i + " : " + list.get(i-1).toString() + "\n");
         }
         s.append("Option "+ (list.size()+1) + ": Back to previous menu");
+        System.out.println(s);
+    }
+
+    private void printTypeAccountList(ArrayList<Account> list){
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i < list.size(); i++) {
+            s.append("Option " + i + " : " + list.get(i-1).toString() + "\n");
+        }
         System.out.println(s);
     }
 
@@ -272,17 +282,131 @@ public class BankSystem {
        }
     }
 
+    private void printTransSubSubMenu() {
+        String[] list = {"Continue", "Back to previous menu"};
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i < 2; i++) {
+            s.append("Option " + i + " : " + list[i - 1] + "\n");
+        }
+        System.out.println(s);
+    }
+
     private void printTransSubMenu() {
-
+        String[] list = {"Regular Transaction", "Deposit",
+                "Withdrawal", "Pay Bills", "Back to previous menu"};
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i < 5; i++) {
+            s.append("Option " + i + " : " + list[i - 1] + "\n");
+        }
+        System.out.println(s);
     }
 
-    private void userTransSubMenu() {
+    private void userTransSubMenu(UserAccManager uam) {
         printTransSubMenu();
+        boolean stay = true;
+        String chosen = ensureOption(1, 5);
+        if (chosen.equals(String.valueOf(5))) {
+            stay = false;
+        }
+        if (stay) {
+            switch (chosen) {
+                case "1":
+                    regularTransactionMenu(uam);
+                    break;
+                case "2":
+                    depositMenu(uam);
+                    break;
+                case "3":
+
+                    break;
+            }
+
+        }
     }
 
-    private void printReqAccSubMenu() {
+    private void payBillMenu(UserAccManager uam) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("Type", "PayBill");
+        try{
+            ArrayList<Account> depositList = uam.getTypeAccounts("TransferInable");
+            map.put("fromAccount", transactionHelper(depositList));
+        }
+        catch(NoSuchTypeException e){
+            System.out.println(e);
+        }
+        String to = promptUser("Please enter to whom: ");
+        map.put("to", to);
+        String amount = promptUser("Please enter amount: ");
+        map.put("amount", amount);
+        transactionHelperOne(map);
+    }
+
+    private void withdrawalMenu(UserAccManager uam) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("Type", "Withdrawal");
+        try{
+            ArrayList<Account> withdrawalList = uam.getTypeAccounts("TransferInable");
+            map.put("fromAccount", transactionHelper(withdrawalList));
+        }
+        catch(NoSuchTypeException e){
+            System.out.println(e);
+        }
+        String amount = promptUser("Please enter amount: ");
+        map.put("amount", amount);
+        transactionHelperOne(map);
+    }
+
+    private void depositMenu(UserAccManager uam) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("Type", "Deposit");
+        try{
+            ArrayList<Account> depositList = uam.getTypeAccounts("TransferInable");
+            map.put("toAccount", transactionHelper(depositList));
+        }
+        catch(NoSuchTypeException e){
+            System.out.println(e);
+        }
+        String amount = promptUser("Please enter amount: ");
+        map.put("amount", amount);
+        transactionHelperOne(map);
+    }
+
+    private void regularTransactionMenu(UserAccManager uam){
+        Map<String, Object> map = new HashMap<>();
+        map.put("Type", "Regular");
+        try{
+            ArrayList<Account> transferOutableList = uam.getTypeAccounts("TransferOutable");
+            map.put("fromAccount", transactionHelper(transferOutableList));
+            ArrayList<Account> transferInableList = uam.getTypeAccounts("TransferInable");
+            map.put("toAccount", transactionHelper(transferInableList));
+        }
+        catch(NoSuchTypeException e){
+            System.out.println(e);
+        }
+        String amount = promptUser("Please enter amount: ");
+        map.put("amount", amount);
+        transactionHelperOne(map);
 
     }
+
+    private void transactionHelperOne(Map<String, Object> map){
+        boolean stay = true;
+        printTransSubMenu();
+        String chosen = ensureOption(1, 2);
+        if (chosen.equals("2")) {
+            stay = false;
+        }
+        if (stay) {
+            infoManager.getTransactionManager().makeTransaction(map);
+        }
+    }
+
+    private Account transactionHelper(ArrayList<Account> list) {
+        printTypeAccountList(list);
+        String chosen = ensureOption(1, list.size()+1);
+        return list.get(Integer.valueOf(chosen));
+    }
+
     userReqAccSubMenu()
 
 
