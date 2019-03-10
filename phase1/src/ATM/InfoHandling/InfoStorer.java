@@ -3,6 +3,7 @@ package ATM.InfoHandling;
 import ATM.Accounts.Account;
 import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.User;
+import ATM.Machine.CashMachine;
 import ATM.Transactions.TransactionManager;
 
 import java.util.Collection;
@@ -29,12 +30,15 @@ public class InfoStorer {
 
     private Map<String, String> accountCreationRequest;
 
+    private CashMachine cashMachine;
+
     public InfoStorer(){
         this.accountMap = new HashMap<String, Account>();
         this.userMap = new HashMap<String, User>();
         this.bankManagerMap = new HashMap<String, BankManager>();
         this.transactionManager = TransactionManager.getTransactionManager();
         this.accountCreationRequest = new HashMap<>();
+        this.cashMachine = new CashMachine();
     }
 
     public Map<String, Account> getAccountMap() {
@@ -53,6 +57,10 @@ public class InfoStorer {
 
     public Map<String, String> getAccountCreationRequest() {
         return accountCreationRequest;
+    }
+
+    public CashMachine getCashMachine() {
+        return cashMachine;
     }
 
     public void addUser(User newUser){
