@@ -2,12 +2,15 @@ package ATM.InfoHandling;
 
 import ATM.Accounts.Account;
 import ATM.BankIdentities.BankManager;
+import ATM.BankIdentities.PasswordManager;
 import ATM.BankIdentities.User;
 import ATM.Transactions.TransactionManager;
 
 import java.io.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class InfoManager {
+public class InfoManager implements Observer {
     private static String filePath = "./serializedinfo.ser";
     private static InfoStorer infoStorer;
     private static InfoManager infoManager;
@@ -41,14 +44,21 @@ public class InfoManager {
 
             //deserialize the InfoStorer
             infoStorer = (InfoStorer) input.readObject();
+            addRelationship();
             input.close();
         } catch (Exception ex) {
             System.out.println(ex);
         }
     }
+    private void addRelationship(){
+        for (User user: getInfoStorer().getUserMap().values()){
+            PasswordManager pw = user.getPassManager();
+            pw.addObserver(this);
+        }
+    }
 
-    public void saveToFile() throws IOException {
-
+    public void saveToFile() {
+        try {
         OutputStream file = new FileOutputStream(filePath);
         OutputStream buffer = new BufferedOutputStream(file);
         ObjectOutput output = new ObjectOutputStream(buffer);
@@ -56,6 +66,9 @@ public class InfoManager {
         // serialize the Map
         output.writeObject(infoStorer);
         output.close();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
     public InfoStorer getInfoStorer() {
@@ -100,6 +113,11 @@ public class InfoManager {
 
     public void add(BankManager newBankManager){
         infoStorer.addBankManager(newBankManager);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        saveToFile();
     }
 }
 
