@@ -13,6 +13,7 @@ public class ChequingAccount extends AssetAccount{
     private String id = "003" + ownerID + (InfoManager.getAccountNum() + 1);
     private final int accountNum = Integer.valueOf(id);
 
+    /**Constructor for chequing account class*/
     public ChequingAccount(int ownerID){
         super(ownerID);
         this.ownerID = ownerID;

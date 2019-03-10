@@ -8,6 +8,8 @@ import ATM.Transactions.Transaction;
 import ATM.Transactions.TransactionManager;
 import ATM.InfoHandling.InfoManager;
 
+import javax.sound.sampled.Line;
+
 public class BankManager extends BankIdentity {
 
     public BankManager() {
@@ -46,57 +48,41 @@ public class BankManager extends BankIdentity {
         // try catch if transaction cant be processed.
     }
 
-
-    //code smell to be fixed.
-    public int createNewAccount(int userID, String accountType) {
+    public void createNewChequingAccount(int userID) {
         User u = InfoManager.getUser(userID);
         UserAccManager m = u.getAccManager();
-        int result = 0;
-        Account acc;
-        switch (accountType) {
-            case "Chequing":
-                acc = new ChequingAccount(userID);
-                m.addAccount(acc);
-                m.getTypeAccounts("ChequingAccount");
-                if (m.getTypeAccounts("ATM.Accounts.ChequingAccount").size() == 0) {
-                    acc.setPrimary(true);
-                }
-                result = acc.getAccountNum();
-                break;
-            case "Line of Credit":
-                int limit;
-                //scanner get limit
-                acc = new LineOfCredit(userID, limit);
-                m.addAccount(acc);
-                result = acc.getAccountNum();
-                break;
-            case "Credit":
-                int limit;
-                //scanner get limit
-                acc = new CreditAccount(userID, limit);
-                m.addAccount(acc);
-                result = acc.getAccountNum();
-                break;
-            case "Saving":
-                acc = new SavingAccount(userID);
-                m.addAccount(acc);
-                result = acc.getAccountNum();
-                break;
-        }
-        return result; // raise exception if result==0
-    }
-
-    public void createNewChequingAccount(int userID, String accountType) {
-        User u = InfoManager.getUser(userID);
-        UserAccManager m = u.getAccManager();
-        Account acc;
-        acc = new ChequingAccount(userID);
-        if (m.getTypeAccounts("ChequingAccount").size() == 0){
-
+        ChequingAccount acc = new ChequingAccount(userID);
+        if (m.getPrimaryChq() == null){
+            try {
+                m.setPrimaryChq(acc);
+            } catch(AlreadyPrimaryException e ){
+                System.out.println();
+            }
         }
         m.addAccount(acc);
 
+    }
 
+    public void createNewSavingAccount(int userID){
+        User u = InfoManager.getUser(userID);
+        UserAccManager m = u.getAccManager();
+        MonthlyInterest interest = new MonthlyInterest(0.01);
+        SavingAccount acc = new SavingAccount(userID, interest);
+        m.addAccount(acc);
+    }
+
+    public void createNewCreditAccount(int userID, double limit){
+        User u = InfoManager.getUser(userID);
+        UserAccManager m = u.getAccManager();
+        CreditAccount acc = new CreditAccount(userID, limit);
+        m.addAccount(acc);
+    }
+
+    public void createNewLineOfCreadit(int userID, double limit){
+        User u = InfoManager.getUser(userID);
+        UserAccManager m =u.getAccManager();
+        LineOfCredit acc = new LineOfCredit(userID, limit);
+        m.addAccount(acc);
     }
 }
-}
+
