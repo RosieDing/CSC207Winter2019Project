@@ -179,7 +179,7 @@ public class BankSystem {
                     bankManager.undoMostRecentTrans(accNum);
                     break;
                 case "8":
-                    managerSubMenu(bankManager);
+                    user.getPassManager().logout();
                     break;
             }
         }
@@ -233,7 +233,6 @@ public class BankSystem {
 
     }
 
-    private
 
     private Double ensureDouble(String prompt) {
         boolean isEnsured = false;
