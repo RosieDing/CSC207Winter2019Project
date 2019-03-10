@@ -92,6 +92,11 @@ public class RegularTrans extends Transaction{
         return new RegularTrans(from, toAcc, this.getAmount());
     }
 
+
+    /***
+     * Return a String representation of RegularTrans
+     * @return string
+     */
     @Override
     public String toString() {
         return "Transaction{" +
