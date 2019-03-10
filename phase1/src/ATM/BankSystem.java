@@ -218,12 +218,10 @@ public class BankSystem {
                     userPriChqSubMenu(userAccManager);
                     break;
                 case "5":
-
-                    userTransSubMenu(userAccManager);
-
                     //enter a transaction menu to make a transaction
+                    userTransSubMenu(userAccManager);
                 case "6":
-                    userReqAccSubMenu();
+                    userReqAccSubMenu(user);
                     break;
                 case "7":
                     System.out.println("Enter a password:");
@@ -365,7 +363,10 @@ public class BankSystem {
                     depositMenu(uam);
                     break;
                 case "3":
-
+                    withdrawalMenu(uam);
+                    break;
+                case "4":
+                    payBillMenu(uam);
                     break;
             }
 
@@ -419,22 +420,21 @@ public class BankSystem {
         transactionHelperOne(map);
     }
 
-    private void regularTransactionMenu(UserAccManager uam){
+    private void regularTransactionMenu(UserAccManager uam) {
         Map<String, Object> map = new HashMap<>();
         map.put("Type", "Regular");
-        try{
+        try {
             ArrayList<Account> transferOutableList = uam.getTypeAccounts("TransferOutable");
             map.put("fromAccount", transactionHelper(transferOutableList));
             ArrayList<Account> transferInableList = uam.getTypeAccounts("TransferInable");
             map.put("toAccount", transactionHelper(transferInableList));
-        }
-        catch(NoSuchTypeException e){
+        } catch (NoSuchTypeException e) {
             System.out.println(e);
         }
         String amount = promptUser("Please enter amount: ");
         map.put("amount", amount);
         transactionHelperOne(map);
-
+    }
 
     private void userReqAccSubMenu(User user){
         printManagerSubMenu();
@@ -454,7 +454,7 @@ public class BankSystem {
 
     private void transactionHelperOne(Map<String, Object> map){
         boolean stay = true;
-        printTransSubMenu();
+        printTransSubSubMenu();
         String chosen = ensureOption(1, 2);
         if (chosen.equals("2")) {
             stay = false;
@@ -470,7 +470,7 @@ public class BankSystem {
         return list.get(Integer.valueOf(chosen));
     }
 
-    userReqAccSubMenu()
+    //userReqAccSubMenu()
 
 
     private Double ensureDouble(String prompt) {
@@ -565,3 +565,4 @@ public class BankSystem {
         }
     }
 }
+
