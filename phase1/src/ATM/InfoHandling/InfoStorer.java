@@ -40,12 +40,18 @@ public class InfoStorer {
         return userMap;
     }
 
+    public Map<String, BankManager> getBankManagerMap() { return bankManagerMap;}
+
     public TransactionManager getTransactionManager() {
         return transactionManager;
     }
 
     public void addUser(User newUser){
         this.userMap.put(String.valueOf(newUser.getId()), newUser);
+    }
+
+    public void addBankManager(BankManager newBankManager){
+        this.bankManagerMap.put(String.valueOf(newBankManager.getId()), newBankManager);
     }
 
     public void addAccount(Account newAccount){
