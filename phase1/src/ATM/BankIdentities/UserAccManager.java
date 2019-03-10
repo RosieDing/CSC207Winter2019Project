@@ -131,7 +131,7 @@ public class UserAccManager implements Serializable {
             result.append(name).append(":\n");
             ArrayList<Account> list = listOfAcc.get(s);
             for (Account acc: list) {
-                result.append(acc.toString()).append("\n");
+                result.append(acc.getSummary()).append("\n");
             }
         }
         return result.toString();

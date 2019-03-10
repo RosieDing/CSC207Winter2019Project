@@ -57,4 +57,6 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
 
     /**Abstract Method for withdraw money from account */
     public abstract void withdraw(double amount);
+
+    public abstract String getSummary();
 }
