@@ -9,15 +9,14 @@ import ATM.InfoHandling.InfoManager;
  */
 public class LineOfCredit extends DebtAccount implements TransferOutable {
     private int ownerID;
-    private User owner= InfoManager.get(ownerID);
-    private String id = "002" + ownerID + String.valueOf(owner.getAccountNum() + 1);
+    private String id = "002" + ownerID + (InfoManager.getAccountNum() + 1);
     private final int accountNum = Integer.valueOf(id);
-    private double availableCredit = limit - balance;
-    private double balance;
+
 
     /**Constructor for debt account class */
     public LineOfCredit(int ownerID, int limit) {
-        super(ownerID, limit, availableCredit);
+        super(ownerID, limit);
+        this.ownerID = ownerID;
     }
     @Override
 
