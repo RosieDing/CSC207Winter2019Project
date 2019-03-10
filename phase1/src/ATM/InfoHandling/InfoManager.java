@@ -77,7 +77,7 @@ public class InfoManager {
         return infoStorer.getBankManagerMap().get(key);
     }
 
-    public static TransactionManager getTransactionManager(){
+    public TransactionManager getTransactionManager(){
         return getInfoStorer().getTransactionManager();
     }
 
