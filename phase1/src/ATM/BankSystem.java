@@ -235,6 +235,7 @@ public class BankSystem {
 
     }
 
+    /** print all the available choice between the accounts*/
     private void printAllAccountList(ArrayList<Account> list){
         StringBuilder s = new StringBuilder();
         for (int i = 1; i < list.size(); i++) {
@@ -244,6 +245,8 @@ public class BankSystem {
         System.out.println(s);
     }
 
+
+    /** 比上面那个少一个option */
     private void printTypeAccountList(ArrayList<Account> list){
         StringBuilder s = new StringBuilder();
         for (int i = 1; i < list.size(); i++) {
@@ -252,6 +255,8 @@ public class BankSystem {
         System.out.println(s);
     }
 
+
+    /** Print all the information under one account*/
     private void printAccountInfoSubSubMenu() {
         String[] list = {"View account balance", "View last transaction",
                 "View date of creation", "Back to previous menu"};
@@ -263,6 +268,7 @@ public class BankSystem {
 
     }
 
+    /** Using the recursion when to provide the print All Account list choice*/
     private void userAccountInfoSubMenu(UserAccManager uam) {
         ArrayList<Account> list = uam.getAllAccounts();
         printAllAccountList(list);
