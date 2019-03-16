@@ -136,6 +136,7 @@ public class UserMenus {
         }
     }
 
+    /** Depend on the customer's choice show the information under their accounts*/
     private void userAccountInfoSubSubMenu(Account acc){
         boolean stay = true;
         while (stay) {
@@ -169,6 +170,8 @@ public class UserMenus {
      * @param manager
      * @return
      */
+
+    /** Print all the information under the chequing account*/
     private ArrayList printPriChqSubMenu(UserAccManager manager) {
         StringBuilder message = new StringBuilder();
         int length = 1;
@@ -181,6 +184,7 @@ public class UserMenus {
         return acclist;
     }
 
+    /** Manager setting the selected chequing account as primary*/
     private void userPriChqSubMenu(UserAccManager manager) {
         ArrayList acclist = printPriChqSubMenu(manager);
         String chosen = typer.ensureOption(1, acclist.size());
@@ -198,6 +202,8 @@ public class UserMenus {
     /***
      * Menu option 5: Make transaction
      */
+
+    /** Print all the available transaction*/
     private void printUserTransSubMenu() {
         String[] list = {"Regular Transaction", "Deposit",
                 "Withdrawal", "Pay Bills", back};
@@ -208,6 +214,7 @@ public class UserMenus {
         System.out.println(s);
     }
 
+    /** Start a transaction by choosing type of transaction*/
     private void userTransSubMenu(UserAccManager uam) {
         boolean stay = true;
         while (stay) {
@@ -233,6 +240,9 @@ public class UserMenus {
         }
     }
 
+    /***
+     * Print a helper menu
+     */
     private void printTransHelperOneMenu() {
         String[] list = {"Continue", back};
         StringBuilder s = new StringBuilder();
@@ -242,6 +252,10 @@ public class UserMenus {
         System.out.println(s.toString());
     }
 
+    /***
+     * Helper method that allow user to choose if they want to continue to make the transaction or not.
+     * @param map recording information of this transaction
+     */
     private void transactionHelperOne(Map<String, Object> map){
         boolean stay = true;
         printTransHelperOneMenu();
@@ -254,6 +268,10 @@ public class UserMenus {
         }
     }
 
+    /***
+     * Print a specific type of accounts as a selective menu
+     * @param list
+     */
     private void printGetTypeAccountMenu(ArrayList<Account> list){
         int j = 1;
         for (Account acc: list) {
@@ -263,6 +281,11 @@ public class UserMenus {
         System.out.println("Option " + j + ": " + "I don't want to make this transaction");
     }
 
+    /***
+     * Return a TypeChecker depending on the input String
+     * @param type String specifying which TypeChecker is wanted
+     * @return TypeChecker
+     */
     private TypeChecker typeCheckerPicker(String type) {
         TypeChecker a = null;
         switch (type){
@@ -288,6 +311,12 @@ public class UserMenus {
         return a;
     }
 
+    /***
+     * Allow user to select an account of a specific type
+     * @param uam UserAccountManager of that user
+     * @param type String specifying the type of accounts
+     * @return Account chosen
+     */
     private Account getTypeAccountMenu(UserAccManager uam, String type){
         Account acc = null;
         ArrayList<Account> list = uam.getTypeAccounts(typeCheckerPicker(type));
@@ -304,6 +333,10 @@ public class UserMenus {
         return acc;
     }
 
+    /***
+     * Get the amount of transaction from keyboard
+     * @param map recording information of transaction
+     */
     private void getAmountMenu(Map<String, Object> map) {
         boolean stay = true;
         String amount = typer.ensureDouble("Please enter the amount of money (Enter '0' if you want to go " +
@@ -319,7 +352,12 @@ public class UserMenus {
 
     /***
      * Pay Bill
-     * @param uam
+     * Apply pay bill feature under selected account
+     */
+
+    /***
+     * Select the account used to pay
+     * @param uam UserAccountManager of the user
      */
     private void payBillMenu(UserAccManager uam) {
         Map<String, Object> map = new HashMap<>();
@@ -330,6 +368,10 @@ public class UserMenus {
         }
     }
 
+    /***
+     * Enter the identity that the bill is paid to
+     * @param map recording information of transaction
+     */
     private void payBillToMenu(Map<String, Object> map){
         boolean stay = true;
         String input = typer.promptUser("Please enter whom the bill is paid to:");
@@ -345,7 +387,12 @@ public class UserMenus {
 
     /***
      * Withdrawal
-     * @param uam
+     * Apply withdraw under selected account
+     */
+
+    /***
+     * Select the account used to pay
+     * @param uam UserAccountManager of the user
      */
     private void withdrawalMenu(UserAccManager uam) {
         Map<String, Object> map = new HashMap<>();
@@ -358,7 +405,8 @@ public class UserMenus {
 
     /***
      * Deposit
-     * @param uam
+     * deposing the entering amount into the primary chequing account
+     * @param uam UsrAccountManager of this user
      */
     private void depositMenu(UserAccManager uam) {
         Map<String, Object> map = new HashMap<>();
@@ -372,7 +420,11 @@ public class UserMenus {
 
     /***
      * Regular transaction
-     * @param uam
+     */
+
+    /***
+     * Apply the regular transactions between the selected accounts
+     * @param uam UserAccountManager of this user
      */
     private void regularTransactionMenu(UserAccManager uam) {
         Map<String, Object> map = new HashMap<>();
@@ -386,6 +438,7 @@ public class UserMenus {
         }
     }
 
+    /** Users send their request for the creation of new account.*/
     private void userReqAccSubMenu(User user){
         ManagerMenus m = new ManagerMenus();
         m.printManagerSubMenu();
