@@ -283,6 +283,7 @@ public class BankSystem {
         }
     }
 
+    /** Depend on the customer's choice show the information under their accounts*/
     private void userAccountInfoSubSubMenu(Account acc){
         printAccountInfoSubSubMenu();
         boolean stay = true;
@@ -306,6 +307,7 @@ public class BankSystem {
         }
     }
 
+    /** Print all the information under the chequing account*/
     private ArrayList printPriChqSubMenu(UserAccManager manager) {
         StringBuilder message = new StringBuilder();
         int length = 1;
@@ -323,6 +325,7 @@ public class BankSystem {
         return acclist;
     }
 
+    /** Manager setting the selected chequing account as primary*/
     private void userPriChqSubMenu(UserAccManager manager) {
        ArrayList acclist = printPriChqSubMenu(manager);
        String chosen = ensureOption(1, acclist.size());
@@ -333,6 +336,7 @@ public class BankSystem {
        }
     }
 
+    /** ? */
     private void printTransSubSubMenu() {
         String[] list = {"Continue", "Back to previous menu"};
         StringBuilder s = new StringBuilder();
@@ -342,6 +346,7 @@ public class BankSystem {
         System.out.println(s);
     }
 
+    /** Print all the available transaction*/
     private void printTransSubMenu() {
         String[] list = {"Regular Transaction", "Deposit",
                 "Withdrawal", "Pay Bills", "Back to previous menu"};
@@ -352,6 +357,7 @@ public class BankSystem {
         System.out.println(s);
     }
 
+    /** Apply the transaction on each account*/
     private void userTransSubMenu(UserAccManager uam) {
         printTransSubMenu();
         boolean stay = true;
@@ -378,6 +384,7 @@ public class BankSystem {
         }
     }
 
+    /** Apply pay bill feature under selected account*/
     private void payBillMenu(UserAccManager uam) {
         Map<String, Object> map = new HashMap<>();
         map.put("Type", "PayBill");
@@ -395,6 +402,7 @@ public class BankSystem {
         transactionHelperOne(map);
     }
 
+    /** Apply withdraw under selected account*/
     private void withdrawalMenu(UserAccManager uam) {
         Map<String, Object> map = new HashMap<>();
         map.put("Type", "Withdrawal");
@@ -410,6 +418,7 @@ public class BankSystem {
         transactionHelperOne(map);
     }
 
+    /** deposing the entering amount into the selected account*/
     private void depositMenu(UserAccManager uam) {
         Map<String, Object> map = new HashMap<>();
         map.put("Type", "Deposit");
@@ -425,6 +434,7 @@ public class BankSystem {
         transactionHelperOne(map);
     }
 
+    /** Apply the regular transactions between the selected accounts*/
     private void regularTransactionMenu(UserAccManager uam) {
         Map<String, Object> map = new HashMap<>();
         map.put("Type", "Regular");
@@ -441,6 +451,7 @@ public class BankSystem {
         transactionHelperOne(map);
     }
 
+    /** Users send their request for the creation of new account.*/
     private void userReqAccSubMenu(User user){
         printManagerSubMenu();
         String chosen = ensureOption(1, 6);
@@ -456,7 +467,7 @@ public class BankSystem {
         }
     }
 
-
+    /** Recording the recording transaction information in infoManager*/
     private void transactionHelperOne(Map<String, Object> map){
         boolean stay = true;
         printTransSubSubMenu();
@@ -469,6 +480,7 @@ public class BankSystem {
         }
     }
 
+    /** Helper function for the transaction: Aimed to generator the choices under the accounts*/
     private Account transactionHelper(ArrayList<Account> list) {
         printTypeAccountList(list);
         String chosen = ensureOption(1, list.size()+1);
@@ -478,6 +490,7 @@ public class BankSystem {
     //userReqAccSubMenu()
 
 
+    /** ensure the customer entering the amount is the number is under two decimal places(the format of double)*/
     private Double ensureDouble(String prompt) {
         boolean isEnsured = false;
         String input = "";
@@ -493,6 +506,7 @@ public class BankSystem {
         return Double.valueOf(input);
     }
 
+    /** ensure the customer entered information is integer*/
     private int ensureInt(String prompt) {
         boolean isEnsured = false;
         String input = "";
@@ -508,6 +522,7 @@ public class BankSystem {
         return Integer.valueOf(input);
     }
 
+    /** ensure the customer entered the valid User ID*/
     private String ensureID() {
         boolean isEnsured = false;
         String input = "";
@@ -522,6 +537,7 @@ public class BankSystem {
         return input;
     }
 
+    /** Ensure the customer entered the correct format of passwords: 4 digits of integer*/
     private String ensurePassword(int length) {
         boolean isEnsured = false;
         String input = "";
@@ -541,6 +557,8 @@ public class BankSystem {
         return input;
     }
 
+    /** Ensure the customer entered the valid operation.
+     * [i.e. the number entering should be limited by the available range]*/
     private String ensureOption(int min, int max) {
         boolean isEnsured = false;
         String chose = "";
@@ -558,6 +576,7 @@ public class BankSystem {
         return chose;
     }
 
+    /** Read the entering string by the customer*/
     private String promptUser(String prompt) {
         Scanner keyboard = new Scanner(System.in);
         System.out.println(prompt);
