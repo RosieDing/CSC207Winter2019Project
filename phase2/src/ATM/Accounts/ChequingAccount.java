@@ -8,7 +8,6 @@ import ATM.InfoHandling.InfoManager;
  */
 public class ChequingAccount extends AssetAccount{
     private double overDraftLimit = 100;
-    private double availableCredit = overDraftLimit + getBalance();
     private final String accountNum = "003" + getOwnerID() + (InfoManager.getInfoManager().getAccountNum() + 1);
 
     /**
@@ -32,7 +31,10 @@ public class ChequingAccount extends AssetAccount{
 
     /**Getter method for getting the available credit of chequing account */
     @Override
-    public double getAvailableCredit(){return availableCredit;}
+    public double getAvailableCredit(){
+        double a = (getBalance()+overDraftLimit);
+        return a;
+    }
 
     /**Getter method for getting the account number of chequing account */
     @Override
