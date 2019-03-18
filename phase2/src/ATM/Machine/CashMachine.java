@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class CashMachine implements Serializable {
     /***
-     * Amounts of dominations the CashMachine has.
+     * Amounts of domination the CashMachine has.
      */
     private int numFiveD;
     private int numTenD;
@@ -19,8 +19,8 @@ public class CashMachine implements Serializable {
     public CashMachine(){}
 
     /***
-     * Set the number of dominations in CashMachine.
-     * @param money record of number of dominations.
+     * Set the number of domination in CashMachine.
+     * @param money record of number of domination.
      */
     public void setAmount(Money money) {
         numFiveD = money.getNumFive();
@@ -118,7 +118,7 @@ public class CashMachine implements Serializable {
     }
 
     /***
-     * Check the current amount of dominations in the machine.
+     * Check the current amount of domination in the machine.
      * Call warning if the amount is under 20.
      */
     public void checkAmount() {

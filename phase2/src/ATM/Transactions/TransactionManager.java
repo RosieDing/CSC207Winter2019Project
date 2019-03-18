@@ -66,7 +66,7 @@ public class TransactionManager implements Serializable {
     }
 
     /***
-     * Overrloading method. Catch possible Exceptions when making a transaction.
+     * Overloading method. Catch possible Exceptions when making a transaction.
      * @param e Transaction
      * @return Transaction
      */

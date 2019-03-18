@@ -199,7 +199,7 @@ public class InfoManager implements Observer {
     /***
      * Update method. Serialize infoStorer if it is called.
      * @param o Observable item which infoManager is observing
-     * @param arg Object arugument
+     * @param arg Object argument
      */
     @Override
     public void update(Observable o, Object arg) {

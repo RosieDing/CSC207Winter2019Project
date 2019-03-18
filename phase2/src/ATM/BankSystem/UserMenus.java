@@ -172,21 +172,21 @@ public class UserMenus {
     private ArrayList printPriChqSubMenu(UserAccManager manager) {
         StringBuilder message = new StringBuilder();
         int length = 1;
-        ArrayList acclist = manager.getTypeAccounts(new ChequingChecker());
-        length = acclist.size();
+        ArrayList accList = manager.getTypeAccounts(new ChequingChecker());
+        length = accList.size();
         for (int i = 1; i <= length; i++) {
-            message.append("Option ").append(i).append(" : ").append(((ChequingAccount) acclist.get(i-1)).toString()).append("\n");
+            message.append("Option ").append(i).append(" : ").append(((ChequingAccount) accList.get(i-1)).toString()).append("\n");
         }
         System.out.println(message);
-        return acclist;
+        return accList;
     }
 
     /** Manager setting the selected chequing account as primary*/
     private void userPriChqSubMenu(UserAccManager manager) {
-        ArrayList acclist = printPriChqSubMenu(manager);
-        String chosen = typer.ensureOption(1, acclist.size());
+        ArrayList accList = printPriChqSubMenu(manager);
+        String chosen = typer.ensureOption(1, accList.size());
         try{
-            manager.setPrimaryChq((ChequingAccount)acclist.get(Integer.valueOf(chosen) - 1));}
+            manager.setPrimaryChq((ChequingAccount)accList.get(Integer.valueOf(chosen) - 1));}
         catch (AlreadyPrimaryException e){
             System.out.println("This is already a primary account.");
         }

@@ -57,10 +57,10 @@ public class ManagerMenus {
                     break;
                 case "4":
                     //restock the ATM machine.
-                    int numFive = typer.ensureInt("Please enter the amount of five dolloars you want to restock");
-                    int numTen = typer.ensureInt("Please enter the amount of ten dolloars you want to restock");
-                    int numTwenty = typer.ensureInt("Please enter the amount of twenty dolloars you want to restock");
-                    int numFifty = typer.ensureInt("Please enter the amount of fifty dolloars you want to restock");
+                    int numFive = typer.ensureInt("Please enter the amount of five dollars you want to restock");
+                    int numTen = typer.ensureInt("Please enter the amount of ten dollars you want to restock");
+                    int numTwenty = typer.ensureInt("Please enter the amount of twenty dollars you want to restock");
+                    int numFifty = typer.ensureInt("Please enter the amount of fifty dollars you want to restock");
                     Money m = new Money(numFive, numTen, numTwenty, numFifty);
                     bankManager.restock(BankSystem.getInfoManager().getCashMachine(), m);
                     break;

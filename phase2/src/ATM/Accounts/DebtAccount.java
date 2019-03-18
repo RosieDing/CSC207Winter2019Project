@@ -5,7 +5,6 @@ package ATM.Accounts;
  */
 public abstract class DebtAccount extends Account {
     private double limit;
-    private String ownerID;
     private double balance;
 
     /**
@@ -17,7 +16,6 @@ public abstract class DebtAccount extends Account {
      */
     public DebtAccount(String ownerID, double limit){
         super(ownerID);
-        this.ownerID = ownerID;
         this.limit = limit;
     }
 
@@ -37,7 +35,7 @@ public abstract class DebtAccount extends Account {
         return (limit-getBalance());
     }
 
-    /**Transfer in method for transfering money into debt accounts*/
+    /**Transfer in method for transferring money into debt accounts*/
     @Override
     public void transferIn(double amount) {
         this.balance -= amount;

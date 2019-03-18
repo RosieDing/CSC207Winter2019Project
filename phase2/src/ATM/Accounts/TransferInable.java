@@ -1,6 +1,6 @@
 package ATM.Accounts;
 
-/** a transferin_able interface for the accounts which could be transferin */
+/** a transferInable interface for the accounts which could be transferred in */
 public interface TransferInable {
    void transferIn(double amount);
 }

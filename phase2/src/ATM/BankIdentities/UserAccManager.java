@@ -9,7 +9,7 @@ import java.util.*;
 
 public class UserAccManager implements Serializable,Iterable<Account>{
     /**
-    A map that have account type as key and an arraylist of Accounts that fit the type of key.
+    A map that have account type as key and an arrayList of Accounts that fit the type of key.
      <"accountType",<Accounts>>
      */
     //private Map<String, ArrayList<Account>> listOfAcc = new HashMap<>();
@@ -29,12 +29,12 @@ public class UserAccManager implements Serializable,Iterable<Account>{
     /** Adding the accounts in the Account Manager
      *
      * @param acc the account be added*/
-    public void addAccount(Account acc) throws UserNotOwnAccountExcetpiton {
+    public void addAccount(Account acc) throws UserNotOwnAccountException {
         if (acc.getOwnerID().equals(ownedUserId)) {
             this.listOfAcc.add(acc);
             InfoManager.getInfoManager().add(acc);
         } else {
-            throw new UserNotOwnAccountExcetpiton("This account is not owned by user " + ownedUserId);
+            throw new UserNotOwnAccountException("This account is not owned by user " + ownedUserId);
         }
     }
 
@@ -65,7 +65,7 @@ public class UserAccManager implements Serializable,Iterable<Account>{
         return listOfAcc;
     }
 
-    /** Return a Arraylist of account that is a specific type
+    /** Return a ArrayList of account that is a specific type
      *
      * @param   checker to check if account is a specific type
      * @return  ArrayList of account

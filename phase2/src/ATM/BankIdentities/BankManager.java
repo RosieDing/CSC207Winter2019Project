@@ -118,7 +118,7 @@ public class BankManager extends BankIdentity {
         }
         try {
             m.addAccount(acc);
-        } catch (UserNotOwnAccountExcetpiton e) {
+        } catch (UserNotOwnAccountException e) {
             System.out.println(e);
         }
     }
@@ -134,7 +134,7 @@ public class BankManager extends BankIdentity {
         SavingAccount acc = new SavingAccount(userID, interest);
         try {
             m.addAccount(acc);
-        } catch (UserNotOwnAccountExcetpiton e) {
+        } catch (UserNotOwnAccountException e) {
             System.out.println(e);
         }
     }
@@ -151,7 +151,7 @@ public class BankManager extends BankIdentity {
         CreditAccount acc = new CreditAccount(userID, limit);
         try {
             m.addAccount(acc);
-        } catch (UserNotOwnAccountExcetpiton e) {
+        } catch (UserNotOwnAccountException e) {
             System.out.println(e);
         }
     }
@@ -167,7 +167,7 @@ public class BankManager extends BankIdentity {
         LineOfCredit acc = new LineOfCredit(userID, limit);
         try {
             m.addAccount(acc);
-        } catch (UserNotOwnAccountExcetpiton e) {
+        } catch (UserNotOwnAccountException e) {
             System.out.println(e);
         }
     }

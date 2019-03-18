@@ -52,7 +52,7 @@ public class InfoStorer implements Serializable {
     }
 
     /***
-     * Get the accounMap
+     * Get the accountMap
      * @return accountMap
      */
     public Map<String, Account> getAccountMap() {

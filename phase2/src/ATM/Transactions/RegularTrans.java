@@ -17,7 +17,7 @@ public class RegularTrans extends Transaction{
 
     /***
      * Create a new RegularTrans.
-     * @param fromAcc transfer from this TransaferOutable account.
+     * @param fromAcc transfer from this TransferOutable account.
      * @param toAcc transfer to this TransferInable account.
      * @param amount transaction amount.
      */

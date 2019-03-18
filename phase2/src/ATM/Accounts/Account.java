@@ -49,7 +49,7 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
     /**Abstract Method for setting balance of account */
     public abstract void setBalance(double amount);
 
-    /**Abstract Method for transfering money to account */
+    /**Abstract Method for transferring money to account */
     public abstract void transferIn(double amount);
 
     /**Abstract Method for paying money from account */

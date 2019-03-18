@@ -20,7 +20,7 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
         super(ownerID, limit);
     }
 
-    /**Transfer out method for transfering money out of line of credit account */
+    /**Transfer out method for transferring money out of line of credit account */
     @Override
     public void transferOut(double amount){
         double new_balance = getBalance() + amount;
