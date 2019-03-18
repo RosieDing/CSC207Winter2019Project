@@ -47,7 +47,7 @@ public class InfoStorer implements Serializable {
         this.userMap = new HashMap<String, User>();
         this.bankManagerMap = new HashMap<String, BankManager>();
         this.transactionManager = TransactionManager.getTransactionManager();
-        this.accountCreationRequest = new HashMap<>();
+        this.accountCreationRequest = new HashMap<String, String>();
         this.cashMachine = new CashMachine();
     }
 
