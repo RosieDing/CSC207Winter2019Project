@@ -57,4 +57,10 @@ public abstract class AssetAccount extends Account implements TransferOutable {
     public void withdraw(int amount) {
         balance -= amount;
     }
+
+    /** method for calculating the net balance*/
+    @Override
+    public double getnetbalance(){
+        return balance;
+    }
 }

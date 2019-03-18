@@ -67,4 +67,10 @@ public abstract class DebtAccount extends Account {
     public void setLimit(double newLimit){
         this.limit = newLimit;
     }
+
+    /** method for calculating the net balance*/
+    @Override
+    public double getnetbalance(){
+        return -balance;
+    }
 }

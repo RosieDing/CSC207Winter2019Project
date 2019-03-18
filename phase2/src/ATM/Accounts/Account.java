@@ -59,4 +59,7 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
     public abstract void withdraw(int amount);
 
     public abstract String getSummary();
+
+    /** Abstract method for calculating the net balance*/
+    public abstract double getnetbalance();
 }
