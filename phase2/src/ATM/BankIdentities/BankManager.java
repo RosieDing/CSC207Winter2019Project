@@ -88,7 +88,7 @@ public class BankManager extends BankIdentity {
      *  */
     public void undoMostRecentTrans(String accNum) {
         try {
-            Transaction e = InfoManager.getInfoManager().getTransactionManager().getAccLastTrans(accNum).reverse();
+            Transaction e = InfoManager.getInfoManager().getTransactionManager().popAccLastTrans(accNum).reverse();
             // try catch where pay bill can't be reversed.
             TransactionManager manager = InfoManager.getInfoManager().getTransactionManager();
             manager.makeTransaction(e);

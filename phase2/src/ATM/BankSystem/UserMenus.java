@@ -3,9 +3,12 @@ package ATM.BankSystem;
 import ATM.AccountTypeChecker.*;
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
+import ATM.Accounts.CreditAccount;
 import ATM.BankIdentities.*;
 import ATM.InfoHandling.InfoManager;
 import ATM.Transactions.NoTransactionException;
+import ATM.Transactions.Transaction;
+import ATM.Transactions.TransactionManager;
 
 import javax.sound.sampled.Line;
 import java.sql.SQLOutput;
@@ -131,7 +134,7 @@ public class UserMenus {
             stay = false;
         }
         if (stay) {
-            Account acc = list.get(Integer.valueOf(chosen));
+            Account acc = list.get(Integer.valueOf(chosen)-1);
             userAccountInfoSubSubMenu(acc);
         }
     }
@@ -148,7 +151,7 @@ public class UserMenus {
                     break;
                 case "2":
                     try {
-                        System.out.println(BankSystem.getInfoManager().getTransactionManager().getAccLastTrans(acc.getAccountNum()));
+                        System.out.println(BankSystem.getInfoManager().getTransactionManager().viewAccLastTrans(acc.getAccountNum()));
                     } catch (NoTransactionException e){
                         System.out.println(e.getMessage());
                     }
@@ -264,7 +267,9 @@ public class UserMenus {
             stay = false;
         }
         if (stay) {
-            BankSystem.getInfoManager().getTransactionManager().makeTransaction(map);
+            TransactionManager tm = BankSystem.getInfoManager().getTransactionManager();
+            Transaction e = tm.makeTransaction(map);
+            tm.addTrans(e);
         }
     }
 
@@ -291,11 +296,11 @@ public class UserMenus {
         switch (type){
             case "TransferInable":
                 System.out.println("Please choose account you want to transfer money in to:");
-                a =  new TransferOutableChecker();
+                a =  new TransferInableChecker();
                 break;
             case "TransferOutable":
                 System.out.println("Please choose account you want to transfer money out from:");
-                a =  new TransferInableChecker();
+                a =  new TransferOutableChecker();
                 break;
             case "Payable":
                 System.out.println("Please choose account you will use to pay the bill:");

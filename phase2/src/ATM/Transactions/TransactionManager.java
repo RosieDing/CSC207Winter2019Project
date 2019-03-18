@@ -97,7 +97,7 @@ public class TransactionManager implements Serializable {
      * @param accNum account number of the account
      * @return the most recent Transaction
      */
-    public Transaction getAccLastTrans(String accNum) throws NoTransactionException {
+    public Transaction viewAccLastTrans(String accNum) throws NoTransactionException {
         if (!accTransList.containsKey(accNum)) {
             throw new NoTransactionException("No transaction on this account.");
         }
@@ -106,9 +106,37 @@ public class TransactionManager implements Serializable {
         return e;
     }
 
+    public Transaction popAccLastTrans(String accNum) throws NoTransactionException {
+        if (!accTransList.containsKey(accNum)) {
+            throw new NoTransactionException("No transaction on this account.");
+        }
+        Transaction e = accTransList.get(accNum).pop();
+        return e;
+    }
+
+    private void accAddHelper(String accNum, Transaction trans) {
+        if (accTransList.containsKey(accNum)) {
+            accTransList.get(accNum).add(trans);
+        } else {
+            Stack a = new Stack<Transaction>();
+            a.add(trans);
+            accTransList.put(accNum, a);
+        }
+    }
+
+    private void userAddHelper(String userId, Transaction trans) {
+        if (userTransList.containsKey(userId)) {
+            userTransList.get(userId).add(trans);
+        } else {
+            Stack a = new Stack<Transaction>();
+            a.add(trans);
+            userTransList.put(userId, a);
+        }
+    }
+
     private void helper(String userId, String accNum, Transaction trans) {
-        accTransList.get(accNum).add(trans);
-        userTransList.get(userId).add(trans);
+        accAddHelper(accNum, trans);
+        userAddHelper(userId, trans);
     }
 
     /***
