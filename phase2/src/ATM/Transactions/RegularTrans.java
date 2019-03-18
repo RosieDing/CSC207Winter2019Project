@@ -13,6 +13,7 @@ public class RegularTrans extends Transaction{
     private final TransferOutable fromAcc;
     private final TransferInable toAcc;
     private final LocalDateTime time;
+    private final double amount;
 
     /***
      * Create a new RegularTrans.
@@ -21,19 +22,15 @@ public class RegularTrans extends Transaction{
      * @param amount transaction amount.
      */
     public RegularTrans(TransferOutable fromAcc, TransferInable toAcc, double amount) {
-        super(amount);
+        this.amount = amount;
         this.fromAcc = fromAcc;
         this.toAcc = toAcc;
         time = LocalDateTime.now();
     }
-/*
-    public int getFromAccNum() {
-        return fromAcc;
-    }
 
-    public ATM.Accounts.Account getToAcc() {
-        return toAcc;
-    }*/
+    public double getAmount() {
+        return amount;
+    }
 
     /***
      * Get the from Account (where money will be transferred out).

@@ -48,14 +48,14 @@ public class TransactionManager implements Serializable {
         Transaction e = null;
         switch((String)map.get("Type")) {
             case "Deposit":
-                e = new Deposit((Account)map.get("toAccount"), (Double)map.get("amount"));
+                e = new Deposit((Account)map.get("toAccount"), (Integer)map.get("amount"));
                 break;
             case "PayBill":
                 e = new PayBill((Account)map.get("fromAccount"), (String)map.get("to"),
                         (Double)map.get("amount"));
                 break;
             case "Withdrawal":
-                e = new Withdrawal((Account)map.get("fromAccount"), (Double)map.get("amount"));
+                e = new Withdrawal((Account)map.get("fromAccount"), (Integer)map.get("amount"));
                 break;
             case "Regular":
                 e = new RegularTrans((TransferOutable)map.get("fromAccount"),

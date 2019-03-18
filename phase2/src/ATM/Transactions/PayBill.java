@@ -15,6 +15,7 @@ public class PayBill extends Transaction{
     private final Payable fromAcc;
     private final Account toAcc;
     private final LocalDateTime time;
+    private final double amount;
     private  BillWriter writer = new BillWriter();
 
     /***
@@ -24,18 +25,16 @@ public class PayBill extends Transaction{
      * @param amount the amount of fund will be paid.
      */
     public PayBill(Payable fromAccount, String to, double amount) {
-        super(amount);
+        this.amount = amount;
         this.fromAcc = fromAccount;
         this.toAcc = null;
         this.to = to;
         this.time = LocalDateTime.now();
     }
 
-    /*public int getToAccNum() {
-        return toAccNum;
+    public double getAmount() {
+        return amount;
     }
-
-    public int getFromAccNum(){ return fromAccNum; }*/
 
     /***
      * Get the from Account (which will pay the bill).

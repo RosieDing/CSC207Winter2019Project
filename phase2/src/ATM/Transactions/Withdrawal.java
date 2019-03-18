@@ -3,6 +3,9 @@ package ATM.Transactions;
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
 import ATM.Accounts.Withdrawable;
+import ATM.InfoHandling.InfoManager;
+import ATM.Machine.CashNotWithdrawableException;
+import ATM.Machine.NotEnoughMoneyException;
 
 import java.time.LocalDateTime;
 
@@ -13,17 +16,22 @@ public class Withdrawal extends Transaction {
     private final Withdrawable fromAcc;
     private final Account toAcc;
     private final LocalDateTime time;
+    private final int amount;
 
     /***
      * Create a new Withdrawal
      * @param fromAcc the account where money will be withdrawn.
      * @param amount the amount of fund will be withdrawn.
      */
-    public Withdrawal(Withdrawable fromAcc, double amount) {
-        super(amount);
+    public Withdrawal(Withdrawable fromAcc, int amount) {
+        this.amount = amount;
         this.fromAcc = fromAcc;
         this.toAcc = null;
         this.time = LocalDateTime.now();
+    }
+
+    public int getAmount() {
+        return amount;
     }
 
     /***
@@ -67,15 +75,21 @@ public class Withdrawal extends Transaction {
     void begin() throws TransactionAmountOverLimitException{
         Account acc = getFromAcc();
         if (acc instanceof ChequingAccount) {
-            if (acc.getBalance() <= 0) {
+            if (acc.getBalance() < 0) {
                 throw new TransactionAmountOverLimitException();
             }
         }
         if (getAmount() > acc.getAvailableCredit()) {
             throw new TransactionAmountOverLimitException();
         }
-        getFromAcc().withdraw(this.getAmount());
-        setHappened(true);
+        try {
+            InfoManager.getInfoManager().getCashMachine().withdrawCash(getAmount());
+            getFromAcc().withdraw(this.getAmount());
+            setHappened(true);
+        }
+        catch (CashNotWithdrawableException | NotEnoughMoneyException e1) {
+            System.out.println(e1);
+        }
     }
 
     /***

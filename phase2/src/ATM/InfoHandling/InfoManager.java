@@ -2,6 +2,7 @@ package ATM.InfoHandling;
 
 import ATM.Accounts.Account;
 import ATM.BankIdentities.BankManager;
+import ATM.BankIdentities.NoSuchAccountException;
 import ATM.BankIdentities.PasswordManager;
 import ATM.BankIdentities.User;
 import ATM.Machine.CashMachine;
@@ -106,8 +107,14 @@ public class InfoManager implements Observer {
 
     /**@param id Account number
      * @return the Account corresponding with Account number id */
-    public Account getAccount(String id){
-        return infoStorer.getAccountMap().get(id);
+    public Account getAccount(String id) throws NoSuchAccountException {
+        Account acc = null;
+        if (infoStorer.getAccountMap().containsKey(id)){
+            acc = infoStorer.getAccountMap().get(id);
+        } else {
+            throw new NoSuchAccountException("There is no such an account!");
+        }
+        return acc;
     }
 
     /**@param id BankManager ID

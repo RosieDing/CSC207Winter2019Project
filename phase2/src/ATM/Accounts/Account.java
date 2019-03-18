@@ -35,7 +35,7 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
     }
 
     /**Abstract Method for deposit money to account*/
-    public abstract void deposit(double amount);
+    public abstract void deposit(int amount);
 
     /**Abstract Method for getting available credit from account */
     public abstract double getAvailableCredit();
@@ -56,7 +56,7 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
     public abstract void pay(double amount);
 
     /**Abstract Method for withdraw money from account */
-    public abstract void withdraw(double amount);
+    public abstract void withdraw(int amount);
 
     public abstract String getSummary();
 }

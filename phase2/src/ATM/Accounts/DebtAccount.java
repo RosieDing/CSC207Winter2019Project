@@ -46,7 +46,7 @@ public abstract class DebtAccount extends Account {
     }
 
     @Override
-    public void deposit(double amount){
+    public void deposit(int amount){
         this.balance -= amount;
     }
 
@@ -58,7 +58,7 @@ public abstract class DebtAccount extends Account {
 
     /**Withdraw method for withdrawing with debt account*/
     @Override
-    public void withdraw(double amount){
+    public void withdraw(int amount){
         this.balance += amount;
     }
 

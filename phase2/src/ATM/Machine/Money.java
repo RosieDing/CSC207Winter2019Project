@@ -54,4 +54,14 @@ public class Money {
     public int getNumFifty() {
         return numFifty;
     }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+                "numFive=" + numFive +
+                ", numTen=" + numTen +
+                ", numTwenty=" + numTwenty +
+                ", numFifty=" + numFifty +
+                '}';
+    }
 }

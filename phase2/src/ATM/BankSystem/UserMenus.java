@@ -6,9 +6,12 @@ import ATM.Accounts.ChequingAccount;
 import ATM.Accounts.CreditAccount;
 import ATM.BankIdentities.*;
 import ATM.InfoHandling.InfoManager;
+import ATM.Machine.CashNotWithdrawableException;
+import ATM.Machine.NotEnoughMoneyException;
 import ATM.Transactions.NoTransactionException;
 import ATM.Transactions.Transaction;
 import ATM.Transactions.TransactionManager;
+import ATM.Transactions.Withdrawal;
 
 import javax.sound.sampled.Line;
 import java.sql.SQLOutput;
@@ -37,11 +40,9 @@ public class UserMenus {
 
 
     /**Display the main menu for user */
-    private void printUserMenu() {
-        String[] list = {"Get All Accounts Summary", "See Net Total of Balance", "View Account",
-                "Set Primary Account", "Make Transaction", "Request Creation of Account", "Reset Password", "Log Out"};
+    private void printFixedMenu(String[] list) {
         StringBuilder s = new StringBuilder();
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < (list.length + 1); i++) {
             s.append("Option " + i + " : " + list[i - 1] + "\n");
         }
         System.out.println(s);
@@ -52,7 +53,10 @@ public class UserMenus {
     public void userMainMenu(User user) {
         while (user.getPassManager().isLogin()) {
             UserAccManager userAccManager = user.getAccManager();
-            printUserMenu();
+            String[] list = {"Get All Accounts Summary", "See Net Total of Balance", "View Account",
+                    "Set Primary Account", "Make Transaction", "Request Creation of Account", "Reset Password",
+                    "Log Out"};
+            printFixedMenu(list);
             String chosen = typer.ensureOption(1, 8);
             switch (chosen) {
                 case "1":
@@ -112,18 +116,6 @@ public class UserMenus {
      * Menu Option 3: Print account info
      */
 
-    /** Print all the information under one account*/
-    private void printAccountInfoSubSubMenu() {
-        String[] list = {"View account balance", "View last transaction",
-                "View date of creation", back};
-        StringBuilder s = new StringBuilder();
-        for (int i = 1; i < 5; i++) {
-            s.append("Option " + i + " : " + list[i - 1] + "\n");
-        }
-        System.out.println(s);
-
-    }
-
     /** Using the recursion when to provide the print All Account list choice*/
     private void userAccountInfoSubMenu(UserAccManager uam) {
         ArrayList<Account> list = uam.getListOfAcc();
@@ -143,7 +135,9 @@ public class UserMenus {
     private void userAccountInfoSubSubMenu(Account acc){
         boolean stay = true;
         while (stay) {
-            printAccountInfoSubSubMenu();
+            String[] list = {"View account balance", "View last transaction",
+                    "View date of creation", back};
+            printFixedMenu(list);
             String chosen = typer.ensureOption(1, 4);
             switch (chosen) {
                 case "1":
@@ -206,22 +200,15 @@ public class UserMenus {
      * Menu option 5: Make transaction
      */
 
-    /** Print all the available transaction*/
-    private void printUserTransSubMenu() {
-        String[] list = {"Regular Transaction", "Deposit",
-                "Withdrawal", "Pay Bills", back};
-        StringBuilder s = new StringBuilder();
-        for (int i = 1; i < 6; i++) {
-            s.append("Option " + i + " : " + list[i - 1] + "\n");
-        }
-        System.out.println(s);
-    }
+    String noMore = "I don't want to make this transaction";
 
     /** Start a transaction by choosing type of transaction*/
     private void userTransSubMenu(UserAccManager uam) {
         boolean stay = true;
         while (stay) {
-            printUserTransSubMenu();
+            String[] list = {"Regular Transaction", "Deposit",
+                    "Withdrawal", "Pay Bills", back};
+            printFixedMenu(list);
             String chosen = typer.ensureOption(1, 5);
             switch (chosen) {
                 case "1":
@@ -268,6 +255,15 @@ public class UserMenus {
             stay = false;
         }
         if (stay) {
+            if (e instanceof Withdrawal) {
+                try {
+                    InfoManager.getInfoManager().getCashMachine().withdrawCash(((Withdrawal)e).getAmount());}
+                catch (CashNotWithdrawableException e1) {
+                    System.out.println(e1);
+                } catch (NotEnoughMoneyException e2) {
+                    System.out.println(e2);
+                }
+            }
             TransactionManager tm = BankSystem.getInfoManager().getTransactionManager();
             e = tm.makeTransaction(map);
         }
@@ -284,7 +280,7 @@ public class UserMenus {
             System.out.println("Option "+ j + ": " +acc.getSummary());
             j++;
         }
-        System.out.println("Option " + j + ": " + "I don't want to make this transaction");
+        System.out.println("Option " + j + ": " + noMore);
     }
 
     /***
@@ -343,7 +339,7 @@ public class UserMenus {
      * Get the amount of transaction from keyboard
      * @param map recording information of transaction
      */
-    private Transaction getAmountMenu(Map<String, Object> map) {
+    private Transaction getDoubleAmountMenu(Map<String, Object> map) {
         boolean stay = true;
         String amount = typer.ensureDouble("Please enter the amount of money (Enter '0' if you want to go " +
                 "back to previous menu):");
@@ -353,6 +349,22 @@ public class UserMenus {
         }
         if (stay) {
             map.put("amount", Double.valueOf(amount));
+            e = transactionHelperOne(map);
+        }
+        return e;
+    }
+
+    private Transaction getIntAmountMenu(Map<String, Object> map) {
+        boolean stay = true;
+        int amount = 0;
+        amount = typer.ensureInt("Please enter the amount of money (Enter '0' if you want to go " +
+                    "back to previous menu):");
+        Transaction e = null;
+        if (amount==0) {
+            stay = false;
+        }
+        if (stay) {
+            map.put("amount", amount);
             e = transactionHelperOne(map);
         }
         return e;
@@ -382,14 +394,14 @@ public class UserMenus {
      */
     private void payBillToMenu(Map<String, Object> map){
         boolean stay = true;
-        String input = typer.promptUser("Please enter whom the bill is paid to:");
-        System.out.println("Enter 'back' if you want to go back to previous menu");
+        String input = typer.promptUser("Please enter whom the bill is paid to (Enter 'back' if you want to go back " +
+                "to previous menu):");
         if (input == "back") {
             stay = false;
         }
         if (stay) {
             map.put("to", input);
-            getAmountMenu(map);
+            getDoubleAmountMenu(map);
         }
     }
 
@@ -407,10 +419,7 @@ public class UserMenus {
         map.put("Type", "Withdrawal");
         map.put("fromAccount", getTypeAccountMenu(uam, "Withdrawable"));
         if (map.get("fromAccount") != null) {
-            Transaction e = getAmountMenu(map);
-            if (e.isHappened()) {
-                InfoManager.getInfoManager().getCashMachine().withdrawCash(e.getAmount());
-            }
+            Transaction e = getIntAmountMenu(map);
         }
     }
 
@@ -424,7 +433,7 @@ public class UserMenus {
         map.put("Type", "Deposit");
         map.put("toAccount", uam.getPrimaryChq());
         if (map.get("toAccount") != null) {
-            getAmountMenu(map);
+            getIntAmountMenu(map);
         }
     }
 
@@ -442,11 +451,51 @@ public class UserMenus {
         map.put("Type", "Regular");
         map.put("fromAccount", getTypeAccountMenu(uam, "TransferOutable"));
         if (map.get("fromAccount") != null) {
-            map.put("toAccount", getTypeAccountMenu(uam, "TransferInable"));
+            regularTransToHelperMenu(uam, "TransferInable", map);
             if (map.get("toAccount") != null) {
-                getAmountMenu(map);
+                getDoubleAmountMenu(map);
             }
         }
+    }
+
+    private void regularTransToHelperMenu(UserAccManager uam, String type, Map<String, Object> map) {
+        boolean stay = true;
+        String[] list = {"Transfer to my account", "Transfer to other user's account", "I don't want to make " +
+                "this transaction"};
+        printFixedMenu(list);
+        String input = typer.ensureOption(1,3);
+        if (input.equals("3")) {
+            stay = false;
+        }
+        if (stay) {
+            Account acc = null;
+            switch (input) {
+                case "1":
+                    acc = getTypeAccountMenu(uam, type);
+                    break;
+                case "2":
+                    acc = regularTransToOtherMenu(uam, type);
+                    break;
+            }
+            map.put("toAccount", acc);
+        }
+    }
+
+    private Account regularTransToOtherMenu(UserAccManager uam, String type){
+        boolean stay = true;
+        String input = typer.ensureTypeAccount(typeCheckerPicker(type));
+        Account acc = null;
+        if (input.equals("back")) {
+            stay = false;
+        }
+        if (stay) {
+            try {
+                acc = InfoManager.getInfoManager().getAccount(input);
+            } catch (NoSuchAccountException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        return acc;
     }
 
     /** Users send their request for the creation of new account.*/

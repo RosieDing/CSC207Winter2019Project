@@ -13,6 +13,7 @@ public class Deposit extends Transaction{
     private final Account fromAcc;
     private final Depositable toAcc;
     private final LocalDateTime time;
+    private final int amount;
 
     /***
      * Create a new Deposit.
@@ -20,27 +21,16 @@ public class Deposit extends Transaction{
      * @param toAccount the account where fund will be deposit to.
      * @param amount the amount of fund will be deposit.
      */
-    public Deposit(Depositable toAccount, double amount) {
-        super(amount);
+    public Deposit(Depositable toAccount, int amount) {
+        this.amount = amount;
         this.toAcc = toAccount;
         this.fromAcc = null;
         this.time = LocalDateTime.now();
     }
 
-    /*public Deposit(User user, double amount) {
-        super(amount);
-        this.toAcc = user.getAccManager().getPrimaryChq();
-        this.fromAcc = null;
-        this.time = toAcc.getCurrentTime();
-    }*/
-
-    /*public int getFromAccNum() {
-        return fromAccNum;
-    }*/
-
-    /*public int getToAccNum() {
-        return toAccNum;
-    }*/
+    public int getAmount() {
+        return amount;
+    }
 
     /***
      * Get the from Account. (Here is always null.)

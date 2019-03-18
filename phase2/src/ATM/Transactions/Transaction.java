@@ -8,16 +8,7 @@ import java.io.Serializable;
  * Abstract class Transaction
  */
 public abstract class Transaction implements Serializable {
-    private final double amount;
     private boolean happened;
-
-    /***
-     * Create a new Transaction
-     * @param amount the amount of money this transaction involves.
-     */
-    public Transaction(double amount) {
-        this.amount = amount;
-    }
 
     //public abstract int getFromAccNum();
 
@@ -34,14 +25,6 @@ public abstract class Transaction implements Serializable {
      * @return Account if there is one, null if there is not.
      */
     public abstract Account getToAcc();
-
-    /***
-     * Return the amount of money this transaction involves.
-     * @return amount in double format.
-     */
-    public double getAmount() {
-        return amount;
-    }
 
     /***
      * Set the boolean field happened as input.
