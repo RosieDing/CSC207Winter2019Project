@@ -259,18 +259,19 @@ public class UserMenus {
      * Helper method that allow user to choose if they want to continue to make the transaction or not.
      * @param map recording information of this transaction
      */
-    private void transactionHelperOne(Map<String, Object> map){
+    private Transaction transactionHelperOne(Map<String, Object> map){
         boolean stay = true;
         printTransHelperOneMenu();
         String chosen = typer.ensureOption(1, 2);
+        Transaction e = null;
         if (chosen.equals("2")) {
             stay = false;
         }
         if (stay) {
             TransactionManager tm = BankSystem.getInfoManager().getTransactionManager();
-            Transaction e = tm.makeTransaction(map);
-            tm.addTrans(e);
+            e = tm.makeTransaction(map);
         }
+        return e;
     }
 
     /***
@@ -342,17 +343,19 @@ public class UserMenus {
      * Get the amount of transaction from keyboard
      * @param map recording information of transaction
      */
-    private void getAmountMenu(Map<String, Object> map) {
+    private Transaction getAmountMenu(Map<String, Object> map) {
         boolean stay = true;
         String amount = typer.ensureDouble("Please enter the amount of money (Enter '0' if you want to go " +
                 "back to previous menu):");
+        Transaction e = null;
         if (amount.equals("0")) {
             stay = false;
         }
         if (stay) {
             map.put("amount", Double.valueOf(amount));
-            transactionHelperOne(map);
+            e = transactionHelperOne(map);
         }
+        return e;
     }
 
     /***
@@ -404,7 +407,10 @@ public class UserMenus {
         map.put("Type", "Withdrawal");
         map.put("fromAccount", getTypeAccountMenu(uam, "Withdrawable"));
         if (map.get("fromAccount") != null) {
-            getAmountMenu(map);
+            Transaction e = getAmountMenu(map);
+            if (e.isHappened()) {
+                InfoManager.getInfoManager().getCashMachine().withdrawCash(e.getAmount());
+            }
         }
     }
 

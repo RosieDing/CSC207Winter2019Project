@@ -78,6 +78,9 @@ public class TransactionManager implements Serializable {
         } catch (NullPointerException b) {
             System.out.println("Transaction is not possible.");
         }
+        if (e.isHappened()) {
+            addTrans(e);
+        }
         return e;
     }
 

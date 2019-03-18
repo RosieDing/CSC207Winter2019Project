@@ -92,9 +92,6 @@ public class BankManager extends BankIdentity {
             // try catch where pay bill can't be reversed.
             TransactionManager manager = InfoManager.getInfoManager().getTransactionManager();
             manager.makeTransaction(e);
-            if (e.isHappened()) {
-                manager.addTrans(e);
-            }
             // try catch if transaction cant be processed.
         } catch (ReverseNotPossibleException e) {
             System.out.println("Impossible to undo this transaction.");
@@ -173,10 +170,6 @@ public class BankManager extends BankIdentity {
         } catch (UserNotOwnAccountExcetpiton e) {
             System.out.println(e);
         }
-    }
-
-    public void printExsitingAccounts(){
-
     }
 }
 
