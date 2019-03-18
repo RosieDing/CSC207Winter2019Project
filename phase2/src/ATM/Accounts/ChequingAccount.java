@@ -32,8 +32,7 @@ public class ChequingAccount extends AssetAccount{
     /**Getter method for getting the available credit of chequing account */
     @Override
     public double getAvailableCredit(){
-        double a = (getBalance()+overDraftLimit);
-        return a;
+        return (getBalance()+overDraftLimit);
     }
 
     /**Getter method for getting the account number of chequing account */

@@ -7,7 +7,6 @@ public abstract class DebtAccount extends Account {
     private double limit;
     private String ownerID;
     private double balance;
-    private double availableCredit;
 
     /**
      * Constructor of debt account
@@ -20,7 +19,6 @@ public abstract class DebtAccount extends Account {
         super(ownerID);
         this.ownerID = ownerID;
         this.limit = limit;
-        this.availableCredit = limit - balance;
     }
 
     /**Getter method for account balance */
@@ -36,7 +34,7 @@ public abstract class DebtAccount extends Account {
     /**Getter method for account available credit to spend*/
     @Override
     public double getAvailableCredit() {
-        return availableCredit;
+        return (limit-getBalance());
     }
 
     /**Transfer in method for transfering money into debt accounts*/

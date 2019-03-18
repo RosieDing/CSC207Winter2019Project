@@ -6,7 +6,6 @@ import ATM.InfoHandling.InfoManager;
  * Saving account class
  */
 public class SavingAccount extends AssetAccount {
-    private double availableCredit = getBalance();
     private ISaverPlan iSaverPlan;
     private final String accountNum = "004" + getOwnerID() + (InfoManager.getInfoManager().getAccountNum() + 1);
 
@@ -26,7 +25,7 @@ public class SavingAccount extends AssetAccount {
     /**Getter method for available credit */
     @Override
     public double getAvailableCredit() {
-        return availableCredit;
+        return getBalance();
     }
 
     /**Getter method for account number */
