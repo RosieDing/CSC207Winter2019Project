@@ -27,7 +27,6 @@ public class BankManager extends BankIdentity {
         manager.setPassword(password);
         manager.addObserver(InfoManager.getInfoManager());
         InfoManager.getInfoManager().add(this);
-        System.out.println("Bank Manager ID: " + this.id + " , Password: " + password);
     }
 
     /** get the PassManager
