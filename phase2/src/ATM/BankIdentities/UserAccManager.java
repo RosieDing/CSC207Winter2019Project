@@ -133,16 +133,12 @@ public class UserAccManager implements Serializable,Iterable<Account>{
     }
 
     /** Get the net total balance */
-    public int getNetTotal(){
-        int net = 0;
+    public double getNetTotal(){
+        double sum = 0;
         for (Account acc: this) {
-            if (acc instanceof DebtAccount) {
-                net -= acc.getBalance();
-            } else if (acc instanceof AssetAccount) {
-                net += acc.getBalance();
-            }
+            sum += acc.getnetbalance();
         }
-        return net;
+        return sum;
     }
 
     @Override
