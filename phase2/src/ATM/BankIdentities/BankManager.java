@@ -52,9 +52,7 @@ public class BankManager extends BankIdentity {
      * And BankManger could init the PassWord of the user with "1234".
      * */
     public void createUser() {
-        /*
-        need to add to the loader list.
-         */
+        AccountCreater creat = new AccountCreater();
         User u = new User();
         UserAccManager accM = new UserAccManager(u.getId());
         u.setAccManager(accM);
@@ -65,7 +63,7 @@ public class BankManager extends BankIdentity {
                 + " initial Password: " + "1234");
         InfoManager.getInfoManager().add(u);
         passM.addObserver(InfoManager.getInfoManager());
-        createNewChequingAccount(u.getId());
+        creat.createNewChequingAccount(u.getId());
 
 
     }
@@ -124,7 +122,8 @@ public class BankManager extends BankIdentity {
      *
      * @param userID the userID of the user
      * @throws AlreadyPrimaryException
-     *  */
+     *  *//*
+
     public void createNewChequingAccount(String userID) {
         User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m = u.getAccManager();
@@ -143,10 +142,10 @@ public class BankManager extends BankIdentity {
         }
     }
 
-    /** Create New Saving Account for the User
+    *//** Create New Saving Account for the User
      *
      * @param userID the userID of the user
-     *  */
+     *  *//*
     public void createNewSavingAccount(String userID){
         User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m = u.getAccManager();
@@ -160,11 +159,11 @@ public class BankManager extends BankIdentity {
     }
 
 
-    /** Create New Credit Account for the User
+    *//** Create New Credit Account for the User
      *
      * @param userID the userID of the user
      * @param limit the limit of the credit account
-     *  */
+     *  *//*
     public void createNewCreditAccount(String userID, double limit){
         User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m = u.getAccManager();
@@ -176,11 +175,11 @@ public class BankManager extends BankIdentity {
         }
     }
 
-    /** Create New Line of Credit Account for the User
+    *//** Create New Line of Credit Account for the User
      *
      * @param userID the userID of the user
      * @param limit the limit of the line of credit account
-     *  */
+     *  *//*
     public void createNewLineOfCredit(String userID, double limit){
         User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m =u.getAccManager();
@@ -190,6 +189,7 @@ public class BankManager extends BankIdentity {
         } catch (UserNotOwnAccountException e) {
             System.out.println(e);
         }
-    }
+    }*/
+
 }
 
