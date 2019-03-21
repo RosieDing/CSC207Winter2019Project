@@ -83,7 +83,7 @@ public class BankManager extends BankIdentity {
      * @param accNum the AccountNumber of the account which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoAccMostRecentTrans(String accNum) {
+    public void undoAccMostRecentTrans(String accNum) throws NoTransactionException {
         try {
             Transaction e = InfoManager.getInfoManager().getTransactionManager().popAccLastTrans(accNum).reverse();
             // try catch where pay bill can't be reversed.
@@ -92,8 +92,6 @@ public class BankManager extends BankIdentity {
             // try catch if transaction cant be processed.
         } catch (ReverseNotPossibleException e) {
             System.out.println("Impossible to undo this transaction.");
-        } catch (NoTransactionException e) {
-            System.out.println(e.getMessage());
         }
     }
 

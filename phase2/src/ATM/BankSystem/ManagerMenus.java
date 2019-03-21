@@ -4,6 +4,7 @@ import ATM.BankIdentities.AccountCreater;
 import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.PasswordManager;
 import ATM.Machine.Money;
+import ATM.Transactions.NoTransactionException;
 
 import java.util.EmptyStackException;
 
@@ -135,6 +136,8 @@ public class ManagerMenus {
             }
         } catch (EmptyStackException e) {
             System.out.println("No more transaction related to this account.");
+        }catch (NoTransactionException e){
+            System.out.println(e.getMessage());
         }
     }
 
