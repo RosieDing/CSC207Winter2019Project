@@ -3,6 +3,8 @@ package ATM.Transactions;
 import ATM.Accounts.Account;
 import ATM.Accounts.TransferInable;
 import ATM.Accounts.TransferOutable;
+import ATM.Machine.CashNotWithdrawableException;
+import ATM.Machine.NotEnoughMoneyException;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -77,6 +79,8 @@ public class TransactionManager implements Serializable {
             System.out.println("Not enough balance to complete transaction.");
         } catch (NullPointerException b) {
             System.out.println("Transaction is not possible.");
+        } catch (CashNotWithdrawableException | NotEnoughMoneyException c){
+            System.out.println(c.getMessage());
         }
         if (e.isHappened()) {
             addTrans(e);
