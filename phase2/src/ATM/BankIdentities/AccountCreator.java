@@ -3,7 +3,7 @@ package ATM.BankIdentities;
 import ATM.Accounts.*;
 import ATM.InfoHandling.InfoManager;
 
-public class AccountCreater {
+public class AccountCreator {
     /** Create New Chequing Account for the User
      *
      * @param userID the userID of the user

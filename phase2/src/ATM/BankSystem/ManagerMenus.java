@@ -1,6 +1,6 @@
 package ATM.BankSystem;
 
-import ATM.BankIdentities.AccountCreater;
+import ATM.BankIdentities.AccountCreator;
 import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.PasswordManager;
 import ATM.Machine.Money;
@@ -106,7 +106,7 @@ public class ManagerMenus {
         }
         if (stay) {
             String userID = typer.ensureID();
-            AccountCreater creater = new AccountCreater();
+            AccountCreator creater = new AccountCreator();
             switch (chosen) {
                 case "1":
                     creater.createNewChequingAccount(userID);
