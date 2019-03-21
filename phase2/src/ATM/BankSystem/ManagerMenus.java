@@ -1,8 +1,12 @@
 package ATM.BankSystem;
 
+import ATM.BankIdentities.AccountCreator;
 import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.PasswordManager;
 import ATM.Machine.Money;
+import ATM.Transactions.NoTransactionException;
+
+import java.util.EmptyStackException;
 
 public class ManagerMenus {
 
@@ -27,10 +31,11 @@ public class ManagerMenus {
     /**Displays the manager main menu to manager
      */
     public void printManagerMenu() {
-        String[] list = {"Create User", "Undo Account's Most Recent Transaction",
+        String[] list = {"Create User", "Undo Account's Most Recent Transactions",
+                "Undo User's Most Recent Transactions",
                 "Create an account for user", "Restock Cash Machine", "Reset Password", "Log out"};
         StringBuilder s = new StringBuilder();
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 8; i++) {
             s.append("Option " + i + " : " + list[i - 1] + "\n");
         }
         System.out.println(s);
@@ -40,7 +45,7 @@ public class ManagerMenus {
     public void managerMainMenu(BankManager bankManager) {
         while (bankManager.getPassManager().isLogin()) {
             printManagerMenu();
-            String chosen = typer.ensureOption(1, 6);
+            String chosen = typer.ensureOption(1, 7);
             switch (chosen) {
                 case "1":
                     //create a new user
@@ -48,14 +53,17 @@ public class ManagerMenus {
                     break;
                 case "2":
                     //undo the last transaction of a certain account
-                    String accNum = typer.promptUser("Please enter an account number: ");
-                    bankManager.undoMostRecentTrans(accNum);
+                    undoAccountTransMenu(bankManager);
                     break;
                 case "3":
-                    //create a new account
-                    managerSubMenu(bankManager);
+                    //undo the last transaction of a certain user
+                    undoUserTransMenu(bankManager);
                     break;
                 case "4":
+                    //create a new account
+                    createAccountMenu(bankManager);
+                    break;
+                case "5":
                     //restock the ATM machine.
                     int numFive = typer.ensureInt("Please enter the amount of five dollars you want to restock");
                     int numTen = typer.ensureInt("Please enter the amount of ten dollars you want to restock");
@@ -64,19 +72,19 @@ public class ManagerMenus {
                     Money m = new Money(numFive, numTen, numTwenty, numFifty);
                     bankManager.restock(BankSystem.getInfoManager().getCashMachine(), m);
                     break;
-                case "5":
+                case "6":
                     String newPass = typer.promptUser("Please enter new password: ");
                     bankManager.getPassManager().setPassword(newPass);
                     break;
-                case "6":
+                case "7":
                     //log out
                     bankManager.getPassManager().logout();
             }
         }
     }
 
-    /**Display the account sub menu to allow for selection */
-    public void printManagerSubMenu() {
+    /**Display the create account sub menu to allow for selection */
+    public void printCreateAccountMenu() {
         String[] list = {"Chequing Account", "Saving Account",
                 "Credit Account", "Line of Credit Account", "Back to previous menu"};
         StringBuilder s = new StringBuilder();
@@ -89,8 +97,8 @@ public class ManagerMenus {
     /**Sub menu for the case 3 in the manager main menu
      * Allow manager to create different types of account
      */
-    private void managerSubMenu(BankManager bankManager) {
-        printManagerSubMenu();
+    private void createAccountMenu(BankManager bankManager) {
+        printCreateAccountMenu();
         boolean stay = true;
         String chosen = typer.ensureOption(1, 5);
         if (chosen.equals("5")) {
@@ -98,22 +106,50 @@ public class ManagerMenus {
         }
         if (stay) {
             String userID = typer.ensureID();
+            AccountCreator creater = new AccountCreator();
             switch (chosen) {
                 case "1":
-                    bankManager.createNewChequingAccount(userID);
+                    creater.createNewChequingAccount(userID);
                     break;
                 case "2":
-                    bankManager.createNewSavingAccount(userID);
+                    creater.createNewSavingAccount(userID);
                     break;
                 case "3":
                     String limit = typer.ensureDouble("Please enter an account limit: ");
-                    bankManager.createNewCreditAccount(userID, Double.valueOf(limit));
+                    creater.createNewCreditAccount(userID, Double.valueOf(limit));
                     break;
                 case "4":
                     String limitN = typer.ensureDouble("Please enter an account limit: ");
-                    bankManager.createNewLineOfCredit(userID, Double.valueOf(limitN));
+                    creater.createNewLineOfCredit(userID, Double.valueOf(limitN));
                     break;
             }
+        }
+    }
+
+
+    private void undoAccountTransMenu(BankManager bankManager){
+        String accNum = typer.promptUser("Please enter an account number: ");
+        int times = typer.ensureInt("Please enter number of transactions needed to undo");
+        try {
+            for (int i = 1; i <= times; i++) {
+                bankManager.undoAccMostRecentTrans(accNum);
+            }
+        } catch (EmptyStackException e) {
+            System.out.println("No more transaction related to this account.");
+        }catch (NoTransactionException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void undoUserTransMenu(BankManager bankManager){
+        String userId = typer.promptUser("Please enter the user id: ");
+        int times = typer.ensureInt("Please enter number of transactions needed to undo");
+        try {
+            for (int i = 1; i <= times; i++) {
+                bankManager.undoUserMostRecentTrans(userId);
+            }
+        } catch (EmptyStackException e) {
+            System.out.println("No more transaction related to this user.");
         }
     }
 

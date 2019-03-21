@@ -76,7 +76,6 @@ public class CashMachine implements Serializable {
      * @throws NotEnoughMoneyException if the machine has not enough money to complete withdrawal.
      */
     public void withdrawCash(int amount) throws CashNotWithdrawableException, NotEnoughMoneyException{
-        System.out.println(getAmount());
         if (amount % 5 != 0) {
             throw new CashNotWithdrawableException("Amount entered should be multiple of 5.");
         }
@@ -99,7 +98,6 @@ public class CashMachine implements Serializable {
 
         }
         checkAmount();
-        System.out.println(getAmount());
     }
 
     private int[] possibleD(int amount) {

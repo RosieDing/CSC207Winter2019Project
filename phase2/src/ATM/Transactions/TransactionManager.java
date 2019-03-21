@@ -3,6 +3,8 @@ package ATM.Transactions;
 import ATM.Accounts.Account;
 import ATM.Accounts.TransferInable;
 import ATM.Accounts.TransferOutable;
+import ATM.Machine.CashNotWithdrawableException;
+import ATM.Machine.NotEnoughMoneyException;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -77,6 +79,8 @@ public class TransactionManager implements Serializable {
             System.out.println("Not enough balance to complete transaction.");
         } catch (NullPointerException b) {
             System.out.println("Transaction is not possible.");
+        } catch (CashNotWithdrawableException | NotEnoughMoneyException c){
+            System.out.println(c.getMessage());
         }
         if (e.isHappened()) {
             addTrans(e);
@@ -88,10 +92,25 @@ public class TransactionManager implements Serializable {
      * Return the most recent transaction of a certain user.
      * @param userId id of the user
      * @return the most recent Transaction
+     * @throws NoTransactionException
      */
-    public Transaction getUserLastTrans(String userId) {
-        Transaction e = userTransList.get(userId).pop();
+    public Transaction viewUserLastTrans(String userId) throws NoTransactionException{
+        Transaction e = popUserLastTrans(userId);
         addTrans(e);
+        return e;
+    }
+
+    /***
+     * Get the most recent transaction of a certain user.(without putting it back to the list)
+     * @param userId id of the user
+     * @return the most recent Transaction
+     * @throws NoTransactionException
+     */
+    public Transaction popUserLastTrans(String userId) throws NoTransactionException {
+        if (!userTransList.containsKey(userId)) {
+            throw new NoTransactionException("No transaction with this user.");
+        }
+        Transaction e = userTransList.get(userId).pop();
         return e;
     }
 
@@ -99,16 +118,20 @@ public class TransactionManager implements Serializable {
      * Return the most recent transaction of a certain account.
      * @param accNum account number of the account
      * @return the most recent Transaction
+     * @throws NoTransactionException
      */
     public Transaction viewAccLastTrans(String accNum) throws NoTransactionException {
-        if (!accTransList.containsKey(accNum)) {
-            throw new NoTransactionException("No transaction on this account.");
-        }
-        Transaction e = accTransList.get(accNum).pop();
+        Transaction e = popAccLastTrans(accNum);
         addTrans(e);
         return e;
     }
 
+    /***
+     * Get the most recent transaction of a certain account.(without putting it back to the list)
+     * @param accNum account number of the account
+     * @return the most recent Transaction
+     * @throws NoTransactionException
+     */
     public Transaction popAccLastTrans(String accNum) throws NoTransactionException {
         if (!accTransList.containsKey(accNum)) {
             throw new NoTransactionException("No transaction on this account.");

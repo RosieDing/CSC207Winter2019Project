@@ -52,9 +52,7 @@ public class BankManager extends BankIdentity {
      * And BankManger could init the PassWord of the user with "1234".
      * */
     public void createUser() {
-        /*
-        need to add to the loader list.
-         */
+        AccountCreater creat = new AccountCreater();
         User u = new User();
         UserAccManager accM = new UserAccManager(u.getId());
         u.setAccManager(accM);
@@ -65,7 +63,7 @@ public class BankManager extends BankIdentity {
                 + " initial Password: " + "1234");
         InfoManager.getInfoManager().add(u);
         passM.addObserver(InfoManager.getInfoManager());
-        createNewChequingAccount(u.getId());
+        creat.createNewChequingAccount(u.getId());
 
 
     }
@@ -82,12 +80,30 @@ public class BankManager extends BankIdentity {
 
     /** Undo the most recent transaction for the Account
      *
-     * @param accNum the AccountNumber of the account which you want to undo
+     * @param accNum the AccountNumber of the account which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoMostRecentTrans(String accNum) {
+    public void undoAccMostRecentTrans(String accNum) throws NoTransactionException {
         try {
             Transaction e = InfoManager.getInfoManager().getTransactionManager().popAccLastTrans(accNum).reverse();
+            // try catch where pay bill can't be reversed.
+            TransactionManager manager = InfoManager.getInfoManager().getTransactionManager();
+            manager.makeTransaction(e);
+            // try catch if transaction cant be processed.
+        } catch (ReverseNotPossibleException e) {
+            System.out.println("Impossible to undo this transaction.");
+        }
+    }
+
+
+    /** Undo the most recent transaction for the user
+     *
+     * @param userId the UserId of the user which you want to undo transaction for
+     * @throws ReverseNotPossibleException
+     *  */
+    public void undoUserMostRecentTrans(String userId) {
+        try {
+            Transaction e = InfoManager.getInfoManager().getTransactionManager().popUserLastTrans(userId).reverse();
             // try catch where pay bill can't be reversed.
             TransactionManager manager = InfoManager.getInfoManager().getTransactionManager();
             manager.makeTransaction(e);
@@ -99,11 +115,13 @@ public class BankManager extends BankIdentity {
         }
     }
 
+
     /** Create New Chequing Account for the User
      *
      * @param userID the userID of the user
      * @throws AlreadyPrimaryException
-     *  */
+     *  *//*
+
     public void createNewChequingAccount(String userID) {
         User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m = u.getAccManager();
@@ -122,10 +140,10 @@ public class BankManager extends BankIdentity {
         }
     }
 
-    /** Create New Saving Account for the User
+    *//** Create New Saving Account for the User
      *
      * @param userID the userID of the user
-     *  */
+     *  *//*
     public void createNewSavingAccount(String userID){
         User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m = u.getAccManager();
@@ -139,11 +157,11 @@ public class BankManager extends BankIdentity {
     }
 
 
-    /** Create New Credit Account for the User
+    *//** Create New Credit Account for the User
      *
      * @param userID the userID of the user
      * @param limit the limit of the credit account
-     *  */
+     *  *//*
     public void createNewCreditAccount(String userID, double limit){
         User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m = u.getAccManager();
@@ -155,11 +173,11 @@ public class BankManager extends BankIdentity {
         }
     }
 
-    /** Create New Line of Credit Account for the User
+    *//** Create New Line of Credit Account for the User
      *
      * @param userID the userID of the user
      * @param limit the limit of the line of credit account
-     *  */
+     *  *//*
     public void createNewLineOfCredit(String userID, double limit){
         User u = InfoManager.getInfoManager().getUser(userID);
         UserAccManager m =u.getAccManager();
@@ -169,6 +187,7 @@ public class BankManager extends BankIdentity {
         } catch (UserNotOwnAccountException e) {
             System.out.println(e);
         }
-    }
+    }*/
+
 }
 

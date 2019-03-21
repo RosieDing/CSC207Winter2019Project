@@ -72,7 +72,7 @@ public class Withdrawal extends Transaction {
      * @throws TransactionAmountOverLimitException if the amount is too large.
      */
     @Override
-    void begin() throws TransactionAmountOverLimitException{
+    void begin() throws TransactionAmountOverLimitException, CashNotWithdrawableException, NotEnoughMoneyException{
         Account acc = getFromAcc();
         if (acc instanceof ChequingAccount) {
             if (acc.getBalance() < 0) {
@@ -82,14 +82,9 @@ public class Withdrawal extends Transaction {
         if (getAmount() > acc.getAvailableCredit()) {
             throw new TransactionAmountOverLimitException();
         }
-        try {
-            InfoManager.getInfoManager().getCashMachine().withdrawCash(getAmount());
-            getFromAcc().withdraw(this.getAmount());
-            setHappened(true);
-        }
-        catch (CashNotWithdrawableException | NotEnoughMoneyException e1) {
-            System.out.println(e1);
-        }
+        InfoManager.getInfoManager().getCashMachine().withdrawCash(getAmount());
+        getFromAcc().withdraw(this.getAmount());
+        setHappened(true);
     }
 
     /***
