@@ -501,7 +501,7 @@ public class UserMenus {
     /** Users send their request for the creation of new account.*/
     private void userReqAccSubMenu(User user){
         ManagerMenus m = new ManagerMenus();
-        m.printManagerSubMenu();
+        m.printCreateAccountMenu();
         String chosen = typer.ensureOption(1, 6);
         switch (chosen){
             case "1":

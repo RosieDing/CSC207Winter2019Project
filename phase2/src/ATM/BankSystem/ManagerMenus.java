@@ -34,7 +34,7 @@ public class ManagerMenus {
                 "Undo User's Most Recent Transactions",
                 "Create an account for user", "Restock Cash Machine", "Reset Password", "Log out"};
         StringBuilder s = new StringBuilder();
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 8; i++) {
             s.append("Option " + i + " : " + list[i - 1] + "\n");
         }
         System.out.println(s);
