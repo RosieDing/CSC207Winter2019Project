@@ -1,5 +1,6 @@
 package ATM.BankSystem;
 
+import ATM.BankIdentities.AccountCreater;
 import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.PasswordManager;
 import ATM.Machine.Money;
@@ -104,20 +105,21 @@ public class ManagerMenus {
         }
         if (stay) {
             String userID = typer.ensureID();
+            AccountCreater creater = new AccountCreater();
             switch (chosen) {
                 case "1":
-                    bankManager.createNewChequingAccount(userID);
+                    creater.createNewChequingAccount(userID);
                     break;
                 case "2":
-                    bankManager.createNewSavingAccount(userID);
+                    creater.createNewSavingAccount(userID);
                     break;
                 case "3":
                     String limit = typer.ensureDouble("Please enter an account limit: ");
-                    bankManager.createNewCreditAccount(userID, Double.valueOf(limit));
+                    creater.createNewCreditAccount(userID, Double.valueOf(limit));
                     break;
                 case "4":
                     String limitN = typer.ensureDouble("Please enter an account limit: ");
-                    bankManager.createNewLineOfCredit(userID, Double.valueOf(limitN));
+                    creater.createNewLineOfCredit(userID, Double.valueOf(limitN));
                     break;
             }
         }
