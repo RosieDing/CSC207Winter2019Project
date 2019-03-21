@@ -52,9 +52,6 @@ public class BankManager extends BankIdentity {
      * And BankManger could init the PassWord of the user with "1234".
      * */
     public void createUser() {
-        /*
-        need to add to the loader list.
-         */
         AccountCreater creat = new AccountCreater();
         User u = new User();
         UserAccManager accM = new UserAccManager(u.getId());
