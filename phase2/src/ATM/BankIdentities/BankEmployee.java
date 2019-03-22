@@ -16,7 +16,7 @@ public abstract class BankEmployee  extends BankIdentity{
      * And BankManger could init the PassWord of the user with "1234".
      * */
     public void createUser() {
-        AccountCreator creat = new AccountCreator();
+        AccountCreator create = new AccountCreator();
         User u = new User();
         UserAccManager accM = new UserAccManager(u.getId());
         u.setAccManager(accM);
@@ -27,7 +27,7 @@ public abstract class BankEmployee  extends BankIdentity{
                 + " initial Password: " + "1234");
         InfoManager.getInfoManager().add(u);
         passM.addObserver(InfoManager.getInfoManager());
-        creat.createNewChequingAccount(u.getId());
+        create.createNewChequingAccount(u.getId());
 
 
     }
