@@ -46,27 +46,7 @@ public class BankManager extends BankEmployee {
     }
 
 
-    /**
-     * The method for the BankManger to create new_user, user_accounts_Manager
-     * with new accounts.
-     * And BankManger could init the PassWord of the user with "1234".
-     * */
-    public void createUser() {
-        AccountCreator creat = new AccountCreator();
-        User u = new User();
-        UserAccManager accM = new UserAccManager(u.getId());
-        u.setAccManager(accM);
-        PasswordManager passM = new PasswordManager(u.getId());
-        passM.setPassword("1234");
-        u.setPassManager(passM);
-        System.out.println("New user created! user ID: " + u.getId()
-                + " initial Password: " + "1234");
-        InfoManager.getInfoManager().add(u);
-        passM.addObserver(InfoManager.getInfoManager());
-        creat.createNewChequingAccount(u.getId());
 
-
-    }
 
     /** Restocking the CashMachine
      *
