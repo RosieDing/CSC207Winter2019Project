@@ -13,7 +13,7 @@ import java.sql.SQLOutput;
 
 
 /** BankManger class */
-public class BankManager extends BankIdentity {
+public class BankManager extends BankEmployee {
     private final String id;
     private PasswordManager manager;
 
