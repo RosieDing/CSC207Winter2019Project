@@ -1,5 +1,7 @@
 package ATM.Accounts;
 
+import ATM.BankSystem.Time;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 /**
@@ -8,7 +10,7 @@ import java.time.LocalDate;
 
 public class MonthlyInterest implements ISaverPlan, Serializable {
     private double interestRate;
-    private LocalDate currentDate = LocalDate.now();
+    private Time time = Time.getTime();
 
     /**
      * Constructor for the monthly interest class
@@ -23,7 +25,7 @@ public class MonthlyInterest implements ISaverPlan, Serializable {
     /** Calculate and return the amount of money that is earned from interest */
     @Override
     public double compute(double amount) {
-        if (currentDate.getDayOfMonth() == 1){
+        if (time.getSystemCurrentTime().getDayOfMonth() == 1){
                 return amount * interestRate;
             }
             return amount;
