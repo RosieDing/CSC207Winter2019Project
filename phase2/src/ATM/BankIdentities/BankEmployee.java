@@ -1,6 +1,6 @@
 package ATM.BankIdentities;
 
-public class BankEmployee  extends BankIdentity{
+public abstract class BankEmployee  extends BankIdentity{
     private String id;
     public String getId(){return id;}
 
