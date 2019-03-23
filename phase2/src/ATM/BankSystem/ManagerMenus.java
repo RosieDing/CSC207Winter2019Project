@@ -83,16 +83,12 @@ public class ManagerMenus {
         }
     }
 
-    /**Display the create account sub menu to allow for selection */
     public void printCreateAccountMenu() {
         String[] list = {"Chequing Account", "Saving Account",
                 "Credit Account", "Line of Credit Account", "Back to previous menu"};
-        StringBuilder s = new StringBuilder();
-        for (int i = 1; i < 6; i++) {
-            s.append("Option " + i + " : " + list[i - 1] + "\n");
-        }
-        System.out.println(s);
+        typer.printFixedMenu(list);
     }
+
 
     /**Sub menu for the case 3 in the manager main menu
      * Allow manager to create different types of account

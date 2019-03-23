@@ -4,6 +4,7 @@ import ATM.AccountTypeChecker.*;
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
 import ATM.Accounts.CreditAccount;
+import ATM.Accounts.Withdrawable;
 import ATM.BankIdentities.*;
 import ATM.InfoHandling.InfoManager;
 import ATM.Machine.CashNotWithdrawableException;
@@ -39,16 +40,6 @@ public class UserMenus {
     }
 
 
-    /**Display the main menu for user */
-    private void printFixedMenu(String[] list) {
-        StringBuilder s = new StringBuilder();
-        for (int i = 1; i < (list.length + 1); i++) {
-            s.append("Option " + i + " : " + list[i - 1] + "\n");
-        }
-        System.out.println(s);
-
-    }
-
     /**Allow user to select different action to complete */
     public void userMainMenu(User user) {
         while (user.getPassManager().isLogin()) {
@@ -56,7 +47,7 @@ public class UserMenus {
             String[] list = {"Get All Accounts Summary", "See Net Total of Balance", "View Account",
                     "Set Primary Account", "Make Transaction", "Request Creation of Account", "Reset Password",
                     "Log Out"};
-            printFixedMenu(list);
+            typer.printFixedMenu(list);
             String chosen = typer.ensureOption(1, 8);
             switch (chosen) {
                 case "1":
@@ -101,16 +92,6 @@ public class UserMenus {
      */
     String back = "Back to previous menu";
 
-    /** print all the available choice between the accounts*/
-    private void printAllAccountList(ArrayList<Account> list){
-        StringBuilder s = new StringBuilder();
-        for (int i = 1; i <= list.size(); i++) {
-            s.append("Option " + i + " : " + list.get(i-1).toString() + "\n");
-        }
-        s.append("Option "+ (list.size()+1) + ": " + back);
-        System.out.println(s);
-    }
-
 
     /***
      * Menu Option 3: Print account info
@@ -119,7 +100,7 @@ public class UserMenus {
     /** Using the recursion when to provide the print All Account list choice*/
     private void userAccountInfoSubMenu(UserAccManager uam) {
         ArrayList<Account> list = uam.getListOfAcc();
-        printAllAccountList(list);
+        typer.printAllAccountList(list, back, "string");
         boolean stay = true;
         String chosen = typer.ensureOption(1, list.size()+1);
         if (chosen.equals(String.valueOf((list.size()+1)))) {
@@ -137,7 +118,7 @@ public class UserMenus {
         while (stay) {
             String[] list = {"View account balance", "View last transaction",
                     "View date of creation", back};
-            printFixedMenu(list);
+            typer.printFixedMenu(list);
             String chosen = typer.ensureOption(1, 4);
             switch (chosen) {
                 case "1":
@@ -170,25 +151,25 @@ public class UserMenus {
 
     /** Print all the information under the chequing account*/
     private ArrayList printPriChqSubMenu(UserAccManager manager) {
-        StringBuilder message = new StringBuilder();
-        int length = 1;
         ArrayList accList = manager.getTypeAccounts(new ChequingChecker());
-        length = accList.size();
-        for (int i = 1; i <= length; i++) {
-            message.append("Option ").append(i).append(" : ").append(((ChequingAccount) accList.get(i-1)).toString()).append("\n");
-        }
-        System.out.println(message);
+        typer.printAllAccountList(accList, back, "string");
         return accList;
     }
 
     /** Manager setting the selected chequing account as primary*/
     private void userPriChqSubMenu(UserAccManager manager) {
         ArrayList accList = printPriChqSubMenu(manager);
-        String chosen = typer.ensureOption(1, accList.size());
-        try{
-            manager.setPrimaryChq((ChequingAccount)accList.get(Integer.valueOf(chosen) - 1));}
-        catch (AlreadyPrimaryException e){
-            System.out.println("This is already a primary account.");
+        String chosen = typer.ensureOption(1, accList.size()+1);
+        boolean stay = true;
+        if (chosen == String.valueOf(accList.size()+1)) {
+            stay = false;
+        }
+        if (stay) {
+            try{
+                manager.setPrimaryChq((ChequingAccount)accList.get(Integer.valueOf(chosen) - 1));}
+            catch (AlreadyPrimaryException e){
+                System.out.println("This is already a primary account.");
+            }
         }
     }
 
@@ -208,7 +189,7 @@ public class UserMenus {
         while (stay) {
             String[] list = {"Regular Transaction", "Deposit",
                     "Withdrawal", "Pay Bills", back};
-            printFixedMenu(list);
+            typer.printFixedMenu(list);
             String chosen = typer.ensureOption(1, 5);
             switch (chosen) {
                 case "1":
@@ -235,11 +216,7 @@ public class UserMenus {
      */
     private void printTransHelperOneMenu() {
         String[] list = {"Continue", back};
-        StringBuilder s = new StringBuilder();
-        for (int i = 1; i <= 2; i++) {
-            s.append("Option " + i + " : " + list[i - 1] + "\n");
-        }
-        System.out.println(s.toString());
+        typer.printFixedMenu(list);
     }
 
     /***
@@ -255,32 +232,17 @@ public class UserMenus {
             stay = false;
         }
         if (stay) {
-            if (e instanceof Withdrawal) {
-                try {
-                    InfoManager.getInfoManager().getCashMachine().withdrawCash(((Withdrawal)e).getAmount());}
-                catch (CashNotWithdrawableException e1) {
-                    System.out.println(e1);
-                } catch (NotEnoughMoneyException e2) {
-                    System.out.println(e2);
+            try{
+                if (map.get("Type").equals("Withdrawal")) {
+                    InfoManager.getInfoManager().getCashMachine().withdrawCash((Integer)map.get("amount"));
                 }
+                TransactionManager tm = BankSystem.getInfoManager().getTransactionManager();
+                e = tm.makeTransaction(map);
+            }catch (CashNotWithdrawableException | NotEnoughMoneyException e1) {
+                System.out.println(e1);
             }
-            TransactionManager tm = BankSystem.getInfoManager().getTransactionManager();
-            e = tm.makeTransaction(map);
         }
         return e;
-    }
-
-    /***
-     * Print a specific type of accounts as a selective menu
-     * @param list
-     */
-    private void printGetTypeAccountMenu(ArrayList<Account> list){
-        int j = 1;
-        for (Account acc: list) {
-            System.out.println("Option "+ j + ": " +acc.getSummary());
-            j++;
-        }
-        System.out.println("Option " + j + ": " + noMore);
     }
 
     /***
@@ -322,7 +284,7 @@ public class UserMenus {
     private Account getTypeAccountMenu(UserAccManager uam, String type){
         Account acc = null;
         ArrayList<Account> list = uam.getTypeAccounts(typeCheckerPicker(type));
-        printGetTypeAccountMenu(list);
+        typer.printAllAccountList(list, noMore, "summary");
         acc = null;
         boolean stay = true;
         String chosen = typer.ensureOption(1, list.size() + 1);
@@ -462,7 +424,7 @@ public class UserMenus {
         boolean stay = true;
         String[] list = {"Transfer to my account", "Transfer to other user's account", "I don't want to make " +
                 "this transaction"};
-        printFixedMenu(list);
+        typer.printFixedMenu(list);
         String input = typer.ensureOption(1,3);
         if (input.equals("3")) {
             stay = false;

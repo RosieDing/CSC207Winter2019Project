@@ -6,6 +6,7 @@ import ATM.BankIdentities.NoSuchAccountException;
 import ATM.InfoHandling.InfoManager;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /***
@@ -158,4 +159,32 @@ public class Typer {
         String input = keyboard.nextLine();
         return input;
     }
+
+    /**Display a menu for user from input array of String*/
+    public void printFixedMenu(String[] list) {
+        StringBuilder s = new StringBuilder();
+        for (int i = 1; i < (list.length + 1); i++) {
+            s.append("Option " + i + " : " + list[i - 1] + "\n");
+        }
+        System.out.println(s);
+
+    }
+
+    /** print all the available choice between the accounts*/
+    public void printAllAccountList(ArrayList<Account> list, String finalMsg, String printType){
+        int j = 1;
+        for (Account acc: list) {
+            switch (printType) {
+                case "summary":
+                    System.out.println("Option " + j + ": " + acc.getSummary());
+                    break;
+                case "string":
+                    System.out.println("Option " + j + ": " + acc.toString());
+                    break;
+            }
+            j++;
+        }
+        System.out.println("Option " + j + ": " + finalMsg);
+    }
+
 }
