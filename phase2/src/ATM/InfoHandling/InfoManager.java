@@ -18,18 +18,15 @@ import java.util.Observer;
  */
 public class InfoManager implements Observer {
 
-    /**The file path in which all the info is serialized and stored in*/
-    private static String filePath = "./serializedinfo.ser";
+    /**The default file path in which all the info is serialized and stored in*/
+    private String filePath = "./serializedinfo.ser";
 
     /**Where all the information is stored in */
-    private static InfoStorer infoStorer;
-
-    /**A private static InfoManager that we use as a singleton */
-    private static InfoManager infoManager;
+    private InfoStorer infoStorer;
 
     /**
-     * Creates a new InfoManager that obtains infoStorer from the file in filePath */
-    private InfoManager(){
+     * Creates a new InfoManager that obtains infoStorer from the file in default filePath */
+    public InfoManager(){
         infoStorer = new InfoStorer();
         File file = new File(filePath);
         if (file.exists()) {
@@ -41,14 +38,6 @@ public class InfoManager implements Observer {
                 System.out.println(ex);;
             }
         }
-    }
-
-    /** @return our singleton infoManager */
-    public static InfoManager getInfoManager(){
-        if (infoManager == null){
-            infoManager = new InfoManager();
-        }
-        return infoManager;
     }
 
     /** A helper method that read the .ser file stored in path
@@ -82,13 +71,13 @@ public class InfoManager implements Observer {
     /** Save and serialize the infoStorer into the .ser file at the filePath*/
     public void saveToFile() {
         try {
-        OutputStream file = new FileOutputStream(filePath);
-        OutputStream buffer = new BufferedOutputStream(file);
-        ObjectOutput output = new ObjectOutputStream(buffer);
+            OutputStream file = new FileOutputStream(filePath);
+            OutputStream buffer = new BufferedOutputStream(file);
+            ObjectOutput output = new ObjectOutputStream(buffer);
 
-        // serialize the InfoStorer
-        output.writeObject(infoStorer);
-        output.close();
+            // serialize the InfoStorer
+            output.writeObject(infoStorer);
+            output.close();
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -187,7 +176,7 @@ public class InfoManager implements Observer {
      * @param type type of account requested
      */
     public void add(String userID, String type) { infoStorer.
-    getAccountCreationRequest().put(userID, type);}
+            getAccountCreationRequest().put(userID, type);}
 
     /***
      * Remove a request of account creation from infoStorer.

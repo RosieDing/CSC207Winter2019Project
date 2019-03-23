@@ -7,7 +7,7 @@ import ATM.InfoHandling.InfoManager;
  */
 public class SavingAccount extends AssetAccount {
     private ISaverPlan iSaverPlan;
-    private final String accountNum = "004" + getOwnerID() + (InfoManager.getInfoManager().getAccountNum() + 1);
+    private final String accountNum;
 
     /**
      * Constructor of saving account
@@ -15,10 +15,12 @@ public class SavingAccount extends AssetAccount {
      *
      * @param ownerID the ID of the owner
      * @param the_plan the plan which result in the value of interest
+     * @param totalNumAcc the total number of accounts created
      */
-    public SavingAccount(String ownerID, ISaverPlan the_plan){
+    public SavingAccount(String ownerID, ISaverPlan the_plan, int totalNumAcc){
         super(ownerID);
         this.iSaverPlan = the_plan;
+        this.accountNum = "004" + getOwnerID() +  String.valueOf(totalNumAcc) + 1;
         setBalance(iSaverPlan.compute(getBalance()));
     }
 

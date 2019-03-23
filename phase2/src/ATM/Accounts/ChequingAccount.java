@@ -1,23 +1,23 @@
 package ATM.Accounts;
 
 
-import ATM.InfoHandling.InfoManager;
-
 /**
  * Chequing account class
  */
 public class ChequingAccount extends AssetAccount{
     private double overDraftLimit = 100;
-    private final String accountNum = "003" + getOwnerID() + (InfoManager.getInfoManager().getAccountNum() + 1);
+    private final String accountNum;
 
     /**
      * Constructor of chequing account
      * Create a new chequing account with ownerID
      *
      * @param ownerID the ID of the owner
+     * @param totalNumAcc the total number of accounts created
      */
-    public ChequingAccount(String ownerID){
+    public ChequingAccount(String ownerID, int totalNumAcc){
         super(ownerID);
+        this.accountNum = "003" + getOwnerID() + String.valueOf(totalNumAcc) + 1;
     }
 
     /**Setter method for setting over draft limit */
