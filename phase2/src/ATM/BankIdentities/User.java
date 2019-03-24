@@ -1,15 +1,16 @@
 package ATM.BankIdentities;
 
-import ATM.InfoHandling.InfoManager;
+
+
+
 /** Class User */
 public class User extends BankIdentity {
     private final String id;
     private UserAccManager accManager;
     private PasswordManager passManager;
-
     /** Create a new user */
     public User() {
-        this.id = "020" + (InfoManager.getInfoManager().getUserNum() + 1);
+        this.id = "020" + (infoManager.getUserNum() + 1);
     }
 
     /** return the Id of the user */
@@ -44,6 +45,6 @@ public class User extends BankIdentity {
      * @param type the account type needed be added
      * */
     public void sendRequest(String type){
-        InfoManager.getInfoManager().add(getId(), type);
+        infoManager.add(getId(), type);
     }
 }
