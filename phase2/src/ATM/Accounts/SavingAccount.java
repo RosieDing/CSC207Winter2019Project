@@ -15,10 +15,10 @@ public class SavingAccount extends AssetAccount {
      * @param the_plan the plan which result in the value of interest
      * @param totalNumAcc the total number of accounts created
      */
-    public SavingAccount(String ownerID, ISaverPlan the_plan, int totalNumAcc){
-        super(ownerID);
+    public SavingAccount(String[] ownerID, int numOwner, ISaverPlan the_plan, int totalNumAcc){
+        super(ownerID, numOwner);
         this.iSaverPlan = the_plan;
-        this.accountNum = "004" + getOwnerID() +  String.valueOf(totalNumAcc) + 1;
+        this.accountNum = "004" + getOwnerID() +  (totalNumAcc + 1);
         setBalance(iSaverPlan.compute(getBalance()));
     }
 

@@ -17,6 +17,7 @@ public class UserAccManager implements Serializable,Iterable<Account>{
     private ArrayList<Account> listOfAcc = new ArrayList<>();
     private String ownedUserId;
     private ChequingAccount primaryChq;
+    InfoManager infoManager = new InfoManager();
 
     /** Create a new userAccountManager
      *
@@ -32,7 +33,7 @@ public class UserAccManager implements Serializable,Iterable<Account>{
     public void addAccount(Account acc) throws UserNotOwnAccountException {
         if (acc.getOwnerID().equals(ownedUserId)) {
             this.listOfAcc.add(acc);
-            InfoManager.getInfoManager().add(acc);
+            infoManager.add(acc);
         } else {
             throw new UserNotOwnAccountException("This account is not owned by user " + ownedUserId);
         }

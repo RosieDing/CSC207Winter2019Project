@@ -1,7 +1,5 @@
 package ATM.BankIdentities;
 
-import ATM.InfoHandling.InfoManager;
-
 public abstract class BankEmployee  extends BankIdentity{
     private String id;
 
@@ -10,6 +8,7 @@ public abstract class BankEmployee  extends BankIdentity{
     }
 
     public String getId(){return id;}
+
     /**
      * The method for the BankManger to create new_user, user_accounts_Manager
      * with new accounts.
@@ -25,11 +24,12 @@ public abstract class BankEmployee  extends BankIdentity{
         u.setPassManager(passM);
         System.out.println("New user created! user ID: " + u.getId()
                 + " initial Password: " + "1234");
-        InfoManager.getInfoManager().add(u);
-        passM.addObserver(InfoManager.getInfoManager());
+        infoManager.add(u);
+        passM.addObserver(infoManager);
         create.createNewChequingAccount(u.getId());
 
 
     }
+
 
 }

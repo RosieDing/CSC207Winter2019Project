@@ -15,9 +15,9 @@ public class ChequingAccount extends AssetAccount{
      * @param ownerID the ID of the owner
      * @param totalNumAcc the total number of accounts created
      */
-    public ChequingAccount(String ownerID, int totalNumAcc){
-        super(ownerID);
-        this.accountNum = "003" + getOwnerID() + String.valueOf(totalNumAcc) + 1;
+    public ChequingAccount(String[] ownerID, int numOwner, int totalNumAcc){
+        super(ownerID, numOwner);
+        this.accountNum = "003" + getOwnerID() + (totalNumAcc + 1);
     }
 
     /**Setter method for setting over draft limit */

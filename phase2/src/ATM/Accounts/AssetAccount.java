@@ -14,8 +14,8 @@ public abstract class AssetAccount extends Account implements TransferOutable {
      *
      * @param ownerID the ID of the owner
      */
-    AssetAccount(String ownerID){
-           super(ownerID);
+    AssetAccount(String[] ownerID, int numOwner){
+           super(ownerID, numOwner);
     }
 
     /**Getter for asset accounts*/

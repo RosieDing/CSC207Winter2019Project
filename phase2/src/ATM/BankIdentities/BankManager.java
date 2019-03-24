@@ -22,11 +22,11 @@ public class BankManager extends BankEmployee {
      * @param password the password of the bankManager.
      * */
     public BankManager(String password) {
-        this.id = "510" + (InfoManager.getInfoManager().getBankManagerNum() + 1);
+        this.id = "510" + (infoManager.getBankManagerNum() + 1);
         manager = new PasswordManager(this.id);
         manager.setPassword(password);
-        manager.addObserver(InfoManager.getInfoManager());
-        InfoManager.getInfoManager().add(this);
+        manager.addObserver(infoManager);
+        infoManager.add(this);
     }
 
     /** get the PassManager
@@ -47,7 +47,6 @@ public class BankManager extends BankEmployee {
 
 
 
-
     /** Restocking the CashMachine
      *
      * @param machine the CashMachine storing cash
@@ -65,9 +64,9 @@ public class BankManager extends BankEmployee {
      *  */
     public void undoAccMostRecentTrans(String accNum) throws NoTransactionException {
         try {
-            Transaction e = InfoManager.getInfoManager().getTransactionManager().popAccLastTrans(accNum).reverse();
+            Transaction e = infoManager.getTransactionManager().popAccLastTrans(accNum).reverse();
             // try catch where pay bill can't be reversed.
-            TransactionManager manager = InfoManager.getInfoManager().getTransactionManager();
+            TransactionManager manager = infoManager.getTransactionManager();
             manager.makeTransaction(e);
             // try catch if transaction cant be processed.
         } catch (ReverseNotPossibleException e) {
@@ -83,9 +82,9 @@ public class BankManager extends BankEmployee {
      *  */
     public void undoUserMostRecentTrans(String userId) {
         try {
-            Transaction e = InfoManager.getInfoManager().getTransactionManager().popUserLastTrans(userId).reverse();
+            Transaction e = infoManager.getTransactionManager().popUserLastTrans(userId).reverse();
             // try catch where pay bill can't be reversed.
-            TransactionManager manager = InfoManager.getInfoManager().getTransactionManager();
+            TransactionManager manager = infoManager.getTransactionManager();
             manager.makeTransaction(e);
             // try catch if transaction cant be processed.
         } catch (ReverseNotPossibleException e) {

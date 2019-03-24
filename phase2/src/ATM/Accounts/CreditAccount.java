@@ -14,9 +14,9 @@ public class CreditAccount extends DebtAccount {
      * @param limit the limit of this credit account
      * @param totalNumAcc the total number of accounts created
      */
-    public CreditAccount(String ownerID, double limit, int totalNumAcc){
-        super(ownerID, limit);
-        this.accountNum = "001" + getOwnerID() + String.valueOf(totalNumAcc) + 1;
+    public CreditAccount(String[] ownerID, int numOwner, double limit, int totalNumAcc){
+        super(ownerID, numOwner, limit);
+        this.accountNum = "001" + getOwnerID() + (totalNumAcc+1);
     }
 
     /**Getter method for credit account number*/
