@@ -47,7 +47,6 @@ public class BankManager extends BankEmployee {
 
 
 
-
     /** Restocking the CashMachine
      *
      * @param machine the CashMachine storing cash
