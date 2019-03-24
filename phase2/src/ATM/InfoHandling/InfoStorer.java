@@ -7,10 +7,7 @@ import ATM.Machine.CashMachine;
 import ATM.Transactions.TransactionManager;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Managing the saving and loading of all information
@@ -29,17 +26,30 @@ public class InfoStorer implements Serializable {
     /**A TransactionManager which has all the transaction information*/
     private TransactionManager transactionManager;
 
-    /***
-     * Map stored request of account creation. Key takes userID, values are requested account type.
+    /**
+     * A Map stored request of account creation.
+     * Key takes userID, values are requested account type.
      */
     private Map<String, String> accountCreationRequest;
 
-    /***
+    /**
+     * A Map storing the password information of every bank identities.
+     * Key takes String ID, values are encrypted password
+     */
+    private Map<String, String> passwordMap;
+
+    /**
+     * A Map storing the account information from the view of users
+     * Key takes String ID, values are ArrayList of accounts.
+     */
+    private Map<String, ArrayList<Account>> accountListMap;
+
+    /**
      * CashMachine in this ATM System.
      */
     private CashMachine cashMachine;
 
-    /***
+    /**
      * Construct a infoStorer.
      */
     public InfoStorer(){
@@ -48,10 +58,12 @@ public class InfoStorer implements Serializable {
         this.bankManagerMap = new HashMap<String, BankManager>();
         this.transactionManager = TransactionManager.getTransactionManager();
         this.accountCreationRequest = new HashMap<String, String>();
+        this.passwordMap = new HashMap<String, String>();
+        this.accountListMap = new HashMap<String, ArrayList<Account>>();
         this.cashMachine = new CashMachine();
     }
 
-    /***
+    /**
      * Get the accountMap
      * @return accountMap
      */
@@ -59,7 +71,7 @@ public class InfoStorer implements Serializable {
         return accountMap;
     }
 
-    /***
+    /**
      * Get the userMap
      * @return userMap
      */
@@ -67,13 +79,13 @@ public class InfoStorer implements Serializable {
         return userMap;
     }
 
-    /***
+    /**
      * Get the bankManagerMap
      * @return bankManagerMap
      */
     public Map<String, BankManager> getBankManagerMap() { return bankManagerMap;}
 
-    /***
+    /**
      * Get the transactionManager
      * @return transactionManager
      */
@@ -81,7 +93,7 @@ public class InfoStorer implements Serializable {
         return transactionManager;
     }
 
-    /***
+    /**
      * Get the accountCreationRequest map
      * @return accountCreationRequest
      */
@@ -89,7 +101,7 @@ public class InfoStorer implements Serializable {
         return accountCreationRequest;
     }
 
-    /***
+    /**
      * Get the CashMachine
      * @return CashMachine
      */
@@ -97,7 +109,7 @@ public class InfoStorer implements Serializable {
         return cashMachine;
     }
 
-    /***
+    /**
      * Add a user to userMap
      * @param newUser the user to be added
      */
@@ -113,7 +125,7 @@ public class InfoStorer implements Serializable {
         this.bankManagerMap.put(newBankManager.getId(), newBankManager);
     }
 
-    /***
+    /**
      * Add an account to accountMap
      * @param newAccount the Account to be added
      */

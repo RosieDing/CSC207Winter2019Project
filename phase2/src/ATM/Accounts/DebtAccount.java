@@ -1,15 +1,21 @@
 package ATM.Accounts;
 
 /**
- * Debt account abstract class
+ * A class that represent a debt account
  */
 public abstract class DebtAccount extends Account {
-    private double limit;
+
+    /**The maximum amount of debt an account can incur
+     * In default, the limit is 1000*/
+    private double limit = 1000;
+
+    /**The account balance: the amount of money this account can incur
+     * balance <= limit */
     private double balance;
 
     /**
      * Constructor of debt account
-     * Create a new debt account with ownerID and limit
+     * Create a new debt account with ownerID, limit
      *
      * @param ownerID the ID of the owner
      * @param  limit the limit of the debt account
@@ -19,40 +25,52 @@ public abstract class DebtAccount extends Account {
         this.limit = limit;
     }
 
-    /**Getter method for account balance */
+    /**Getter method for account balance
+     * @return account balance */
     public double getBalance(){
         return this.balance;
     }
 
-    /**Setter method for account balance */
+    /**Setter method for account balance with given newBalance */
     public void setBalance(double newBalance){
         this.balance = newBalance;
     }
 
-    /**Getter method for account available credit to spend*/
+    /**Getter method for available credit
+     * @return available credit: the amount of money which can be retrieved from this account
+     */
     @Override
     public double getAvailableCredit() {
         return (limit-getBalance());
     }
 
-    /**Transfer in method for transferring money into debt accounts*/
+    /**Transfer money with given amount into debt account
+     * @param amount The given amount of money
+     */
     @Override
     public void transferIn(double amount) {
         this.balance -= amount;
     }
 
+    /** Deposit money with given amount into this account
+     * @param amount The given amount of money
+     */
     @Override
     public void deposit(int amount){
         this.balance -= amount;
     }
 
-    /**Pay method for paying with debt account*/
+    /**Pay money with given amount from this debt account
+     * @param amount The given amount of money
+     */
     @Override
     public void pay(double amount){
         this.balance += amount;
     }
 
-    /**Withdraw method for withdrawing with debt account*/
+    /**Withdraw money with given amount from this account
+     * @param amount The given amount of money
+     */
     @Override
     public void withdraw(int amount){
         this.balance += amount;
@@ -68,9 +86,9 @@ public abstract class DebtAccount extends Account {
         this.limit = newLimit;
     }
 
-    /** method for calculating the net balance*/
+    /** Calculating the net balance*/
     @Override
-    public double getnetbalance(){
+    public double getNetBalance(){
         return -balance;
     }
 }

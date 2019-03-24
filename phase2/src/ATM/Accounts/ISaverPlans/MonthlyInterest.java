@@ -1,10 +1,9 @@
 package ATM.Accounts.ISaverPlans;
 
-import ATM.Accounts.ISaverPlan;
 import ATM.BankSystem.Time;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+
 /**
  * The normal saving plans with monthly interest 3%
  */
@@ -32,8 +31,9 @@ public class MonthlyInterest implements ISaverPlan, Serializable {
             return amount;
     }
 
+    /** Return a String representation of this saving plan
+     * @return String information about this saving plan */
     public String toString(){
-        return "This is a SavingPlan with monthly interest; "+interestRate;}
-
+        return "This is a SavingPlan with monthly interest: "+interestRate;}
     }
 

@@ -3,66 +3,81 @@ package ATM.Accounts;
 import ATM.Accounts.TransferTypes.TransferOutable;
 
 /**
- * Asset account abstract class
+ * An abstract class that represent an asset account
  */
 public abstract class AssetAccount extends Account implements TransferOutable {
+
+    /**
+     * Account balance represents how much money is stored in this account
+     */
     private double balance;
 
     /**
      * Constructor of asset account
      * Create a new asset account with ownerID
-     *
      * @param ownerID the ID of the owner
      */
     AssetAccount(String[] ownerID, int numOwner){
            super(ownerID, numOwner);
     }
 
-    /**Getter for asset accounts*/
+    /** Returen the account balance*/
     @Override
     public double getBalance() {
         return balance;
     }
 
-    /**Method for Transfer in money to the asset account*/
-    @Override
-    public void transferIn(double amount) {
-        balance += amount;
-    }
-
-    /**Method for deposit money to the asset account*/
-    @Override
-    public void deposit(int amount){
-        balance += amount;
-    }
-
-    /**Method for Transfer out money from the asset account*/
-    @Override
-    public void transferOut(double amount) {
-        balance -= amount;
-    }
-
-    /**Setter method for the balance of the asset account*/
+    /**Set the balance of the asset account
+     * @param balance The new balance
+     */
     @Override
     public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    /**Method for pay money from the asset account*/
+    /**Transfer in money with given amount to the asset account
+     * @param amount The given amount of money
+     */
+    @Override
+    public void transferIn(double amount) {
+        balance += amount;
+    }
+
+    /**Deposit money with given amount to the asset account
+     * @param amount The given amount of money
+     */
+    @Override
+    public void deposit(int amount){
+        balance += amount;
+    }
+
+    /**Transfer out money with given amount from the asset account
+     * @param amount The given amount of money
+     */
+    @Override
+    public void transferOut(double amount) {
+        balance -= amount;
+    }
+
+    /**Pay money with given amount from the asset account
+     * @param amount The given amount of money
+     */
     @Override
     public void pay(double amount) {
         balance -= amount;
     }
 
-    /**Method for withdraw money from the asset account*/
+    /**Withdraw money with given amount from the asset account
+     * @param amount The given amount of money
+     */
     @Override
     public void withdraw(int amount) {
         balance -= amount;
     }
 
-    /** method for calculating the net balance*/
+    /**Calculating the net balance*/
     @Override
-    public double getnetbalance(){
+    public double getNetBalance(){
         return balance;
     }
 }

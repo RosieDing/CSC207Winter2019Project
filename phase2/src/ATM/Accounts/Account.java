@@ -38,7 +38,7 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
 
     /**Return the User ID */
     public String getOwnerID(){
-        String s = new String();
+        String s = "";
         for(int i = 0; i < ownerID.length; i++){
             String x = ownerID[i];
             s += x;
