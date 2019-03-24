@@ -10,8 +10,9 @@ public class AccountCreator {
      * @param userID the userID of the user
      * @throws AlreadyPrimaryException
      *  */
+    InfoManager infoManager = new InfoManager();
     public void createNewChequingAccount(String userID) {
-        User u = InfoManager.getInfoManager().getUser(userID);
+        User u = infoManager.getUser(userID);
         UserAccManager m = u.getAccManager();
         ChequingAccount acc = new ChequingAccount(userID);
         if (m.getPrimaryChq() == null){
@@ -33,7 +34,7 @@ public class AccountCreator {
      * @param userID the userID of the user
      *  */
     public void createNewSavingAccount(String userID){
-        User u = InfoManager.getInfoManager().getUser(userID);
+        User u = infoManager.getUser(userID);
         UserAccManager m = u.getAccManager();
         MonthlyInterest interest = new MonthlyInterest(0.01);
         SavingAccount acc = new SavingAccount(userID, interest);
@@ -51,7 +52,7 @@ public class AccountCreator {
      * @param limit the limit of the credit account
      *  */
     public void createNewCreditAccount(String userID, double limit){
-        User u = InfoManager.getInfoManager().getUser(userID);
+        User u = infoManager.getUser(userID);
         UserAccManager m = u.getAccManager();
         CreditAccount acc = new CreditAccount(userID, limit);
         try {
@@ -67,7 +68,7 @@ public class AccountCreator {
      * @param limit the limit of the line of credit account
      *  */
     public void createNewLineOfCredit(String userID, double limit){
-        User u = InfoManager.getInfoManager().getUser(userID);
+        User u = infoManager.getUser(userID);
         UserAccManager m =u.getAccManager();
         LineOfCredit acc = new LineOfCredit(userID, limit);
         try {
