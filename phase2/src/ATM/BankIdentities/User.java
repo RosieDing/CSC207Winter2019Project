@@ -2,8 +2,10 @@ package ATM.BankIdentities;
 
 import java.util.Map;
 
-/** Class User */
+/** a class that represent a bank user */
 public class User extends BankIdentity {
+
+    /** The id of the user */
     private final String id;
 
     /**
@@ -13,15 +15,17 @@ public class User extends BankIdentity {
         this.id = "020" + totalUserNum + 1;
     }
 
-    /** return the Id of the user */
+    /** Return the Id of the user
+     * @return id
+     */
     public String getId(){
         return id;
     }
 
-    /** the user send the request to the Manager to add the account
-     * @param type the account type needed be added
-     * @param requestMap
-     * */
+    /** Send a request to tell Manager to create account
+     * @param type The account type needed to be added
+     * @param requestMap The global request map from User ID to the request type
+     */
     public void sendRequest(String type, Map<String, String> requestMap){
         requestMap.put(getId(), type);
     }

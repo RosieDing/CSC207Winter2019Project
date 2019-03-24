@@ -1,9 +1,9 @@
 package ATM.BankIdentities;
 
-public abstract class BankEmployee  extends BankIdentity{
-    private String id;
+/** A class that represent a bank employee */
+public abstract class BankEmployee extends BankIdentity{
 
-    public String getId(){return id;}
+    public abstract String getId();
 
     /**
      * The method for the BankEmployee to create new_user with default password "1234"

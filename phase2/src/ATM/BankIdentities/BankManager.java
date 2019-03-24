@@ -9,11 +9,13 @@ import ATM.Transactions.TransactionManager;
 
 import java.util.Map;
 
-/** A class that represent a manager of a bank
+/** A class that represent a manager of the bank
  * Help Users manage their accounts
- * Have higher access than BankEmployee
+ * Have more access than BankStaff
  */
 public class BankManager extends BankEmployee {
+
+    /** The id of this bank manager */
     private final String id;
 
     /** Creates a new BankManager with a password.
@@ -30,33 +32,36 @@ public class BankManager extends BankEmployee {
         setPassword(newPassword, passwordMap);
     }
 
+    /**
+     * Set the password and update this password into global information
+     * @param newPassword the new password
+     * @param passwordMap a mapping from BankIdentity ID to the encrypted password
+     */
     private void setPassword(String newPassword, Map<String, String> passwordMap){
         PasswordManager pm = new PasswordManager(id);
         pm.setPassword(newPassword, passwordMap);
     }
 
-    /** get the private ID of the manager
-     *
+    /**
+     * Get the ID of the manager
      * @return the ID of the manager.
-     *  */
+     */
     public String getId(){
         return id;
     }
 
-
-
-    /** Restocking the CashMachine
-     *
+    /**
+     * Restocking the CashMachine
      * @param machine the CashMachine storing cash
-     * @param money the money object
+     * @param money a money object representing all the bills that need to be restocked into the machine
      * */
     public void restock(CashMachine machine, Money money) {
         machine.setAmount(money);
         // how to prevent other identities from touching cash machine setter?
     }
 
-    /** Undo the most recent transaction for the Account
-     *
+    /**
+     * Undo the most recent transaction for the Account
      * @param accNum the AccountNumber of the account which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
