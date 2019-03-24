@@ -79,8 +79,6 @@ public class TransactionManager implements Serializable {
             System.out.println("Not enough balance to complete transaction.");
         } catch (NullPointerException b) {
             System.out.println("Transaction is not possible.");
-        } catch (CashNotWithdrawableException | NotEnoughMoneyException c){
-            System.out.println(c.getMessage());
         }
         if (e.isHappened()) {
             addTrans(e);

@@ -50,8 +50,7 @@ public abstract class Transaction implements Serializable {
      * @throws TransactionAmountOverLimitException if the amount this
      * transaction involves is more than what can be took out.
      */
-    abstract void begin() throws TransactionAmountOverLimitException, CashNotWithdrawableException,
-            NotEnoughMoneyException;  //make it default
+    abstract void begin() throws TransactionAmountOverLimitException;  //make it default
 
     /***
      * Abstract method. Return a reversed version of the input transaction.

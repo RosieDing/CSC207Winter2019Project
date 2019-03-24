@@ -1,44 +1,39 @@
 package ATM.BankIdentities;
 import ATM.AccountTypeChecker.TypeChecker;
 import ATM.Accounts.*;
-import ATM.InfoHandling.InfoManager;
 
 import java.io.Serializable;
-import java.sql.SQLOutput;
 import java.util.*;
 
+/** A class manage operations on accounts of a particular user */
 public class UserAccManager implements Serializable,Iterable<Account>{
-    /**
-    A map that have account type as key and an arrayList of Accounts that fit the type of key.
-     <"accountType",<Accounts>>
-     */
-    //private Map<String, ArrayList<Account>> listOfAcc = new HashMap<>();
 
-    private ArrayList<Account> listOfAcc = new ArrayList<>();
+    /** The User ID who own these accounts */
     private String ownedUserId;
+
+    /** The list of accounts the user owns */
+    private ArrayList<Account> accountList;
+
+    /** The primary account of the user. Default account which transfers go*/
     private ChequingAccount primaryChq;
-    InfoManager infoManager = new InfoManager();
 
     /** Create a new userAccountManager
-     *
+     * @param accountListMap a global mapping of User ID to list of accounts
      * @param ownedUserId the Id of the user of the userAccount manager*/
-    public UserAccManager(String ownedUserId) {
-
+    public UserAccManager(String ownedUserId, Map<String, ArrayList<Account>> accountListMap) {
+        this.accountList = accountListMap.get(ownedUserId);
         this.ownedUserId = ownedUserId;
     }
 
-    /** Adding the accounts in the Account Manager
-     *
+    /** Adding the accounts to the account list
      * @param acc the account be added*/
     public void addAccount(Account acc) throws UserNotOwnAccountException {
         if (acc.getOwnerID().equals(ownedUserId)) {
-            this.listOfAcc.add(acc);
-            infoManager.add(acc);
+            this.accountList.add(acc);
         } else {
-            throw new UserNotOwnAccountException("This account is not owned by user " + ownedUserId);
+            throw new UserNotOwnAccountException("This account is not owned by user: " + ownedUserId);
         }
     }
-
 
     /** Use the account number to get the account
      *
@@ -62,8 +57,8 @@ public class UserAccManager implements Serializable,Iterable<Account>{
 
     /** get all the accounts
      * @return  all the account of the userAccManager*/
-    public ArrayList<Account> getListOfAcc() {
-        return listOfAcc;
+    public ArrayList<Account> getAccountList() {
+        return accountList;
     }
 
     /** Return a ArrayList of account that is a specific type
@@ -153,13 +148,13 @@ public class UserAccManager implements Serializable,Iterable<Account>{
 
         @Override
         public boolean hasNext() {
-            return i < listOfAcc.size();
+            return i < accountList.size();
         }
 
         @Override
         public Account next() {
             if (hasNext()) {
-                return listOfAcc.get(i ++);
+                return accountList.get(i ++);
             }
             throw new NoSuchElementException();
         }
