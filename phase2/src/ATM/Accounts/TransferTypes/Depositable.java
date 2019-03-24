@@ -1,4 +1,4 @@
-package ATM.Accounts;
+package ATM.Accounts.TransferTypes;
 /**
  * The interface for depositable of the accounts
  */

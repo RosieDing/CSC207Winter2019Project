@@ -1,5 +1,7 @@
 package ATM.Accounts;
 
+import ATM.Accounts.TransferTypes.TransferOutable;
+
 /**
  * Line of credit account class
  */

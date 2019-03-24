@@ -1,5 +1,7 @@
 package ATM.Accounts;
 
+import ATM.Accounts.TransferTypes.TransferOutable;
+
 /**
  * Asset account abstract class
  */

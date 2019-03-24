@@ -1,5 +1,10 @@
 package ATM.Accounts;
 
+import ATM.Accounts.TransferTypes.Depositable;
+import ATM.Accounts.TransferTypes.Payable;
+import ATM.Accounts.TransferTypes.TransferInable;
+import ATM.Accounts.TransferTypes.Withdrawable;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
