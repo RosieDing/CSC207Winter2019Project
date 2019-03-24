@@ -1,34 +1,44 @@
 package ATM.Accounts;
 
+import ATM.Accounts.ISaverPlans.ISaverPlan;
+
 /**
- * Saving account class
+ * A class that represent a saving account
  */
 public class SavingAccount extends AssetAccount {
+
+    /** The saving plan for this account*/
     private ISaverPlan iSaverPlan;
+
+    /** The account number */
     private final String accountNum;
 
     /**
      * Constructor of saving account
-     * Create a new saving account with ownerID and ISaverPlan
+     * Create a new saving account with ownerID, ISaverPlan and the total number of accounts created
      *
      * @param ownerID the ID of the owner
-     * @param the_plan the plan which result in the value of interest
+     * @param plan the plan which result in the value of interest
      * @param totalNumAcc the total number of accounts created
      */
-    public SavingAccount(String ownerID, ISaverPlan the_plan, int totalNumAcc){
-        super(ownerID);
-        this.iSaverPlan = the_plan;
-        this.accountNum = "004" + getOwnerID() +  String.valueOf(totalNumAcc) + 1;
+    public SavingAccount(String[] ownerID, int numOwner, ISaverPlan plan, int totalNumAcc){
+        super(ownerID, numOwner);
+        this.iSaverPlan = plan;
+        this.accountNum = "004" + getOwnerID() +  (totalNumAcc + 1);
         setBalance(iSaverPlan.compute(getBalance()));
     }
 
-    /**Getter method for available credit */
+    /**Getter method for available credit
+     * @return available credit: the amount of money which can be retrieved from this account
+     */
     @Override
     public double getAvailableCredit() {
         return getBalance();
     }
 
-    /**Getter method for account number */
+    /**Getter method for account number
+     * @return account number
+     */
     @Override
     public String getAccountNum(){
         return accountNum;
@@ -39,13 +49,19 @@ public class SavingAccount extends AssetAccount {
         this.iSaverPlan = s;
     }
 
-    /**@string a string combined with account type, account number */
+    /**
+     * Return a String representation of this account
+     * @return a string combined with account type, account number
+     */
     @Override
     public String toString() {
         return ("Saving Account " + this.accountNum);
     }
 
-    /** @return a String that includes the summary of saving account: type, number, balance */
+    /**
+     * Return the summary of this account
+     * @return a String combined with account type, account number, balance
+     */
     public String getSummary() {
         return (this.toString() + " , Remaining Balance: " + getBalance());
     }

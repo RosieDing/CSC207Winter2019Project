@@ -2,19 +2,20 @@ package ATM.BankIdentities;
 
 import ATM.Accounts.*;
 import ATM.Accounts.ISaverPlans.MonthlyInterest;
-import ATM.InfoHandling.InfoManager;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class AccountCreator {
+
     /** Create New Chequing Account for the User
      *
      * @param userID the userID of the user
      * @throws AlreadyPrimaryException
      *  */
-    InfoManager infoManager = new InfoManager();
-    public void createNewChequingAccount(String userID) {
-        User u = infoManager.getUser(userID);
-        UserAccManager m = u.getAccManager();
-        ChequingAccount acc = new ChequingAccount(userID);
+    public void createNewChequingAccount(int totalAccNum, String userID, Map<String, ArrayList<Account>> accountListMap) {
+        UserAccManager m = new UserAccManager(userID, accountListMap);
+        ChequingAccount acc = new ChequingAccount(userID, totalAccNum);
         if (m.getPrimaryChq() == null){
             try {
                 m.setPrimaryChq(acc);

@@ -3,29 +3,32 @@ package ATM.Accounts;
 import ATM.Accounts.TransferTypes.TransferOutable;
 
 /**
- * Line of credit account class
+ * a class that represent a Line of credit account
  */
 public class LineOfCredit extends DebtAccount implements TransferOutable {
+
+    /** The account number */
     private final String accountNum;
 
     /**
      * Constructor of line of credit account
-     * Create a new line of credit account with ownerID and limit
+     * Create a new line of credit account with ownerID, limit and the total number of accounts created
      *
      * @param ownerID the ID of the owner
      * @param limit the limit of this line of credit account
      * @param totalNumAcc the total number of accounts created
      */
-    public LineOfCredit(String ownerID, double limit, int totalNumAcc) {
-        super(ownerID, limit);
-        this.accountNum = "002" + getOwnerID() + String.valueOf(totalNumAcc) + 1;
+    public LineOfCredit(String[] ownerID, int numOwner, double limit, int totalNumAcc) {
+        super(ownerID, numOwner, limit);
+        this.accountNum = "002" + getOwnerID() + (totalNumAcc+1);
     }
 
-    /**Transfer out method for transferring money out of line of credit account */
+    /**Transfer money with given amount out of line of credit account
+     * @param amount the given amount of money
+     */
     @Override
     public void transferOut(double amount){
-        double new_balance = getBalance() + amount;
-        setBalance(new_balance);
+        setBalance(getBalance() + amount);
     }
 
     /**Getter for getting line of credit account number */
@@ -33,13 +36,20 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
         return this.accountNum;
     }
 
-    /**@string a string combined with account type, account number */
+    /**
+     * Return a String representation of this account
+     * @return a string combined with account type, account number
+     */
     @Override
     public String toString() {
         return ("Line of Credit " + this.accountNum);
     }
 
-    /** @return a String that includes the summary of line of credit account: type, number, balance */
+    /**
+     * Return the summary of this account
+     * @return a String combined with account type, account number, balance
+     */
+    @Override
     public String getSummary() {
         return (this.toString() + " , Remaining Balance: " + getBalance());
     }
