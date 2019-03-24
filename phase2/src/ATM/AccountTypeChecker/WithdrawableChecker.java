@@ -1,7 +1,7 @@
 package ATM.AccountTypeChecker;
 
 import ATM.Accounts.Account;
-import ATM.Accounts.Withdrawable;
+import ATM.Accounts.TransferTypes.Withdrawable;
 
 /***
  * A checker used to check if an account is of type Withdrawable

@@ -2,7 +2,7 @@ package ATM.Transactions;
 
 
 import ATM.Accounts.Account;
-import ATM.Accounts.Payable;
+import ATM.Accounts.TransferTypes.Payable;
 import ATM.InfoHandling.BillWriter;
 
 import java.time.LocalDateTime;

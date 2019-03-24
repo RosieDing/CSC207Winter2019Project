@@ -1,6 +1,7 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.*;
+import ATM.Accounts.ISaverPlans.MonthlyInterest;
 import ATM.InfoHandling.InfoManager;
 
 public class AccountCreator {

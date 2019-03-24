@@ -1,7 +1,7 @@
 package ATM.AccountTypeChecker;
 
 import ATM.Accounts.Account;
-import ATM.Accounts.TransferOutable;
+import ATM.Accounts.TransferTypes.TransferOutable;
 
 /***
  * A checker used to check if an account is of type TransferOutable

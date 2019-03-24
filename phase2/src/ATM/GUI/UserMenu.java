@@ -1,21 +1,6 @@
 package ATM.GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import ATM.AccountTypeChecker.*;
-import ATM.Accounts.Account;
-import ATM.Accounts.ChequingAccount;
-import ATM.Accounts.CreditAccount;
-import ATM.Accounts.Withdrawable;
 import ATM.BankIdentities.*;
-import ATM.InfoHandling.InfoManager;
-import ATM.Machine.CashNotWithdrawableException;
-import ATM.Machine.NotEnoughMoneyException;
-import ATM.Transactions.NoTransactionException;
-import ATM.Transactions.Transaction;
-import ATM.Transactions.TransactionManager;
-import ATM.Transactions.Withdrawal;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

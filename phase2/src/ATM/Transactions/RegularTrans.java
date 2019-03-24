@@ -1,8 +1,8 @@
 package ATM.Transactions;
 
 import ATM.Accounts.Account;
-import ATM.Accounts.TransferInable;
-import ATM.Accounts.TransferOutable;
+import ATM.Accounts.TransferTypes.TransferInable;
+import ATM.Accounts.TransferTypes.TransferOutable;
 
 import java.time.LocalDateTime;
 

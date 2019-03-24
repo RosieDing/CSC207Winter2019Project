@@ -1,7 +1,7 @@
 package ATM.AccountTypeChecker;
 
 import ATM.Accounts.Account;
-import ATM.Accounts.Depositable;
+import ATM.Accounts.TransferTypes.Depositable;
 
 /***
  * A checker used to check if an account is of type Depositable

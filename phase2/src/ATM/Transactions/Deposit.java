@@ -2,7 +2,7 @@ package ATM.Transactions;
 
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
-import ATM.Accounts.Depositable;
+import ATM.Accounts.TransferTypes.Depositable;
 
 import java.time.LocalDateTime;
 

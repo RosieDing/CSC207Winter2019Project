@@ -1,7 +1,7 @@
 package ATM.AccountTypeChecker;
 
 import ATM.Accounts.Account;
-import ATM.Accounts.Payable;
+import ATM.Accounts.TransferTypes.Payable;
 
 /***
  * A checker used to check if an account is of type Payable

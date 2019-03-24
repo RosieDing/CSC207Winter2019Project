@@ -2,7 +2,7 @@ package ATM.Transactions;
 
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
-import ATM.Accounts.Withdrawable;
+import ATM.Accounts.TransferTypes.Withdrawable;
 import ATM.InfoHandling.InfoManager;
 import ATM.Machine.CashNotWithdrawableException;
 import ATM.Machine.NotEnoughMoneyException;
