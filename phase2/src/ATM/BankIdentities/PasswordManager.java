@@ -1,14 +1,19 @@
 package ATM.BankIdentities;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Observable;
 
-/** The passWordManager class */
+/** A class manage operations on password of a particular user */
 public class PasswordManager extends Observable implements Serializable {
 
     private final String ownerId;
-    private String password;
     private boolean authority;
+
+    /** get the id of the owner */
+    public String getOwnerId() {
+        return ownerId;
+    }
 
     /** Create a new PassWordManager
      *
@@ -19,8 +24,8 @@ public class PasswordManager extends Observable implements Serializable {
     }
 
     /** get the password of the password manager */
-    private String getPassword() {
-        return password;
+    private String getPassword(Map<String, String> passwordMap) {
+        return decrypt(passwordMap.get(ownerId));
     }
 
     /** return the authority to confirm the login*/
@@ -28,24 +33,41 @@ public class PasswordManager extends Observable implements Serializable {
         return authority;
     }
 
+    /**
+     * Encrypt the given password to a more secure String
+     * @param password
+     * @return encrypted password
+     */
+    private String encrypt(String password){
+        Integer raw = Integer.valueOf(password);
+        Integer id = Integer.valueOf(getOwnerId());
+        return String.valueOf((raw + id) * 2 + 207);
+    }
+
+    /**
+     * Decrypte the given encrypted password to its orginal form
+     * @param encryptedPassword
+     * @return password
+     */
+    private String decrypt(String encryptedPassword){
+        Integer encrypted = Integer.valueOf(encryptedPassword);
+        Integer id = Integer.valueOf(getOwnerId());
+        return String.valueOf((encrypted - 207)/2 - id);
+    }
+
     /** Set the password of the password Manager
      * @param newPass the new password to assign
      * */
-    public void setPassword(String newPass) {
-        /*if (authority) {
-            this.password = newPass;
-        } else {
-            System.out.println("You don't have authority to modify this.");
-        }*/
-        this.password = newPass;
+    public void setPassword(String newPass, Map<String, String> passwordMap) {
+        passwordMap.replace(getOwnerId(), encrypt(newPass));
     }
 
     /** Check the entering input of users with the password
      *
      * @param inputPass the entering string from user
      * */
-    public void login(String inputPass) {
-        if (getPassword().equals(inputPass)) {
+    public void login(String inputPass, Map<String, String> passwordMap) {
+        if (getPassword(passwordMap).equals(inputPass)) {
             authority = true;
         }else{
             System.out.println("Password is wrong!");
@@ -57,10 +79,5 @@ public class PasswordManager extends Observable implements Serializable {
         authority = false;
         setChanged();
         notifyObservers();
-    }
-
-    /** get the id of the owner */
-    public String getOwnerId() {
-        return ownerId;
     }
 }
