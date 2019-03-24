@@ -57,7 +57,8 @@ public class ChequingAccount extends AssetAccount{
 
     /**
      * Return the summary of this account
-     * @return a String combined with account type, account number, balance */
+     * @return a String combined with account type, account number, balance
+     */
     public String getSummary() {
         return (this.toString() + " , Remaining Balance: " + getBalance());
     }
