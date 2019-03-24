@@ -14,8 +14,8 @@ public abstract class DebtAccount extends Account {
      * @param ownerID the ID of the owner
      * @param  limit the limit of the debt account
      */
-    public DebtAccount(String ownerID, double limit){
-        super(ownerID);
+    public DebtAccount(String[] ownerID, int numOwner, double limit){
+        super(ownerID, numOwner);
         this.limit = limit;
     }
 

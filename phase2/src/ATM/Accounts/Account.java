@@ -4,9 +4,10 @@ import ATM.Accounts.TransferTypes.Depositable;
 import ATM.Accounts.TransferTypes.Payable;
 import ATM.Accounts.TransferTypes.TransferInable;
 import ATM.Accounts.TransferTypes.Withdrawable;
+import ATM.BankSystem.Time;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 /**
@@ -15,10 +16,15 @@ import java.time.LocalDateTime;
 public abstract class Account implements Withdrawable, TransferInable, Payable, Depositable, Serializable {
 
     /**The time when an account is created */
-    private final LocalDateTime dateOfCreation = LocalDateTime.now();
+    Time time = new Time();
+    private final LocalDate dateOfCreation = time.getSystemCurrentTime();
+
+    /**The number of owners*/
+    private int numOwner;
 
     /**The ID of the User whom this account belongs to */
-    private String ownerID;
+    private String[] ownerID = new String[numOwner];
+
 
     /**
      * Constructor of account
@@ -26,16 +32,25 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
      *
      * @param ownerID the ID of the owner
      */
-    public Account(String ownerID){
+    public Account(String[] ownerID, int numOwner){
         this.ownerID = ownerID;
     }
 
     /**Return the User ID */
-    public String getOwnerID(){ return ownerID;}
+    public String getOwnerID(){
+        String s = new String();
+        for(int i = 0; i < ownerID.length; i++){
+            String x = ownerID[i];
+            s += x;
+        }
+        return s;
+    }
 
+    /**Return the number of users */
+    public int getNumOwner(){return numOwner;}
 
     /**Return the date of Creation */
-    public LocalDateTime getDateOfCreation(){
+    public LocalDate getDateOfCreation(){
         return dateOfCreation;
     }
 
