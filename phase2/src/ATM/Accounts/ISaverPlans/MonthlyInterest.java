@@ -5,7 +5,7 @@ import ATM.BankSystem.Time;
 import java.io.Serializable;
 
 /**
- * The normal saving plans with monthly interest 3%
+ * The normal saving plans with monthly interest less than 3%
  */
 
 public class MonthlyInterest implements ISaverPlan, Serializable {
