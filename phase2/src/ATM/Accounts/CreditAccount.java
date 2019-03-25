@@ -10,7 +10,7 @@ public class CreditAccount extends DebtAccount {
     /** The account number */
     private final String accountNum;
 
-    private final int credit_code = 001;
+    private final String credit_code = "001";
 
     /**
      * Constructor of credit account
@@ -22,7 +22,7 @@ public class CreditAccount extends DebtAccount {
      */
     public CreditAccount(ArrayList<String> ownerID, double limit, int totalNumAcc){
         super(ownerID, limit);
-        this.accountNum = "001" + (totalNumAcc+1);
+        this.accountNum = credit_code + (totalNumAcc+1);
     }
 
     /**Getter method for credit account number

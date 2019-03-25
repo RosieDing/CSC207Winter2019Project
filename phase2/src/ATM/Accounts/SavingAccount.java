@@ -15,7 +15,7 @@ public class SavingAccount extends AssetAccount {
     /** The account number */
     private final String accountNum;
 
-    private final int saving_code = 004;
+    private final String saving_code = "004";
 
     /**
      * Constructor of saving account
@@ -28,7 +28,7 @@ public class SavingAccount extends AssetAccount {
     public SavingAccount(ArrayList<String> ownerID, ISaverPlan plan, int totalNumAcc){
         super(ownerID);
         this.iSaverPlan = plan;
-        this.accountNum = "004" +  (totalNumAcc + 1);
+        this.accountNum = saving_code +  (totalNumAcc + 1);
         setBalance(iSaverPlan.compute(getBalance()));
     }
 

@@ -12,7 +12,7 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
     /** The account number */
     private final String accountNum;
 
-    private final int lineOfCredit_code = 002;
+    private final String lineOfCredit_code = "002";
 
     /**
      * Constructor of line of credit account
@@ -24,7 +24,7 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
      */
     public LineOfCredit(ArrayList<String> ownerID, double limit, int totalNumAcc) {
         super(ownerID, limit);
-        this.accountNum = "002" + (totalNumAcc+1);
+        this.accountNum = lineOfCredit_code + (totalNumAcc+1);
     }
 
     /**Transfer money with given amount out of line of credit account

@@ -15,7 +15,7 @@ public class ChequingAccount extends AssetAccount{
     /** The account number */
     private final String accountNum;
 
-    private final int chequing_code = 003;
+    private final String chequing_code = "003";
 
     /**
      * Constructor of Chequing account
@@ -26,7 +26,7 @@ public class ChequingAccount extends AssetAccount{
      */
     public ChequingAccount(ArrayList<String> ownerID, int totalNumAcc){
         super(ownerID);
-        this.accountNum = "003" + (totalNumAcc + 1);
+        this.accountNum = chequing_code + (totalNumAcc + 1);
     }
 
     /**Setter method for setting over draft limit */
