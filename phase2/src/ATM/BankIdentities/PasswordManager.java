@@ -63,7 +63,7 @@ public class PasswordManager extends Observable implements Serializable {
      * @param newPass the new password to assign
      * */
     public void setPassword(String newPass, Map<String, String> passwordMap) {
-        passwordMap.put(getUserID(), encrypt(newPass));
+            passwordMap.put(getUserID(), encrypt(newPass));
     }
 
     /**

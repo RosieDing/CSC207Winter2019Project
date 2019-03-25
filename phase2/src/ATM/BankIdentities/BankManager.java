@@ -1,5 +1,7 @@
 package ATM.BankIdentities;
 
+import ATM.Accounts.Account;
+import ATM.InfoHandling.InfoManager;
 import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
 import ATM.Transactions.NoTransactionException;
@@ -65,12 +67,11 @@ public class BankManager extends BankEmployee {
      * @param accNum the AccountNumber of the account which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoAccMostRecentTrans(String accNum) throws NoTransactionException {
+    public void undoAccMostRecentTrans(String accNum, TransactionManager trans) throws NoTransactionException {
         try {
-            Transaction e = infoManager.getTransactionManager().popAccLastTrans(accNum).reverse();
+            Transaction e = trans.popAccLastTrans(accNum).reverse();
             // try catch where pay bill can't be reversed.
-            TransactionManager manager = infoManager.getTransactionManager();
-            manager.makeTransaction(e);
+            trans.makeTransaction(e);
             // try catch if transaction cant be processed.
         } catch (ReverseNotPossibleException e) {
             System.out.println("Impossible to undo this transaction.");
@@ -83,12 +84,11 @@ public class BankManager extends BankEmployee {
      * @param userId the UserId of the user which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoUserMostRecentTrans(String userId) {
+    public void undoUserMostRecentTrans(String userId, TransactionManager trans) {
         try {
-            Transaction e = infoManager.getTransactionManager().popUserLastTrans(userId).reverse();
+            Transaction e = trans.popUserLastTrans(userId).reverse();
             // try catch where pay bill can't be reversed.
-            TransactionManager manager = infoManager.getTransactionManager();
-            manager.makeTransaction(e);
+            trans.makeTransaction(e);
             // try catch if transaction cant be processed.
         } catch (ReverseNotPossibleException e) {
             System.out.println("Impossible to undo this transaction.");
