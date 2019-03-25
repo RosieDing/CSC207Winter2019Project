@@ -1,5 +1,7 @@
 package ATM.Accounts;
 
+import java.util.ArrayList;
+
 /**
  * A class that represent a credit account
  */
@@ -7,6 +9,8 @@ public class CreditAccount extends DebtAccount {
 
     /** The account number */
     private final String accountNum;
+
+    private final int credit_code = 001;
 
     /**
      * Constructor of credit account
@@ -16,9 +20,9 @@ public class CreditAccount extends DebtAccount {
      * @param limit the limit of this credit account
      * @param totalNumAcc the total number of accounts created
      */
-    public CreditAccount(String[] ownerID, int numOwner, double limit, int totalNumAcc){
-        super(ownerID, numOwner, limit);
-        this.accountNum = "001" + getOwnerID() + (totalNumAcc+1);
+    public CreditAccount(ArrayList<String> ownerID, double limit, int totalNumAcc){
+        super(ownerID, limit);
+        this.accountNum = "001" + (totalNumAcc+1);
     }
 
     /**Getter method for credit account number
