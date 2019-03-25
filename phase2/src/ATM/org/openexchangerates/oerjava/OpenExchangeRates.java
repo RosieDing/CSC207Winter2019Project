@@ -42,17 +42,14 @@ import java.util.Map;
         private final static String OER_URL = "http://openexchangerates.org/api/";
         private static final String LATEST = "latest.json?app_id=%s";
         private static final String HISTORICAL = "historical/%04d-%02d-%02d.json?app_id=%s";
-        private final String appId;
-        private String base;
+        private final String appId = "0c77a0ee69b54ab8ac28bb98edfea483";
+        private String base = "USD";
         private final static ObjectMapper mapper = new ObjectMapper();
 
         /**
          * Constructor for a new OpenExchangeRates
-         *
-         * @param appId The API key to Open Exchange Rates
          */
-        public OpenExchangeRates(String appId) {
-            this.appId = appId;
+        public OpenExchangeRates() {
         }
 
         /**
@@ -102,12 +99,28 @@ import java.util.Map;
         }
 
         public BigDecimal currency(String currency) throws UnavailableExchangeRateException {
-            return latest().get(currency);
+            BigDecimal result = null;
+            if (base.equals("USD")) {
+                result = latest().get(currency);
+            } else {
+                BigDecimal middleRate = latest().get(base);
+                BigDecimal targetRate = latest().get(currency);
+                result = (targetRate.divide(middleRate));
+            }
+            return result;
         }
 
         public BigDecimal historicalCurrency(String currency,
                                              Calendar date) throws UnavailableExchangeRateException {
             return historical(date).get(currency);
+        }
+
+        public String getBase() {
+            return base;
+        }
+
+        public void setBase(String base) {
+            this.base = base;
         }
     }
 
