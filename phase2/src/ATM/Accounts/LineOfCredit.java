@@ -12,6 +12,8 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
     /** The account number */
     private final String accountNum;
 
+    private final int lineOfCredit_code = 002;
+
     /**
      * Constructor of line of credit account
      * Create a new line of credit account with ownerID, limit and the total number of accounts created

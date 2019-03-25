@@ -15,6 +15,8 @@ public class ChequingAccount extends AssetAccount{
     /** The account number */
     private final String accountNum;
 
+    private final int chequing_code = 003;
+
     /**
      * Constructor of Chequing account
      * Create a new Chequing account with owner ID and total number of accounts created

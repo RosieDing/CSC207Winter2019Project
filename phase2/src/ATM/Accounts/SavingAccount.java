@@ -15,6 +15,8 @@ public class SavingAccount extends AssetAccount {
     /** The account number */
     private final String accountNum;
 
+    private final int saving_code = 004;
+
     /**
      * Constructor of saving account
      * Create a new saving account with ownerID, ISaverPlan and the total number of accounts created

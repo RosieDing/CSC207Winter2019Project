@@ -10,6 +10,8 @@ public class CreditAccount extends DebtAccount {
     /** The account number */
     private final String accountNum;
 
+    private final int credit_code = 001;
+
     /**
      * Constructor of credit account
      * Create a new credit account with ownerID and limit and the total number of accounts created
@@ -20,7 +22,7 @@ public class CreditAccount extends DebtAccount {
      */
     public CreditAccount(ArrayList<String> ownerID, double limit, int totalNumAcc){
         super(ownerID, limit);
-        this.accountNum = "001" + getOwnerID() + (totalNumAcc+1);
+        this.accountNum = "001" + (totalNumAcc+1);
     }
 
     /**Getter method for credit account number
