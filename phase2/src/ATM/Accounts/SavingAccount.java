@@ -2,6 +2,8 @@ package ATM.Accounts;
 
 import ATM.Accounts.ISaverPlans.ISaverPlan;
 
+import java.util.ArrayList;
+
 /**
  * A class that represent a saving account
  */
@@ -21,10 +23,10 @@ public class SavingAccount extends AssetAccount {
      * @param plan the plan which result in the value of interest
      * @param totalNumAcc the total number of accounts created
      */
-    public SavingAccount(String[] ownerID, int numOwner, ISaverPlan plan, int totalNumAcc){
-        super(ownerID, numOwner);
+    public SavingAccount(ArrayList<String> ownerID, ISaverPlan plan, int totalNumAcc){
+        super(ownerID);
         this.iSaverPlan = plan;
-        this.accountNum = "004" + getOwnerID() +  (totalNumAcc + 1);
+        this.accountNum = "004" +  (totalNumAcc + 1);
         setBalance(iSaverPlan.compute(getBalance()));
     }
 

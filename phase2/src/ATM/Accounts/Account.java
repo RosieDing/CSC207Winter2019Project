@@ -8,6 +8,7 @@ import ATM.BankSystem.Time;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 /**
@@ -16,14 +17,13 @@ import java.time.LocalDate;
 public abstract class Account implements Withdrawable, TransferInable, Payable, Depositable, Serializable {
 
     /**The time when an account is created */
-    Time time = new Time();
-    private final LocalDate dateOfCreation = time.getSystemCurrentTime();
+    private final LocalDate dateOfCreation = Time.getTime().getSystemCurrentTime();
+
+    /**The ID of the User whom this account belongs to */
+    private ArrayList<String> ownerID;
 
     /**The number of owners*/
     private int numOwner;
-
-    /**The ID of the User whom this account belongs to */
-    private String[] ownerID = new String[numOwner];
 
 
     /**
@@ -32,18 +32,19 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
      *
      * @param ownerID the ID of the owner
      */
-    public Account(String[] ownerID, int numOwner){
+    public Account(ArrayList<String> ownerID){
         this.ownerID = ownerID;
+        this.numOwner = ownerID.size();
     }
 
     /**Return the User ID */
-    public String getOwnerID(){
-        String s = "";
-        for(int i = 0; i < ownerID.length; i++){
-            String x = ownerID[i];
-            s += x;
-        }
-        return s;
+    public ArrayList<String> getOwnerID(){
+//        String s = "";
+//        for(int i = 0; i < ownerID.size(); i++){
+//            String x = ownerID.get(i);
+//            s += x;
+//        }
+        return ownerID;
     }
 
     /**Return the number of users */
