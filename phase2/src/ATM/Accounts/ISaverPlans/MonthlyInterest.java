@@ -9,17 +9,14 @@ import java.io.Serializable;
  */
 
 public class MonthlyInterest implements ISaverPlan, Serializable {
-    private double interestRate;
+    private double interestRate = 0.001;
     private Time time = Time.getTime();
 
     /**
      * Constructor for the monthly interest class
      * Creates monthly interest with interest rate
-     *
-     * @param interestRate the interest rate of the monthly interest
      */
-    public MonthlyInterest(double interestRate){
-        this.interestRate = interestRate;
+    public MonthlyInterest(){
     }
 
     /** Calculate and return the amount of money that is earned from interest */
@@ -34,6 +31,6 @@ public class MonthlyInterest implements ISaverPlan, Serializable {
     /** Return a String representation of this saving plan
      * @return String information about this saving plan */
     public String toString(){
-        return "This is a SavingPlan with monthly interest: "+interestRate;}
+        return "This is a SavingPlan with monthly interest: " + interestRate;}
     }
 
