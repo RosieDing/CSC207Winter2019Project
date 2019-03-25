@@ -2,6 +2,8 @@ package ATM.Accounts;
 
 import ATM.Accounts.TransferTypes.TransferOutable;
 
+import java.util.ArrayList;
+
 /**
  * An abstract class that represent an asset account
  */
@@ -17,8 +19,8 @@ public abstract class AssetAccount extends Account implements TransferOutable {
      * Create a new asset account with ownerID
      * @param ownerID the ID of the owner
      */
-    AssetAccount(String[] ownerID, int numOwner){
-           super(ownerID, numOwner);
+    AssetAccount(ArrayList<String> ownerID){
+           super(ownerID);
     }
 
     /** Returen the account balance*/
