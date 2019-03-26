@@ -1,6 +1,7 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.*;
+import ATM.Accounts.ISaverPlans.ISaverPlan;
 import ATM.Accounts.ISaverPlans.MonthlyInterest;
 
 import java.util.ArrayList;
@@ -15,12 +16,14 @@ public class AccountCreator {
      *  */
     public void createNewChequingAccount(int totalAccNum, String userID, Map<String, ArrayList<Account>> accountListMap) {
         UserAccManager m = new UserAccManager(userID, accountListMap);
-        ChequingAccount acc = new ChequingAccount(userID, totalAccNum);
+        ArrayList userList = new ArrayList();
+        userList.add(userID);
+        ChequingAccount acc = new ChequingAccount(userList, totalAccNum);
         if (m.getPrimaryChq() == null){
             try {
                 m.setPrimaryChq(acc);
             } catch(AlreadyPrimaryException e ){
-                System.out.println();
+                System.out.println("This is already the Primary Account");
             }
         }
         try {
@@ -34,11 +37,11 @@ public class AccountCreator {
      *
      * @param userID the userID of the user
      *  */
-    public void createNewSavingAccount(String userID){
-        User u = infoManager.getUser(userID);
-        UserAccManager m = u.getAccManager();
-        MonthlyInterest interest = new MonthlyInterest(0.01);
-        SavingAccount acc = new SavingAccount(userID, interest);
+    public void createNewSavingAccount(String userID, Map<String, ArrayList<Account>> accountListMap, int totalAccNum, ISaverPlan plan){
+        UserAccManager m = new UserAccManager(userID, accountListMap);
+        ArrayList userList = new ArrayList();
+        userList.add(userID);
+        SavingAccount acc = new SavingAccount(userList, plan, totalAccNum);
         try {
             m.addAccount(acc);
         } catch (UserNotOwnAccountException e) {
@@ -52,10 +55,11 @@ public class AccountCreator {
      * @param userID the userID of the user
      * @param limit the limit of the credit account
      *  */
-    public void createNewCreditAccount(String userID, double limit){
-        User u = infoManager.getUser(userID);
-        UserAccManager m = u.getAccManager();
-        CreditAccount acc = new CreditAccount(userID, limit);
+    public void createNewCreditAccount(String userID, double limit,  int totalAccNum, Map<String, ArrayList<Account>> accountListMap){
+        UserAccManager m = new UserAccManager(userID, accountListMap);
+        ArrayList userList = new ArrayList();
+        userList.add(userID);
+        CreditAccount acc = new CreditAccount(userList, limit, totalAccNum);
         try {
             m.addAccount(acc);
         } catch (UserNotOwnAccountException e) {
@@ -68,10 +72,11 @@ public class AccountCreator {
      * @param userID the userID of the user
      * @param limit the limit of the line of credit account
      *  */
-    public void createNewLineOfCredit(String userID, double limit){
-        User u = infoManager.getUser(userID);
-        UserAccManager m =u.getAccManager();
-        LineOfCredit acc = new LineOfCredit(userID, limit);
+    public void createNewLineOfCredit(String userID, double limit, int totalAccNum, Map<String, ArrayList<Account>> accountListMap){
+        UserAccManager m = new UserAccManager(userID, accountListMap);
+        ArrayList userList = new ArrayList();
+        userList.add(userID);
+        LineOfCredit acc = new LineOfCredit(userList, limit, totalAccNum);
         try {
             m.addAccount(acc);
         } catch (UserNotOwnAccountException e) {
