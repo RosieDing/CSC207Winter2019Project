@@ -98,8 +98,16 @@ public class ExchangeCurrency extends Transaction{
      * @throws ReverseNotPossibleException raised when not enough money in original to account.
      */
     @Override
-    public RegularTrans reverse() throws ReverseNotPossibleException {
-        throw new ReverseNotPossibleException();
+    public ExchangeCurrency reverse() throws ReverseNotPossibleException {
+        String fromCurrency = this.getToCurrency();
+        String toCurrency = this.getFromCurrency();
+        TransferOutable fromAcc;
+        if (!(getToAcc() instanceof TransferOutable)) {
+            throw new ReverseNotPossibleException();
+        } else {
+            fromAcc = (TransferOutable)this.getToAcc();
+        }
+        return new ExchangeCurrency(fromAcc, getFromAcc(), fromCurrency, toCurrency, getAmount());
     }
 
     @Override
