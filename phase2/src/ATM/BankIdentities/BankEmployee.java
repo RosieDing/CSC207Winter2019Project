@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /** A class that represent a bank employee */
-public abstract class BankEmployee extends BankIdentity{
+public abstract class BankEmployee extends BankIdentity implements  PrivilegeLevelB{
 
     public abstract String getId();
 

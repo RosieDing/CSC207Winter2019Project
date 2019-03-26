@@ -16,7 +16,7 @@ import java.util.Map;
  * Help Users manage their accounts
  * Have more access than BankEmployee
  */
-public class BankManager extends BankEmployee {
+public class BankManager extends BankEmployee implements PrivilegeLevelA{
 
     /** The id of this bank manager */
     private final String id;
@@ -60,7 +60,7 @@ public class BankManager extends BankEmployee {
      * @param accNum the AccountNumber of the account which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoAccMostRecentTrans(String accNum, TransactionManager trans, int times) throws NoTransactionException {
+    public void undoAccRecentTrans(String accNum, TransactionManager trans, int times){
         try {
             for (int i = 1; i <= times; i++) {
                 Transaction e = trans.popAccLastTrans(accNum).reverse();
@@ -83,7 +83,7 @@ public class BankManager extends BankEmployee {
      * @param userId the UserId of the user which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoUserMostRecentTrans(String userId, TransactionManager trans, int times) {
+    public void undoUserRecentTrans(String userId, TransactionManager trans, int times) {
         try {
             for (int i = 1; i <= times; i++) {
                 Transaction e = trans.popUserLastTrans(userId).reverse();
