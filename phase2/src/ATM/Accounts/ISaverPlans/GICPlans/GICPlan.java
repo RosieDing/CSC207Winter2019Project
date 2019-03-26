@@ -1,0 +1,69 @@
+package ATM.Accounts.ISaverPlans.GICPlans;
+
+import ATM.Accounts.ISaverPlans.ISaverPlan;
+import ATM.BankSystem.Time;
+
+import java.time.LocalDate;
+import java.time.Period;
+
+public class GICPlan implements ISaverPlan {
+
+    protected LocalDate current = Time.getTime().getSystemCurrentTime();
+
+    private double interestRate;
+    private int periodOfMonth;
+
+    @Override
+    public double compute(double amount){
+        return amount*(interestRate +1);
+    }
+
+    public void setPeriodOfMonth(int periodOfMonth) {
+        this.periodOfMonth = periodOfMonth;
+    }
+
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public double computeTotalInterest(double amount){
+        return amount*interestRate;
+    }
+
+    public double computeMonthlyInterest(double amount){
+        return amount*(interestRate+1)/periodOfMonth;
+    }
+
+    public int getPeriodMonth(){return periodOfMonth;}
+
+    public double getPerspectTotalInterest(double amount, LocalDate dateOfCreation,boolean isEnd){
+        if(!isEnd){
+            Period p = Period.between(dateOfCreation, current);
+            int month = p.getMonths() + 1;
+            return month * computeMonthlyInterest(amount);
+        }
+        else {return computeTotalInterest(amount);}
+    }
+
+    public double getPerspectBalance(double amount,LocalDate dateOfCreation, boolean isEnd){
+        return amount + getPerspectTotalInterest(amount, dateOfCreation, isEnd);
+    }
+
+    public int getMonthLeft(LocalDate dateOfCreation, boolean isEnd){
+        if(!isEnd){
+            return periodOfMonth - getMonthpassed(dateOfCreation);
+        }
+        else{return 0;}
+    }
+
+    public boolean isEnd(LocalDate maturityDate){
+        return current.isAfter(maturityDate);
+    }
+
+    public int getMonthpassed(LocalDate dateOfCreation){
+        Period p = Period.between(dateOfCreation, current);
+        int years = p.getYears();
+        int months = p.getMonths();
+        return (years+1) *12 + months+1;
+    }
+}

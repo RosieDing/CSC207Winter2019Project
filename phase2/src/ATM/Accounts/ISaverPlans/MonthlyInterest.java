@@ -12,13 +12,6 @@ public class MonthlyInterest implements ISaverPlan, Serializable {
     private final double interestRate = 0.01;
     private Time time = Time.getTime();
 
-    /**
-     * Constructor for the monthly interest class
-     * Creates monthly interest with interest rate
-     */
-    public MonthlyInterest(){
-    }
-
     /** Calculate and return the amount of money that is earned from interest */
     @Override
     public double compute(double amount) {

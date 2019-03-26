@@ -7,15 +7,7 @@ import java.io.Serializable;
 /**High interest plan with monthly interesting rate above 3%*/
 public class MonthlyPremiumInterest implements ISaverPlan, Serializable {
     private final double interestRate = 0.03;
-
-
     private Time time = Time.getTime();
-
-    /**
-     * Constructor for the PremiumHighInterest class
-     * [deposit more than 10000.00]
-     * Creates monthly interest with interest rate
-     */
 
     /** Calculate and return the amount of money that is earned from interest */
     @Override
@@ -29,7 +21,8 @@ public class MonthlyPremiumInterest implements ISaverPlan, Serializable {
     /** Return a String representation of this saving plan
      * @return String information about this saving plan */
     public String toString(){
-        return "This is a SavingPlan with monthly interest: "+interestRate;}
+        return "This is a SavingPlan with monthly interest: " + interestRate;
+    }
 }
 
 
