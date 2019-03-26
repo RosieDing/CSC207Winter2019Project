@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * A class that represent a debt account
  */
-public abstract class DebtAccount extends Account {
+public abstract class DebtAccount extends BasicAccount {
 
     /**The maximum amount of debt an account can incur
      * In default, the limit is 1000*/

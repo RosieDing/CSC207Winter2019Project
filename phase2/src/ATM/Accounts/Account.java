@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * An abstract class that represents a bank account
  */
-public abstract class Account implements Withdrawable, TransferInable, Payable, Depositable, Serializable {
+public abstract class Account implements TransferInable, Serializable {
 
     /**The time when an account is created */
     Time time = new Time();
@@ -80,12 +80,6 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
 
     /**Abstract Method for transferring money to account */
     public abstract void transferIn(double amount);
-
-    /**Abstract Method for paying money from account */
-    public abstract void pay(double amount);
-
-    /**Abstract Method for withdraw money from account */
-    public abstract void withdraw(int amount);
 
     public abstract String getSummary();
 
