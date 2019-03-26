@@ -1,6 +1,8 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.Account;
+import ATM.Machine.CashMachine;
+import ATM.Machine.Money;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -26,6 +28,17 @@ public abstract class BankEmployee extends BankIdentity{
         accCreator.createNewChequingAccount(Numuser, u.getId(), accountListMap);
 
 
+    }
+
+
+    /**
+     * Restocking the CashMachine
+     * @param machine the CashMachine storing cash
+     * @param money a money object representing all the bills that need to be restocked into the machine
+     * */
+    public void restock(CashMachine machine, Money money) {
+        machine.setAmount(money);
+        // how to prevent other identities from touching cash machine setter?
     }
 
 

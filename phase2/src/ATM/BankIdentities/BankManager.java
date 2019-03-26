@@ -14,7 +14,7 @@ import java.util.Map;
 
 /** A class that represent a manager of the bank
  * Help Users manage their accounts
- * Have more access than BankStaff
+ * Have more access than BankEmployee
  */
 public class BankManager extends BankEmployee {
 
@@ -53,15 +53,7 @@ public class BankManager extends BankEmployee {
         return id;
     }
 
-    /**
-     * Restocking the CashMachine
-     * @param machine the CashMachine storing cash
-     * @param money a money object representing all the bills that need to be restocked into the machine
-     * */
-    public void restock(CashMachine machine, Money money) {
-        machine.setAmount(money);
-        // how to prevent other identities from touching cash machine setter?
-    }
+
 
     /**
      * Undo the most recent transaction for the Account

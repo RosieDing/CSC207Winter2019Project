@@ -6,7 +6,7 @@ import ATM.Accounts.ISaverPlans.MonthlyInterest;
 
 import java.util.ArrayList;
 import java.util.Map;
-
+/** A class that create a new  Account*/
 public class AccountCreator {
 
     /** Create New Chequing Account for the User
