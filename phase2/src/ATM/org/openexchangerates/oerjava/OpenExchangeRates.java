@@ -98,7 +98,7 @@ import java.util.Map;
 
         }
 
-        public BigDecimal currency(String currency) throws UnavailableExchangeRateException {
+        private BigDecimal currency(String currency) throws UnavailableExchangeRateException {
             BigDecimal result;
             if (base.equals("USD")) {
                 result = latest().get(currency);
@@ -121,6 +121,25 @@ import java.util.Map;
 
         public void setBase(String base) {
             this.base = base;
+        }
+
+        /***
+         * Return the exchange rate of toCurrency in fromCurrency
+         * @param fromCurrency
+         * @param toCurrency
+         * @return exchange rate
+         */
+        public BigDecimal getExchangeRate(String fromCurrency, String toCurrency){
+            BigDecimal rate = null;
+            try {
+                if (!fromCurrency.equals(getBase())){
+                    setBase(fromCurrency);
+                }
+                rate = currency(toCurrency);
+            } catch (UnavailableExchangeRateException e){
+                System.out.println(e.getMessage());
+            }
+            return rate;
         }
     }
 

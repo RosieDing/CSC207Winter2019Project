@@ -69,33 +69,19 @@ public class ExchangeCurrency extends Transaction{
                 throw new TransactionAmountOverLimitException();
             }
         }
-        double amount = getAmount()*(getRate(getFromCurrency(),getToCurrency()).doubleValue());
-        if (amount > acc.getAvailableCredit()) {
-            throw new TransactionAmountOverLimitException();
-        }
-        fromAcc.transferOut(amount);
-        toAcc.transferIn(getAmount());
-        setHappened(true);
-    }
-
-    /***
-     * Return the exchange rate of toCurrency in fromCurrency
-     * @param fromCurrency
-     * @param toCurrency
-     * @return
-     */
-    private BigDecimal getRate(String fromCurrency, String toCurrency){
         OpenExchangeRates oer = new OpenExchangeRates();
-        BigDecimal rate = null;
-        try {
-            if (!fromCurrency.equals(oer.getBase())){
-                oer.setBase(fromCurrency);
+        BigDecimal rate = oer.getExchangeRate(getFromCurrency(), getToCurrency());
+        if (rate != null){
+            double amount = getAmount()*(rate.doubleValue());
+            if (amount > acc.getAvailableCredit()) {
+                throw new TransactionAmountOverLimitException();
             }
-            rate = oer.currency(toCurrency);
-        } catch (UnavailableExchangeRateException e){
-            System.out.println(e.getMessage());
+            fromAcc.transferOut(amount);
+            toAcc.transferIn(getAmount());
+            setHappened(true);
+        } else {
+            System.out.println("Can not make this conversion.");
         }
-        return rate;
     }
 
     /***
