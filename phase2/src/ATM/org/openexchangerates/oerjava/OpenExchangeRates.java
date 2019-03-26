@@ -99,13 +99,13 @@ import java.util.Map;
         }
 
         public BigDecimal currency(String currency) throws UnavailableExchangeRateException {
-            BigDecimal result = null;
+            BigDecimal result;
             if (base.equals("USD")) {
                 result = latest().get(currency);
             } else {
                 BigDecimal middleRate = latest().get(base);
                 BigDecimal targetRate = latest().get(currency);
-                result = (targetRate.divide(middleRate));
+                result = (middleRate.divide(targetRate));
             }
             return result;
         }

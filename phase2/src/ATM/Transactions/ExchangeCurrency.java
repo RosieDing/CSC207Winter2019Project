@@ -69,7 +69,7 @@ public class ExchangeCurrency extends Transaction{
                 throw new TransactionAmountOverLimitException();
             }
         }
-        double amount = getAmount()/(getRate(getFromCurrency(),getToCurrency()).doubleValue());
+        double amount = getAmount()*(getRate(getFromCurrency(),getToCurrency()).doubleValue());
         if (amount > acc.getAvailableCredit()) {
             throw new TransactionAmountOverLimitException();
         }
@@ -78,6 +78,12 @@ public class ExchangeCurrency extends Transaction{
         setHappened(true);
     }
 
+    /***
+     * Return the exchange rate of toCurrency in fromCurrency
+     * @param fromCurrency
+     * @param toCurrency
+     * @return
+     */
     private BigDecimal getRate(String fromCurrency, String toCurrency){
         OpenExchangeRates oer = new OpenExchangeRates();
         BigDecimal rate = null;
