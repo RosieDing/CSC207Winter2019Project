@@ -7,6 +7,7 @@ import ATM.Machine.CashNotWithdrawableException;
 import ATM.Machine.NotEnoughMoneyException;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -148,17 +149,19 @@ public class TransactionManager implements Serializable {
         }
     }
 
-    private void userAddHelper(String userId, Transaction trans) {
-        if (userTransList.containsKey(userId)) {
-            userTransList.get(userId).add(trans);
-        } else {
-            Stack a = new Stack<Transaction>();
-            a.add(trans);
-            userTransList.put(userId, a);
+    private void userAddHelper(ArrayList<String> userId, Transaction trans) {
+        for (String id: userId) {
+            if (userTransList.containsKey(id)) {
+                userTransList.get(id).add(trans);
+            } else {
+                Stack a = new Stack<Transaction>();
+                a.add(trans);
+                userTransList.put(id, a);
+            }
         }
     }
 
-    private void helper(String userId, String accNum, Transaction trans) {
+    private void helper(ArrayList<String> userId, String accNum, Transaction trans) {
         accAddHelper(accNum, trans);
         userAddHelper(userId, trans);
     }
@@ -169,11 +172,11 @@ public class TransactionManager implements Serializable {
      */
     public void addTrans(Transaction trans){
         if (trans.getFromAcc() == null) {
-            String userId = trans.getToAcc().getOwnerID();
+            ArrayList<String> userId = trans.getToAcc().getOwnerID();
             String accNum = trans.getToAcc().getAccountNum();
             helper(userId, accNum, trans);
         } else {
-            String userId = trans.getFromAcc().getOwnerID();
+            ArrayList<String> userId = trans.getFromAcc().getOwnerID();
             String accNum = trans.getFromAcc().getAccountNum();
             helper(userId, accNum, trans);
 
