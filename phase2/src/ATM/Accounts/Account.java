@@ -63,9 +63,6 @@ public abstract class Account implements TransferInable, Serializable {
         ownerID.remove(owner);
     }
 
-    /**Abstract Method for deposit money to account*/
-    public abstract void deposit(int amount);
-
     /**Abstract Method for getting available credit from account */
     public abstract double getAvailableCredit();
 
