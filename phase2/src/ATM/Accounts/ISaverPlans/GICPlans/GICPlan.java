@@ -22,8 +22,12 @@ public class GICPlan implements ISaverPlan {
         this.periodOfMonth = periodOfMonth;
     }
 
-    public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
+    public double getInterestRate() {
+        return interestRate;
+    }
+
+    protected void setInterestRate(double newInterestRate){
+        this.interestRate = newInterestRate;
     }
 
     public double computeTotalInterest(double amount){
@@ -36,7 +40,7 @@ public class GICPlan implements ISaverPlan {
 
     public int getPeriodMonth(){return periodOfMonth;}
 
-    public double getPerspectTotalInterest(double amount, LocalDate dateOfCreation,boolean isEnd){
+    public double getCurrentPerspectTotalInterest(double amount, LocalDate dateOfCreation,boolean isEnd){
         if(!isEnd){
             Period p = Period.between(dateOfCreation, current);
             int month = p.getMonths() + 1;
@@ -45,8 +49,8 @@ public class GICPlan implements ISaverPlan {
         else {return computeTotalInterest(amount);}
     }
 
-    public double getPerspectBalance(double amount,LocalDate dateOfCreation, boolean isEnd){
-        return amount + getPerspectTotalInterest(amount, dateOfCreation, isEnd);
+    public double getCurrentPerspectBalance(double amount,LocalDate dateOfCreation, boolean isEnd){
+        return amount + getCurrentPerspectTotalInterest(amount, dateOfCreation, isEnd);
     }
 
     public int getMonthLeft(LocalDate dateOfCreation, boolean isEnd){
