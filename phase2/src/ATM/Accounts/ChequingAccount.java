@@ -1,5 +1,7 @@
 package ATM.Accounts;
 
+import java.util.ArrayList;
+
 /**
  * A class that represent a Chequing account
  */
@@ -13,6 +15,8 @@ public class ChequingAccount extends AssetAccount{
     /** The account number */
     private final String accountNum;
 
+    private final String chequing_code = "003";
+
     /**
      * Constructor of Chequing account
      * Create a new Chequing account with owner ID and total number of accounts created
@@ -20,9 +24,9 @@ public class ChequingAccount extends AssetAccount{
      * @param ownerID the ID of the owner
      * @param totalNumAcc the total number of accounts created
      */
-    public ChequingAccount(String[] ownerID, int numOwner, int totalNumAcc){
-        super(ownerID, numOwner);
-        this.accountNum = "003" + getOwnerID() + (totalNumAcc + 1);
+    public ChequingAccount(ArrayList<String> ownerID, int totalNumAcc){
+        super(ownerID);
+        this.accountNum = chequing_code + (totalNumAcc + 1);
     }
 
     /**Setter method for setting over draft limit */

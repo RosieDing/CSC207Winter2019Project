@@ -126,27 +126,13 @@ public class ManagerMenus {
     private void undoAccountTransMenu(BankManager bankManager){
         String accNum = typer.promptUser("Please enter an account number: ");
         int times = typer.ensureInt("Please enter number of transactions needed to undo");
-        try {
-            for (int i = 1; i <= times; i++) {
-                bankManager.undoAccMostRecentTrans(accNum);
-            }
-        } catch (EmptyStackException e) {
-            System.out.println("No more transaction related to this account.");
-        }catch (NoTransactionException e){
-            System.out.println(e.getMessage());
-        }
+        bankManager.undoUserMostRecentTrans(accNum, ,times);
     }
 
     private void undoUserTransMenu(BankManager bankManager){
         String userId = typer.promptUser("Please enter the user id: ");
         int times = typer.ensureInt("Please enter number of transactions needed to undo");
-        try {
-            for (int i = 1; i <= times; i++) {
-                bankManager.undoUserMostRecentTrans(userId);
-            }
-        } catch (EmptyStackException e) {
-            System.out.println("No more transaction related to this user.");
-        }
+        bankManager.undoUserMostRecentTrans(userId, ,times);
     }
 
 }

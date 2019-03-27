@@ -8,12 +8,13 @@ import ATM.BankSystem.Time;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 /**
  * An abstract class that represents a bank account
  */
-public abstract class Account implements Withdrawable, TransferInable, Payable, Depositable, Serializable {
+public abstract class Account implements TransferInable, Serializable {
 
     /**The time when an account is created */
     Time time = new Time();
@@ -23,7 +24,7 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
     private int numOwner;
 
     /**The ID of the User whom this account belongs to */
-    private String[] ownerID = new String[numOwner];
+    private ArrayList<String> ownerID;
 
 
     /**
@@ -32,18 +33,14 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
      *
      * @param ownerID the ID of the owner
      */
-    public Account(String[] ownerID, int numOwner){
+    public Account(ArrayList<String> ownerID){
         this.ownerID = ownerID;
+        this.numOwner = ownerID.size();
     }
 
     /**Return the User ID */
-    public String getOwnerID(){
-        String s = "";
-        for(int i = 0; i < ownerID.length; i++){
-            String x = ownerID[i];
-            s += x;
-        }
-        return s;
+    public ArrayList<String> getOwnerID() {
+        return ownerID;
     }
 
     /**Return the number of users */
@@ -54,8 +51,17 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
         return dateOfCreation;
     }
 
-    /**Abstract Method for deposit money to account*/
-    public abstract void deposit(int amount);
+    public void addOwner(String newOwner){
+        ownerID.add(newOwner);
+    }
+
+    public boolean containsOwner(String owner){
+        return owner.contains(owner);
+    }
+
+    public void removeOwner(String owner){
+        ownerID.remove(owner);
+    }
 
     /**Abstract Method for getting available credit from account */
     public abstract double getAvailableCredit();
@@ -71,12 +77,6 @@ public abstract class Account implements Withdrawable, TransferInable, Payable, 
 
     /**Abstract Method for transferring money to account */
     public abstract void transferIn(double amount);
-
-    /**Abstract Method for paying money from account */
-    public abstract void pay(double amount);
-
-    /**Abstract Method for withdraw money from account */
-    public abstract void withdraw(int amount);
 
     public abstract String getSummary();
 

@@ -1,5 +1,7 @@
 package ATM.BankIdentities;
 
+import ATM.Accounts.Account;
+import ATM.InfoHandling.InfoManager;
 import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
 import ATM.Transactions.NoTransactionException;
@@ -7,13 +9,14 @@ import ATM.Transactions.ReverseNotPossibleException;
 import ATM.Transactions.Transaction;
 import ATM.Transactions.TransactionManager;
 
+import java.util.EmptyStackException;
 import java.util.Map;
 
 /** A class that represent a manager of the bank
  * Help Users manage their accounts
- * Have more access than BankStaff
+ * Have more access than BankEmployee
  */
-public class BankManager extends BankEmployee {
+public class BankManager extends BankEmployee implements PrivilegeLevelA{
 
     /** The id of this bank manager */
     private final String id;
@@ -50,30 +53,27 @@ public class BankManager extends BankEmployee {
         return id;
     }
 
-    /**
-     * Restocking the CashMachine
-     * @param machine the CashMachine storing cash
-     * @param money a money object representing all the bills that need to be restocked into the machine
-     * */
-    public void restock(CashMachine machine, Money money) {
-        machine.setAmount(money);
-        // how to prevent other identities from touching cash machine setter?
-    }
+
 
     /**
      * Undo the most recent transaction for the Account
      * @param accNum the AccountNumber of the account which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoAccMostRecentTrans(String accNum) throws NoTransactionException {
+    public void undoAccRecentTrans(String accNum, TransactionManager trans, int times){
         try {
-            Transaction e = infoManager.getTransactionManager().popAccLastTrans(accNum).reverse();
-            // try catch where pay bill can't be reversed.
-            TransactionManager manager = infoManager.getTransactionManager();
-            manager.makeTransaction(e);
-            // try catch if transaction cant be processed.
-        } catch (ReverseNotPossibleException e) {
+            for (int i = 1; i <= times; i++) {
+                Transaction e = trans.popAccLastTrans(accNum).reverse();
+                // try catch where pay bill can't be reversed.
+                trans.makeTransaction(e);
+            }
+        } catch (EmptyStackException e) {
+            System.out.println("No more transaction related to this user.");
+        }// try catch if transaction cant be processed.
+        catch (ReverseNotPossibleException e) {
             System.out.println("Impossible to undo this transaction.");
+        } catch (NoTransactionException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -83,14 +83,17 @@ public class BankManager extends BankEmployee {
      * @param userId the UserId of the user which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoUserMostRecentTrans(String userId) {
+    public void undoUserRecentTrans(String userId, TransactionManager trans, int times) {
         try {
-            Transaction e = infoManager.getTransactionManager().popUserLastTrans(userId).reverse();
-            // try catch where pay bill can't be reversed.
-            TransactionManager manager = infoManager.getTransactionManager();
-            manager.makeTransaction(e);
-            // try catch if transaction cant be processed.
-        } catch (ReverseNotPossibleException e) {
+            for (int i = 1; i <= times; i++) {
+                Transaction e = trans.popUserLastTrans(userId).reverse();
+                // try catch where pay bill can't be reversed.
+                trans.makeTransaction(e);
+            }
+        } catch (EmptyStackException e) {
+            System.out.println("No more transaction related to this user.");
+        }// try catch if transaction cant be processed.
+         catch (ReverseNotPossibleException e) {
             System.out.println("Impossible to undo this transaction.");
         } catch (NoTransactionException e) {
             System.out.println(e.getMessage());

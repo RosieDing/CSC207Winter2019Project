@@ -1,9 +1,11 @@
 package ATM.Accounts;
 
+import java.util.ArrayList;
+
 /**
  * A class that represent a debt account
  */
-public abstract class DebtAccount extends Account {
+public abstract class DebtAccount extends BasicAccount {
 
     /**The maximum amount of debt an account can incur
      * In default, the limit is 1000*/
@@ -20,8 +22,8 @@ public abstract class DebtAccount extends Account {
      * @param ownerID the ID of the owner
      * @param  limit the limit of the debt account
      */
-    public DebtAccount(String[] ownerID, int numOwner, double limit){
-        super(ownerID, numOwner);
+    public DebtAccount(ArrayList<String> ownerID, double limit){
+        super(ownerID);
         this.limit = limit;
     }
 

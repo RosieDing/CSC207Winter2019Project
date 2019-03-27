@@ -2,6 +2,8 @@ package ATM.Accounts;
 
 import ATM.Accounts.TransferTypes.TransferOutable;
 
+import java.util.ArrayList;
+
 /**
  * a class that represent a Line of credit account
  */
@@ -9,6 +11,8 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
 
     /** The account number */
     private final String accountNum;
+
+    private final String lineOfCredit_code = "002";
 
     /**
      * Constructor of line of credit account
@@ -18,9 +22,9 @@ public class LineOfCredit extends DebtAccount implements TransferOutable {
      * @param limit the limit of this line of credit account
      * @param totalNumAcc the total number of accounts created
      */
-    public LineOfCredit(String[] ownerID, int numOwner, double limit, int totalNumAcc) {
-        super(ownerID, numOwner, limit);
-        this.accountNum = "002" + getOwnerID() + (totalNumAcc+1);
+    public LineOfCredit(ArrayList<String> ownerID, double limit, int totalNumAcc) {
+        super(ownerID, limit);
+        this.accountNum = lineOfCredit_code + (totalNumAcc+1);
     }
 
     /**Transfer money with given amount out of line of credit account
