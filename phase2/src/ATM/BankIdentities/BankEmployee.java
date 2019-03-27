@@ -23,8 +23,6 @@ public abstract class BankEmployee extends BankIdentity{
         infoManager.add(u);
         passM.addObserver(infoManager);
         accCreator.createNewChequingAccount(u.getId());
-
-
     }
 
 

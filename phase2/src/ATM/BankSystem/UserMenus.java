@@ -94,7 +94,7 @@ public class UserMenus {
 
     /** Using the recursion when to provide the print All Account list choice*/
     private void userAccountInfoSubMenu(UserAccManager uam) {
-        ArrayList<Account> list = uam.getListOfAcc();
+        ArrayList<Account> list = uam.getAccountList();
         typer.printAllAccountList(list, back, "string");
         boolean stay = true;
         String chosen = typer.ensureOption(1, list.size()+1);

@@ -11,12 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-/***
- * TransactionManager class
- */
+/** A class that manage all the transaction for one user TransactionManager class */
 public class TransactionManager implements Serializable {
-    private static TransactionManager m;
-    /***
+
+    /**
      * accTransList record history of Transaction of specific accounts.
      */
     private Map<String, Stack<Transaction>> accTransList = new HashMap<>();
@@ -24,9 +22,6 @@ public class TransactionManager implements Serializable {
      * userTransList record history of Transaction of specific users.
      */
     private Map<String, Stack<Transaction>> userTransList = new HashMap<>();
-
-
-    private TransactionManager(){}
 
     /***
      * Singleton pattern. get the only TransactionManager.

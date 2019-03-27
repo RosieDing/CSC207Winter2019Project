@@ -4,6 +4,7 @@ import ATM.Accounts.Account;
 import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.User;
 import ATM.Machine.CashMachine;
+import ATM.Transactions.Transaction;
 import ATM.Transactions.TransactionManager;
 
 import java.io.Serializable;
@@ -43,6 +44,15 @@ public class InfoStorer implements Serializable {
      * Key takes String ID, values are ArrayList of accounts.
      */
     private Map<String, ArrayList<Account>> accountListMap;
+
+    /**
+     * accTrans record history of Transaction of specific accounts.
+     */
+    private Map<String, Stack<Transaction>> accTransMap;
+    /**
+     * userTransList record history of Transaction of specific users.
+     */
+    private Map<String, Stack<Transaction>> userTransMap;
 
     /**
      * CashMachine in this ATM System.
