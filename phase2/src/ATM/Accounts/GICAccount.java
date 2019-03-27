@@ -41,18 +41,13 @@ public class GICAccount extends InvestmentAccount {
         this.monthLeft = plan.getMonthLeft(getDateOfCreation(), isEnd);
 
         perspectTotalInterest = plan.getCurrentPerspectTotalInterest(principle, getDateOfCreation(), isEnd);
-
         perspectiveBalance = plan.getCurrentPerspectBalance(principle,getDateOfCreation(),isEnd);
 
         if (!isEnd) {
             this.balance = perspectiveBalance;
             availableCredit = principle + perspectTotalInterest * penalty;
         } else {
-            if(monthLeft == 0){
             availableCredit = balance;
-            }else {
-                balance = availableCredit;
-            }
         }
     }
 
@@ -96,9 +91,11 @@ public class GICAccount extends InvestmentAccount {
     public void transferOut(double amount){
         if(!isEnd){
             availableCredit -= amount;
+            balance = availableCredit;
             isEnd = true;}
         else{
             balance -= amount;
+            availableCredit = balance;
         }
         }
 }
