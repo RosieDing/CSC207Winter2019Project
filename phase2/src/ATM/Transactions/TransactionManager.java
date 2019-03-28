@@ -156,25 +156,21 @@ public class TransactionManager implements Serializable {
         }
     }
 
-    private void helper(ArrayList<String> userId, String accNum, Transaction trans) {
-        accAddHelper(accNum, trans);
-        userAddHelper(userId, trans);
-    }
-
     /***
      * Add a transaction to history of transaction.
      * @param trans the Transaction to be added.
      */
     public void addTrans(Transaction trans){
+        ArrayList<String> userId;
+        String accNum;
         if (trans.getFromAcc() == null) {
-            ArrayList<String> userId = trans.getToAcc().getOwnerID();
-            String accNum = trans.getToAcc().getAccountNum();
-            helper(userId, accNum, trans);
+            userId = trans.getToAcc().getOwnerID();
+            accNum = trans.getToAcc().getAccountNum();
         } else {
-            ArrayList<String> userId = trans.getFromAcc().getOwnerID();
-            String accNum = trans.getFromAcc().getAccountNum();
-            helper(userId, accNum, trans);
-
+            userId = trans.getFromAcc().getOwnerID();
+            accNum = trans.getFromAcc().getAccountNum();
         }
+        userAddHelper(userId, trans);
+        accAddHelper(accNum, trans);
     }
 }
