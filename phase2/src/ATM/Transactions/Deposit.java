@@ -16,7 +16,7 @@ public class Deposit extends Transaction{
     private final int amount;
     private String fromBaseCurrency = "CAD";
     private double exRate = 1;
-    private final String toCurrency = ;
+    private final String toCurrency;
 
 
     /***
@@ -68,7 +68,7 @@ public class Deposit extends Transaction{
      */
     @Override
     void begin() {
-        getToAcc().deposit(this.getAmount()*exRate);
+        getToAcc().deposit(this.getAmount()) * exRate);
         setHappened(true);
     }
 
