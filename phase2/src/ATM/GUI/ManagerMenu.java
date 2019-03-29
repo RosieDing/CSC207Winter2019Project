@@ -19,18 +19,30 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class ManagerMenu extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtPassword;
+	private JPasswordField passwordField;
     
 
 
 	/**
 	 * Launch the application.
 	 */
-
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ManagerMenu frame = new ManagerMenu(IDMenu.getID());
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -55,19 +67,14 @@ public class ManagerMenu extends JFrame {
 		lblPassword.setBounds(79, 80, 73, 16);
 		contentPane.add(lblPassword);
 		
-		txtPassword = new JTextField();
-		txtPassword.setColumns(10);
-		txtPassword.setBounds(146, 75, 130, 26);
-		contentPane.add(txtPassword);
-		
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String password = txtPassword.getText();
+				String password = new String(passwordField.getPassword());
 				passwordManager.login(password);
 				if (passwordManager.isLogin()){
 					ManagerMenu.this.dispose();
-					new ManagerMainMenu().setVisible(true);
+					new ManagerMainMenu(id).setVisible(true);
 				}else {
 					JOptionPane.showMessageDialog(null, "Password wrong! Please enter again.");
 				
@@ -83,6 +90,9 @@ public class ManagerMenu extends JFrame {
 		lblEnterPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEnterPassword.setBounds(6, 27, 440, 16);
 		contentPane.add(lblEnterPassword);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(146, 75, 130, 26);
+		contentPane.add(passwordField);
 	}
-
 }

@@ -1,6 +1,21 @@
 package ATM.GUI;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import ATM.AccountTypeChecker.*;
+import ATM.Accounts.Account;
+import ATM.Accounts.ChequingAccount;
+import ATM.Accounts.CreditAccount;
+import ATM.Accounts.Withdrawable;
 import ATM.BankIdentities.*;
+import ATM.InfoHandling.InfoManager;
+import ATM.Machine.CashNotWithdrawableException;
+import ATM.Machine.NotEnoughMoneyException;
+import ATM.Transactions.NoTransactionException;
+import ATM.Transactions.Transaction;
+import ATM.Transactions.TransactionManager;
+import ATM.Transactions.Withdrawal;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,19 +26,30 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;;
 
 
 public class UserMenu extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtPassword;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
 	 */
-
-
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UserMenu frame = new UserMenu(IDMenu.getID());
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -42,7 +68,7 @@ public class UserMenu extends JFrame {
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String password = txtPassword.getText();
+				String password = new String(passwordField.getPassword());
 				passwordManager.login(password);
 				if (passwordManager.isLogin()){
 					UserMenu.this.dispose();
@@ -54,11 +80,6 @@ public class UserMenu extends JFrame {
 		});
 		btnNext.setBounds(288, 75, 117, 29);
 		contentPane.add(btnNext);
-		
-		txtPassword = new JTextField();
-		txtPassword.setColumns(10);
-		txtPassword.setBounds(146, 75, 130, 26);
-		contentPane.add(txtPassword);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setBounds(79, 80, 73, 16);
@@ -73,6 +94,10 @@ public class UserMenu extends JFrame {
 		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWelcome.setBounds(6, 6, 440, 16);
 		contentPane.add(lblWelcome);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(156, 75, 120, 26);
+		contentPane.add(passwordField);
 	}
 
 }
