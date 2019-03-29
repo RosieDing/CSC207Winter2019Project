@@ -6,7 +6,7 @@ import ATM.BankSystem.Time;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class GICPlan implements Plan {
+public abstract class GICPlan implements Plan {
 
     protected LocalDate current = Time.getTime().getSystemCurrentTime();
 
@@ -70,4 +70,6 @@ public class GICPlan implements Plan {
         int months = p.getMonths();
         return (years+1) *12 + months+1;
     }
+
+    public abstract String toString();
 }

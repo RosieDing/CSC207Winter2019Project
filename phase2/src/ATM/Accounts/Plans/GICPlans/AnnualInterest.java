@@ -8,4 +8,9 @@ public class AnnualInterest extends GICPlan{
         setInterestRate(interestRate);
         setPeriodOfMonth(periodOfMonth);
     }
+
+    @Override
+    public String toString(){
+        return "One Year GIC Plan with interesting rate" + interestRate;
+    }
 }

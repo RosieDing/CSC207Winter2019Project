@@ -11,4 +11,9 @@ public class FiveYearInterest extends GICPlan implements Serializable {
         setInterestRate(interestRate);
         setPeriodOfMonth(periodOfMonth);
     }
+
+    @Override
+    public String toString(){
+        return "Five Years GIC Plan with interesting rate" + interestRate;
+    }
 }

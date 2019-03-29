@@ -11,10 +11,14 @@ public class MortagagePaymentCalculator {
         this.interestingRate = interestingRate;
         this.termOfMonth = termsOfyear*12;
         this.loan = loan;
-        this.monthlyPayment = (loan * monthLyRate) / (1-Math.pow(1+ monthLyRate, - termOfMonth));
+        this.monthlyPayment = (this.loan * monthLyRate) / (1-Math.pow(1+ monthLyRate, - termOfMonth));
     }
 
     public double getMonthlyPayment(){
         return getMonthlyPayment();
+    }
+
+    public void setMonthLyRate(double newRate){
+        this.monthLyRate = newRate;
     }
 }
