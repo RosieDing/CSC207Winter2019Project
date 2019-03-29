@@ -14,6 +14,9 @@ public class RegularTrans extends Transaction{
     private final TransferInable toAcc;
     private final LocalDateTime time;
     private final double amount;
+    private String fromCurrency;
+    private String toBaseCurrency;
+    private double exRate;
 
     /***
      * Create a new RegularTrans.
@@ -26,6 +29,11 @@ public class RegularTrans extends Transaction{
         this.fromAcc = fromAcc;
         this.toAcc = toAcc;
         time = LocalDateTime.now();
+        this.fromCurrency = ((Account)fromAcc).getBaseCurrency();
+        this.toBaseCurrency = ((Account)toAcc).getBaseCurrency();
+        if(this.fromCurrency != toBaseCurrency){
+            this.exRate = exchangeToBaseCurrency(fromCurrency,toBaseCurrency);
+        }
     }
 
     public double getAmount() {
@@ -63,10 +71,10 @@ public class RegularTrans extends Transaction{
      */
     @Override
     void begin() throws TransactionAmountOverLimitException{
-        if (getAmount() > getFromAcc().getAvailableCredit()) {
+        if (getAmount()*exRate > getFromAcc().getAvailableCredit()) {
             throw new TransactionAmountOverLimitException();
         }
-        fromAcc.transferOut(this.getAmount());
+        fromAcc.transferOut(getAmount()*exRate);
         toAcc.transferIn(this.getAmount());
         setHappened(true);
     }

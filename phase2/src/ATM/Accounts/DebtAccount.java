@@ -74,7 +74,7 @@ public abstract class DebtAccount extends BasicAccount {
      * @param amount The given amount of money
      */
     @Override
-    public void withdraw(int amount){
+    public void withdraw(double amount){
         this.balance += amount;
     }
 

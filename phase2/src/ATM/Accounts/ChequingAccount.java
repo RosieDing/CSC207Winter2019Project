@@ -20,7 +20,6 @@ public class ChequingAccount extends AssetAccount{
     /**
      * Constructor of Chequing account
      * Create a new Chequing account with owner ID and total number of accounts created
-     *
      * @param ownerID the ID of the owner
      * @param totalNumAcc the total number of accounts created
      */

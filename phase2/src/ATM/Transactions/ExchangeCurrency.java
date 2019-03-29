@@ -23,13 +23,12 @@ public class ExchangeCurrency extends Transaction{
     final private double amount;
     final private LocalDate time = Time.getTime().getSystemCurrentTime();
 
-    public ExchangeCurrency(TransferOutable fromAcc, TransferInable toAcc, String fromCurrency,
-                            String toCurrency, Double amount) {
+    public ExchangeCurrency(TransferOutable fromAcc, TransferInable toAcc, Double amount) {
         this.amount = amount;
         this.fromAcc = fromAcc;
         this.toAcc = toAcc;
-        this.fromCurrency = fromCurrency;
-        this.toCurrency = toCurrency;
+        this.fromCurrency = ((Account)fromAcc).getBaseCurrency();
+        this.toCurrency = ((Account)fromAcc).getBaseCurrency();
     }
 
     public Account getFromAcc() {
@@ -69,6 +68,7 @@ public class ExchangeCurrency extends Transaction{
                 throw new TransactionAmountOverLimitException();
             }
         }
+
         OpenExchangeRates oer = new OpenExchangeRates();
         BigDecimal rate = oer.getExchangeRate(getFromCurrency(), getToCurrency());
         if (rate != null){

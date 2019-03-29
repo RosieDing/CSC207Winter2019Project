@@ -3,8 +3,10 @@ package ATM.Transactions;
 import ATM.Accounts.Account;
 import ATM.Machine.CashNotWithdrawableException;
 import ATM.Machine.NotEnoughMoneyException;
+import ATM.org.openexchangerates.oerjava.OpenExchangeRates;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /***
  * Abstract class Transaction
@@ -58,5 +60,11 @@ public abstract class Transaction implements Serializable {
      * @throws ReverseNotPossibleException
      */
     public abstract Transaction reverse() throws ReverseNotPossibleException;
+
+    protected double exchangeToBaseCurrency(String inCurrency,String outCurrency){
+        OpenExchangeRates oer = new OpenExchangeRates();
+        BigDecimal rateDecial = oer.getExchangeRate(inCurrency, outCurrency);
+        return rateDecial.doubleValue();
+    }
 
 }

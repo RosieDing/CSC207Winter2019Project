@@ -14,6 +14,10 @@ public class Deposit extends Transaction{
     private final Depositable toAcc;
     private final LocalDateTime time;
     private final int amount;
+    private String fromBaseCurrency = "CAD";
+    private double exRate = 1;
+    private final String toCurrency = ;
+
 
     /***
      * Create a new Deposit.
@@ -26,6 +30,10 @@ public class Deposit extends Transaction{
         this.toAcc = toAccount;
         this.fromAcc = null;
         this.time = LocalDateTime.now();
+        this.toCurrency = ((Account)toAccount).getBaseCurrency();
+        if(this.toCurrency != fromBaseCurrency){
+            this.exRate = exchangeToBaseCurrency(fromBaseCurrency, toCurrency);
+        }
     }
 
     public int getAmount() {
@@ -60,7 +68,7 @@ public class Deposit extends Transaction{
      */
     @Override
     void begin() {
-        getToAcc().deposit(this.getAmount());
+        getToAcc().deposit(this.getAmount()*exRate);
         setHappened(true);
     }
 

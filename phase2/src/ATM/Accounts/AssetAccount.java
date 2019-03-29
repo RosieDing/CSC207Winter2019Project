@@ -73,7 +73,7 @@ public abstract class AssetAccount extends BasicAccount implements TransferOutab
      * @param amount The given amount of money
      */
     @Override
-    public void withdraw(int amount) {
+    public void withdraw(double amount) {
         balance -= amount;
     }
 

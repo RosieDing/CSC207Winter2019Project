@@ -4,7 +4,9 @@ package ATM.Transactions;
 import ATM.Accounts.Account;
 import ATM.Accounts.TransferTypes.Payable;
 import ATM.InfoHandling.BillWriter;
+import ATM.org.openexchangerates.oerjava.OpenExchangeRates;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /***
@@ -17,6 +19,10 @@ public class PayBill extends Transaction{
     private final LocalDateTime time;
     private final double amount;
     private  BillWriter writer = new BillWriter();
+    private String fromCurrency;
+    private double exRate = 1;
+    private final String baseCurrency = "CAD";
+
 
     /***
      * Create a new PayBill.
@@ -30,6 +36,10 @@ public class PayBill extends Transaction{
         this.toAcc = null;
         this.to = to;
         this.time = LocalDateTime.now();
+        this.fromCurrency = ((Account)fromAccount).getBaseCurrency();
+        if(this.fromCurrency != baseCurrency){
+            this.exRate = exchangeToBaseCurrency(fromCurrency,baseCurrency);
+        }
     }
 
     public double getAmount() {
@@ -67,13 +77,14 @@ public class PayBill extends Transaction{
      */
     @Override
     void begin() throws TransactionAmountOverLimitException{
-        if (getAmount() > getFromAcc().getAvailableCredit()) {
+        if (amount*exRate > getFromAcc().getAvailableCredit()) {
             throw new TransactionAmountOverLimitException();
         }
-        fromAcc.pay(this.getAmount());
+        fromAcc.pay(this.getAmount()*exRate);
         setHappened(true);
         writer.write(this.toString());
     }
+
 
     /***
      * Not possible to reverse a PayBill

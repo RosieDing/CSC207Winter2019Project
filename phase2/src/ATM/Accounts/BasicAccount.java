@@ -29,6 +29,6 @@ public abstract class BasicAccount extends Account implements Withdrawable, Tran
         public abstract void pay(double amount);
 
         /**Abstract Method for withdraw money from account */
-        public abstract void withdraw(int amount);
+        public abstract void withdraw(double amount);
 
     }

@@ -2,6 +2,7 @@ package ATM.Transactions;
 
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
+import ATM.Accounts.TransferTypes.Depositable;
 import ATM.Accounts.TransferTypes.Withdrawable;
 import ATM.InfoHandling.InfoManager;
 import ATM.Machine.CashNotWithdrawableException;
@@ -17,6 +18,9 @@ public class Withdrawal extends Transaction {
     private final Account toAcc;
     private final LocalDateTime time;
     private final int amount;
+    private String fromCurrency;
+    private double exRate = 1;
+    private final String baseCurrency = "CAD";
 
     /***
      * Create a new Withdrawal
@@ -28,6 +32,10 @@ public class Withdrawal extends Transaction {
         this.fromAcc = fromAcc;
         this.toAcc = null;
         this.time = LocalDateTime.now();
+        this.fromCurrency = ((Account)fromAcc).getBaseCurrency();
+        if(this.fromCurrency != baseCurrency){
+            this.exRate = exchangeToBaseCurrency(fromCurrency,baseCurrency);
+        }
     }
 
     public int getAmount() {
@@ -79,10 +87,10 @@ public class Withdrawal extends Transaction {
                 throw new TransactionAmountOverLimitException();
             }
         }
-        if (getAmount() > acc.getAvailableCredit()) {
+        if (getAmount()*exRate > acc.getAvailableCredit()) {
             throw new TransactionAmountOverLimitException();
         }
-        getFromAcc().withdraw(this.getAmount());
+        fromAcc.withdraw((Double.valueOf(amount))* exRate);
         setHappened(true);
     }
 
@@ -93,8 +101,8 @@ public class Withdrawal extends Transaction {
      */
     @Override
     public Deposit reverse() {
-        Account toAcc = getFromAcc();
-        return new Deposit(toAcc, this.getAmount());
+        Depositable toAcc = (Depositable)getFromAcc();
+        return new Deposit(toAcc ,this.getAmount());
     }
 
     /***

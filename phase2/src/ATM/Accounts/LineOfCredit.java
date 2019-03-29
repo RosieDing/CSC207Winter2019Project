@@ -1,13 +1,14 @@
 package ATM.Accounts;
 
 import ATM.Accounts.TransferTypes.TransferOutable;
+import ATM.Accounts.TransferTypes.Withdrawable;
 
 import java.util.ArrayList;
 
 /**
  * a class that represent a Line of credit account
  */
-public class LineOfCredit extends DebtAccount implements TransferOutable {
+public class LineOfCredit extends DebtAccount{
 
     /** The account number */
     private final String accountNum;
