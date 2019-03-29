@@ -105,7 +105,7 @@ import java.util.Map;
             } else {
                 BigDecimal middleRate = latest().get(base);
                 BigDecimal targetRate = latest().get(currency);
-                result = (middleRate.divide(targetRate));
+                result = (targetRate.divide(middleRate));
             }
             return result;
         }
