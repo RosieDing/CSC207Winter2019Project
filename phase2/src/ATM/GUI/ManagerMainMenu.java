@@ -3,6 +3,13 @@ package ATM.GUI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import ATM.BankIdentities.AccountCreator;
+import ATM.BankIdentities.BankManager;
+import ATM.BankIdentities.PasswordManager;
+import ATM.BankSystem.BankSystem;
+import ATM.Machine.Money;
+import ATM.Transactions.NoTransactionException;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,12 +26,25 @@ public class ManagerMainMenu extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ManagerMainMenu frame = new ManagerMainMenu();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public ManagerMainMenu() {
+	public ManagerMainMenu(String id) {
+        BankManager bankManager = BankSystem.getInfoManager().getBankManager(id);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -66,6 +86,12 @@ public class ManagerMainMenu extends JFrame {
 		contentPane.add(btnRestock);
 		
 		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                bankManager.getPassManager().logout();
+                ManagerMainMenu.this.dispose();
+			}
+		});
 		btnLogout.setBounds(182, 155, 125, 29);
 		contentPane.add(btnLogout);
 	}

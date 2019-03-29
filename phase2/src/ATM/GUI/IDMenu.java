@@ -32,6 +32,7 @@ public class IDMenu extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 
 
 	public void identityLog(String id) {
@@ -93,6 +94,7 @@ public class IDMenu extends JFrame {
 
 
 	public static InfoManager getInfoManager() {
+		// TODO Auto-generated method stub
 		return infoManager;
 	}
 	public static String getID() {
