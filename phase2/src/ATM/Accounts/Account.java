@@ -26,6 +26,8 @@ public abstract class Account implements TransferInable, Serializable {
     /**The ID of the User whom this account belongs to */
     private ArrayList<String> ownerID;
 
+    private String baseCurrency = "CAD";
+
 
     /**
      * Constructor of account
@@ -82,4 +84,9 @@ public abstract class Account implements TransferInable, Serializable {
 
     /** Abstract method for calculating the net balance*/
     public abstract double getNetBalance();
+
+    public String getBaseCurrency(){return baseCurrency;}
+
+    public void setBaseCurrency(String newBaseCurrency){this.baseCurrency = newBaseCurrency;
+    }
 }
