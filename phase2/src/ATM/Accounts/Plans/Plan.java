@@ -1,8 +1,8 @@
-package ATM.Accounts.ISaverPlans;
+package ATM.Accounts.Plans;
 /**
  * The interface for the plans for Saving account
  */
 
-public interface ISaverPlan {
+public interface Plan {
     double compute(double amount);
 }

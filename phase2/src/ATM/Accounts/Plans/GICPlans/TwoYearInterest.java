@@ -1,4 +1,4 @@
-package ATM.Accounts.ISaverPlans.GICPlans;
+package ATM.Accounts.Plans.GICPlans;
 
 public class TwoYearInterest extends GICPlan{
     private final double  interestRate = 0.15;

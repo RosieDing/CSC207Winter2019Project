@@ -1,6 +1,6 @@
 package ATM.Accounts;
 
-import ATM.Accounts.ISaverPlans.GICPlans.GICPlan;
+import ATM.Accounts.Plans.GICPlans.GICPlan;
 
 import java.time.LocalDate;
 import java.time.Period;

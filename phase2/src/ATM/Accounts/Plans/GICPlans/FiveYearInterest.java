@@ -1,4 +1,4 @@
-package ATM.Accounts.ISaverPlans.GICPlans;
+package ATM.Accounts.Plans.GICPlans;
 
 import java.io.Serializable;
 

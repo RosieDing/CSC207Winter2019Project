@@ -1,12 +1,12 @@
-package ATM.Accounts.ISaverPlans.GICPlans;
+package ATM.Accounts.Plans.GICPlans;
 
-import ATM.Accounts.ISaverPlans.ISaverPlan;
+import ATM.Accounts.Plans.Plan;
 import ATM.BankSystem.Time;
 
 import java.time.LocalDate;
 import java.time.Period;
 
-public class GICPlan implements ISaverPlan {
+public class GICPlan implements Plan {
 
     protected LocalDate current = Time.getTime().getSystemCurrentTime();
 

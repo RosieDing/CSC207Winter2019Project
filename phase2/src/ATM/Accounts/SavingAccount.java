@@ -1,6 +1,6 @@
 package ATM.Accounts;
 
-import ATM.Accounts.ISaverPlans.ISaverPlan;
+import ATM.Accounts.Plans.Plan;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class SavingAccount extends AssetAccount {
 
     /** The saving plan for this account*/
-    private ISaverPlan iSaverPlan;
+    private Plan Plan;
 
     /** The account number */
     private final String accountNum;
@@ -25,11 +25,11 @@ public class SavingAccount extends AssetAccount {
      * @param plan the plan which result in the value of interest
      * @param totalNumAcc the total number of accounts created
      */
-    public SavingAccount(ArrayList<String> ownerID, ISaverPlan plan, int totalNumAcc){
+    public SavingAccount(ArrayList<String> ownerID, Plan plan, int totalNumAcc){
         super(ownerID);
-        this.iSaverPlan = plan;
+        this.Plan = plan;
         this.accountNum = saving_code +  (totalNumAcc + 1);
-        setBalance(iSaverPlan.compute(getBalance()));
+        setBalance(Plan.compute(getBalance()));
     }
 
     /**Getter method for available credit
@@ -49,8 +49,8 @@ public class SavingAccount extends AssetAccount {
     }
 
     /**Setter method for saver plan */
-    public void setSaverPlan(ISaverPlan s) {
-        this.iSaverPlan = s;
+    public void setSaverPlan(Plan s) {
+        this.Plan = s;
     }
 
     /**
