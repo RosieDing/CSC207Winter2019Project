@@ -2,6 +2,7 @@ package ATM.InfoHandling;
 
 import ATM.Accounts.Account;
 import ATM.BankIdentities.BankManager;
+import ATM.BankIdentities.BankStuff;
 import ATM.BankIdentities.User;
 import ATM.Machine.CashMachine;
 import ATM.Transactions.Transaction;
@@ -20,6 +21,9 @@ public class InfoStorer implements Serializable {
 
     /**A mapping of User ID to User */
     private Map<String, User> userMap;
+
+    /**A mapping of User ID to BankStuff */
+    private Map<String, BankStuff> stuffMap;
 
     /**A mapping of Bank manager ID to Bank manager*/
     private Map<String, BankManager> bankManagerMap;
@@ -82,6 +86,14 @@ public class InfoStorer implements Serializable {
     }
 
     /**
+     * Get the stuffMap
+     * @return stuffMap
+     */
+    public Map<String, BankStuff> getsuffMap() {
+        return stuffMap;
+    }
+
+    /**
      * Get the bankManagerMap
      * @return bankManagerMap
      */
@@ -94,6 +106,8 @@ public class InfoStorer implements Serializable {
     public Map<String, String> getAccountCreationRequest() {
         return accountCreationRequest;
     }
+
+
 
     /**
      * Get the CashMachine

@@ -16,21 +16,7 @@ public class UserTransactionWithdrawal extends JFrame {
 	private JTextField txtAmount;
 	private JTextField txtID;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UserTransactionWithdrawal frame = new UserTransactionWithdrawal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
