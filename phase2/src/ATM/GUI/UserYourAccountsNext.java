@@ -20,21 +20,7 @@ public class UserYourAccountsNext extends JFrame {
 	private JTextField txtTrans;
 	private JTextField txtDate;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UserYourAccountsNext frame = new UserYourAccountsNext();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
