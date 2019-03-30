@@ -1,6 +1,7 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.*;
+import ATM.Accounts.Plans.GICPlans.GICPlan;
 import ATM.Accounts.Plans.Plan;
 
 
@@ -90,4 +91,44 @@ public class AccountCreator {
             System.out.println(e);
         }
     }
+
+    /** Create New GIC Account for the User
+     *
+     * @param user the user
+     *  */
+    public void createNewGICAccount(int totalAccNum, AccountOwnable user, Map<String, Account> accountMap, GICPlan plan, double principle){
+        String userID = user.getId();
+        UserAccManager m = new UserAccManager(userID, accountMap);
+        ArrayList<String> userList = new ArrayList<>();
+        userList.add(userID);
+        GICAccount acc = new GICAccount(userList, totalAccNum, plan, principle);
+        m.addGlobalMap(acc.getAccountNum(), acc);
+        try {
+            user.addAccount(acc);
+        } catch (UserNotOwnAccountException e) {
+            System.out.println(e);
+        }
+    }
+
+    /** Create New ForeignCurrency Account for the User
+     *
+     * @param user the user
+     *  */
+    public void createNewForeignAccount(int totalAccNum, AccountOwnable user, Map<String, Account> accountMap, String currency){
+        String userID = user.getId();
+        UserAccManager m = new UserAccManager(userID, accountMap);
+        ArrayList<String> userList = new ArrayList<>();
+        userList.add(userID);
+        ForeignCurrencyChequingAccount acc = new ForeignCurrencyChequingAccount(userList, totalAccNum, currency);
+        m.addGlobalMap(acc.getAccountNum(), acc);
+        try {
+            user.addAccount(acc);
+        } catch (UserNotOwnAccountException e) {
+            System.out.println(e);
+        }
+    }
+
+
+
+
 }
