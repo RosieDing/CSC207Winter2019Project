@@ -26,9 +26,7 @@ public class IDMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtID;
-	public InfoManager infoManager;
-	public InfoStorer infoStorer;
-	private static String ID;
+	private String ID;
 
 
 	/**
@@ -37,7 +35,7 @@ public class IDMenu extends JFrame {
 
 
 
-	public void identityLog(String id) {
+	public void identityLog(String id, InfoStorer infoStorer, InfoManager infoManager) {
 
 		if (infoStorer.getBankManagerMap().containsKey(id)) {
 			IDMenu.this.dispose();
@@ -57,6 +55,10 @@ public class IDMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public IDMenu() {
+		InfoManager infoManager = new InfoManager();
+		InfoStorer infoStorer = infoManager.getInfoStorer();
+
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -86,16 +88,12 @@ public class IDMenu extends JFrame {
 					infoManager.add(defaultManager);
 				}
 				ID = txtID.getText();
-				identityLog(ID);
+				identityLog(ID, infoStorer, infoManager);
 
 			}
 		});
 		btnNext.setBounds(287, 74, 117, 29);
 		contentPane.add(btnNext);
-	}
-
-	public static String getID() {
-		return ID;
 	}
 
 }
