@@ -61,10 +61,5 @@ public abstract class Transaction implements Serializable {
      */
     public abstract Transaction reverse() throws ReverseNotPossibleException;
 
-    protected double exchangeToBaseCurrency(String inCurrency,String outCurrency){
-        OpenExchangeRates oer = new OpenExchangeRates();
-        BigDecimal rateDecial = oer.getExchangeRate(inCurrency, outCurrency);
-        return rateDecial.doubleValue();
-    }
 
 }

@@ -22,9 +22,10 @@ public class ChequingAccount extends AssetAccount{
      * Create a new Chequing account with owner ID and total number of accounts created
      * @param ownerID the ID of the owner
      * @param totalNumAcc the total number of accounts created
+     * @param type the currency type
      */
-    public ChequingAccount(ArrayList<String> ownerID, int totalNumAcc){
-        super(ownerID);
+    public ChequingAccount(ArrayList<String> ownerID, int totalNumAcc, String type){
+        super(ownerID, type);
         this.accountNum = chequing_code + (totalNumAcc + 1);
     }
 
@@ -39,8 +40,8 @@ public class ChequingAccount extends AssetAccount{
     /**Getter method for getting the available credit of Chequing account
      * Available credit is the amount of money which can be retrieved from this account*/
     @Override
-    public double getAvailableCredit(){
-        return (getBalance() +overDraftLimit);
+    public Currency getAvailableCredit(){
+        return new Currency(getCurrencyType(), getBalance().getAmount() +overDraftLimit);
     }
 
     /**Getter method for getting the account number of chequing account */
@@ -55,7 +56,7 @@ public class ChequingAccount extends AssetAccount{
      */
     @Override
     public String toString() {
-        return ("Chquing Account " + this.accountNum);
+        return (getCurrencyType() + " Chquing Account " + this.accountNum);
     }
 
     /**

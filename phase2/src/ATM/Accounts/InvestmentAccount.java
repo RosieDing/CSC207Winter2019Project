@@ -14,5 +14,5 @@ public abstract class InvestmentAccount extends Account implements TransferOutab
     }
 
     @Override
-    public abstract void transferOut(double amount);
+    public abstract void transferOut(Currency amount);
 }

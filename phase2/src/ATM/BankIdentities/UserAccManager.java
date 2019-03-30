@@ -1,6 +1,7 @@
 package ATM.BankIdentities;
 import ATM.AccountTypeChecker.TypeChecker;
 import ATM.Accounts.*;
+import ATM.Accounts.Currency;
 
 import java.io.Serializable;
 import java.util.*;
@@ -107,14 +108,14 @@ public class UserAccManager implements Serializable,Iterable<Account>{
 
     /**
      * Get the net total balance
-     * @return the net total of all the acounts
+     * @return the Canadian dollars net total of all the acounts
      */
     public double getNetTotal(){
-        double sum = 0;
+        Currency sum = new Currency("CAD", 0);
         for (Account acc: this) {
-            sum += acc.getNetBalance();
+            sum.add(acc.getNetBalance());
         }
-        return sum;
+        return sum.getAmount();
     }
 
     @Override

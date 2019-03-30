@@ -19,9 +19,10 @@ public class CreditAccount extends DebtAccount {
      * @param ownerID the ID of the owner
      * @param limit the limit of this credit account
      * @param totalNumAcc the total number of accounts created
+     * @param type the currency type
      */
-    public CreditAccount(ArrayList<String> ownerID, double limit, int totalNumAcc){
-        super(ownerID, limit);
+    public CreditAccount(ArrayList<String> ownerID, double limit, int totalNumAcc, String type){
+        super(ownerID, limit, type);
         this.accountNum = credit_code + (totalNumAcc+1);
     }
 
@@ -38,7 +39,7 @@ public class CreditAccount extends DebtAccount {
      */
     @Override
     public String toString() {
-        return ("Credit Account " + this.accountNum);
+        return (this.getCurrencyType() + " Credit Account " + this.accountNum);
     }
 
     /**

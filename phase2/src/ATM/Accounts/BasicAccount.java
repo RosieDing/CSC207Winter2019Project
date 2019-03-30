@@ -22,13 +22,16 @@ public abstract class BasicAccount extends Account implements Withdrawable, Tran
         super(ownerID);
     }
 
+        @Override
         /**Abstract Method for deposit money to account*/
-        public abstract void deposit(double amount);
+        public abstract void deposit(Currency amount);
 
+        @Override
         /**Abstract Method for paying money from account */
-        public abstract void pay(double amount);
+        public abstract void pay(Currency amount);
 
+        @Override
         /**Abstract Method for withdraw money from account */
-        public abstract void withdraw(double amount);
+        public abstract void withdraw(Currency amount);
 
     }

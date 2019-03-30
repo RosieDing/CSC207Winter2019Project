@@ -22,18 +22,18 @@ public class LineOfCredit extends DebtAccount{
      * @param ownerID the ID of the owner
      * @param limit the limit of this line of credit account
      * @param totalNumAcc the total number of accounts created
+     * @param type the currency type
      */
-    public LineOfCredit(ArrayList<String> ownerID, double limit, int totalNumAcc) {
-        super(ownerID, limit);
+    public LineOfCredit(ArrayList<String> ownerID, double limit, int totalNumAcc, String type) {
+        super(ownerID, limit, type);
         this.accountNum = lineOfCredit_code + (totalNumAcc+1);
     }
 
     /**Transfer money with given amount out of line of credit account
      * @param amount the given amount of money
      */
-    @Override
-    public void transferOut(double amount){
-        setBalance(getBalance() + amount);
+    public void transferOut(Currency amount){
+        getBalance().add(amount);
     }
 
     /**Getter for getting line of credit account number */
@@ -47,7 +47,7 @@ public class LineOfCredit extends DebtAccount{
      */
     @Override
     public String toString() {
-        return ("Line of Credit " + this.accountNum);
+        return (this.getCurrencyType() + " Line of Credit " + this.accountNum);
     }
 
     /**

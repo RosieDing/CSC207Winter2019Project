@@ -12,74 +12,80 @@ public abstract class AssetAccount extends BasicAccount implements TransferOutab
     /**
      * Account balance represents how much money is stored in this account
      */
-    private double balance;
+    private Currency balance;
 
     /**
      * Constructor of asset account
      * Create a new asset account with ownerID
      * @param ownerID the ID of the owner
+     * @param type the currency type
      */
-    AssetAccount(ArrayList<String> ownerID){
+    AssetAccount(ArrayList<String> ownerID, String type){
            super(ownerID);
+           this.balance = new Currency(type, 0);
     }
 
     /** Returen the account balance*/
     @Override
-    public double getBalance() {
+    public Currency getBalance() {
         return balance;
     }
+
+    public String getCurrencyType(){
+        return this.balance.getType();
+    };
 
     /**Set the balance of the asset account
      * @param balance The new balance
      */
     @Override
     public void setBalance(double balance) {
-        this.balance = balance;
+        this.balance.setAmount(balance);
     }
 
     /**Transfer in money with given amount to the asset account
      * @param amount The given amount of money
      */
     @Override
-    public void transferIn(double amount) {
-        balance += amount;
+    public void transferIn(Currency amount) {
+        balance.add(amount);
     }
 
     /**Deposit money with given amount to the asset account
      * @param amount The given amount of money
      */
     @Override
-    public void deposit(double amount){
-        balance += amount;
+    public void deposit(Currency amount){
+        balance.add(amount);
     }
 
     /**Transfer out money with given amount from the asset account
      * @param amount The given amount of money
      */
     @Override
-    public void transferOut(double amount) {
-        balance -= amount;
+    public void transferOut(Currency amount) {
+        balance.subtract(amount);
     }
 
     /**Pay money with given amount from the asset account
      * @param amount The given amount of money
      */
     @Override
-    public void pay(double amount) {
-        balance -= amount;
+    public void pay(Currency amount) {
+        balance.subtract(amount);
     }
 
     /**Withdraw money with given amount from the asset account
      * @param amount The given amount of money
      */
     @Override
-    public void withdraw(double amount) {
-        balance -= amount;
+    public void withdraw(Currency amount) {
+        balance.subtract(amount);
     }
 
     /**Calculating the net balance*/
     @Override
-    public double getNetBalance(){
+    public Currency getNetBalance(){
         return balance;
     }
 }

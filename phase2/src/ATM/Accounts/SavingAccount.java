@@ -24,19 +24,20 @@ public class SavingAccount extends AssetAccount {
      * @param ownerID the ID of the owner
      * @param plan the plan which result in the value of interest
      * @param totalNumAcc the total number of accounts created
+     * @param type the currency type
      */
-    public SavingAccount(ArrayList<String> ownerID, Plan plan, int totalNumAcc){
-        super(ownerID);
+    public SavingAccount(ArrayList<String> ownerID, Plan plan, int totalNumAcc, String type){
+        super(ownerID, type);
         this.Plan = plan;
         this.accountNum = saving_code +  (totalNumAcc + 1);
-        setBalance(Plan.compute(getBalance()));
+        setBalance(Plan.compute(getBalance().getAmount()));
     }
 
     /**Getter method for available credit
      * @return available credit: the amount of money which can be retrieved from this account
      */
     @Override
-    public double getAvailableCredit() {
+    public Currency getAvailableCredit() {
         return getBalance();
     }
 
@@ -59,7 +60,7 @@ public class SavingAccount extends AssetAccount {
      */
     @Override
     public String toString() {
-        return ("Saving Account " + this.accountNum);
+        return (this.getCurrencyType() + " Saving Account " + this.accountNum);
     }
 
     /**

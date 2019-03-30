@@ -1,7 +1,10 @@
 package ATM.Accounts.TransferTypes;
+
+import ATM.Accounts.Currency;
+
 /**
  * The interface for depositable of the accounts
  */
 public interface Depositable {
-    void deposit(double amount);
+    void deposit(Currency amount);
 }
