@@ -1,14 +1,14 @@
 package ATM.Accounts.Plans.GICPlans;
 
 import ATM.Accounts.Plans.Plan;
-import ATM.BankSystem.Time;
+import ATM.BankSystem.Date;
 
 import java.time.LocalDate;
 import java.time.Period;
 
 public abstract class GICPlan implements Plan {
 
-    protected LocalDate current = Time.getTime().getSystemCurrentTime();
+    protected LocalDate current = Date.getDate().getSystemCurrentTime();
 
     private double interestRate;
     private int periodOfMonth;

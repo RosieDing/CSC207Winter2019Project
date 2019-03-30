@@ -1,10 +1,7 @@
 package ATM.Accounts;
 
-import ATM.Accounts.TransferTypes.Depositable;
-import ATM.Accounts.TransferTypes.Payable;
 import ATM.Accounts.TransferTypes.TransferInable;
-import ATM.Accounts.TransferTypes.Withdrawable;
-import ATM.BankSystem.Time;
+import ATM.BankSystem.Date;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,9 +13,9 @@ import java.util.ArrayList;
  */
 public abstract class Account implements TransferInable, Serializable {
 
-    /**The time when an account is created */
-    Time time = new Time();
-    private final LocalDate dateOfCreation = time.getSystemCurrentTime();
+    /**The date when an account is created */
+    Date date = new Date();
+    private final LocalDate dateOfCreation = date.getSystemCurrentTime();
 
     /**The number of owners*/
     private int numOwner;
