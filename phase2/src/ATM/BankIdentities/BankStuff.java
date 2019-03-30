@@ -2,34 +2,30 @@ package ATM.BankIdentities;
 
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
+import ATM.InfoHandling.RecordWriter;
+import ATM.Machine.CashMachine;
+import ATM.Machine.Money;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-/** a class that access to a user's account and primary account */
-public class User extends BankIdentity {
-
+/** A class that represent a BankStuff*/
+public class BankStuff extends BankEmployee implements PrivilegeLevelB{
     /** The id of the user */
     private final String id;
     /** The account list of the user */
     private ArrayList<Account> accounts = new ArrayList<>();
     /** The primary account of the user */
     private ChequingAccount primaryChq;
-
-    /**
-     * Create a new user
-     * @param totalUserNum The total number of the users created*/
-    public User(int totalUserNum) {
-        this.id = "020" + totalUserNum + 1;
+    public BankStuff(int totalNum){
+        this.id = "710" + totalNum + 1;
     }
-
     /** Return the Id of the user
      * @return id
      */
     public String getId(){
         return id;
     }
-
 
 
     /** Set the primary chequing account
@@ -68,4 +64,19 @@ public class User extends BankIdentity {
     public ArrayList<Account> getUserAccounts(){
         return this.accounts;
     }
+
+    @Override
+    public void createUser(int Numuser, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account> accountListMap) {
+        super.createUser(Numuser, userMap, passwordMap, accountListMap);
+        RecordWriter rw = new RecordWriter();
+        rw.write(this.getId() + " create a user");
+    }
+
+    @Override
+    public void restock(CashMachine machine, Money money) {
+        super.restock(machine, money);
+        RecordWriter rw = new RecordWriter();
+        rw.write(this.getId() + " restock");
+    }
 }
+
