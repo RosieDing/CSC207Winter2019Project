@@ -26,8 +26,8 @@ public class IDMenu extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtID;
-	private static InfoManager infoManager;
-	private static InfoStorer infoStorer;
+	public InfoManager infoManager;
+	public InfoStorer infoStorer;
 	private static String ID;
 
 
@@ -41,11 +41,11 @@ public class IDMenu extends JFrame {
 
 		if (infoStorer.getBankManagerMap().containsKey(id)) {
 			IDMenu.this.dispose();
-			new ManagerMenu(id).setVisible(true);
+			new ManagerMenu(id, infoStorer, infoManager).setVisible(true);
 
 		} else if (infoStorer.getUserMap().containsKey(id)) {
 			IDMenu.this.dispose();
-			new UserMenu(id).setVisible(true);
+			new UserMenu(id, infoStorer, infoManager).setVisible(true);
 
 		} else {
 			JOptionPane.showMessageDialog(null, "ID not found. Please enter again");
@@ -83,7 +83,7 @@ public class IDMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (infoManager.getBankManagerNum() == 0) {
 					BankManager defaultManager = new BankManager(infoManager.getBankManagerNum(),infoStorer.getBankManagerMap(), "1234", infoStorer.getPasswordMap());
-					//infoManager.add(defaultManager);
+					infoManager.add(defaultManager);
 				}
 				ID = txtID.getText();
 				identityLog(ID);
@@ -97,10 +97,5 @@ public class IDMenu extends JFrame {
 	public static String getID() {
 		return ID;
 	}
-	public static InfoManager getInfoManager() {
-		return infoManager;
-	}
-	public static InfoStorer getInfoStorer() {
-		return infoStorer;
-	}
+
 }

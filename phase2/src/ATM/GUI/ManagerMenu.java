@@ -8,6 +8,8 @@ import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.PasswordManager;
 import ATM.Machine.Money;
 import ATM.Transactions.NoTransactionException;
+import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -37,8 +39,8 @@ public class ManagerMenu extends JFrame {
     /**
      * Create the frame.
      */
-    public ManagerMenu(String id) {
-        BankManager bankManager = IDMenu.getInfoManager().getBankManager(id);
+    public ManagerMenu(String id, InfoStorer infoStorer, InfoManager infoManager) {
+        BankManager bankManager = infoManager.getBankManager(id);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -65,7 +67,7 @@ public class ManagerMenu extends JFrame {
         btnNext.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String password = txtPassword.getText();
-                passwordManager.login(password, IDMenu.getInfoStorer().getPasswordMap());
+                passwordManager.login(password, infoStorer.getPasswordMap());
                 if (passwordManager.isLogin()){
                     ManagerMenu.this.dispose();
                     new ManagerMainMenu(id).setVisible(true);
