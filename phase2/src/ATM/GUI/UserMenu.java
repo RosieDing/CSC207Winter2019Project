@@ -1,6 +1,8 @@
 package ATM.GUI;
 
 import ATM.BankIdentities.*;
+import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,8 +32,8 @@ public class UserMenu extends JFrame {
     /**
      * Create the frame.
      */
-    public UserMenu(String id) {
-        User user = IDMenu.getInfoManager().getUser(id);
+    public UserMenu(String id,InfoStorer infoStorer, InfoManager infoManager) {
+        User user = infoManager.getUser(id);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -44,7 +46,7 @@ public class UserMenu extends JFrame {
         btnNext.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String password = txtPassword.getText();
-                passwordManager.login(password, IDMenu.getInfoStorer().getPasswordMap());
+                passwordManager.login(password, infoStorer.getPasswordMap());
                 if (passwordManager.isLogin()){
                     UserMenu.this.dispose();
                     new UserMainMenu().setVisible(true);
