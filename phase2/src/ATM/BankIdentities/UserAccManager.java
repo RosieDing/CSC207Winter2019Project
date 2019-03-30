@@ -12,58 +12,27 @@ public class UserAccManager implements Serializable,Iterable<Account>{
     private String ownerUserId;
 
     /** The list of accounts the user owns */
-    private ArrayList<Account> accountList;
+    private Map<String, Account>  accountList;
+
 
     /** Create a new user account manager
-     * @param accountListMap a global mapping of User ID to list of accounts
+     * @param accountList a global mapping of User ID to list of accounts
      * @param ownerUserId the Id of the user of the userAccount manager
      */
-    public UserAccManager(String ownerUserId, Map<String, ArrayList<Account>> accountListMap) {
-        this.accountList = accountListMap.get(ownerUserId);
+    public UserAccManager(String ownerUserId,  Map<String, Account> accountList) {
+        this.accountList = accountList;
         this.ownerUserId = ownerUserId;
     }
 
-    /** The primary account of the user.
-     * This is also the default account where deposits go
-     */
-    private ChequingAccount primaryChq;
-
-    /** Set the primary chequing account
-     *
-     * @param acc the account we want to set as primary
-     * @throws AlreadyPrimaryException
-     * */
-    public void setPrimaryChq(Account acc) throws AlreadyPrimaryException{
-        if (acc instanceof ChequingAccount) {
-            if (acc.getOwnerID().equals(ownerUserId)) {
-                if (acc == getPrimaryChq()) {
-                    throw new AlreadyPrimaryException("This account is already " +
-                            "a primary chequing account.");
-                } else {
-                    this.primaryChq = ((ChequingAccount)acc);
-                }
-            }
-        }
+    public void addGlobalMap(String accID, Account acc){
+        this.accountList.put(accID, acc);
     }
 
-    /** Get primary chequing account */
-    public ChequingAccount getPrimaryChq(){
-        return primaryChq;
-    }
 
-    /** Add the given account to the account list
-     * @param acc the account be added*/
-    public void addAccount(Account acc) throws UserNotOwnAccountException {
-        if (acc.getOwnerID().equals(ownerUserId)) {
-            this.accountList.add(acc);
-        } else {
-            throw new UserNotOwnAccountException("This account is not owned by user: " + ownerUserId);
-        }
-    }
 
     /** Get the list of accounts this user has
      * @return  the account list */
-    public ArrayList<Account> getAccountList() {
+    public Map<String, Account> getAccountList() {
         return accountList;
     }
 
@@ -185,4 +154,8 @@ public class UserAccManager implements Serializable,Iterable<Account>{
             throw new NoSuchElementException();
         }
     }
+    public void sendRequest(String type, Map<String, String> requestMap){
+        requestMap.put(ownerUserId, type);
+    }
+
 }

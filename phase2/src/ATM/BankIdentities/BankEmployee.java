@@ -1,6 +1,7 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.Account;
+import ATM.Accounts.ChequingAccount;
 import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
 
@@ -17,15 +18,15 @@ public abstract class BankEmployee extends BankIdentity implements  PrivilegeLev
      * It will create a default primary chequing account
      * At the same time, all the information is going to be updated to global information
      */
-    public void createUser(int Numuser, Map<String, User> userMap, Map<String, String> passwordMap,  Map<String, ArrayList<Account>> accountListMap) {
+    public void createUser(int Numuser, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
         AccountCreator accCreator = new AccountCreator();
         User u = new User(Numuser);
-        userMap.put(u.getId(), u);
-        accountListMap.put(u.getId(), null);
+
+
         PasswordManager passwordManager = new PasswordManager(u.getId());
         passwordManager.setPassword("1234", passwordMap);
         System.out.println("New user created! user ID: " + u.getId()); /* still need this?*/
-        accCreator.createNewChequingAccount(Numuser, u.getId(), accountListMap);
+        accCreator.createNewChequingAccount(Numuser, u, accountListMap);
     }
 
     /**
