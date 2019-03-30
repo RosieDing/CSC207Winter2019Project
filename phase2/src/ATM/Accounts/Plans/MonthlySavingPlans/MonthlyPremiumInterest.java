@@ -1,19 +1,19 @@
 package ATM.Accounts.Plans.MonthlySavingPlans;
 
 import ATM.Accounts.Plans.Plan;
-import ATM.BankSystem.Time;
+import ATM.BankSystem.Date;
 
 import java.io.Serializable;
 
 /**High interest plan with monthly interesting rate above 3%*/
 public class MonthlyPremiumInterest implements Plan, Serializable {
     private final double interestRate = 0.03;
-    private Time time = Time.getTime();
+    private Date date = Date.getDate();
 
     /** Calculate and return the amount of money that is earned from interest */
     @Override
     public double compute(double amount) {
-        if (time.getSystemCurrentTime().getDayOfMonth() == 1){
+        if (date.getSystemCurrentTime().getDayOfMonth() == 1){
             return amount * (interestRate+1);
         }
         return amount;

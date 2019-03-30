@@ -1,7 +1,7 @@
 package ATM.Accounts.Plans.MonthlySavingPlans;
 
 import ATM.Accounts.Plans.Plan;
-import ATM.BankSystem.Time;
+import ATM.BankSystem.Date;
 
 import java.io.Serializable;
 
@@ -11,12 +11,12 @@ import java.io.Serializable;
 
 public class MonthlyInterest implements Plan, Serializable {
     private final double interestRate = 0.01;
-    private Time time = Time.getTime();
+    private Date date = Date.getDate();
 
     /** Calculate and return the amount of money that is earned from interest */
     @Override
     public double compute(double amount) {
-        if (time.getSystemCurrentTime().getDayOfMonth() == 1){
+        if (date.getSystemCurrentTime().getDayOfMonth() == 1){
                 return amount * (interestRate+1);
             }
             return amount;

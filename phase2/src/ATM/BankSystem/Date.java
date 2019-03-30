@@ -2,21 +2,21 @@ package ATM.BankSystem;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class Time {
-    private static Time time;
+public class Date {
+    private static Date date;
     private int periodDay;
     private int periodMonth;
     private int periodYear;
 
 
-    private void Time() {
+    private void Date() {
     }
 
-    public static Time getTime() {
-        if (time == null) {
-            time = new Time();
+    public static Date getDate() {
+        if (date == null) {
+            date = new Date();
         }
-        return time;
+        return date;
     }
 
     public LocalDate getSystemCurrentTime() {

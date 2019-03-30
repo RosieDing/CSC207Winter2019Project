@@ -4,15 +4,10 @@ import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
 import ATM.Accounts.TransferTypes.TransferInable;
 import ATM.Accounts.TransferTypes.TransferOutable;
-import ATM.BankSystem.Time;
+import ATM.BankSystem.Date;
 import ATM.org.openexchangerates.oerjava.OpenExchangeRates;
-import ATM.org.openexchangerates.oerjava.exceptions.UnavailableExchangeRateException;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.time.LocalDate;
 
 public class ExchangeCurrency extends Transaction{
@@ -21,7 +16,7 @@ public class ExchangeCurrency extends Transaction{
     final private String fromCurrency;
     final private String toCurrency;
     final private double amount;
-    final private LocalDate time = Time.getTime().getSystemCurrentTime();
+    final private LocalDate time = Date.getDate().getSystemCurrentTime();
 
     public ExchangeCurrency(TransferOutable fromAcc, TransferInable toAcc, Double amount) {
         this.amount = amount;

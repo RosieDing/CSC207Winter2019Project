@@ -107,7 +107,7 @@ public class PayBill extends Transaction{
         writer.write();
         String userId = getFromAcc().getOwnerID();
         return (userId + "," + getFromAcc() + "," + getTo() + ","
-                + getTime() + "," + getAmount() + "\n")
+                + getDate() + "," + getAmount() + "\n")
                 ;
     }*/
 
