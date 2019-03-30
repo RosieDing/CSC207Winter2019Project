@@ -1,10 +1,7 @@
 package ATM.Transactions;
 
 import ATM.Accounts.Account;
-import ATM.Accounts.TransferTypes.TransferInable;
-import ATM.Accounts.TransferTypes.TransferOutable;
-import ATM.Machine.CashNotWithdrawableException;
-import ATM.Machine.NotEnoughMoneyException;
+import ATM.Accounts.TransferTypes.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,29 +13,27 @@ import java.util.Stack;
 public class TransactionManager implements Serializable {
 
     /**
-     * accTransList record history of Transaction of specific accounts.
+     * accTransMap record history of Transaction of specific accounts.
      */
-    private Map<String, Stack<Transaction>> accTransList = new HashMap<>();
-    /***
-     * userTransList record history of Transaction of specific users.
-     */
-    private Map<String, Stack<Transaction>> userTransList = new HashMap<>();
+    private Map<String, Stack<Transaction>> accTransMap = new HashMap<>();
 
-    /***
-     * Singleton pattern. get the only TransactionManager.
-     * If there is not one, create a new TransactionManager.
-     * @return the only TransactionManger
+    /**
+     * userTransMap record history of Transaction of specific users.
      */
-    public static TransactionManager getTransactionManager() {
-        if (m == null) {
-            m = new TransactionManager();
-        }
-        return m;
+    private Map<String, Stack<Transaction>> userTransMap = new HashMap<>();
+
+    /**
+     * Create new instance of TransactionManager given two global transaction maps
+     * @param accTransMap The global map that stores all transaction history under every account
+     * @param userTransMap The global map that stores all transaction history under every user
+     */
+    public TransactionManager(Map<String, Stack<Transaction>> accTransMap, Map<String, Stack<Transaction>> userTransMap){
+        this.accTransMap = accTransMap;
+        this.userTransMap = userTransMap;
     }
 
-    /***
-     * Take in a map recording the request from user, and make
-     * corresponding transaction.
+    /**
+     * Take in a map recording the request from user, and make corresponding transaction.
      * @param map the map recorded user's request
      * @return a corresponding new Transaction
      */
@@ -46,14 +41,14 @@ public class TransactionManager implements Serializable {
         Transaction e = null;
         switch((String)map.get("Type")) {
             case "Deposit":
-                e = new Deposit((Account)map.get("toAccount"), (Integer)map.get("amount"));
+                e = new Deposit((Depositable) map.get("toAccount"), (Integer)map.get("amount"));
                 break;
             case "PayBill":
-                e = new PayBill((Account)map.get("fromAccount"), (String)map.get("to"),
+                e = new PayBill((Payable) map.get("fromAccount"), (String)map.get("to"),
                         (Double)map.get("amount"));
                 break;
             case "Withdrawal":
-                e = new Withdrawal((Account)map.get("fromAccount"), (Integer)map.get("amount"));
+                e = new Withdrawal((Withdrawable) map.get("fromAccount"), (Integer)map.get("amount"));
                 break;
             case "Regular":
                 e = new RegularTrans((TransferOutable)map.get("fromAccount"),
@@ -63,7 +58,7 @@ public class TransactionManager implements Serializable {
         return makeTransaction(e);
     }
 
-    /***
+    /**
      * Overloading method. Catch possible Exceptions when making a transaction.
      * @param e Transaction
      * @return Transaction
@@ -82,81 +77,85 @@ public class TransactionManager implements Serializable {
         return e;
     }
 
-    /***
+    /**
      * Return the most recent transaction of a certain user.
      * @param userId id of the user
      * @return the most recent Transaction
      * @throws NoTransactionException
      */
     public Transaction viewUserLastTrans(String userId) throws NoTransactionException{
-        Transaction e = popUserLastTrans(userId);
-        addTrans(e);
+        if (!userTransMap.containsKey(userId)) {
+            throw new NoTransactionException("No transaction with this user.");
+        }
+        Transaction e = userTransMap.get(userId).peek();
         return e;
     }
 
-    /***
+    /**
      * Get the most recent transaction of a certain user.(without putting it back to the list)
      * @param userId id of the user
      * @return the most recent Transaction
      * @throws NoTransactionException
      */
     public Transaction popUserLastTrans(String userId) throws NoTransactionException {
-        if (!userTransList.containsKey(userId)) {
+        if (!userTransMap.containsKey(userId)) {
             throw new NoTransactionException("No transaction with this user.");
         }
-        Transaction e = userTransList.get(userId).pop();
+        Transaction e = userTransMap.get(userId).pop();
         return e;
     }
 
-    /***
+    /**
      * Return the most recent transaction of a certain account.
      * @param accNum account number of the account
      * @return the most recent Transaction
      * @throws NoTransactionException
      */
     public Transaction viewAccLastTrans(String accNum) throws NoTransactionException {
-        Transaction e = popAccLastTrans(accNum);
-        addTrans(e);
+        if (!accTransMap.containsKey(accNum)) {
+            throw new NoTransactionException("No transaction on this account.");
+        }
+        Transaction e = accTransMap.get(accNum).peek();
         return e;
     }
 
-    /***
+    /**
      * Get the most recent transaction of a certain account.(without putting it back to the list)
      * @param accNum account number of the account
      * @return the most recent Transaction
      * @throws NoTransactionException
      */
     public Transaction popAccLastTrans(String accNum) throws NoTransactionException {
-        if (!accTransList.containsKey(accNum)) {
+        if (!accTransMap.containsKey(accNum)) {
             throw new NoTransactionException("No transaction on this account.");
         }
-        Transaction e = accTransList.get(accNum).pop();
+        Transaction e = accTransMap.get(accNum).pop();
         return e;
     }
 
     private void accAddHelper(String accNum, Transaction trans) {
-        if (accTransList.containsKey(accNum)) {
-            accTransList.get(accNum).add(trans);
+        if (accTransMap.containsKey(accNum)) {
+            accTransMap.get(accNum).add(trans);
         } else {
             Stack a = new Stack<Transaction>();
             a.add(trans);
-            accTransList.put(accNum, a);
+            accTransMap.put(accNum, a);
         }
     }
 
     private void userAddHelper(ArrayList<String> userId, Transaction trans) {
         for (String id: userId) {
-            if (userTransList.containsKey(id)) {
-                userTransList.get(id).add(trans);
+            if (userTransMap.containsKey(id)) {
+                userTransMap.get(id).add(trans);
             } else {
                 Stack a = new Stack<Transaction>();
                 a.add(trans);
-                userTransList.put(id, a);
+                userTransMap.put(id, a);
             }
         }
     }
 
-    /***
+    /**
      * Add a transaction to history of transaction.
      * @param trans the Transaction to be added.
      */

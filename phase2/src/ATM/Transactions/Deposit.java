@@ -3,6 +3,7 @@ package ATM.Transactions;
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
 import ATM.Accounts.TransferTypes.Depositable;
+import ATM.Accounts.TransferTypes.Withdrawable;
 
 import java.time.LocalDateTime;
 
@@ -68,7 +69,7 @@ public class Deposit extends Transaction{
      */
     @Override
     void begin() {
-        getToAcc().deposit(this.getAmount()) * exRate);
+        toAcc.deposit((this.getAmount()) * exRate);
         setHappened(true);
     }
 
@@ -89,7 +90,7 @@ public class Deposit extends Transaction{
         if (getAmount() > fromAcc.getAvailableCredit()) {
             throw new ReverseNotPossibleException();
         }
-        return new Withdrawal(fromAcc, this.getAmount());
+        return new Withdrawal((Withdrawable) fromAcc, this.getAmount());
     }
 
     /***

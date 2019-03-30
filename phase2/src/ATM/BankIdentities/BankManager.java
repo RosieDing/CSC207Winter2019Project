@@ -92,7 +92,7 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
             }
         } catch (EmptyStackException e) {
             System.out.println("No more transaction related to this user.");
-        }// try catch if transaction cant be processed.
+        }// try catch if transaction can't be processed.
          catch (ReverseNotPossibleException e) {
             System.out.println("Impossible to undo this transaction.");
         } catch (NoTransactionException e) {

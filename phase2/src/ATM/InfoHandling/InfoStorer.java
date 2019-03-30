@@ -24,9 +24,6 @@ public class InfoStorer implements Serializable {
     /**A mapping of Bank manager ID to Bank manager*/
     private Map<String, BankManager> bankManagerMap;
 
-    /**A TransactionManager which has all the transaction information*/
-    private TransactionManager transactionManager;
-
     /**
      * A Map stored request of account creation.
      * Key takes userID, values are requested account type.
@@ -61,10 +58,10 @@ public class InfoStorer implements Serializable {
         this.accountMap = new HashMap<String, Account>();
         this.userMap = new HashMap<String, User>();
         this.bankManagerMap = new HashMap<String, BankManager>();
-        this.transactionManager = TransactionManager.getTransactionManager();
         this.accountCreationRequest = new HashMap<String, String>();
         this.passwordMap = new HashMap<String, String>();
-        this.accountListMap = new HashMap<String, ArrayList<Account>>();
+        this.userTransMap = new HashMap<String, Stack<Transaction>>();
+        this.accTransMap = new HashMap<String, Stack<Transaction>>();
         this.cashMachine = new CashMachine();
     }
 
@@ -91,14 +88,6 @@ public class InfoStorer implements Serializable {
     public Map<String, BankManager> getBankManagerMap() { return bankManagerMap;}
 
     /**
-     * Get the transactionManager
-     * @return transactionManager
-     */
-    public TransactionManager getTransactionManager() {
-        return transactionManager;
-    }
-
-    /**
      * Get the accountCreationRequest map
      * @return accountCreationRequest
      */
@@ -114,27 +103,15 @@ public class InfoStorer implements Serializable {
         return cashMachine;
     }
 
-    /**
-     * Add a user to userMap
-     * @param newUser the user to be added
-     */
-    public void addUser(User newUser){
-        this.userMap.put(newUser.getId(), newUser);
+    public Map<String, String> getPasswordMap() {
+        return passwordMap;
     }
 
-    /***
-     * Add a bank manager to bankManagerMap
-     * @param newBankManager the BankManager to be added
-     */
-    public void addBankManager(BankManager newBankManager){
-        this.bankManagerMap.put(newBankManager.getId(), newBankManager);
+    public Map<String, Stack<Transaction>> getAccTransMap() {
+        return accTransMap;
     }
 
-    /**
-     * Add an account to accountMap
-     * @param newAccount the Account to be added
-     */
-    public void addAccount(Account newAccount){
-        this.accountMap.put(newAccount.getAccountNum(), newAccount);
+    public Map<String, Stack<Transaction>> getUserTransMap() {
+        return userTransMap;
     }
 }
