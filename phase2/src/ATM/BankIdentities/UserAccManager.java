@@ -131,7 +131,11 @@ public class UserAccManager implements Serializable, Iterable<Account> {
      * @return the net total of all the acounts
      */
     public double getNetTotal() {
-        return 1;
+        Currency sum = new Currency("CAD", 0);
+        for (Account acc : this) {
+            sum.add(acc.getNetBalance());
+        }
+        return sum.getAmount();
     }
 
     @Override
