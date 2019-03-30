@@ -3,7 +3,7 @@ package ATM.InfoHandling;
 import java.io.*;
 
 /***
- * AlertWriter class
+ * RecordWriter class
  */
 public class RecordWriter implements WriteTXT, Serializable {
     /***
