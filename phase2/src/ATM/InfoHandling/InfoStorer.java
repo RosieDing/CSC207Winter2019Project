@@ -39,11 +39,6 @@ public class InfoStorer implements Serializable {
      */
     private Map<String, String> passwordMap;
 
-    /**
-     * A Map storing the account information from the view of users
-     * Key takes String ID, values are ArrayList of accounts.
-     */
-    private Map<String, ArrayList<Account>> accountListMap;
 
     /**
      * accTrans record history of Transaction of specific accounts.
