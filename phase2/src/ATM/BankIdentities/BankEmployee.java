@@ -21,8 +21,7 @@ public abstract class BankEmployee extends BankIdentity implements  PrivilegeLev
     public void createUser(int Numuser, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
         AccountCreator accCreator = new AccountCreator();
         User u = new User(Numuser);
-
-
+        userMap.put(u.getId(), u);
         PasswordManager passwordManager = new PasswordManager(u.getId());
         passwordManager.setPassword("1234", passwordMap);
         System.out.println("New user created! user ID: " + u.getId()); /* still need this?*/

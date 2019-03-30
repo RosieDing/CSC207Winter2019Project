@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /** a class that access to a user's account and primary account */
-public class User extends BankIdentity {
+public class User extends BankIdentity implements AccountOwnable{
 
     /** The id of the user */
     private final String id;

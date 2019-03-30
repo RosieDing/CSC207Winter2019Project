@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /** A class that represent a BankStuff*/
-public class BankStuff extends BankEmployee implements PrivilegeLevelB{
+public class BankStuff extends BankEmployee implements PrivilegeLevelB, AccountOwnable{
     /** The id of the user */
     private final String id;
     /** The account list of the user */
