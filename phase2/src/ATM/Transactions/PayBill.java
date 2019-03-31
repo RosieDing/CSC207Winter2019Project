@@ -4,25 +4,26 @@ package ATM.Transactions;
 import ATM.Accounts.Account;
 import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.Payable;
+import ATM.BankSystem.Date;
 import ATM.InfoHandling.BillWriter;
 import ATM.org.openexchangerates.oerjava.OpenExchangeRates;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-/***
- * PayBill class
+/**
+ * a class that represents a bill paying action
  */
 public class PayBill extends Transaction{
     private final String to;
     private final Payable fromAcc;
     private final Account toAcc;
-    private final LocalDateTime time;
+    private final LocalDate time;
     private final Currency amount;
     private  BillWriter writer = new BillWriter();
 
 
-    /***
+    /**
      * Create a new PayBill.
      *
      * @param fromAccount the account where fund will be extracted from.
@@ -33,14 +34,14 @@ public class PayBill extends Transaction{
         this.fromAcc = fromAccount;
         this.toAcc = null;
         this.to = to;
-        this.time = LocalDateTime.now();
+        this.time = Date.getDate().getSystemCurrentTime();
     }
 
     public Currency getAmount() {
         return amount;
     }
 
-    /***
+    /**
      * Get the from Account (which will pay the bill).
      * @return Account if there is a from Account, null if there is not.
      */
@@ -48,7 +49,7 @@ public class PayBill extends Transaction{
         return (Account)fromAcc;
     }
 
-    /***
+    /**
      * Get the to Account (Here is null).
      * @return Account if there is a to Account, null if there is not.
      */
@@ -56,15 +57,15 @@ public class PayBill extends Transaction{
         return toAcc;
     }
 
-    /***
+    /**
      * Get the time when this PayBill happened.
      * @return the time recorded.
      */
-    public LocalDateTime getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
-    /***
+    /**
      * Execute this PayBill. Set field happened as true if this
      * PayBill is executed.
      * @throws TransactionAmountOverLimitException
@@ -80,7 +81,7 @@ public class PayBill extends Transaction{
     }
 
 
-    /***
+    /**
      * Not possible to reverse a PayBill
      * @throws ReverseNotPossibleException raised when not enough money in original to account.
      */
@@ -89,7 +90,7 @@ public class PayBill extends Transaction{
         throw new ReverseNotPossibleException();
     }
 
-    /***
+    /**
      * Get the destination of this bill payment.
      * @return the name whom this payment is made to.
      */
@@ -105,7 +106,7 @@ public class PayBill extends Transaction{
                 ;
     }*/
 
-    /***
+    /**
      * Return a string representation of PayBill.
      * @return a String.
      */

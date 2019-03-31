@@ -5,22 +5,20 @@ import ATM.Accounts.ChequingAccount;
 import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.Depositable;
 import ATM.Accounts.TransferTypes.Withdrawable;
-import ATM.InfoHandling.InfoManager;
-import ATM.Machine.CashNotWithdrawableException;
-import ATM.Machine.NotEnoughMoneyException;
+import ATM.BankSystem.Date;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-/***
- * Withdrawal class
+/**
+ * a class that represents a withdrawal action
  */
 public class Withdrawal extends Transaction {
     private final Withdrawable fromAcc;
     private final Account toAcc;
-    private final LocalDateTime time;
+    private final LocalDate date;
     private final Currency amount;
 
-    /***
+    /**
      * Create a new Withdrawal
      * @param fromAcc the account where money will be withdrawn.
      * @param amount the amount of fund will be withdrawn.
@@ -29,14 +27,14 @@ public class Withdrawal extends Transaction {
         this.amount = amount;
         this.fromAcc = fromAcc;
         this.toAcc = null;
-        this.time = LocalDateTime.now();
+        this.date = Date.getDate().getSystemCurrentTime();
     }
 
     public Currency getAmount() {
         return amount;
     }
 
-    /***
+    /**
      * Get the from Account (where money be withdrawn).
      * @return Account if there is a from Account, null if there is not.
      */
@@ -44,7 +42,7 @@ public class Withdrawal extends Transaction {
         return (Account)fromAcc;
     }
 
-    /***
+    /**
      * Get the to Account (Here is null).
      * @return Account if there is a to Account, null if there is not.
      */
@@ -52,12 +50,12 @@ public class Withdrawal extends Transaction {
         return toAcc;
     }
 
-    /***
-     * Get the time when this Withdrawal happened.
-     * @return the time recorded.
+    /**
+     * Get the date when this Withdrawal happened.
+     * @return the date recorded.
      */
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDate getDate() {
+        return date;
     }
 
     /*public int getToAccNum() {
@@ -68,7 +66,7 @@ public class Withdrawal extends Transaction {
         return fromAccNum;
     }*/
 
-    /***
+    /**
      * Execute this Withdrawal. Set field happened as true if this
      * Withdrawal is executed.
      * @throws TransactionAmountOverLimitException if the amount is too large.
@@ -88,7 +86,7 @@ public class Withdrawal extends Transaction {
         setHappened(true);
     }
 
-    /***
+    /**
      * Return a new Deposit as a reverse of the input transaction (same amount,
      * reversed from and to account).
      * @return Deposit
@@ -99,7 +97,7 @@ public class Withdrawal extends Transaction {
         return new Deposit(toAcc ,this.getAmount());
     }
 
-    /***
+    /**
      * Return a String representation of Deposit.
      * @return string
      */
@@ -107,7 +105,7 @@ public class Withdrawal extends Transaction {
     public String toString() {
         return "Withdrawal{" +
                 "from: " + getFromAcc() +
-                ", time: " + getTime() +
+                ", date: " + getDate() +
                 ", amount: " + getAmount() +
                 "}";
     }

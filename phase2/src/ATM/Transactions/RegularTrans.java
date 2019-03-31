@@ -4,19 +4,20 @@ import ATM.Accounts.Account;
 import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.TransferInable;
 import ATM.Accounts.TransferTypes.TransferOutable;
+import ATM.BankSystem.Date;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-/***
- * RegularTrans class.
+/**
+ * a class that represents a regular transaction action
  */
 public class RegularTrans extends Transaction{
     private final TransferOutable fromAcc;
     private final TransferInable toAcc;
-    private final LocalDateTime time;
+    private final LocalDate time;
     private final Currency amount;
 
-    /***
+    /**
      * Create a new RegularTrans.
      * @param fromAcc transfer from this TransferOutable account.
      * @param toAcc transfer to this TransferInable account.
@@ -26,14 +27,14 @@ public class RegularTrans extends Transaction{
         this.amount = amount;
         this.fromAcc = fromAcc;
         this.toAcc = toAcc;
-        time = LocalDateTime.now();
+        time = Date.getDate().getSystemCurrentTime();
     }
 
     public Currency getAmount() {
         return amount;
     }
 
-    /***
+    /**
      * Get the from Account (where money will be transferred out).
      * @return Account if there is a from Account, null if there is not.
      */
@@ -41,7 +42,7 @@ public class RegularTrans extends Transaction{
         return ((Account)fromAcc);
     }
 
-    /***
+    /**
      * Get the to Account (where money will be transferred in).
      * @return Account if there is a to Account, null if there is not.
      */
@@ -49,15 +50,15 @@ public class RegularTrans extends Transaction{
         return ((Account)toAcc);
     }
 
-    /***
+    /**
      * Get the time when this RegularTrans happened.
      * @return the time recorded.
      */
-    public LocalDateTime getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
-    /***
+    /**
      * Execute this RegularTrans. Set field happened as true if this
      * RegularTrans is executed.
      * @throws TransactionAmountOverLimitException
@@ -72,7 +73,7 @@ public class RegularTrans extends Transaction{
         setHappened(true);
     }
 
-    /***
+    /**
      * Return a new RegularTrans as a reverse of the input transaction (same amount,
      * reversed from and to account).
      * @return RegularTrans the reversed transaction.
@@ -91,7 +92,7 @@ public class RegularTrans extends Transaction{
     }
 
 
-    /***
+    /**
      * Return a String representation of RegularTrans
      * @return string
      */

@@ -10,7 +10,7 @@ import ATM.BankSystem.Date;
 import java.time.LocalDate;
 
 /**
- * Deposit class
+ * a class that represents a deposit action
  */
 public class Deposit extends Transaction{
     private final Account fromAcc;
