@@ -1,6 +1,10 @@
 package ATM.GUI.Manager;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import ATM.BankIdentities.BankManager;
+import ATM.BankIdentities.PasswordManager;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 
@@ -9,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -74,6 +80,14 @@ public class ManagerCreaterUser extends JFrame {
 		rdbtnInr.setBounds(380, 34, 70, 23);
 		contentPane.add(rdbtnInr);
 		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnCAD);
+		group.add(rdbtnUsd);
+		group.add(rdbtnRmb);
+		group.add(rdbtnEur);
+		group.add(rdbtnGbp);
+		group.add(rdbtnInr);
+		
 		JButton btnCreateUser = new JButton("Create User");
 		btnCreateUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -92,7 +106,7 @@ public class ManagerCreaterUser extends JFrame {
 					type = rdbtnInr.getText();
 				}
 				
-				String ID = bankManager.createUser(type, infoStorer);
+				String ID = bankManager.createUser(infoManager.getUserNum(), type, infoStorer);
             	if (ID != "") {
             		JOptionPane.showMessageDialog(null, "New user created! user ID: " + ID);
             	}

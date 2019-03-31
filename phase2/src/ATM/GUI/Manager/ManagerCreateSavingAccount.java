@@ -1,5 +1,13 @@
 package ATM.GUI.Manager;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import ATM.Accounts.Plans.GICPlans.AnnualInterest;
+import ATM.Accounts.Plans.GICPlans.FiveYearInterest;
+import ATM.Accounts.Plans.GICPlans.GICPlan;
+import ATM.Accounts.Plans.GICPlans.TwoYearInterest;
+import ATM.Accounts.Plans.MonthlySavingPlans.*;
 import ATM.BankIdentities.AccountCreator;
 import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
@@ -10,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -89,6 +98,31 @@ public class ManagerCreateSavingAccount extends JFrame {
 		rdbtnINR.setBounds(380, 72, 70, 23);
 		contentPane.add(rdbtnINR);
 		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnCAD);
+		group.add(rdbtnUSD);
+		group.add(rdbtnCNY);
+		group.add(rdbtnEUR);
+		group.add(rdbtnGBP);
+		group.add(rdbtnINR);
+		
+		JRadioButton rdbtnMonthlyPremiumPlan = new JRadioButton("Monthly Premium Plan");
+		rdbtnMonthlyPremiumPlan.setBounds(221, 135, 172, 23);
+		contentPane.add(rdbtnMonthlyPremiumPlan);
+		
+		JRadioButton rdbtnMonthlyPlan = new JRadioButton("Monthly Plan");
+		rdbtnMonthlyPlan.setSelected(true);
+		rdbtnMonthlyPlan.setBounds(0, 135, 130, 23);
+		contentPane.add(rdbtnMonthlyPlan);
+		
+		JLabel lblChoosePlan = new JLabel("Choose Plan:");
+		lblChoosePlan.setBounds(6, 107, 188, 16);
+		contentPane.add(lblChoosePlan);
+		
+		ButtonGroup group2 = new ButtonGroup();
+		group2.add(rdbtnMonthlyPremiumPlan);
+		group2.add(rdbtnMonthlyPlan);
+		
 		JButton btnCreateSavingAccount = new JButton("Create Saving Account");
 		btnCreateSavingAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -106,6 +140,13 @@ public class ManagerCreateSavingAccount extends JFrame {
 				}else if (rdbtnINR.isSelected()) {
 					type = rdbtnINR.getText();
 				}
+				
+				SavingPlan plan = new MonthlyInterest();	
+				if (rdbtnMonthlyPlan.isSelected()) {
+					plan = new MonthlyInterest();
+				}else if (rdbtnMonthlyPremiumPlan.isSelected()) {
+					plan = new MonthlyPremiumInterest();
+				}
 				String ID = txtID.getText();
 				InfoStorer infoStorer = infoManager.getInfoStorer();
 				User user = infoStorer.getUserMap().get(ID);
@@ -115,19 +156,6 @@ public class ManagerCreateSavingAccount extends JFrame {
 		});
 		btnCreateSavingAccount.setBounds(232, 217, 191, 29);
 		contentPane.add(btnCreateSavingAccount);
-		
-		JRadioButton rdbtnMonthlyPremiumPlan = new JRadioButton("Monthly Premium Plan");
-		rdbtnMonthlyPremiumPlan.setBounds(221, 135, 172, 23);
-		contentPane.add(rdbtnMonthlyPremiumPlan);
-		
-		JRadioButton rdbtnMonthlyPlan = new JRadioButton("Monthly Plan");
-		rdbtnMonthlyPlan.setSelected(true);
-		rdbtnMonthlyPlan.setBounds(0, 135, 130, 23);
-		contentPane.add(rdbtnMonthlyPlan);
-		
-		JLabel lblChoosePlan = new JLabel("Choose Plan:");
-		lblChoosePlan.setBounds(6, 107, 188, 16);
-		contentPane.add(lblChoosePlan);
 	}
 
 }

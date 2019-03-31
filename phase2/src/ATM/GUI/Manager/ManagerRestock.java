@@ -1,5 +1,8 @@
 package ATM.GUI.Manager;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import ATM.BankIdentities.BankManager;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
