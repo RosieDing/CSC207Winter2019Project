@@ -4,6 +4,7 @@ import ATM.Accounts.Account;
 import ATM.BankIdentities.*;
 import ATM.Machine.CashMachine;
 import ATM.Transactions.Transaction;
+import ATM.BankSystem.Date;
 
 import java.io.*;
 import java.util.Map;
@@ -135,6 +136,10 @@ public class InfoManager {
     /**@return CashMachine */
     public CashMachine getCashMachine(){
         return getInfoStorer().getCashMachine();
+    }
+
+    public Date getDate(){
+        return getInfoStorer().getDate();
     }
 
     /**
