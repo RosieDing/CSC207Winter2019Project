@@ -2,6 +2,7 @@ package ATM.BankIdentities;
 
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
+import ATM.BankSystem.Date;
 import ATM.InfoHandling.InfoStorer;
 import ATM.InfoHandling.RecordWriter;
 import ATM.Machine.CashMachine;
@@ -70,7 +71,7 @@ public class BankStaff extends BankEmployee implements PrivilegeLevelB, AccountO
     public String createUser(String type, InfoStorer infoStorer) {
         String userID = super.createUser(type, infoStorer);
         RecordWriter rw = new RecordWriter();
-        rw.write(this.getId() + " create a user");
+        rw.write(this.getId() + " create a user on " + Date.getDate());
         return userID;
     }
 
@@ -78,7 +79,7 @@ public class BankStaff extends BankEmployee implements PrivilegeLevelB, AccountO
     public void restock(CashMachine machine, Money money) {
         super.restock(machine, money);
         RecordWriter rw = new RecordWriter();
-        rw.write(this.getId() + " has restocked " + money);
+        rw.write(this.getId() + " has restocked " + money+ "on " +Date.getDate());
     }
 }
 

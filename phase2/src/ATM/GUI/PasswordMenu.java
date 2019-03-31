@@ -57,11 +57,6 @@ public class PasswordMenu extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblWelcomeManager = new JLabel("Welcome Manager!");
-		lblWelcomeManager.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcomeManager.setBounds(6, 6, 440, 16);
-		contentPane.add(lblWelcomeManager);
-		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setBounds(79, 80, 73, 16);
 		contentPane.add(lblPassword);

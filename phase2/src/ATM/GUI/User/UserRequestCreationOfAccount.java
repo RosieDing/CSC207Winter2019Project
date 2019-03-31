@@ -28,24 +28,28 @@ public class UserRequestCreationOfAccount extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnChequingAccount = new JButton("Chequing Account");
-		btnChequingAccount.setBounds(151, 31, 144, 29);
+		btnChequingAccount.setBounds(246, 31, 144, 29);
 		contentPane.add(btnChequingAccount);
 		
 		JButton btnSavingAccount = new JButton("Saving Account");
-		btnSavingAccount.setBounds(151, 72, 144, 29);
+		btnSavingAccount.setBounds(246, 95, 144, 29);
 		contentPane.add(btnSavingAccount);
 		
 		JButton btnCreditAccount = new JButton("Credit Account");
-		btnCreditAccount.setBounds(151, 120, 144, 29);
+		btnCreditAccount.setBounds(246, 164, 144, 29);
 		contentPane.add(btnCreditAccount);
 		
 		JButton btnLine = new JButton(" Line of Credit Account");
-		btnLine.setBounds(151, 164, 170, 29);
+		btnLine.setBounds(16, 95, 170, 29);
 		contentPane.add(btnLine);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(151, 232, 117, 29);
 		contentPane.add(btnBack);
+		
+		JButton btnInvestmentAccount = new JButton("GIC Account");
+		btnInvestmentAccount.setBounds(16, 31, 170, 29);
+		contentPane.add(btnInvestmentAccount);
 	}
 
 }
