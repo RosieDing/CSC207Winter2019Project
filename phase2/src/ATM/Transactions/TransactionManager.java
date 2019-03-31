@@ -42,9 +42,10 @@ public class TransactionManager implements Serializable {
      * @param map the map recorded user's request
      * @return a corresponding new Transaction
      */
-    public Transaction makeTransaction(Map<String, Object> map, CashMachine machine) {
+    public Transaction makeTransaction(Map<String, Object> map, CashMachine machine) throws NotCADBaseAccountException,
+    NotEnoughMoneyException, CashNotWithdrawableException, TransactionAmountOverLimitException, NullPointerException{
         Transaction e = null;
-        try{
+//        try{
         switch((String)map.get("Type")) {
             case "Deposit":
                 e = new Deposit((Depositable) map.get("toAccount"), (Currency)map.get("amount"));
@@ -61,10 +62,10 @@ public class TransactionManager implements Serializable {
             case "Regular":
                 e = new RegularTrans((TransferOutable)map.get("fromAccount"),
                         (TransferInable)map.get("toAccount"), (Currency) map.get("amount"));
-                break;
-        }}catch (NotCADBaseAccountException e1){
-            System.out.println("The currency base of account chosen should be CAD");
-        }
+                break;}
+//        }catch (NotCADBaseAccountException e1){
+//            System.out.println("The currency base of account chosen should be CAD");
+//        }
         return makeTransaction(e, machine);
     }
 
@@ -73,23 +74,24 @@ public class TransactionManager implements Serializable {
      * @param e Transaction
      * @return Transaction
      */
-    public Transaction makeTransaction(Transaction e, CashMachine machine) {
-        try{
+    public Transaction makeTransaction(Transaction e, CashMachine machine) throws NotEnoughMoneyException,
+            CashNotWithdrawableException, TransactionAmountOverLimitException, NullPointerException{
+//        try{
             e.possibleToBegin();
             if (e instanceof Withdrawal) {
                 machine.withdrawCash((int)(((Withdrawal)e).getAmount().getAmount()));
             }
             e.begin();
-        } catch (CashNotWithdrawableException | NotEnoughMoneyException a){
-            System.out.println(a.getMessage());
-        } catch (TransactionAmountOverLimitException b) {
-            System.out.println("Not enough balance to complete transaction.");
-        } /*catch (NullPointerException c) {
-            System.out.println("Transaction is not possible.");
-        }*/
-        if (e.isHappened()) {
-            addTrans(e);
-        }
+            if (e.isHappened()) {
+                addTrans(e);
+            }
+//        } catch (CashNotWithdrawableException | NotEnoughMoneyException a){
+//            System.out.println(a.getMessage());
+//        } catch (TransactionAmountOverLimitException b) {
+//            System.out.println("Not enough balance to complete transaction.");
+//        } catch (NullPointerException c) {
+//            System.out.println("Transaction is not possible.");
+//        }
         return e;
     }
 
