@@ -15,7 +15,7 @@ public class UserAccManager implements Serializable, Iterable<Account> {
     /**
      * The User ID who own these accounts
      */
-    private String ownerUserId;
+    private String ownerId;
 
     /**
      * The list of accounts the user owns
@@ -27,11 +27,17 @@ public class UserAccManager implements Serializable, Iterable<Account> {
      * Create a new user account manager
      *
      * @param userMap a global mapping of User ID to user
-     * @param ownerUserId the Id of the user of the userAccount manager
+     * @param staffMap a global mapping of Staff ID to staff
+     * @param ownerId the Id of the user of the userAccount manager
      */
-    public UserAccManager(String ownerUserId, Map<String, User> userMap) {
-        this.accountList = userMap.get(ownerUserId).getUserAccounts();
-        this.ownerUserId = ownerUserId;
+    public UserAccManager(String ownerId, Map<String, User> userMap, Map<String, BankStaff> staffMap) {
+        if (userMap.containsKey(ownerId)){
+            this.accountList = userMap.get(ownerId).getUserAccounts();
+        }
+        else if (staffMap.containsKey(ownerId)){
+            this.accountList = staffMap.get(ownerId).getUserAccounts();
+        }
+        this.ownerId = ownerId;
     }
 
 
@@ -65,7 +71,7 @@ public class UserAccManager implements Serializable, Iterable<Account> {
             }
         }
         if (acc == null) {
-            throw new NoSuchAccountException("User " + ownerUserId + " has no such an account.");
+            throw new NoSuchAccountException("User " + ownerId + " has no such an account.");
         }
         return acc;
     }
@@ -184,7 +190,7 @@ public class UserAccManager implements Serializable, Iterable<Account> {
      * @param requestMap The global request map from User ID to the request type
      */
     public void sendRequest(String request, Map<String, String> requestMap) {
-        requestMap.put(ownerUserId, request);
+        requestMap.put(ownerId, request);
     }
 
 }

@@ -105,7 +105,6 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
         BankStaff bankStaff = new BankStaff(Numuser);
         PasswordManager passwordManager = new PasswordManager(bankStaff.getId());
         passwordManager.setPassword("1234", passwordMap);
-        System.out.println("New user created! user ID: " + bankStaff.getId()); /* still need this?*/
         accCreator.createNewChequingAccount(Numuser, bankStaff, type, accountListMap);
         return bankStaff.getId();
     }
@@ -128,5 +127,14 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
     public void restock(CashMachine machine, Money money) {
         super.restock(machine, money);
     }
+
+   /** Add a user to a specific account to make that account joint.
+    *
+    *
+    * */
+   public void ShareAccount(AccountOwnable person, Account acc) throws UserNotOwnAccountException{
+       acc.addOwner(person.getId());
+       person.addAccount(acc);
+   }
 }
 
