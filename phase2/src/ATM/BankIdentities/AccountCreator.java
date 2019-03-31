@@ -3,6 +3,7 @@ package ATM.BankIdentities;
 import ATM.Accounts.*;
 import ATM.Accounts.Plans.GICPlans.GICPlan;
 import ATM.Accounts.Plans.Plan;
+import ATM.InfoHandling.InfoStorer;
 
 
 import java.util.ArrayList;
@@ -10,18 +11,25 @@ import java.util.Map;
 /** A class that create a new  Account*/
 public class AccountCreator {
 
+
+
+
     /** Create New Chequing Account for the User
      *
      * @param user the User
      * @throws AlreadyPrimaryException
      *  */
-    public void createNewChequingAccount(int totalAccNum, AccountOwnable user,String type, Map<String, Account> accountMap) {
+    public void createNewChequingAccount(AccountOwnable user, String type, InfoStorer infoStorer) {
+        Map<String, User> userMap = infoStorer.getUserMap();
+        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
+        int totalAccNum = infoStorer.getAccountMap().size();
+        Map<String, Account> accountMap = infoStorer.getAccountMap();
         String userID = user.getId();
-        UserAccManager m = new UserAccManager(userID, accountMap);
+        UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList<String> userList = new ArrayList<>();
         userList.add(userID);
         ChequingAccount acc = new ChequingAccount(userList, totalAccNum, type);
-        m.addGlobalMap(acc.getAccountNum(), acc);
+        m.addGlobalMap(acc.getAccountNum(), acc, accountMap);
         if (user.getPrimaryChq() == null){
             try {
                 user.setPrimaryChq(acc);
@@ -40,13 +48,17 @@ public class AccountCreator {
      *
      * @param user the user
      *  */
-    public void createNewSavingAccount(int totalAccNum, AccountOwnable user, String type, Map<String, Account> accountMap, Plan plan){
+    public void createNewSavingAccount(AccountOwnable user, String type, Plan plan, InfoStorer infoStorer){
+        Map<String, User> userMap = infoStorer.getUserMap();
+        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
+        int totalAccNum = infoStorer.getAccountMap().size();
+        Map<String, Account> accountMap = infoStorer.getAccountMap();
         String userID = user.getId();
-        UserAccManager m = new UserAccManager(userID, accountMap);
+        UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList<String> userList = new ArrayList<>();
         userList.add(userID);
         SavingAccount acc = new SavingAccount(userList, plan, totalAccNum,type);
-        m.addGlobalMap(acc.getAccountNum(), acc);
+        m.addGlobalMap(acc.getAccountNum(), acc, accountMap);
         try {
             user.addAccount(acc);
         } catch (UserNotOwnAccountException e) {
@@ -60,13 +72,17 @@ public class AccountCreator {
      * @param user the user
      * @param limit the limit of the credit account
      *  */
-    public void createNewCreditAccount(int totalAccNum, AccountOwnable user, double limit,String type, Map<String, Account> accountMap){
+    public void createNewCreditAccount(AccountOwnable user, double limit, String type,InfoStorer infoStorer){
+        Map<String, User> userMap = infoStorer.getUserMap();
+        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
+        int totalAccNum = infoStorer.getAccountMap().size();
+        Map<String, Account> accountMap = infoStorer.getAccountMap();
         String userID = user.getId();
-        UserAccManager m = new UserAccManager(userID, accountMap);
+        UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList userList = new ArrayList();
         userList.add(userID);
         CreditAccount acc = new CreditAccount(userList, limit, totalAccNum,type);
-        m.addGlobalMap(acc.getAccountNum(), acc);
+        m.addGlobalMap(acc.getAccountNum(), acc, accountMap);
         try {
             user.addAccount(acc);
         } catch (UserNotOwnAccountException e) {
@@ -79,12 +95,17 @@ public class AccountCreator {
      * @param user the user
      * @param limit the limit of the line of credit account
      *  */
-    public void createNewLineOfCredit(int totalAccNum, AccountOwnable user, double limit,String type, Map<String, Account> accountMap){
+    public void createNewLineOfCredit(AccountOwnable user, double limit, String type, InfoStorer infoStorer){
+        Map<String, User> userMap = infoStorer.getUserMap();
+        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
+        int totalAccNum = infoStorer.getAccountMap().size();
+        Map<String, Account> accountMap = infoStorer.getAccountMap();
         String userID = user.getId();
-        UserAccManager m = new UserAccManager(userID, accountMap);
+        UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList userList = new ArrayList();
         userList.add(userID);
         LineOfCredit acc = new LineOfCredit(userList, limit, totalAccNum,type);
+        m.addGlobalMap(acc.getAccountNum(), acc, accountMap);
         try {
             user.addAccount(acc);
         } catch (UserNotOwnAccountException e) {
@@ -96,14 +117,17 @@ public class AccountCreator {
      *
      * @param user the user
      *  */
-    public void createNewGICAccount(int totalAccNum, AccountOwnable user,String type,
-                                    Map<String, Account> accountMap, GICPlan plan, double principle){
+    public void createNewGICAccount(AccountOwnable user, String type, GICPlan plan, double principle, InfoStorer infoStorer){
+        Map<String, User> userMap = infoStorer.getUserMap();
+        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
+        int totalAccNum = infoStorer.getAccountMap().size();
+        Map<String, Account> accountMap = infoStorer.getAccountMap();
         String userID = user.getId();
-        UserAccManager m = new UserAccManager(userID, accountMap);
+        UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList<String> userList = new ArrayList<>();
         userList.add(userID);
         GICAccount acc = new GICAccount(userList, totalAccNum, plan, principle,type);
-        m.addGlobalMap(acc.getAccountNum(), acc);
+        m.addGlobalMap(acc.getAccountNum(), acc, accountMap);
         try {
             user.addAccount(acc);
         } catch (UserNotOwnAccountException e) {
