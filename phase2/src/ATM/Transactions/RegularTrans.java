@@ -1,6 +1,7 @@
 package ATM.Transactions;
 
 import ATM.Accounts.Account;
+import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.TransferInable;
 import ATM.Accounts.TransferTypes.TransferOutable;
 
@@ -13,10 +14,7 @@ public class RegularTrans extends Transaction{
     private final TransferOutable fromAcc;
     private final TransferInable toAcc;
     private final LocalDateTime time;
-    private final double amount;
-    private String fromCurrency;
-    private String toBaseCurrency;
-    private double exRate;
+    private final Currency amount;
 
     /***
      * Create a new RegularTrans.
@@ -24,19 +22,14 @@ public class RegularTrans extends Transaction{
      * @param toAcc transfer to this TransferInable account.
      * @param amount transaction amount.
      */
-    public RegularTrans(TransferOutable fromAcc, TransferInable toAcc, double amount) {
+    public RegularTrans(TransferOutable fromAcc, TransferInable toAcc, Currency amount) {
         this.amount = amount;
         this.fromAcc = fromAcc;
         this.toAcc = toAcc;
         time = LocalDateTime.now();
-        this.fromCurrency = ((Account)fromAcc).getBaseCurrency();
-        this.toBaseCurrency = ((Account)toAcc).getBaseCurrency();
-        if(this.fromCurrency != toBaseCurrency){
-            this.exRate = exchangeToBaseCurrency(fromCurrency,toBaseCurrency);
-        }
     }
 
-    public double getAmount() {
+    public Currency getAmount() {
         return amount;
     }
 
@@ -71,10 +64,10 @@ public class RegularTrans extends Transaction{
      */
     @Override
     void begin() throws TransactionAmountOverLimitException{
-        if (getAmount()*exRate > getFromAcc().getAvailableCredit()) {
+        if (getAmount().getAmount() > getFromAcc().getAvailableCredit().getAmount()) {
             throw new TransactionAmountOverLimitException();
         }
-        fromAcc.transferOut(getAmount()*exRate);
+        fromAcc.transferOut(getAmount());
         toAcc.transferIn(this.getAmount());
         setHappened(true);
     }

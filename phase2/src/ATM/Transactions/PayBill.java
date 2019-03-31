@@ -2,6 +2,7 @@ package ATM.Transactions;
 
 
 import ATM.Accounts.Account;
+import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.Payable;
 import ATM.InfoHandling.BillWriter;
 import ATM.org.openexchangerates.oerjava.OpenExchangeRates;
@@ -17,11 +18,8 @@ public class PayBill extends Transaction{
     private final Payable fromAcc;
     private final Account toAcc;
     private final LocalDateTime time;
-    private final double amount;
+    private final Currency amount;
     private  BillWriter writer = new BillWriter();
-    private String fromCurrency;
-    private double exRate = 1;
-    private final String baseCurrency = "CAD";
 
 
     /***
@@ -30,19 +28,15 @@ public class PayBill extends Transaction{
      * @param fromAccount the account where fund will be extracted from.
      * @param amount the amount of fund will be paid.
      */
-    public PayBill(Payable fromAccount, String to, double amount) {
+    public PayBill(Payable fromAccount, String to, Currency amount) {
         this.amount = amount;
         this.fromAcc = fromAccount;
         this.toAcc = null;
         this.to = to;
         this.time = LocalDateTime.now();
-        this.fromCurrency = ((Account)fromAccount).getBaseCurrency();
-        if(this.fromCurrency != baseCurrency){
-            this.exRate = exchangeToBaseCurrency(fromCurrency,baseCurrency);
-        }
     }
 
-    public double getAmount() {
+    public Currency getAmount() {
         return amount;
     }
 
@@ -77,10 +71,10 @@ public class PayBill extends Transaction{
      */
     @Override
     void begin() throws TransactionAmountOverLimitException{
-        if (amount*exRate > getFromAcc().getAvailableCredit()) {
+        if (amount.getAmount() > getFromAcc().getAvailableCredit().getAmount()) {
             throw new TransactionAmountOverLimitException();
         }
-        fromAcc.pay(this.getAmount()*exRate);
+        fromAcc.pay(this.getAmount());
         setHappened(true);
         writer.write(this.toString());
     }

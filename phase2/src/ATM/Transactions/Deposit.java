@@ -2,6 +2,7 @@ package ATM.Transactions;
 
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
+import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.Depositable;
 import ATM.Accounts.TransferTypes.Withdrawable;
 
@@ -14,10 +15,7 @@ public class Deposit extends Transaction{
     private final Account fromAcc;
     private final Depositable toAcc;
     private final LocalDateTime time;
-    private final int amount;
-    private String fromBaseCurrency = "CAD";
-    private double exRate = 1;
-    private final String toCurrency;
+    private final Currency amount;
 
 
     /***
@@ -26,18 +24,15 @@ public class Deposit extends Transaction{
      * @param toAccount the account where fund will be deposit to.
      * @param amount the amount of fund will be deposit.
      */
-    public Deposit(Depositable toAccount, int amount) {
+    public Deposit(Depositable toAccount, Currency amount) {
         this.amount = amount;
         this.toAcc = toAccount;
         this.fromAcc = null;
         this.time = LocalDateTime.now();
-        this.toCurrency = ((Account)toAccount).getBaseCurrency();
-        if(this.toCurrency != fromBaseCurrency){
-            this.exRate = exchangeToBaseCurrency(fromBaseCurrency, toCurrency);
-        }
+
     }
 
-    public int getAmount() {
+    public Currency getAmount() {
         return amount;
     }
 
@@ -69,7 +64,7 @@ public class Deposit extends Transaction{
      */
     @Override
     void begin() {
-        toAcc.deposit((this.getAmount()) * exRate);
+        toAcc.deposit((this.getAmount()));
         setHappened(true);
     }
 
@@ -83,11 +78,11 @@ public class Deposit extends Transaction{
     public Withdrawal reverse() throws ReverseNotPossibleException{
         Account fromAcc = getToAcc();
         if (fromAcc instanceof ChequingAccount) {
-            if (fromAcc.getBalance() <=0) {
+            if (fromAcc.getBalance().getAmount() <=0) {
                 throw new ReverseNotPossibleException();
             }
         }
-        if (getAmount() > fromAcc.getAvailableCredit()) {
+        if (getAmount().getAmount() > fromAcc.getAvailableCredit().getAmount()) {
             throw new ReverseNotPossibleException();
         }
         return new Withdrawal((Withdrawable) fromAcc, this.getAmount());
