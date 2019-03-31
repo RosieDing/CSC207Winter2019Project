@@ -49,7 +49,6 @@ public class TransactionManager implements Serializable {
         switch((String)map.get("Type")) {
             case "Deposit":
                 e = new Deposit((Depositable) map.get("toAccount"), (Currency)map.get("amount"));
-                checkCADBase(e.getToAcc());
                 break;
             case "PayBill":
                 e = new PayBill((Payable) map.get("fromAccount"), (String)map.get("to"),
@@ -57,15 +56,11 @@ public class TransactionManager implements Serializable {
                 break;
             case "Withdrawal":
                 e = new Withdrawal((Withdrawable) map.get("fromAccount"), (Currency) map.get("amount"));
-                checkCADBase(e.getFromAcc());
                 break;
             case "Regular":
                 e = new RegularTrans((TransferOutable)map.get("fromAccount"),
                         (TransferInable)map.get("toAccount"), (Currency) map.get("amount"));
                 break;}
-//        }catch (NotCADBaseAccountException e1){
-//            System.out.println("The currency base of account chosen should be CAD");
-//        }
         return makeTransaction(e, machine);
     }
 
@@ -74,11 +69,14 @@ public class TransactionManager implements Serializable {
      * @param e Transaction
      * @return Transaction
      */
-    public Transaction makeTransaction(Transaction e, CashMachine machine) throws NotEnoughMoneyException,
-            CashNotWithdrawableException, TransactionAmountOverLimitException, NullPointerException{
+    public Transaction makeTransaction(Transaction e, CashMachine machine) throws NotCADBaseAccountException,
+            NotEnoughMoneyException, CashNotWithdrawableException, TransactionAmountOverLimitException, NullPointerException{
 //        try{
             e.possibleToBegin();
-            if (e instanceof Withdrawal) {
+            if (e instanceof Deposit) {
+                checkCADBase(e.getToAcc());}
+            else if (e instanceof Withdrawal) {
+                checkCADBase(e.getFromAcc());
                 machine.withdrawCash((int)(((Withdrawal)e).getAmount().getAmount()));
             }
             e.begin();
@@ -91,7 +89,10 @@ public class TransactionManager implements Serializable {
 //            System.out.println("Not enough balance to complete transaction.");
 //        } catch (NullPointerException c) {
 //            System.out.println("Transaction is not possible.");
+//        } catch (NotCADBaseAccountException e1){
+//            System.out.println("The currency base of account chosen should be CAD");
 //        }
+
         return e;
     }
 

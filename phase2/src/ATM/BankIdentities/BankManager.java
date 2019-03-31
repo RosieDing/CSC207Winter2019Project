@@ -3,11 +3,10 @@ package ATM.BankIdentities;
 import ATM.Accounts.Account;
 import ATM.InfoHandling.InfoStorer;
 import ATM.Machine.CashMachine;
+import ATM.Machine.CashNotWithdrawableException;
 import ATM.Machine.Money;
-import ATM.Transactions.NoTransactionException;
-import ATM.Transactions.ReverseNotPossibleException;
-import ATM.Transactions.Transaction;
-import ATM.Transactions.TransactionManager;
+import ATM.Machine.NotEnoughMoneyException;
+import ATM.Transactions.*;
 
 import java.util.EmptyStackException;
 import java.util.Map;
@@ -58,21 +57,23 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
      * @param accNum the AccountNumber of the account which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoAccRecentTrans(String accNum, TransactionManager trans, CashMachine machine, int times){
-        try {
+    public void undoAccRecentTrans(String accNum, TransactionManager trans, CashMachine machine, int times) throws
+            NoTransactionException, ReverseNotPossibleException, NotCADBaseAccountException, NotEnoughMoneyException,
+            CashNotWithdrawableException, TransactionAmountOverLimitException, NullPointerException{
+//        try {
             for (int i = 1; i <= times; i++) {
                 Transaction e = trans.popAccLastTrans(accNum).reverse();
                 // try catch where pay bill can't be reversed.
                 trans.makeTransaction(e, machine);
             }
-        } catch (EmptyStackException e) {
-            System.out.println("No more transaction related to this user.");
-        }// try catch if transaction cant be processed.
-        catch (ReverseNotPossibleException e) {
-            System.out.println("Impossible to undo this transaction.");
-        } catch (NoTransactionException e) {
-            System.out.println(e.getMessage());
-        }
+//        } catch (EmptyStackException e) {
+//            System.out.println("No more transaction related to this user.");
+//        }// try catch if transaction cant be processed.
+//        catch (ReverseNotPossibleException e) {
+//            System.out.println("Impossible to undo this transaction.");
+//        } catch (NoTransactionException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 
 
@@ -81,21 +82,23 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
      * @param userId the UserId of the user which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoUserRecentTrans(String userId, TransactionManager trans, CashMachine machine, int times) {
-        try {
+    public void undoUserRecentTrans(String userId, TransactionManager trans, CashMachine machine, int times) throws
+            NoTransactionException, ReverseNotPossibleException, NotCADBaseAccountException, NotEnoughMoneyException,
+            CashNotWithdrawableException, TransactionAmountOverLimitException, NullPointerException{
+//        try {
             for (int i = 1; i <= times; i++) {
                 Transaction e = trans.popUserLastTrans(userId).reverse();
                 // try catch where pay bill can't be reversed.
                 trans.makeTransaction(e, machine);
             }
-        } catch (EmptyStackException e) {
-            System.out.println("No more transaction related to this user.");
-        }// try catch if transaction can't be processed.
-         catch (ReverseNotPossibleException e) {
-            System.out.println("Impossible to undo this transaction.");
-        } catch (NoTransactionException e) {
-            System.out.println(e.getMessage());
-        }
+//        } catch (EmptyStackException e) {
+//            System.out.println("No more transaction related to this user.");
+//        }// try catch if transaction can't be processed.
+//         catch (ReverseNotPossibleException e) {
+//            System.out.println("Impossible to undo this transaction.");
+//        } catch (NoTransactionException e) {
+//            System.out.println(e.getMessage());
+//        }
     }
 
     /** Create a new Bank staff */
