@@ -187,11 +187,5 @@ public class InfoManager {
      * @param type type of account requested
      */
     public void removeRequest(String userID, String type) { getAccountCreationRequest().remove(userID, type); }
-
-    /***
-     * Update method. Serialize infoStorer if it is called.
-     * @param o Observable item which infoManager is observing
-     * @param arg Object argument
-     */
 }
 

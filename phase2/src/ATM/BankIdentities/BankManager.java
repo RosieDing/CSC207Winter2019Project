@@ -99,8 +99,8 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
         }
     }
 
-    /** Create a new Bankstuff */
-    public String createBankStuff(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
+    /** Create a new Bank staff */
+    public String createBankStaff(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
         AccountCreator accCreator = new AccountCreator();
         BankStaff bankStaff = new BankStaff(Numuser);
         PasswordManager passwordManager = new PasswordManager(bankStaff.getId());
