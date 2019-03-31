@@ -2,6 +2,7 @@ package ATM.BankIdentities;
 
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
+import ATM.InfoHandling.InfoStorer;
 import ATM.InfoHandling.RecordWriter;
 import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
@@ -66,8 +67,8 @@ public class BankStaff extends BankEmployee implements PrivilegeLevelB, AccountO
     }
 
     @Override
-    public String createUser(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account> accountListMap) {
-        String userID = super.createUser(Numuser, type, userMap, passwordMap, accountListMap);
+    public String createUser(String type, InfoStorer infoStorer) {
+        String userID = super.createUser(type, infoStorer);
         RecordWriter rw = new RecordWriter();
         rw.write(this.getId() + " create a user");
         return userID;
