@@ -53,19 +53,17 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
         return id;
     }
 
-
-
     /**
      * Undo the most recent transaction for the Account
      * @param accNum the AccountNumber of the account which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoAccRecentTrans(String accNum, TransactionManager trans, int times){
+    public void undoAccRecentTrans(String accNum, TransactionManager trans, CashMachine machine, int times){
         try {
             for (int i = 1; i <= times; i++) {
                 Transaction e = trans.popAccLastTrans(accNum).reverse();
                 // try catch where pay bill can't be reversed.
-                trans.makeTransaction(e);
+                trans.makeTransaction(e, machine);
             }
         } catch (EmptyStackException e) {
             System.out.println("No more transaction related to this user.");
@@ -83,12 +81,12 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
      * @param userId the UserId of the user which you want to undo transaction for
      * @throws ReverseNotPossibleException
      *  */
-    public void undoUserRecentTrans(String userId, TransactionManager trans, int times) {
+    public void undoUserRecentTrans(String userId, TransactionManager trans, CashMachine machine, int times) {
         try {
             for (int i = 1; i <= times; i++) {
                 Transaction e = trans.popUserLastTrans(userId).reverse();
                 // try catch where pay bill can't be reversed.
-                trans.makeTransaction(e);
+                trans.makeTransaction(e, machine);
             }
         } catch (EmptyStackException e) {
             System.out.println("No more transaction related to this user.");
