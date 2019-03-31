@@ -18,13 +18,13 @@ public abstract class BankEmployee extends BankIdentity implements  PrivilegeLev
      * It will create a default primary chequing account
      * At the same time, all the information is going to be updated to global information
      */
-    public String createUser(int Numuser, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
+    public String createUser(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
         AccountCreator accCreator = new AccountCreator();
         User u = new User(Numuser);
         userMap.put(u.getId(), u);
         PasswordManager passwordManager = new PasswordManager(u.getId());
         passwordManager.setPassword("1234", passwordMap);
-        accCreator.createNewChequingAccount(Numuser, u, accountListMap);
+        accCreator.createNewChequingAccount(Numuser, u, type, accountListMap);
         return u.getId();
     }
 

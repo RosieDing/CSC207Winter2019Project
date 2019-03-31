@@ -66,10 +66,11 @@ public class BankStaff extends BankEmployee implements PrivilegeLevelB, AccountO
     }
 
     @Override
-    public void createUser(int Numuser, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account> accountListMap) {
-        super.createUser(Numuser, userMap, passwordMap, accountListMap);
+    public String createUser(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account> accountListMap) {
+        String userID = super.createUser(Numuser, type, userMap, passwordMap, accountListMap);
         RecordWriter rw = new RecordWriter();
         rw.write(this.getId() + " create a user");
+        return userID;
     }
 
     @Override

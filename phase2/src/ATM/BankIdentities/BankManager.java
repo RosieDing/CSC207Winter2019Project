@@ -1,6 +1,8 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.Account;
+import ATM.Machine.CashMachine;
+import ATM.Machine.Money;
 import ATM.Transactions.NoTransactionException;
 import ATM.Transactions.ReverseNotPossibleException;
 import ATM.Transactions.Transaction;
@@ -98,13 +100,33 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
     }
 
     /** Create a new Bankstuff */
-    public void createBankStuff(int Numuser, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
+    public String createBankStuff(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
         AccountCreator accCreator = new AccountCreator();
         BankStaff bankStaff = new BankStaff(Numuser);
         PasswordManager passwordManager = new PasswordManager(bankStaff.getId());
         passwordManager.setPassword("1234", passwordMap);
         System.out.println("New user created! user ID: " + bankStaff.getId()); /* still need this?*/
-        accCreator.createNewChequingAccount(Numuser, bankStaff, accountListMap);
+        accCreator.createNewChequingAccount(Numuser, bankStaff, type, accountListMap);
+        return bankStaff.getId();
+    }
+
+    /**
+     * The method for the BankEmployee to create new_user with default password "1234"
+     * It will create a default primary chequing account
+     * At the same time, all the information is going to be updated to global information
+     */
+    public String createUser(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
+        String userID = super.createUser(Numuser, type, userMap, passwordMap, accountListMap);
+        return userID;
+    }
+
+    /**
+     * Restocking the CashMachine
+     * @param machine the CashMachine storing cash
+     * @param money a money object representing all the bills that need to be restocked into the machine
+     * */
+    public void restock(CashMachine machine, Money money) {
+        super.restock(machine, money);
     }
 }
 

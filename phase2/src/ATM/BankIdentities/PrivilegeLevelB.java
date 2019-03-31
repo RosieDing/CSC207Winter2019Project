@@ -8,6 +8,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public interface PrivilegeLevelB {
-    public String createUser(int Numuser, Map<String, User> userMap, Map<String, String> passwordMap,  Map<String, Account> accountListMap);
+    public String createUser(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap,  Map<String, Account> accountListMap);
     public void restock(CashMachine machine, Money money);
 }
