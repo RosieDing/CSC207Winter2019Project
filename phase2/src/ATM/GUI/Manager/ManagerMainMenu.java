@@ -1,14 +1,9 @@
-package ATM.GUI;
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+package ATM.GUI.Manager;
 
 import ATM.BankIdentities.*;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 import ATM.BankSystem.BankSystem;
-import ATM.Machine.Money;
-import ATM.Transactions.NoTransactionException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

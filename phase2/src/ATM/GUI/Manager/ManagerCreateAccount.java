@@ -1,4 +1,4 @@
-package ATM.GUI;
+package ATM.GUI.Manager;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,6 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ATM.BankIdentities.AccountCreator;
+import ATM.BankIdentities.UserAccManager;
+import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -22,7 +28,11 @@ public class ManagerCreateAccount extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ManagerCreateAccount() {
+	public ManagerCreateAccount(String id, InfoManager infoManager) {
+        AccountCreator creater = new AccountCreator();
+        InfoStorer infoStorer = infoManager.getInfoStorer();
+        UserAccManager user = new UserAccManager(id, infoStorer.getAccountMap());
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -30,9 +40,13 @@ public class ManagerCreateAccount extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Create Chequing Account");
-		btnNewButton.setBounds(19, 80, 192, 29);
-		contentPane.add(btnNewButton);
+		JButton btnCreateChequingAccount = new JButton("Create Chequing Account");
+		btnCreateChequingAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCreateChequingAccount.setBounds(19, 80, 192, 29);
+		contentPane.add(btnCreateChequingAccount);
 		
 		JButton btnCreateSavingAccount = new JButton("Create Saving Account");
 		btnCreateSavingAccount.setBounds(233, 80, 192, 29);

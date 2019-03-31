@@ -1,4 +1,4 @@
-package ATM.GUI;
+package ATM.GUI.Manager;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
