@@ -63,7 +63,7 @@ public class RegularTrans extends Transaction{
      * RegularTrans is executed.
      */
     @Override
-    public void begin(){
+    void begin(){
         fromAcc.transferOut(getAmount());
         toAcc.transferIn(this.getAmount());
         setHappened(true);
@@ -74,7 +74,7 @@ public class RegularTrans extends Transaction{
      * @return if the amount of transaction is within limit
      * @throws TransactionAmountOverLimitException
      */
-    public boolean possibleToBegin() throws TransactionAmountOverLimitException {
+    boolean possibleToBegin() throws TransactionAmountOverLimitException {
         if (getAmount().getAmount() > getFromAcc().getAvailableCredit().getAmount()) {
             throw new TransactionAmountOverLimitException();
         }

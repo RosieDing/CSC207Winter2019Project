@@ -46,12 +46,8 @@ public class GICAccount extends InvestmentAccount {
         perspectTotalInterest = plan.getCurrentPerspectTotalInterest(principle, getDateOfCreation(), isEnd);
         perspectiveBalance = plan.getCurrentPerspectBalance(principle,getDateOfCreation(),isEnd);
 
-        //if (!isEnd) {
-            balance = new Currency(type, perspectiveBalance);
-            availableCredit = new Currency(type,principle + perspectTotalInterest * penalty);
-        //} else {
-          //  availableCredit = balance;
-        //}
+        balance = new Currency(type, perspectiveBalance);
+        availableCredit = new Currency(type,principle + perspectTotalInterest * penalty);
     }
 
     @Override
@@ -102,8 +98,7 @@ public class GICAccount extends InvestmentAccount {
 
     @Override
     public String toString(){
-        return this.getCurrencyType() + " GICAccount " + this.accountNum +"with period" + termsOfMonth +
-                "Maturity Date is " + maturityYear +"/" + maturityMonth +"/" +maturityDay
+        return this.getCurrencyType() + " GICAccount "+ this.accountNum + plan + "maturityYear"+ maturityYear +"/" + maturityMonth +"/" +maturityDay
                 + monthLeft +" months left";
     }
 
