@@ -1,7 +1,10 @@
 package ATM.GUI.User;
 
+import ATM.BankIdentities.User;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,7 +27,7 @@ public class UserTransactionDeposit extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserTransactionDeposit() {
+	public UserTransactionDeposit(Map<String, Object> transMap, User user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

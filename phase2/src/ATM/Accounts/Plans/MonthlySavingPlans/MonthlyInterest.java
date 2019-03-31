@@ -18,14 +18,14 @@ public class MonthlyInterest implements Plan, Serializable {
     public double compute(double amount) {
         LocalDate current = Date.getDate().getSystemCurrentTime();
         if (current.getDayOfMonth() == 1){
-                return amount * (interestRate+1);
-            }
-            return amount;
+            return amount * (interestRate+1);
+        }
+        return amount;
     }
 
     /** Return a String representation of this saving plan
      * @return String information about this saving plan */
     public String toString(){
         return "This is a SavingPlan with monthly interest: "+interestRate;}
-    }
+}
 
