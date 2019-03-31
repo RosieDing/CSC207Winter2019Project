@@ -91,32 +91,7 @@ public class ManagerCreateGICAccount extends JFrame {
 		rdbtnINR.setBounds(380, 67, 70, 23);
 		contentPane.add(rdbtnINR);
 		
-		JButton btnCreateGicAccount = new JButton("Create GIC Account");
-		btnCreateGicAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String type = rdbtnCAD.getText();
-				if (rdbtnCAD.isSelected()) {
-					type = rdbtnCAD.getText();
-				}else if (rdbtnUSD.isSelected()) {
-					type = rdbtnUSD.getText();
-				}else if (rdbtnCNY.isSelected()) {
-					type = rdbtnCNY.getText();
-				}else if (rdbtnEUR.isSelected()) {
-					type = rdbtnEUR.getText();
-				}else if (rdbtnGBP.isSelected()) {
-					type = rdbtnGBP.getText();
-				}else if (rdbtnINR.isSelected()) {
-					type = rdbtnINR.getText();
-				}
-				String ID = txtID.getText();
-				InfoStorer infoStorer = infoManager.getInfoStorer();
-				User user = infoStorer.getUserMap().get(ID);
-				AccountCreator creater = new AccountCreator(user, infoStorer, type);
-				creater.createNewGICAccount(plan, principle);
-			}
-		});
-		btnCreateGicAccount.setBounds(221, 225, 191, 29);
-		contentPane.add(btnCreateGicAccount);
+
 		
 		JLabel lblChoosePlan = new JLabel("Choose Plan:");
 		lblChoosePlan.setBounds(6, 102, 188, 16);
@@ -143,5 +118,36 @@ public class ManagerCreateGICAccount extends JFrame {
 		txtAmount.setBounds(181, 160, 130, 26);
 		contentPane.add(txtAmount);
 		txtAmount.setColumns(10);
+
+		JButton btnCreateGicAccount = new JButton("Create GIC Account");
+		btnCreateGicAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String type = rdbtnCAD.getText();
+				if (rdbtnCAD.isSelected()) {
+					type = rdbtnCAD.getText();
+				}else if (rdbtnUSD.isSelected()) {
+					type = rdbtnUSD.getText();
+				}else if (rdbtnCNY.isSelected()) {
+					type = rdbtnCNY.getText();
+				}else if (rdbtnEUR.isSelected()) {
+					type = rdbtnEUR.getText();
+				}else if (rdbtnGBP.isSelected()) {
+					type = rdbtnGBP.getText();
+				}else if (rdbtnINR.isSelected()) {
+					type = rdbtnINR.getText();
+				}
+				String ID = txtID.getText();
+				InfoStorer infoStorer = infoManager.getInfoStorer();
+				User user = infoStorer.getUserMap().get(ID);
+				AccountCreator creater = new AccountCreator(user, infoStorer, type);
+				if (rdbtnAnnualInterest.isSelected()){
+
+				}
+				rdbtnAnnualInterest.getText();
+				creater.createNewGICAccount(plan, principle);
+			}
+		});
+		btnCreateGicAccount.setBounds(221, 225, 191, 29);
+		contentPane.add(btnCreateGicAccount);
 	}
 }

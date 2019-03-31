@@ -92,7 +92,7 @@ public class ManagerCreaterUser extends JFrame {
 					type = rdbtnInr.getText();
 				}
 				
-				String ID = bankManager.createUser(infoManager.getUserNum(), type, infoStorer.getUserMap(), infoStorer.getPasswordMap(), infoStorer.getAccountMap());
+				String ID = bankManager.createUser(type, infoStorer);
             	if (ID != "") {
             		JOptionPane.showMessageDialog(null, "New user created! user ID: " + ID);
             	}
