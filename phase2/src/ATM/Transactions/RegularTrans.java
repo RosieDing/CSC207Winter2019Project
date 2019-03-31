@@ -61,7 +61,6 @@ public class RegularTrans extends Transaction{
     /**
      * Execute this RegularTrans. Set field happened as true if this
      * RegularTrans is executed.
-     * @throws TransactionAmountOverLimitException
      */
     @Override
     public void begin(){
@@ -70,6 +69,11 @@ public class RegularTrans extends Transaction{
         setHappened(true);
     }
 
+    /***
+     * Check if the transaction is possible to begin
+     * @return if the amount of transaction is within limit
+     * @throws TransactionAmountOverLimitException
+     */
     public boolean possibleToBegin() throws TransactionAmountOverLimitException {
         if (getAmount().getAmount() > getFromAcc().getAvailableCredit().getAmount()) {
             throw new TransactionAmountOverLimitException();
