@@ -143,9 +143,9 @@ public class ManagerCreateSavingAccount extends JFrame {
 				
 				SavingPlan plan = new MonthlyInterest();	
 				if (rdbtnMonthlyPlan.isSelected()) {
-					MonthlyInterest plan = new MonthlyInterest();
+					plan = new MonthlyInterest();
 				}else if (rdbtnMonthlyPremiumPlan.isSelected()) {
-					MonthlyPremiumInterest plan = new MonthlyPremiumInterest();
+					plan = new MonthlyPremiumInterest();
 				}
 				String ID = txtID.getText();
 				InfoStorer infoStorer = infoManager.getInfoStorer();
