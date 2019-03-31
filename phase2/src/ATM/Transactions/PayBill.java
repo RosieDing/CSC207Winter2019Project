@@ -65,16 +65,19 @@ public class PayBill extends Transaction{
         return time;
     }
 
-    /**
-     * Execute this PayBill. Set field happened as true if this
-     * PayBill is executed.
-     * @throws TransactionAmountOverLimitException
-     */
-    @Override
-    void begin() throws TransactionAmountOverLimitException{
+    boolean possibleToBegin() throws TransactionAmountOverLimitException{
         if (amount.getAmount() > getFromAcc().getAvailableCredit().getAmount()) {
             throw new TransactionAmountOverLimitException();
         }
+        return true;
+    }
+
+    /**
+     * Execute this PayBill. Set field happened as true if this
+     * PayBill is executed.
+     */
+    @Override
+    void begin() throws TransactionAmountOverLimitException{
         fromAcc.pay(this.getAmount());
         setHappened(true);
         writer.write(this.toString());

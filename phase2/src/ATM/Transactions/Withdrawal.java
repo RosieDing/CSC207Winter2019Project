@@ -69,7 +69,6 @@ public class Withdrawal extends Transaction {
     /**
      * Execute this Withdrawal. Set field happened as true if this
      * Withdrawal is executed.
-     * @throws TransactionAmountOverLimitException if the amount is too large.
      */
     @Override
     public void begin() {
@@ -90,6 +89,11 @@ public class Withdrawal extends Transaction {
         return new Deposit(toAcc ,this.getAmount());
     }
 
+    /***
+     * Check if the transaction is possible to begin
+     * @return if the amount of transaction is within limit
+     * @throws TransactionAmountOverLimitException
+     */
     public boolean possibleToBegin() throws TransactionAmountOverLimitException{
         Account acc = getFromAcc();
         if (acc instanceof ChequingAccount) {

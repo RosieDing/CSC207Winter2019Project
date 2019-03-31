@@ -59,6 +59,9 @@ public class Deposit extends Transaction{
         return date;
     }
 
+    boolean possibleToBegin(){
+        return true;
+    }
     /**
      * Execute this Deposit. Set field happened as true if
      * this transaction is made.

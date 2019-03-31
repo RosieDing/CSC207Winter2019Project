@@ -59,6 +59,7 @@ public class InfoStorer implements Serializable {
     public InfoStorer(){
         this.accountMap = new HashMap<String, Account>();
         this.userMap = new HashMap<String, User>();
+        this.staffMap = new HashMap<String, BankStaff>();
         this.bankManagerMap = new HashMap<String, BankManager>();
         this.requestMap = new HashMap<String, String>();
         this.passwordMap = new HashMap<String, String>();
