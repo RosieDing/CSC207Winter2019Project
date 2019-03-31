@@ -180,11 +180,11 @@ public class UserAccManager implements Serializable, Iterable<Account> {
     /**
      * Send a request to tell Manager to create account
      *
-     * @param type       The account type needed to be added
+     * @param request       The request needed to be added
      * @param requestMap The global request map from User ID to the request type
      */
-    public void sendRequest(String type, Map<String, String> requestMap) {
-        requestMap.put(ownerUserId, type);
+    public void sendRequest(String request, Map<String, String> requestMap) {
+        requestMap.put(ownerUserId, request);
     }
 
 }
