@@ -25,8 +25,7 @@ public class ManagerCreateSavingAccount extends JFrame {
 	 * Create the frame.
 	 */
 	public ManagerCreateSavingAccount(String id, InfoManager infoManager) {
-		AccountCreator creater = new AccountCreator();
-		InfoStorer infoStorer = infoManager.getInfoStorer();
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -51,7 +50,7 @@ public class ManagerCreateSavingAccount extends JFrame {
 				new ManagerCreateAccount(id, infoManager).setVisible(true);
 			}
 		});
-		btnBack.setBounds(64, 136, 117, 29);
+		btnBack.setBounds(37, 217, 117, 29);
 		contentPane.add(btnBack);
 		
 		
@@ -108,12 +107,27 @@ public class ManagerCreateSavingAccount extends JFrame {
 					type = rdbtnINR.getText();
 				}
 				String ID = txtID.getText();
+				InfoStorer infoStorer = infoManager.getInfoStorer();
 				User user = infoStorer.getUserMap().get(ID);
-				creater.createNewSavingAccount(infoManager.getAccountNum(), user, type, infoStorer.getAccountMap(), plan);
+				AccountCreator creater = new AccountCreator(user, infoStorer, type);
+				creater.createNewSavingAccount(plan);
 			}
 		});
-		btnCreateSavingAccount.setBounds(235, 136, 191, 29);
+		btnCreateSavingAccount.setBounds(232, 217, 191, 29);
 		contentPane.add(btnCreateSavingAccount);
+		
+		JRadioButton rdbtnMonthlyPremiumPlan = new JRadioButton("Monthly Premium Plan");
+		rdbtnMonthlyPremiumPlan.setBounds(221, 135, 172, 23);
+		contentPane.add(rdbtnMonthlyPremiumPlan);
+		
+		JRadioButton rdbtnMonthlyPlan = new JRadioButton("Monthly Plan");
+		rdbtnMonthlyPlan.setSelected(true);
+		rdbtnMonthlyPlan.setBounds(0, 135, 130, 23);
+		contentPane.add(rdbtnMonthlyPlan);
+		
+		JLabel lblChoosePlan = new JLabel("Choose Plan:");
+		lblChoosePlan.setBounds(6, 107, 188, 16);
+		contentPane.add(lblChoosePlan);
 	}
 
 }

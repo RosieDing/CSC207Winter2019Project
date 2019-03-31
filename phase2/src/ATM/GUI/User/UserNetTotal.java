@@ -1,7 +1,7 @@
 package ATM.GUI.User;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import ATM.BankIdentities.UserAccManager;
+import ATM.InfoHandling.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,20 +9,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UserNetTotal extends JFrame {
 
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-
-
-	/**
 	 * Create the frame.
 	 */
-	public UserNetTotal() {
+	public UserNetTotal(String id, InfoManager infoManager) {
+		InfoStorer infoStorer = infoManager.getInfoStorer();
+		UserAccManager manager = new UserAccManager(id, infoStorer.getUserMap(), infoStorer.getStaffMap());
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -40,8 +40,17 @@ public class UserNetTotal extends JFrame {
 		contentPane.add(lblTitle);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserNetTotal.this.dispose();
+				new UserMainMenu(id, infoManager).setVisible(true);
+
+			}
+		});
 		btnBack.setBounds(163, 212, 117, 29);
 		contentPane.add(btnBack);
+		
+		lblNetTotal.setText(Double.toString(manager.getNetTotal()));
 	}
 
 }

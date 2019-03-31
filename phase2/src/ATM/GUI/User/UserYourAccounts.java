@@ -1,13 +1,14 @@
 package ATM.GUI.User;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import ATM.InfoHandling.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UserYourAccounts extends JFrame {
 
@@ -18,7 +19,7 @@ public class UserYourAccounts extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserYourAccounts() {
+	public UserYourAccounts(String id, InfoManager infoManager) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -35,6 +36,13 @@ public class UserYourAccounts extends JFrame {
 		contentPane.add(btnNext);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserYourAccounts.this.dispose();
+				new UserMainMenu(id, infoManager).setVisible(true);
+
+			}
+		});
 		btnBack.setBounds(151, 202, 117, 29);
 		contentPane.add(btnBack);
 	}

@@ -1,13 +1,14 @@
 package ATM.GUI.User;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import ATM.InfoHandling.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UserMakeTransaction extends JFrame {
 
@@ -21,7 +22,7 @@ public class UserMakeTransaction extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserMakeTransaction() {
+	public UserMakeTransaction(String id, InfoManager infoManager) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -50,6 +51,13 @@ public class UserMakeTransaction extends JFrame {
 		contentPane.add(btnPayBill);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserMakeTransaction.this.dispose();
+				new UserMainMenu(id, infoManager).setVisible(true);
+
+			}
+		});
 		btnBack.setBounds(144, 222, 144, 29);
 		contentPane.add(btnBack);
 	}

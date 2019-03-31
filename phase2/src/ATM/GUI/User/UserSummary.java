@@ -1,15 +1,16 @@
 package ATM.GUI.User;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import ATM.InfoHandling.*;
+import ATM.BankIdentities.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UserSummary extends JFrame {
 
@@ -23,7 +24,10 @@ public class UserSummary extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserSummary() {
+	public UserSummary(String id, InfoManager infoManager) {
+		InfoStorer infoStorer = infoManager.getInfoStorer();
+		UserAccManager manager = new UserAccManager(id, infoStorer.getUserMap(), infoStorer.getStaffMap());
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -41,7 +45,15 @@ public class UserSummary extends JFrame {
 		contentPane.add(txtSummary);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserSummary.this.dispose();
+				new UserMainMenu(id, infoManager).setVisible(true);
+			}
+		});
 		btnBack.setBounds(148, 229, 117, 29);
 		contentPane.add(btnBack);
+		txtSummary.setText(manager.getSummary());
+
 	}
 }

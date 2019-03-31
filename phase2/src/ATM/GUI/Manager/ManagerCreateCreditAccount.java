@@ -27,8 +27,7 @@ public class ManagerCreateCreditAccount extends JFrame {
 	 * Create the frame.
 	 */
 	public ManagerCreateCreditAccount(String id, InfoManager infoManager) {
-		AccountCreator creater = new AccountCreator();
-		InfoStorer infoStorer = infoManager.getInfoStorer();
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -120,9 +119,11 @@ public class ManagerCreateCreditAccount extends JFrame {
 					}
 				String ID = txtID.getText();
 				String limit = txtLimit.getText();
+				InfoStorer infoStorer = infoManager.getInfoStorer();
 				int limitint = Integer.valueOf(limit);
 				User user = infoStorer.getUserMap().get(ID);
-				creater.createNewCreditAccount(infoManager.getAccountNum(), user, limitint, type, infoStorer.getAccountMap());
+				AccountCreator creater = new AccountCreator(user, infoStorer, type);
+				creater.createNewCreditAccount(limitint);
 			}
 		});
 		btnCreateCreditAccount.setBounds(221, 190, 191, 29);
