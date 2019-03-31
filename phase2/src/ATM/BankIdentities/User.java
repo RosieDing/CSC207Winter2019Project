@@ -58,7 +58,7 @@ public class User extends BankIdentity implements AccountOwnable{
     /** Add the given account to the account list
      * @param acc the account be added*/
     public void addAccount(Account acc) throws UserNotOwnAccountException {
-        if (acc.getOwnerID().equals(id)) {
+        if (acc.getOwnerID().contains(id)) {
             this.accounts.add(acc);
         } else {
             throw new UserNotOwnAccountException("This account is not owned by user: " + id);
