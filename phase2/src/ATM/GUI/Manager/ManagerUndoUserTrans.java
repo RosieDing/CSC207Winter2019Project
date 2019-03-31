@@ -3,12 +3,19 @@ package ATM.GUI.Manager;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
+import ATM.BankIdentities.*;
+import ATM.Transactions.*;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ManagerUndoUserTrans extends JFrame {
 
@@ -24,7 +31,11 @@ public class ManagerUndoUserTrans extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ManagerUndoUserTrans() {
+	public ManagerUndoUserTrans(String id, InfoManager infoManager) {
+		InfoStorer infoStorer = infoManager.getInfoStorer();
+		BankManager bankManager = infoStorer.getBankManagerMap().get(id);
+		TransactionManager transaction = new TransactionManager(infoStorer.getAccTransMap(),infoStorer.getUserTransMap());
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -33,6 +44,13 @@ public class ManagerUndoUserTrans extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnUndo = new JButton("Undo");
+		btnUndo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ID = txtID.getText();
+				int times = Integer.valueOf(txtTrans.getText());
+				bankManager.undoUserRecentTrans(ID, transaction, times);
+			}
+		});
 		btnUndo.setBounds(292, 222, 117, 29);
 		contentPane.add(btnUndo);
 		

@@ -104,12 +104,12 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
         Map<String, BankStaff> userMap = infoStorer.getStaffMap();
         Map<String, String> passwordMap = infoStorer.getPasswordMap();
         Map<String, Account>accountListMap = infoStorer.getAccountMap();
-        AccountCreator accCreator = new AccountCreator();
         BankStaff bankStaff = new BankStaff(Numuser);
+        AccountCreator accCreator = new AccountCreator(bankStaff,infoStorer, type);
         userMap.put(bankStaff.getId(), bankStaff);
         PasswordManager passwordManager = new PasswordManager(bankStaff.getId());
         passwordManager.setPassword("1234", passwordMap);
-        accCreator.createNewChequingAccount(bankStaff, type, infoStorer);
+        accCreator.createNewChequingAccount();
         return bankStaff.getId();
     }
 

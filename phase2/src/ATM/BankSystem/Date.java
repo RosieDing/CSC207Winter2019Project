@@ -25,13 +25,17 @@ public class Date {
         return d.plus(p);
     }
 
-    public void setDateOfCreation(int day, int month, int year) {
+    public boolean setDateOfCreation(int day, int month, int year) {
         LocalDate actualDateOfCreation = LocalDate.now();
-        LocalDate creationDate = LocalDate.of(year, month, day);
-        Period period = Period.between(actualDateOfCreation, creationDate);
-        periodDay = period.getDays();
-        periodMonth = period.getMonths();
-        periodYear = period.getYears();
+        try {
+            LocalDate creationDate = LocalDate.of(year, month, day);
+            Period period = Period.between(actualDateOfCreation, creationDate);
+
+            periodDay = period.getDays();
+            periodMonth = period.getMonths();
+            periodYear = period.getYears();
+        }catch (DateTimeException e){return false;}
+        return true;
     }
 
     @Override

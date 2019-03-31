@@ -10,20 +10,27 @@ import java.util.ArrayList;
 import java.util.Map;
 /** A class that create a new  Account*/
 public class AccountCreator {
-
-
+    private Map<String, User> userMap;
+    private  Map<String, BankStaff> staffMap;
+    private int totalAccNum;
+    private Map<String, Account> accountMap;
+    private AccountOwnable user;
+    private String type;
+    public AccountCreator(AccountOwnable user, InfoStorer infoStorer, String type){
+        userMap = infoStorer.getUserMap();
+        staffMap = infoStorer.getStaffMap();
+        totalAccNum = infoStorer.getAccountMap().size();
+        accountMap = infoStorer.getAccountMap();
+        this.user = user;
+        this.type = type;
+    }
 
 
     /** Create New Chequing Account for the User
      *
-     * @param user the User
      * @throws AlreadyPrimaryException
      *  */
-    public void createNewChequingAccount(AccountOwnable user, String type, InfoStorer infoStorer) {
-        Map<String, User> userMap = infoStorer.getUserMap();
-        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
-        int totalAccNum = infoStorer.getAccountMap().size();
-        Map<String, Account> accountMap = infoStorer.getAccountMap();
+    public void createNewChequingAccount() {
         String userID = user.getId();
         UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList<String> userList = new ArrayList<>();
@@ -46,13 +53,8 @@ public class AccountCreator {
 
     /** Create New Saving Account for the User
      *
-     * @param user the user
      *  */
-    public void createNewSavingAccount(AccountOwnable user, String type, Plan plan, InfoStorer infoStorer){
-        Map<String, User> userMap = infoStorer.getUserMap();
-        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
-        int totalAccNum = infoStorer.getAccountMap().size();
-        Map<String, Account> accountMap = infoStorer.getAccountMap();
+    public void createNewSavingAccount(Plan plan){
         String userID = user.getId();
         UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList<String> userList = new ArrayList<>();
@@ -69,14 +71,9 @@ public class AccountCreator {
 
     /** Create New Credit Account for the User
      *
-     * @param user the user
      * @param limit the limit of the credit account
      *  */
-    public void createNewCreditAccount(AccountOwnable user, double limit, String type,InfoStorer infoStorer){
-        Map<String, User> userMap = infoStorer.getUserMap();
-        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
-        int totalAccNum = infoStorer.getAccountMap().size();
-        Map<String, Account> accountMap = infoStorer.getAccountMap();
+    public void createNewCreditAccount(double limit){
         String userID = user.getId();
         UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList userList = new ArrayList();
@@ -92,14 +89,9 @@ public class AccountCreator {
 
     /** Create New Line of Credit Account for the User
      *
-     * @param user the user
      * @param limit the limit of the line of credit account
      *  */
-    public void createNewLineOfCredit(AccountOwnable user, double limit, String type, InfoStorer infoStorer){
-        Map<String, User> userMap = infoStorer.getUserMap();
-        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
-        int totalAccNum = infoStorer.getAccountMap().size();
-        Map<String, Account> accountMap = infoStorer.getAccountMap();
+    public void createNewLineOfCredit(double limit){
         String userID = user.getId();
         UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList userList = new ArrayList();
@@ -115,13 +107,8 @@ public class AccountCreator {
 
     /** Create New GIC Account for the User
      *
-     * @param user the user
      *  */
-    public void createNewGICAccount(AccountOwnable user, String type, GICPlan plan, double principle, InfoStorer infoStorer){
-        Map<String, User> userMap = infoStorer.getUserMap();
-        Map<String, BankStaff> staffMap = infoStorer.getStaffMap();
-        int totalAccNum = infoStorer.getAccountMap().size();
-        Map<String, Account> accountMap = infoStorer.getAccountMap();
+    public void createNewGICAccount(GICPlan plan, double principle){
         String userID = user.getId();
         UserAccManager m = new UserAccManager(userID, userMap, staffMap);
         ArrayList<String> userList = new ArrayList<>();

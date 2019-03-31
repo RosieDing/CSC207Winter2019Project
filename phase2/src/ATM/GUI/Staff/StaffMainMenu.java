@@ -31,25 +31,29 @@ public class StaffMainMenu extends JFrame {
 		contentPane.add(btnCreateUser);
 		
 		JButton btnCreateAccount = new JButton("Create Account");
-		btnCreateAccount.setBounds(268, 25, 140, 29);
+		btnCreateAccount.setBounds(28, 87, 140, 29);
 		contentPane.add(btnCreateAccount);
 		
 		JButton btnRestock = new JButton("Restock");
-		btnRestock.setBounds(28, 99, 140, 29);
+		btnRestock.setBounds(197, 146, 140, 29);
 		contentPane.add(btnRestock);
 		
-		JButton btnAccessUserOption = new JButton("Access User Option");
+		JButton btnAccessUserOption = new JButton("Access User Options");
 		btnAccessUserOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StaffMainMenu.this.dispose();
 				new UserMainMenu(id, infoManager).setVisible(true);
 			}
 		});
-		btnAccessUserOption.setBounds(268, 99, 156, 29);
+		btnAccessUserOption.setBounds(197, 25, 156, 29);
 		contentPane.add(btnAccessUserOption);
 		
 		JButton btnLogout = new JButton("Logout");
-		btnLogout.setBounds(140, 175, 156, 29);
+		btnLogout.setBounds(28, 146, 156, 29);
 		contentPane.add(btnLogout);
+		
+		JButton btnCheckMachineBalance = new JButton("Check Machine Balance");
+		btnCheckMachineBalance.setBounds(197, 87, 200, 29);
+		contentPane.add(btnCheckMachineBalance);
 	}
 }

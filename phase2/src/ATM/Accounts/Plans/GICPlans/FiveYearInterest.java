@@ -14,6 +14,6 @@ public class FiveYearInterest extends GICPlan implements Serializable {
 
     @Override
     public String toString(){
-        return "Five Years GIC Plan with interesting rate" + interestRate;
+        return "Five Years GIC Plan with interesting rate: " + interestRate;
     }
 }

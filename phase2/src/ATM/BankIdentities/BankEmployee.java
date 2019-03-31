@@ -23,12 +23,12 @@ public abstract class BankEmployee extends BankIdentity implements  PrivilegeLev
         Map<String, User> userMap = infoStorer.getUserMap();
         Map<String, String> passwordMap = infoStorer.getPasswordMap();
         int Numuser = infoStorer.getUserMap().size();
-        AccountCreator accCreator = new AccountCreator();
         User u = new User(Numuser);
+        AccountCreator accCreator = new AccountCreator(u, infoStorer, type);
         userMap.put(u.getId(), u);
         PasswordManager passwordManager = new PasswordManager(u.getId());
         passwordManager.setPassword("1234", passwordMap);
-        accCreator.createNewChequingAccount(u, type, infoStorer);
+        accCreator.createNewChequingAccount();
         return u.getId();
     }
 
