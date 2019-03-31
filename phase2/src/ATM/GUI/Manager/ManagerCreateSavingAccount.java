@@ -3,10 +3,6 @@ package ATM.GUI.Manager;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import ATM.Accounts.Plans.GICPlans.AnnualInterest;
-import ATM.Accounts.Plans.GICPlans.FiveYearInterest;
-import ATM.Accounts.Plans.GICPlans.GICPlan;
-import ATM.Accounts.Plans.GICPlans.TwoYearInterest;
 import ATM.Accounts.Plans.MonthlySavingPlans.*;
 import ATM.BankIdentities.AccountCreator;
 import ATM.BankIdentities.User;
