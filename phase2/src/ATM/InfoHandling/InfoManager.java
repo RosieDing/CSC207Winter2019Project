@@ -1,6 +1,8 @@
 package ATM.InfoHandling;
 
+import ATM.AccountTypeChecker.TimeSensitiveChecker;
 import ATM.Accounts.Account;
+import ATM.Accounts.TimeSensitive;
 import ATM.BankIdentities.*;
 import ATM.Machine.CashMachine;
 import ATM.Transactions.Transaction;
@@ -189,5 +191,18 @@ public class InfoManager {
      * @param type type of account requested
      */
     public void removeRequest(String userID, String type) { getRequestMap().remove(userID, type); }
+
+    /**
+     * Run through all the created timeSensitive accounts
+     * Compute and set their balance with potential new compounded interest
+     */
+    public void interestCompound(){
+        TimeSensitiveChecker checker = new TimeSensitiveChecker();
+        for (Account acc: getAccountMap().values()){
+            if (checker.check(acc)){
+                ((TimeSensitive) acc).compute();
+            }
+        }
+    }
 }
 
