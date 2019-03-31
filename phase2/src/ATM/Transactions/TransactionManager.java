@@ -1,6 +1,7 @@
 package ATM.Transactions;
 
 import ATM.Accounts.Account;
+import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.*;
 
 import java.io.Serializable;
@@ -41,18 +42,18 @@ public class TransactionManager implements Serializable {
         Transaction e = null;
         switch((String)map.get("Type")) {
             case "Deposit":
-                e = new Deposit((Depositable) map.get("toAccount"), (Integer)map.get("amount"));
+                e = new Deposit((Depositable) map.get("toAccount"), (Currency)map.get("amount"));
                 break;
             case "PayBill":
                 e = new PayBill((Payable) map.get("fromAccount"), (String)map.get("to"),
-                        (Double)map.get("amount"));
+                        (Currency) map.get("amount"));
                 break;
             case "Withdrawal":
-                e = new Withdrawal((Withdrawable) map.get("fromAccount"), (Integer)map.get("amount"));
+                e = new Withdrawal((Withdrawable) map.get("fromAccount"), (Currency) map.get("amount"));
                 break;
             case "Regular":
                 e = new RegularTrans((TransferOutable)map.get("fromAccount"),
-                        (TransferInable)map.get("toAccount"), (Double)map.get("amount"));
+                        (TransferInable)map.get("toAccount"), (Currency) map.get("amount"));
                 break;
         }
         return makeTransaction(e);
