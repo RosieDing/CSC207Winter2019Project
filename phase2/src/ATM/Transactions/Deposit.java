@@ -5,20 +5,21 @@ import ATM.Accounts.ChequingAccount;
 import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.Depositable;
 import ATM.Accounts.TransferTypes.Withdrawable;
+import ATM.BankSystem.Date;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-/***
+/**
  * Deposit class
  */
 public class Deposit extends Transaction{
     private final Account fromAcc;
     private final Depositable toAcc;
-    private final LocalDateTime time;
+    private final LocalDate date;
     private final Currency amount;
 
 
-    /***
+    /**
      * Create a new Deposit.
      *
      * @param toAccount the account where fund will be deposit to.
@@ -28,7 +29,7 @@ public class Deposit extends Transaction{
         this.amount = amount;
         this.toAcc = toAccount;
         this.fromAcc = null;
-        this.time = LocalDateTime.now();
+        this.date = Date.getDate().getSystemCurrentTime();
 
     }
 
@@ -36,13 +37,13 @@ public class Deposit extends Transaction{
         return amount;
     }
 
-    /***
+    /**
      * Get the from Account. (Here is always null.)
      * @return Account if there is a from Account, null if there is not.
      */
     public Account getFromAcc() { return fromAcc; }
 
-    /***
+    /**
      * Get the to Account (where money will be deposit to).
      * @return Account if there is a to Account, null if there is not.
      */
@@ -50,15 +51,15 @@ public class Deposit extends Transaction{
         return (Account)toAcc;
     }
 
-    /***
-     * Get the time when this Deposit happened.
-     * @return the time recorded.
+    /**
+     * Get the date when this Deposit happened.
+     * @return the date recorded.
      */
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDate getDate() {
+        return date;
     }
 
-    /***
+    /**
      * Execute this Deposit. Set field happened as true if
      * this transaction is made.
      */
@@ -68,7 +69,7 @@ public class Deposit extends Transaction{
         setHappened(true);
     }
 
-    /***
+    /**
      * Return a new Withdrawal as a reverse of the input transaction (same amount,
      * reversed from and to account).
      * @return Withdrawal
@@ -88,7 +89,7 @@ public class Deposit extends Transaction{
         return new Withdrawal((Withdrawable) fromAcc, this.getAmount());
     }
 
-    /***
+    /**
      * Return a string representation of Deposit.
      * @return a String.
      */
@@ -96,7 +97,7 @@ public class Deposit extends Transaction{
     public String toString() {
         return "Deposit{" +
                 "to: " + getToAcc() +
-                ", time:  " + getTime() +
+                ", date:  " + getDate() +
                 ", amount:" + getAmount() +
                 '}';
     }
