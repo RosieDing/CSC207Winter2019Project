@@ -1,4 +1,4 @@
-package ATM.GUI;
+package ATM.GUI.User;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,10 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
-public class UserNetTotal extends JFrame {
+public class UserTransactionRegularNext extends JFrame {
 
 	private JPanel contentPane;
 
@@ -22,7 +21,7 @@ public class UserNetTotal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserNetTotal() {
+	public UserTransactionRegularNext() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -30,18 +29,17 @@ public class UserNetTotal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNetTotal = new JLabel("");
-		lblNetTotal.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNetTotal.setBounds(25, 63, 382, 16);
-		contentPane.add(lblNetTotal);
+		JButton btnTransferToMy = new JButton("Transfer to my account");
+		btnTransferToMy.setBounds(83, 39, 231, 29);
+		contentPane.add(btnTransferToMy);
 		
-		JLabel lblTitle = new JLabel("Net Total:");
-		lblTitle.setBounds(182, 6, 83, 16);
-		contentPane.add(lblTitle);
+		JButton btnTransferToOther = new JButton("Transfer to other user account");
+		btnTransferToOther.setBounds(83, 112, 231, 29);
+		contentPane.add(btnTransferToOther);
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.setBounds(163, 212, 117, 29);
-		contentPane.add(btnBack);
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(83, 176, 231, 29);
+		contentPane.add(btnCancel);
 	}
 
 }

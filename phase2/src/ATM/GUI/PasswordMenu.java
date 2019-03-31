@@ -1,13 +1,9 @@
 package ATM.GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import ATM.BankIdentities.AccountCreator;
-import ATM.BankIdentities.BankManager;
 import ATM.BankIdentities.PasswordManager;
-import ATM.Machine.Money;
-import ATM.Transactions.NoTransactionException;
+import ATM.GUI.Manager.ManagerMainMenu;
+import ATM.GUI.Staff.StaffMainMenu;
+import ATM.GUI.User.UserMainMenu;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 
@@ -16,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;

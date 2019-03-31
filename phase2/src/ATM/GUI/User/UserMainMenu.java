@@ -1,10 +1,8 @@
-package ATM.GUI;
+package ATM.GUI.User;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import ATM.InfoHandling.InfoManager;
-import ATM.InfoHandling.InfoStorer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,21 +17,6 @@ public class UserMainMenu extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UserMainMenu frame = new UserMainMenu();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
