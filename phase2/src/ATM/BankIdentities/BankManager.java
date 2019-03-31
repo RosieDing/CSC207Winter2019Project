@@ -1,6 +1,7 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.Account;
+import ATM.InfoHandling.InfoStorer;
 import ATM.Machine.CashMachine;
 import ATM.Machine.Money;
 import ATM.Transactions.NoTransactionException;
@@ -100,12 +101,17 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
     }
 
     /** Create a new Bank staff */
-    public String createBankStaff(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
+    public String createBankStaff(String type, InfoStorer infoStorer) {
+        int Numuser = infoStorer.getStaffMap().size();
+        Map<String, BankStaff> userMap = infoStorer.getStaffMap();
+        Map<String, String> passwordMap = infoStorer.getPasswordMap();
+        Map<String, Account>accountListMap = infoStorer.getAccountMap();
         AccountCreator accCreator = new AccountCreator();
         BankStaff bankStaff = new BankStaff(Numuser);
+        userMap.put(bankStaff.getId(), bankStaff);
         PasswordManager passwordManager = new PasswordManager(bankStaff.getId());
         passwordManager.setPassword("1234", passwordMap);
-        accCreator.createNewChequingAccount(Numuser, bankStaff, type, accountListMap);
+        accCreator.createNewChequingAccount(bankStaff, type, infoStorer);
         return bankStaff.getId();
     }
 
@@ -114,8 +120,8 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
      * It will create a default primary chequing account
      * At the same time, all the information is going to be updated to global information
      */
-    public String createUser(int Numuser, String type, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
-        String userID = super.createUser(Numuser, type, userMap, passwordMap, accountListMap);
+    public String createUser(int Numuser, String type, InfoStorer infoStorer) {
+        String userID = super.createUser(type, infoStorer);
         return userID;
     }
 
