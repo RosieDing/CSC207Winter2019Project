@@ -61,7 +61,6 @@ public class RegularTrans extends Transaction{
     /**
      * Execute this RegularTrans. Set field happened as true if this
      * RegularTrans is executed.
-     * @throws TransactionAmountOverLimitException
      */
     @Override
     public void begin(){

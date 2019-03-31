@@ -69,7 +69,6 @@ public class Withdrawal extends Transaction {
     /**
      * Execute this Withdrawal. Set field happened as true if this
      * Withdrawal is executed.
-     * @throws TransactionAmountOverLimitException if the amount is too large.
      */
     @Override
     public void begin() {
