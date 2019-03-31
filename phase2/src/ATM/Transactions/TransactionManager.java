@@ -1,5 +1,6 @@
 package ATM.Transactions;
 
+import ATM.AccountTypeChecker.CADBaseChecker;
 import ATM.Accounts.Account;
 import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.*;
@@ -40,9 +41,11 @@ public class TransactionManager implements Serializable {
      */
     public Transaction makeTransaction(Map<String, Object> map) {
         Transaction e = null;
+        try{
         switch((String)map.get("Type")) {
             case "Deposit":
                 e = new Deposit((Depositable) map.get("toAccount"), (Currency)map.get("amount"));
+                checkCADBase(e.getToAcc());
                 break;
             case "PayBill":
                 e = new PayBill((Payable) map.get("fromAccount"), (String)map.get("to"),
@@ -50,11 +53,14 @@ public class TransactionManager implements Serializable {
                 break;
             case "Withdrawal":
                 e = new Withdrawal((Withdrawable) map.get("fromAccount"), (Currency) map.get("amount"));
+                checkCADBase(e.getFromAcc());
                 break;
             case "Regular":
                 e = new RegularTrans((TransferOutable)map.get("fromAccount"),
                         (TransferInable)map.get("toAccount"), (Currency) map.get("amount"));
                 break;
+        }}catch (NotCADBaseAccountException e1){
+            System.out.println("The currency base of account chosen should be CAD");
         }
         return makeTransaction(e);
     }
@@ -66,6 +72,7 @@ public class TransactionManager implements Serializable {
      */
     public Transaction makeTransaction(Transaction e) {
         try{
+
             e.begin();
         } catch (TransactionAmountOverLimitException a) {
             System.out.println("Not enough balance to complete transaction.");
@@ -76,6 +83,13 @@ public class TransactionManager implements Serializable {
             addTrans(e);
         }
         return e;
+    }
+
+    private void checkCADBase(Account acc) throws NotCADBaseAccountException {
+        CADBaseChecker checker = new CADBaseChecker();
+        if (!(checker.check(acc))){
+            throw new NotCADBaseAccountException();
+        }
     }
 
     /**
