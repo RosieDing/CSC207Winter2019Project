@@ -6,6 +6,7 @@ import ATM.BankIdentities.BankStaff;
 import ATM.BankIdentities.User;
 import ATM.Machine.CashMachine;
 import ATM.Transactions.Transaction;
+import ATM.BankSystem.Date;
 
 import java.io.Serializable;
 import java.util.*;
@@ -53,6 +54,8 @@ public class InfoStorer implements Serializable {
      */
     private CashMachine cashMachine;
 
+    private Date date;
+
     /**
      * Construct a infoStorer.
      */
@@ -66,6 +69,7 @@ public class InfoStorer implements Serializable {
         this.userTransMap = new HashMap<String, Stack<Transaction>>();
         this.accTransMap = new HashMap<String, Stack<Transaction>>();
         this.cashMachine = new CashMachine();
+        this.date = Date.getDate();
     }
 
     /**
@@ -124,5 +128,9 @@ public class InfoStorer implements Serializable {
      */
     public CashMachine getCashMachine() {
         return cashMachine;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }
