@@ -30,15 +30,7 @@ public class ManagerCheckMachineBalance extends JFrame {
 	 * Create the frame.
 	 */
 	public ManagerCheckMachineBalance(String id, InfoManager infoManager) {
-		CashMachine machine = infoManager.getCashMachine();
-		String five = Integer.toString(machine.getNumFiveD());
-		String ten = Integer.toString(machine.getNumTenD());
-		String twenty = Integer.toString(machine.getNumTwentyD());
-		String fifty = Integer.toString(machine.getNumFiftyD());
-		txtFive.setText(five);
-		txtTen.setText(ten);
-		txtFifty.setText(fifty);
-		txtTwenty.setText(twenty);
+
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,25 +56,25 @@ public class ManagerCheckMachineBalance extends JFrame {
 		lblFifty.setBounds(28, 191, 61, 16);
 		contentPane.add(lblFifty);
 		
-		txtFive = new JTextField();
+		txtFive = new JTextField("0");
 		txtFive.setEditable(false);
 		txtFive.setBounds(65, 38, 130, 26);
 		contentPane.add(txtFive);
 		txtFive.setColumns(10);
 		
-		txtTen = new JTextField();
+		txtTen = new JTextField("0");
 		txtTen.setEditable(false);
 		txtTen.setColumns(10);
 		txtTen.setBounds(65, 90, 130, 26);
 		contentPane.add(txtTen);
 		
-		txtTwenty = new JTextField();
+		txtTwenty = new JTextField("0");
 		txtTwenty.setEditable(false);
 		txtTwenty.setColumns(10);
 		txtTwenty.setBounds(89, 142, 130, 26);
 		contentPane.add(txtTwenty);
 		
-		txtFifty = new JTextField();
+		txtFifty = new JTextField("0");
 		txtFifty.setEditable(false);
 		txtFifty.setColumns(10);
 		txtFifty.setBounds(65, 186, 130, 26);
@@ -97,6 +89,16 @@ public class ManagerCheckMachineBalance extends JFrame {
 		});
 		btnBack.setBounds(327, 231, 117, 29);
 		contentPane.add(btnBack);
+
+		CashMachine machine = infoManager.getCashMachine();
+		String five = String.valueOf(machine.getNumFiveD());
+		String ten = String.valueOf(machine.getNumTenD());
+		String twenty = String.valueOf(machine.getNumTwentyD());
+		String fifty = String.valueOf(machine.getNumFiftyD());
+		txtFive.setText(five);
+		txtTen.setText(ten);
+		txtFifty.setText(fifty);
+		txtTwenty.setText(twenty);
 	}
 
 }

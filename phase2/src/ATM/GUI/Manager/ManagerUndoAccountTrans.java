@@ -75,6 +75,12 @@ public class ManagerUndoAccountTrans extends JFrame {
 		contentPane.add(txtTrans);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 ManagerUndoAccountTrans.this.dispose();
+				 new ManagerMainMenu(id, infoManager).setVisible(true);
+			}
+		});
 		btnBack.setBounds(6, 214, 117, 29);
 		contentPane.add(btnBack);
 	}
