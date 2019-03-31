@@ -76,7 +76,7 @@ public class BankStaff extends BankEmployee implements PrivilegeLevelB, AccountO
     public void restock(CashMachine machine, Money money) {
         super.restock(machine, money);
         RecordWriter rw = new RecordWriter();
-        rw.write(this.getId() + " restock");
+        rw.write(this.getId() + " has restocked " + money);
     }
 }
 

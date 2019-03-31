@@ -2,6 +2,7 @@ package ATM.Transactions;
 
 import ATM.Accounts.Account;
 import ATM.Accounts.ChequingAccount;
+import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.Depositable;
 import ATM.Accounts.TransferTypes.Withdrawable;
 import ATM.InfoHandling.InfoManager;
@@ -17,28 +18,21 @@ public class Withdrawal extends Transaction {
     private final Withdrawable fromAcc;
     private final Account toAcc;
     private final LocalDateTime time;
-    private final int amount;
-    private String fromCurrency;
-    private double exRate = 1;
-    private final String baseCurrency = "CAD";
+    private final Currency amount;
 
     /***
      * Create a new Withdrawal
      * @param fromAcc the account where money will be withdrawn.
      * @param amount the amount of fund will be withdrawn.
      */
-    public Withdrawal(Withdrawable fromAcc, int amount) {
+    public Withdrawal(Withdrawable fromAcc, Currency amount) {
         this.amount = amount;
         this.fromAcc = fromAcc;
         this.toAcc = null;
         this.time = LocalDateTime.now();
-        this.fromCurrency = ((Account)fromAcc).getBaseCurrency();
-        if(this.fromCurrency != baseCurrency){
-            this.exRate = exchangeToBaseCurrency(fromCurrency,baseCurrency);
-        }
     }
 
-    public int getAmount() {
+    public Currency getAmount() {
         return amount;
     }
 
@@ -83,14 +77,14 @@ public class Withdrawal extends Transaction {
     void begin() throws TransactionAmountOverLimitException {
         Account acc = getFromAcc();
         if (acc instanceof ChequingAccount) {
-            if (acc.getBalance() < 0) {
+            if (acc.getBalance().getAmount() < 0) {
                 throw new TransactionAmountOverLimitException();
             }
         }
-        if (getAmount()*exRate > acc.getAvailableCredit()) {
+        if (getAmount().getAmount() > acc.getAvailableCredit().getAmount()) {
             throw new TransactionAmountOverLimitException();
         }
-        fromAcc.withdraw((Double.valueOf(amount))* exRate);
+        fromAcc.withdraw(getAmount());
         setHappened(true);
     }
 
