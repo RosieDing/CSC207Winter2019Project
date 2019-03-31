@@ -3,6 +3,9 @@ package ATM.GUI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,12 +22,23 @@ public class UserMainMenu extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UserMainMenu frame = new UserMainMenu();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public UserMainMenu() {
+	public UserMainMenu(String id, InfoManager infoManager) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -44,6 +58,7 @@ public class UserMainMenu extends JFrame {
 		JButton btnSummary = new JButton("Summary");
 		btnSummary.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnSummary.setBounds(16, 34, 117, 29);

@@ -6,6 +6,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ATM.BankIdentities.User;
+import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -16,6 +21,8 @@ import java.awt.event.ActionEvent;
 public class StartMenu extends JFrame {
 
 	private JPanel contentPane;
+
+    
 
 	/**
 	 * Launch the application.
@@ -36,7 +43,9 @@ public class StartMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public StartMenu() {
+	public StartMenu() {		
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -61,5 +70,7 @@ public class StartMenu extends JFrame {
 		btnStart.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
 		contentPane.add(btnStart);
 	}
+	
+	
 
 }

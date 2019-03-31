@@ -3,9 +3,9 @@ package ATM.GUI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import ATM.BankIdentities.AccountCreator;
-import ATM.BankIdentities.BankManager;
-import ATM.BankIdentities.PasswordManager;
+import ATM.BankIdentities.*;
+import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
 import ATM.BankSystem.BankSystem;
 import ATM.Machine.Money;
 import ATM.Transactions.NoTransactionException;
@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -31,8 +32,11 @@ public class ManagerMainMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ManagerMainMenu(String id) {
-        BankManager bankManager = BankSystem.getInfoManager().getBankManager(id);
+	public ManagerMainMenu(String id, InfoManager infoManager) {
+        PasswordManager passwordManager = new PasswordManager(id);
+        InfoStorer infoStorer = infoManager.getInfoStorer();
+        BankManager bankManager = infoManager.getBankManager(id);
+
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -47,6 +51,13 @@ public class ManagerMainMenu extends JFrame {
 		contentPane.add(label);
 		
 		JButton btnCreateUser = new JButton("Create User");
+		btnCreateUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ID = bankManager.createUser(infoManager.getUserNum(), infoStorer.getUserMap(), infoStorer.getPasswordMap(), infoStorer.getAccountMap());
+            	JOptionPane.showMessageDialog(null, "New user created! user ID: " + ID);
+
+			}
+		});
 		btnCreateUser.setBounds(16, 34, 117, 29);
 		contentPane.add(btnCreateUser);
 		
@@ -71,18 +82,21 @@ public class ManagerMainMenu extends JFrame {
 		contentPane.add(btnCreateAccount);
 		
 		JButton btnRestock = new JButton("Restock");
-		btnRestock.setBounds(16, 155, 125, 29);
+		btnRestock.setBounds(16, 200, 125, 29);
 		contentPane.add(btnRestock);
 		
 		JButton btnLogout = new JButton("Logout");
 		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                bankManager.getPassManager().logout();
+                passwordManager.logout();
                 ManagerMainMenu.this.dispose();
 			}
 		});
-		btnLogout.setBounds(182, 155, 125, 29);
+		btnLogout.setBounds(183, 165, 125, 29);
 		contentPane.add(btnLogout);
+		
+		JButton btnCreatestaff = new JButton("Create Staff");
+		btnCreatestaff.setBounds(16, 142, 117, 29);
+		contentPane.add(btnCreatestaff);
 	}
-
 }
