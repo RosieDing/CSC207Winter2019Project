@@ -20,23 +20,23 @@ public class UserAccManager implements Serializable, Iterable<Account> {
     /**
      * The list of accounts the user owns
      */
-    private Map<String, Account> accountList;
+    private ArrayList<Account> accountList;
 
 
     /**
      * Create a new user account manager
      *
-     * @param accountList a global mapping of User ID to list of accounts
+     * @param userMap a global mapping of User ID to user
      * @param ownerUserId the Id of the user of the userAccount manager
      */
-    public UserAccManager(String ownerUserId, Map<String, Account> accountList) {
-        this.accountList = accountList;
+    public UserAccManager(String ownerUserId, Map<String, User> userMap) {
+        this.accountList = userMap.get(ownerUserId).getUserAccounts();
         this.ownerUserId = ownerUserId;
     }
 
 
-    public void addGlobalMap(String accID, Account acc) {
-        this.accountList.put(accID, acc);
+    public void addGlobalMap(String accID, Account acc, Map<String, Account> accountMap) {
+        accountMap.put(accID, acc);
     }
 
 
@@ -45,7 +45,7 @@ public class UserAccManager implements Serializable, Iterable<Account> {
      *
      * @return the account list
      */
-    public Map<String, Account> getAccountList() {
+    public ArrayList<Account> getAccountList() {
         return accountList;
     }
 
