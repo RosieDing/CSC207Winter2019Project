@@ -27,8 +27,7 @@ public class ManagerCreateLineOfCreditAccount extends JFrame {
 	 * Create the frame.
 	 */
 	public ManagerCreateLineOfCreditAccount(String id, InfoManager infoManager) {
-		AccountCreator creater = new AccountCreator();
-		InfoStorer infoStorer = infoManager.getInfoStorer();
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -121,8 +120,11 @@ public class ManagerCreateLineOfCreditAccount extends JFrame {
 				String ID = txtID.getText();
 				String limit = txtLimit.getText();
 				int limitint = Integer.valueOf(limit);
+				InfoStorer infoStorer = infoManager.getInfoStorer();
 				User user = infoStorer.getUserMap().get(ID);
-				creater.createNewLineOfCredit(infoManager.getAccountNum(), user, limitint, type, infoStorer.getAccountMap());
+				AccountCreator creater = new AccountCreator(user, infoStorer, type);
+				
+				creater.createNewLineOfCredit(limitint);
 			}
 		});
 		btnCreateLineOf.setBounds(217, 150, 219, 29);

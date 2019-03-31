@@ -20,14 +20,14 @@ public class ManagerCreateGICAccount extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtID;
 	private JTextField txtJoint;
+	private JTextField txtAmount;
 
 
 	/**
 	 * Create the frame.
 	 */
 	public ManagerCreateGICAccount(String id, InfoManager infoManager) {
-		AccountCreator creater = new AccountCreator();
-		InfoStorer infoStorer = infoManager.getInfoStorer();
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -52,7 +52,7 @@ public class ManagerCreateGICAccount extends JFrame {
 				new ManagerCreateAccount(id, infoManager).setVisible(true);
 			}
 		});
-		btnBack.setBounds(44, 113, 117, 29);
+		btnBack.setBounds(41, 225, 117, 29);
 		contentPane.add(btnBack);
 		
 		txtJoint = new JTextField();
@@ -109,12 +109,39 @@ public class ManagerCreateGICAccount extends JFrame {
 					type = rdbtnINR.getText();
 				}
 				String ID = txtID.getText();
+				InfoStorer infoStorer = infoManager.getInfoStorer();
 				User user = infoStorer.getUserMap().get(ID);
-				creater.createNewGICAccount(infoManager.getAccountNum(), user, type, infoStorer.getAccountMap(), plan, principle);
+				AccountCreator creater = new AccountCreator(user, infoStorer, type);
+				creater.createNewGICAccount(plan, principle);
 			}
 		});
-		btnCreateGicAccount.setBounds(224, 113, 191, 29);
+		btnCreateGicAccount.setBounds(221, 225, 191, 29);
 		contentPane.add(btnCreateGicAccount);
+		
+		JLabel lblChoosePlan = new JLabel("Choose Plan:");
+		lblChoosePlan.setBounds(6, 102, 188, 16);
+		contentPane.add(lblChoosePlan);
+		
+		JRadioButton rdbtnAnnualInterest = new JRadioButton("Annual Interest");
+		rdbtnAnnualInterest.setSelected(true);
+		rdbtnAnnualInterest.setBounds(0, 130, 144, 23);
+		contentPane.add(rdbtnAnnualInterest);
+		
+		JRadioButton rdbtnTwoYearInterest = new JRadioButton("Two Year Interest");
+		rdbtnTwoYearInterest.setBounds(134, 130, 140, 23);
+		contentPane.add(rdbtnTwoYearInterest);
+		
+		JRadioButton rdbtnFiveYearInterest = new JRadioButton("Five Year Interest");
+		rdbtnFiveYearInterest.setBounds(286, 130, 164, 23);
+		contentPane.add(rdbtnFiveYearInterest);
+		
+		JLabel lblEnterMoneyAmount = new JLabel("Enter Money Amount:");
+		lblEnterMoneyAmount.setBounds(9, 165, 160, 16);
+		contentPane.add(lblEnterMoneyAmount);
+		
+		txtAmount = new JTextField();
+		txtAmount.setBounds(181, 160, 130, 26);
+		contentPane.add(txtAmount);
+		txtAmount.setColumns(10);
 	}
-
 }
