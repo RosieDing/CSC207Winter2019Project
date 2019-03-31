@@ -4,12 +4,9 @@ import ATM.Accounts.Account;
 import ATM.BankIdentities.*;
 import ATM.Machine.CashMachine;
 import ATM.Transactions.Transaction;
-import ATM.Transactions.TransactionManager;
 
 import java.io.*;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.Stack;
 
 /**
@@ -119,8 +116,8 @@ public class InfoManager {
         return this.infoStorer.getBankManagerMap();
     }
 
-    public Map<String, String> getAccountCreationRequest(){
-        return this.infoStorer.getAccountCreationRequest();
+    public Map<String, String> getRequestMap(){
+        return this.infoStorer.getRequestMap();
     }
 
     public Map<String, String> getPasswordMap() {
@@ -186,6 +183,6 @@ public class InfoManager {
      * @param userID id of user who sent request
      * @param type type of account requested
      */
-    public void removeRequest(String userID, String type) { getAccountCreationRequest().remove(userID, type); }
+    public void removeRequest(String userID, String type) { getRequestMap().remove(userID, type); }
 }
 

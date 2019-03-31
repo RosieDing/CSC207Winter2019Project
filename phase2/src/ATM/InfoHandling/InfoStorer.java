@@ -31,7 +31,7 @@ public class InfoStorer implements Serializable {
      * A Map stored request of account creation.
      * Key takes userID, values are requested account type.
      */
-    private Map<String, String> accountCreationRequest;
+    private Map<String, String> requestMap;
 
     /**
      * A Map storing the password information of every bank identities.
@@ -60,7 +60,7 @@ public class InfoStorer implements Serializable {
         this.accountMap = new HashMap<String, Account>();
         this.userMap = new HashMap<String, User>();
         this.bankManagerMap = new HashMap<String, BankManager>();
-        this.accountCreationRequest = new HashMap<String, String>();
+        this.requestMap = new HashMap<String, String>();
         this.passwordMap = new HashMap<String, String>();
         this.userTransMap = new HashMap<String, Stack<Transaction>>();
         this.accTransMap = new HashMap<String, Stack<Transaction>>();
@@ -98,11 +98,11 @@ public class InfoStorer implements Serializable {
     public Map<String, BankManager> getBankManagerMap() { return bankManagerMap;}
 
     /**
-     * Get the accountCreationRequest map
-     * @return accountCreationRequest
+     * Get the requestMap map
+     * @return requestMap
      */
-    public Map<String, String> getAccountCreationRequest() {
-        return accountCreationRequest;
+    public Map<String, String> getRequestMap() {
+        return requestMap;
     }
 
     public Map<String, String> getPasswordMap() {
