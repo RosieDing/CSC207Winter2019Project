@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 
 /** A class manage operations on password of a particular user */
-public class PasswordManager extends Observable implements Serializable {
+public class PasswordManager implements Serializable {
 
     /** The ID of the user that this password manager is managing for */
     private final String userID;
@@ -86,7 +86,5 @@ public class PasswordManager extends Observable implements Serializable {
      */
     public void logout(){
         isAuthorized = false;
-        setChanged();
-        notifyObservers();
     }
 }

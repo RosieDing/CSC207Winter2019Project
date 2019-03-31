@@ -16,7 +16,7 @@ import java.util.Stack;
  * Managing the saving and loading of all information stored in infoStorer
  * This is an observer of password manager to make sure infoStorer is serialized every time an user log out
  */
-public class InfoManager implements Observer {
+public class InfoManager {
 
     /**The default file path in which all the info is serialized and stored in*/
     private String filePath = "./serializedinfo.ser";
@@ -53,18 +53,9 @@ public class InfoManager implements Observer {
 
             //deserialize the InfoStorer
             infoStorer = (InfoStorer) input.readObject();
-            addRelationship();
             input.close();
         } catch (Exception ex) {
             System.out.println(ex);
-        }
-    }
-
-    /** Make sure an infoManager instance can observe all the PasswordManagers */
-    private void addRelationship(){
-        for (User user: getInfoStorer().getUserMap().values()){
-            PasswordManager pw = user.getPassManager();
-            pw.addObserver(this);
         }
     }
 
@@ -202,9 +193,5 @@ public class InfoManager implements Observer {
      * @param o Observable item which infoManager is observing
      * @param arg Object argument
      */
-    @Override
-    public void update(Observable o, Object arg) {
-        saveToFile();
-    }
 }
 
