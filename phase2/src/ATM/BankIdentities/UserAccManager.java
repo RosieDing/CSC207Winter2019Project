@@ -41,9 +41,9 @@ public class UserAccManager implements Serializable, Iterable<Account> {
     }
 
 
-    public void addGlobalMap(String accID, Account acc, Map<String, Account> accountMap) {
-        accountMap.put(accID, acc);
-    }
+//    public void addGlobalMap(String accID, Account acc, Map<String, Account> accountMap) {
+//        accountMap.put(accID, acc);
+//    }
 
 
     /**
