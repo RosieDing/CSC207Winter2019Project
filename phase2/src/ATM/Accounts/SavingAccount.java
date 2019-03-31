@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * A class that represent a saving account
  */
-public class SavingAccount extends AssetAccount {
+public class SavingAccount extends AssetAccount implements TimeSensitive{
 
     /** The saving plan for this account*/
     private Plan Plan;
@@ -63,6 +63,7 @@ public class SavingAccount extends AssetAccount {
         return (this.getCurrencyType() + " Saving Account " + this.accountNum);
     }
 
+    @Override
     public void compute(){
         setBalance(Plan.compute(getBalance().getAmount()));
     }
