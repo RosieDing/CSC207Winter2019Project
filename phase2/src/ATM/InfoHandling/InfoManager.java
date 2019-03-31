@@ -1,16 +1,16 @@
 package ATM.InfoHandling;
 
 import ATM.Accounts.Account;
-import ATM.BankIdentities.BankManager;
-import ATM.BankIdentities.NoSuchAccountException;
-import ATM.BankIdentities.PasswordManager;
-import ATM.BankIdentities.User;
+import ATM.BankIdentities.*;
 import ATM.Machine.CashMachine;
+import ATM.Transactions.Transaction;
 import ATM.Transactions.TransactionManager;
 
 import java.io.*;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Stack;
 
 /**
  * Managing the saving and loading of all information stored in infoStorer
@@ -112,9 +112,36 @@ public class InfoManager implements Observer {
         return infoStorer.getBankManagerMap().get(id);
     }
 
-    /**@return TransactionManager: a singleton that is used to handle transaction */
-    public TransactionManager getTransactionManager(){
-        return getInfoStorer().getTransactionManager();
+    public Map<String, Account> getAccountMap(){
+        return this.infoStorer.getAccountMap();
+    }
+
+    public Map<String, User> getUserMap(){
+        return this.infoStorer.getUserMap();
+    }
+
+    public Map<String, BankStaff> getStaffMap(){
+        return this.infoStorer.getStaffMap();
+    }
+
+    public Map<String, BankManager> getBankManagerMap(){
+        return this.infoStorer.getBankManagerMap();
+    }
+
+    public Map<String, String> getAccountCreationRequest(){
+        return this.infoStorer.getAccountCreationRequest();
+    }
+
+    public Map<String, String> getPasswordMap() {
+        return this.infoStorer.getPasswordMap();
+    }
+
+    public Map<String, Stack<Transaction>> getAccTransMap() {
+        return this.infoStorer.getAccTransMap();
+    }
+
+    public Map<String, Stack<Transaction>> getUserTransMap() {
+        return this.infoStorer.getUserTransMap();
     }
 
     /**@return CashMachine */
@@ -122,68 +149,53 @@ public class InfoManager implements Observer {
         return getInfoStorer().getCashMachine();
     }
 
-    /***
+    /**
      * Get number of users already stored in infoStorer
      * @return int
      */
     public int getUserNum(){
-        return infoStorer.getUserMap().size();
+        return getUserMap().size();
     }
 
-    /***
+    /**
      * Get number of account already stored in infoStorer.
      * @return int
      */
     public int getAccountNum(){
-        return infoStorer.getAccountMap().size();
+        return getAccountMap().size();
     }
 
-    /***
+    /**
      * Get number of bank managers already stored in infoStorer.
      * @return int
      */
     public int getBankManagerNum(){
-        return infoStorer.getBankManagerMap().size();
+        return getBankManagerMap().size();
     }
 
-    /***
-     * Add a new user to infoStorer.
-     * @param newUser User to be added.
+    /**
+     * Get number of bank managers already stored in infoStorer.
+     * @return int
      */
-    public void add(User newUser){
-        infoStorer.addUser(newUser);
+    public int getStaffNum(){
+        return getStaffMap().size();
     }
 
-    /***
-     * Add a new account to infoStorer.
-     * @param newAccount Account to be added.
-     */
-    public void add(Account newAccount){
-        infoStorer.addAccount(newAccount);
-    }
-
-    /***
+    /**
      * Add a new bank manager to infoStorer.
+     * @param id BankManger's id
      * @param newBankManager BankManager to be added.
      */
-    public void add(BankManager newBankManager){
-        infoStorer.addBankManager(newBankManager);
+    public void add(String id, BankManager newBankManager){
+        getBankManagerMap().put(id, newBankManager);
     }
 
-    /***
-     * Add a new request of account creation to infoStorer.
-     * @param userID id of user who sent request
-     * @param type type of account requested
-     */
-    public void add(String userID, String type) { infoStorer.
-            getAccountCreationRequest().put(userID, type);}
-
-    /***
+    /**
      * Remove a request of account creation from infoStorer.
      * @param userID id of user who sent request
      * @param type type of account requested
      */
-    public void removeRequest(String userID, String type) { infoStorer.getAccountCreationRequest().remove(userID, type); }
+    public void removeRequest(String userID, String type) { getAccountCreationRequest().remove(userID, type); }
 
     /***
      * Update method. Serialize infoStorer if it is called.

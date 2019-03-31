@@ -1,9 +1,6 @@
 package ATM.BankIdentities;
 
 import ATM.Accounts.Account;
-import ATM.InfoHandling.InfoManager;
-import ATM.Machine.CashMachine;
-import ATM.Machine.Money;
 import ATM.Transactions.NoTransactionException;
 import ATM.Transactions.ReverseNotPossibleException;
 import ATM.Transactions.Transaction;
@@ -103,11 +100,11 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
     /** Create a new Bankstuff */
     public void createBankStuff(int Numuser, Map<String, User> userMap, Map<String, String> passwordMap, Map<String, Account>accountListMap) {
         AccountCreator accCreator = new AccountCreator();
-        BankStuff bankStuff = new BankStuff(Numuser);
-        PasswordManager passwordManager = new PasswordManager(bankStuff.getId());
+        BankStaff bankStaff = new BankStaff(Numuser);
+        PasswordManager passwordManager = new PasswordManager(bankStaff.getId());
         passwordManager.setPassword("1234", passwordMap);
-        System.out.println("New user created! user ID: " + bankStuff.getId()); /* still need this?*/
-        accCreator.createNewChequingAccount(Numuser, bankStuff, accountListMap);
+        System.out.println("New user created! user ID: " + bankStaff.getId()); /* still need this?*/
+        accCreator.createNewChequingAccount(Numuser, bankStaff, accountListMap);
     }
 }
 

@@ -9,15 +9,15 @@ import ATM.Machine.Money;
 import java.util.ArrayList;
 import java.util.Map;
 
-/** A class that represent a BankStuff*/
-public class BankStuff extends BankEmployee implements PrivilegeLevelB, AccountOwnable{
+/** A class that represent a BankStaff*/
+public class BankStaff extends BankEmployee implements PrivilegeLevelB, AccountOwnable{
     /** The id of the user */
     private final String id;
     /** The account list of the user */
     private ArrayList<Account> accounts = new ArrayList<>();
     /** The primary account of the user */
     private ChequingAccount primaryChq;
-    public BankStuff(int totalNum){
+    public BankStaff(int totalNum){
         this.id = "710" + totalNum + 1;
     }
     /** Return the Id of the user
@@ -76,7 +76,7 @@ public class BankStuff extends BankEmployee implements PrivilegeLevelB, AccountO
     public void restock(CashMachine machine, Money money) {
         super.restock(machine, money);
         RecordWriter rw = new RecordWriter();
-        rw.write(this.getId() + " restock");
+        rw.write(this.getId() + " has restocked " + money);
     }
 }
 

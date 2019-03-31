@@ -2,11 +2,10 @@ package ATM.InfoHandling;
 
 import ATM.Accounts.Account;
 import ATM.BankIdentities.BankManager;
-import ATM.BankIdentities.BankStuff;
+import ATM.BankIdentities.BankStaff;
 import ATM.BankIdentities.User;
 import ATM.Machine.CashMachine;
 import ATM.Transactions.Transaction;
-import ATM.Transactions.TransactionManager;
 
 import java.io.Serializable;
 import java.util.*;
@@ -22,8 +21,8 @@ public class InfoStorer implements Serializable {
     /**A mapping of User ID to User */
     private Map<String, User> userMap;
 
-    /**A mapping of User ID to BankStuff */
-    private Map<String, BankStuff> stuffMap;
+    /**A mapping of User ID to BankStaff */
+    private Map<String, BankStaff> staffMap;
 
     /**A mapping of Bank manager ID to Bank manager*/
     private Map<String, BankManager> bankManagerMap;
@@ -39,7 +38,6 @@ public class InfoStorer implements Serializable {
      * Key takes String ID, values are encrypted password
      */
     private Map<String, String> passwordMap;
-
 
     /**
      * accTrans record history of Transaction of specific accounts.
@@ -86,11 +84,11 @@ public class InfoStorer implements Serializable {
     }
 
     /**
-     * Get the stuffMap
-     * @return stuffMap
+     * Get the staffMap
+     * @return staffMap
      */
-    public Map<String, BankStuff> getsuffMap() {
-        return stuffMap;
+    public Map<String, BankStaff> getStaffMap() {
+        return staffMap;
     }
 
     /**
@@ -107,16 +105,6 @@ public class InfoStorer implements Serializable {
         return accountCreationRequest;
     }
 
-
-
-    /**
-     * Get the CashMachine
-     * @return CashMachine
-     */
-    public CashMachine getCashMachine() {
-        return cashMachine;
-    }
-
     public Map<String, String> getPasswordMap() {
         return passwordMap;
     }
@@ -127,5 +115,13 @@ public class InfoStorer implements Serializable {
 
     public Map<String, Stack<Transaction>> getUserTransMap() {
         return userTransMap;
+    }
+
+    /**
+     * Get the CashMachine
+     * @return CashMachine
+     */
+    public CashMachine getCashMachine() {
+        return cashMachine;
     }
 }
