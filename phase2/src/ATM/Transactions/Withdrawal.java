@@ -71,7 +71,7 @@ public class Withdrawal extends Transaction {
      * Withdrawal is executed.
      */
     @Override
-    public void begin() {
+    void begin() {
         Currency amount = getAmount();
         amount.setAmount((int)(amount.getAmount()));
         fromAcc.withdraw(amount);
@@ -89,7 +89,12 @@ public class Withdrawal extends Transaction {
         return new Deposit(toAcc ,this.getAmount());
     }
 
-    public boolean possibleToBegin() throws TransactionAmountOverLimitException{
+    /***
+     * Check if the transaction is possible to begin
+     * @return if the amount of transaction is within limit
+     * @throws TransactionAmountOverLimitException
+     */
+    boolean possibleToBegin() throws TransactionAmountOverLimitException{
         Account acc = getFromAcc();
         if (acc instanceof ChequingAccount) {
             if (acc.getBalance().getAmount() < 0) {

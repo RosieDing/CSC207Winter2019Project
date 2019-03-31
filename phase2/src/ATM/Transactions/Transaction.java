@@ -52,7 +52,7 @@ public abstract class Transaction implements Serializable {
      * @throws TransactionAmountOverLimitException if the amount this
      * transaction involves is more than what can be took out.
      */
-    public abstract void begin();  //make it default
+    abstract void begin();  //make it default
 
     /***
      * Abstract method. Return a reversed version of the input transaction.
@@ -61,6 +61,6 @@ public abstract class Transaction implements Serializable {
      */
     public abstract Transaction reverse() throws ReverseNotPossibleException;
 
-    public abstract boolean possibleToBegin() throws TransactionAmountOverLimitException;
+    abstract boolean possibleToBegin() throws TransactionAmountOverLimitException;
 
 }

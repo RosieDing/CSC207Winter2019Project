@@ -77,7 +77,7 @@ public class PayBill extends Transaction{
      * PayBill is executed.
      */
     @Override
-    void begin() throws TransactionAmountOverLimitException{
+    void begin(){
         fromAcc.pay(this.getAmount());
         setHappened(true);
         writer.write(this.toString());
