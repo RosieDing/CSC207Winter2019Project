@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ATM.InfoHandling.InfoManager;
-import ATM.BankSystem.Time;
+import ATM.BankSystem.Date;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -113,8 +113,10 @@ public class DateMenu extends JFrame {
 				int yearint = Integer.valueOf(year);
 				int monthint = Integer.valueOf(month);
 				int dayint = Integer.valueOf(day);
-
-
+				if (infoManager.getDate().setDateOfCreation(dayint, monthint, yearint)){
+					infoManager.interestCompound();
+					new IDMenu(infoManager).setVisible(true);
+				};
 			}
 		});
 		btnNext.setBounds(295, 220, 117, 29);
