@@ -2,14 +2,11 @@ package ATM.GUI.Manager;
 
 import ATM.BankIdentities.*;
 import ATM.InfoHandling.InfoManager;
-import ATM.InfoHandling.InfoStorer;
-import ATM.BankSystem.BankSystem;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -28,10 +25,7 @@ public class ManagerMainMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public ManagerMainMenu(String id, InfoManager infoManager) {
-        PasswordManager passwordManager = new PasswordManager(id);
-        InfoStorer infoStorer = infoManager.getInfoStorer();
-        BankManager bankManager = infoManager.getBankManager(id);
-
+		PasswordManager passwordManager = new PasswordManager(id);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -48,9 +42,8 @@ public class ManagerMainMenu extends JFrame {
 		JButton btnCreateUser = new JButton("Create User");
 		btnCreateUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String ID = bankManager.createUser(infoManager.getUserNum(), infoStorer.getUserMap(), infoStorer.getPasswordMap(), infoStorer.getAccountMap());
-            	JOptionPane.showMessageDialog(null, "New user created! user ID: " + ID);
-
+				ManagerMainMenu.this.dispose();
+				new ManagerCreaterUser(id, infoManager).setVisible(true);
 			}
 		});
 		btnCreateUser.setBounds(16, 34, 117, 29);
@@ -59,6 +52,8 @@ public class ManagerMainMenu extends JFrame {
 		JButton btnUndoTransaction = new JButton("Undo User Transaction");
 		btnUndoTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ManagerMainMenu.this.dispose();
+				new ManagerUndoUserTrans(id, infoManager).setVisible(true);
 			}
 		});
 		btnUndoTransaction.setBounds(145, 34, 187, 29);
@@ -67,17 +62,31 @@ public class ManagerMainMenu extends JFrame {
 		JButton btnUndoAccountTransaction = new JButton("Undo Account Transaction");
 		btnUndoAccountTransaction.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ManagerMainMenu.this.dispose();
+				new ManagerUndoAccountTrans(id, infoManager).setVisible(true);
 			}
 		});
 		btnUndoAccountTransaction.setBounds(145, 94, 198, 29);
 		contentPane.add(btnUndoAccountTransaction);
 		
 		JButton btnCreateAccount = new JButton("Create Account");
-		btnCreateAccount.setBounds(16, 94, 125, 29);
+		btnCreateAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManagerMainMenu.this.dispose();
+				new ManagerCreateAccount(id, infoManager).setVisible(true);
+			}
+		});
+		btnCreateAccount.setBounds(16, 148, 125, 29);
 		contentPane.add(btnCreateAccount);
 		
 		JButton btnRestock = new JButton("Restock");
-		btnRestock.setBounds(16, 200, 125, 29);
+		btnRestock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManagerMainMenu.this.dispose();
+				new ManagerRestock(id, infoManager).setVisible(true);
+			}
+		});
+		btnRestock.setBounds(145, 203, 125, 29);
 		contentPane.add(btnRestock);
 		
 		JButton btnLogout = new JButton("Logout");
@@ -87,11 +96,21 @@ public class ManagerMainMenu extends JFrame {
                 ManagerMainMenu.this.dispose();
 			}
 		});
-		btnLogout.setBounds(183, 165, 125, 29);
+		btnLogout.setBounds(16, 203, 125, 29);
 		contentPane.add(btnLogout);
 		
 		JButton btnCreatestaff = new JButton("Create Staff");
-		btnCreatestaff.setBounds(16, 142, 117, 29);
+		btnCreatestaff.setBounds(16, 94, 117, 29);
 		contentPane.add(btnCreatestaff);
+		
+		JButton btnCheckMachineBalance = new JButton("Check Machine Balance");
+		btnCheckMachineBalance.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManagerMainMenu.this.dispose();
+				new ManagerCheckMachineBalance(id, infoManager).setVisible(true);
+			}
+		});
+		btnCheckMachineBalance.setBounds(145, 148, 180, 29);
+		contentPane.add(btnCheckMachineBalance);
 	}
 }
