@@ -4,6 +4,9 @@ import ATM.AccountTypeChecker.CADBaseChecker;
 import ATM.Accounts.Account;
 import ATM.Accounts.Currency;
 import ATM.Accounts.TransferTypes.*;
+import ATM.Machine.CashMachine;
+import ATM.Machine.CashNotWithdrawableException;
+import ATM.Machine.NotEnoughMoneyException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,7 +42,7 @@ public class TransactionManager implements Serializable {
      * @param map the map recorded user's request
      * @return a corresponding new Transaction
      */
-    public Transaction makeTransaction(Map<String, Object> map) {
+    public Transaction makeTransaction(Map<String, Object> map, CashMachine machine) {
         Transaction e = null;
         try{
         switch((String)map.get("Type")) {
@@ -62,7 +65,7 @@ public class TransactionManager implements Serializable {
         }}catch (NotCADBaseAccountException e1){
             System.out.println("The currency base of account chosen should be CAD");
         }
-        return makeTransaction(e);
+        return makeTransaction(e, machine);
     }
 
     /**
@@ -70,13 +73,18 @@ public class TransactionManager implements Serializable {
      * @param e Transaction
      * @return Transaction
      */
-    public Transaction makeTransaction(Transaction e) {
+    public Transaction makeTransaction(Transaction e, CashMachine machine) {
         try{
-
+            e.possibleToBegin();
+            if (e instanceof Withdrawal) {
+                machine.withdrawCash((int)(((Withdrawal)e).getAmount().getAmount()));
+            }
             e.begin();
-        } catch (TransactionAmountOverLimitException a) {
+        } catch (CashNotWithdrawableException | NotEnoughMoneyException a){
+            System.out.println(a.getMessage());
+        } catch (TransactionAmountOverLimitException b) {
             System.out.println("Not enough balance to complete transaction.");
-        } catch (NullPointerException b) {
+        } catch (NullPointerException c) {
             System.out.println("Transaction is not possible.");
         }
         if (e.isHappened()) {

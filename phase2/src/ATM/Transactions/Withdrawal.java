@@ -72,17 +72,10 @@ public class Withdrawal extends Transaction {
      * @throws TransactionAmountOverLimitException if the amount is too large.
      */
     @Override
-    void begin() throws TransactionAmountOverLimitException {
-        Account acc = getFromAcc();
-        if (acc instanceof ChequingAccount) {
-            if (acc.getBalance().getAmount() < 0) {
-                throw new TransactionAmountOverLimitException();
-            }
-        }
-        if (getAmount().getAmount() > acc.getAvailableCredit().getAmount()) {
-            throw new TransactionAmountOverLimitException();
-        }
-        fromAcc.withdraw(getAmount());
+    public void begin() {
+        Currency amount = getAmount();
+        amount.setAmount((int)(amount.getAmount()));
+        fromAcc.withdraw(amount);
         setHappened(true);
     }
 
@@ -95,6 +88,19 @@ public class Withdrawal extends Transaction {
     public Deposit reverse() {
         Depositable toAcc = (Depositable)getFromAcc();
         return new Deposit(toAcc ,this.getAmount());
+    }
+
+    public boolean possibleToBegin() throws TransactionAmountOverLimitException{
+        Account acc = getFromAcc();
+        if (acc instanceof ChequingAccount) {
+            if (acc.getBalance().getAmount() < 0) {
+                throw new TransactionAmountOverLimitException();
+            }
+        }
+        if (getAmount().getAmount() > acc.getAvailableCredit().getAmount()) {
+            throw new TransactionAmountOverLimitException();
+        }
+        return true;
     }
 
     /**

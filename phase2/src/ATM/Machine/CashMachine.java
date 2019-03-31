@@ -76,27 +76,27 @@ public class CashMachine implements Serializable {
      * @throws CashNotWithdrawableException: When the entered amount is not multiple of 5.
      * @throws NotEnoughMoneyException: When the machine has not enough money to complete the withdrawal.
      */
-    public void withdrawCash(int amount) throws CashNotWithdrawableException, NotEnoughMoneyException{
-        if (amount % 5 != 0) {
+    public void withdrawCash(double amount) throws CashNotWithdrawableException, NotEnoughMoneyException{
+        int newAmount = (int)amount;
+        if (newAmount % 5 != 0) {
             throw new CashNotWithdrawableException("Amount entered should be a multiple of 5.");
         }
-        int[] Dbox = possibleD(amount);
+        int[] Dbox = possibleD(newAmount);
         int[] DAmount = {getNumFiveD(), getNumTenD(), getNumTwentyD(), getNumFiftyD()};
         int[] Dnum = new int[Dbox.length];
         for (int i = (Dbox.length - 1); i >= 0; i--) {
-            Dnum[i] = (amount/Dbox[i]);
+            Dnum[i] = ((newAmount/Dbox[i]));
             if ((DAmount[i] - Dnum[i]) >= 0) {
-                amount -= (Dbox[i]*Dnum[i]);
+                newAmount -= (Dbox[i]*Dnum[i]);
             }
         }
-        if (amount != 0) {
+        if (newAmount != 0) {
             throw new NotEnoughMoneyException("Not enough bills in the machine.");
         } else {
             int[] numCopy = Arrays.copyOf(Dnum, 4);
             Money m = new Money(DAmount[0] - numCopy[0], DAmount[1] - numCopy[1],
                     DAmount[2] - numCopy[2], DAmount[3] - numCopy[3]);
             setAmount(m);
-
         }
         checkAmount();
     }
