@@ -11,6 +11,6 @@ public class TwoYearInterest extends GICPlan{
 
     @Override
     public String toString(){
-        return "Two Years GIC Plan with interesting rate" + interestRate;
+        return "Two Years GIC Plan with interesting rate: " + interestRate;
     }
 }
