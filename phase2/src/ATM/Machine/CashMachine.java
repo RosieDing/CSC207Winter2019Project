@@ -83,7 +83,7 @@ public class CashMachine implements Serializable {
         int[] Dbox = possibleD(amount);
         int[] DAmount = {getNumFiveD(), getNumTenD(), getNumTwentyD(), getNumFiftyD()};
         int[] Dnum = new int[Dbox.length];
-        for (int i = (Dbox.length - 1); i > 0; i--) {
+        for (int i = (Dbox.length - 1); i >= 0; i--) {
             Dnum[i] = (amount/Dbox[i]);
             if ((DAmount[i] - Dnum[i]) >= 0) {
                 amount -= (Dbox[i]*Dnum[i]);
