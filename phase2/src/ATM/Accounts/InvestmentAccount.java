@@ -13,6 +13,8 @@ public abstract class InvestmentAccount extends Account implements TransferOutab
         this.plan = s;
     }
 
+    public abstract void compute();
+
     @Override
     public abstract void transferOut(Currency amount);
 }

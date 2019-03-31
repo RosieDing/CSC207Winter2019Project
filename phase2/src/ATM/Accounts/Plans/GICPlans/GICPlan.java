@@ -8,8 +8,6 @@ import java.time.Period;
 
 public abstract class GICPlan implements Plan {
 
-    protected LocalDate current = Date.getDate().getSystemCurrentTime();
-
     private double interestRate;
     private int periodOfMonth;
 
@@ -42,6 +40,7 @@ public abstract class GICPlan implements Plan {
 
     public double getCurrentPerspectTotalInterest(double amount, LocalDate dateOfCreation,boolean isEnd){
         if(!isEnd){
+            LocalDate current = Date.getDate().getSystemCurrentTime();
             Period p = Period.between(dateOfCreation, current);
             int month = p.getMonths() + 1;
             return month * computeMonthlyInterest(amount);
@@ -61,10 +60,12 @@ public abstract class GICPlan implements Plan {
     }
 
     public boolean isEnd(LocalDate maturityDate){
+        LocalDate current = Date.getDate().getSystemCurrentTime();
         return current.isAfter(maturityDate);
     }
 
     public int getMonthpassed(LocalDate dateOfCreation){
+        LocalDate current = Date.getDate().getSystemCurrentTime();
         Period p = Period.between(dateOfCreation, current);
         int years = p.getYears();
         int months = p.getMonths();

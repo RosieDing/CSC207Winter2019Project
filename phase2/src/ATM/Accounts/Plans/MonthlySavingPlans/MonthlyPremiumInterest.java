@@ -8,11 +8,11 @@ import java.io.Serializable;
 /**High interest plan with monthly interesting rate above 3%*/
 public class MonthlyPremiumInterest implements Plan, Serializable {
     private final double interestRate = 0.03;
-    private Date date = Date.getDate();
 
     /** Calculate and return the amount of money that is earned from interest */
     @Override
     public double compute(double amount) {
+        Date date = Date.getDate();
         if (date.getSystemCurrentTime().getDayOfMonth() == 1){
             return amount * (interestRate+1);
         }

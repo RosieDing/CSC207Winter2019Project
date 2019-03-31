@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public abstract class Account implements TransferInable, Serializable {
 
     /**The date when an account is created */
-    Date date = new Date();
+    Date date = Date.getDate();
     private final LocalDate dateOfCreation = date.getSystemCurrentTime();
 
     /**The number of owners*/

@@ -4,6 +4,7 @@ import ATM.Accounts.Plans.Plan;
 import ATM.BankSystem.Date;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * The normal saving plans with monthly interest less than 3%
@@ -11,12 +12,12 @@ import java.io.Serializable;
 
 public class MonthlyInterest implements Plan, Serializable {
     private final double interestRate = 0.01;
-    private Date date = Date.getDate();
 
     /** Calculate and return the amount of money that is earned from interest */
     @Override
     public double compute(double amount) {
-        if (date.getSystemCurrentTime().getDayOfMonth() == 1){
+        LocalDate current = Date.getDate().getSystemCurrentTime();
+        if (current.getDayOfMonth() == 1){
                 return amount * (interestRate+1);
             }
             return amount;

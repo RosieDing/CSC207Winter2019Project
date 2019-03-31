@@ -63,6 +63,10 @@ public class SavingAccount extends AssetAccount {
         return (this.getCurrencyType() + " Saving Account " + this.accountNum);
     }
 
+    public void compute(){
+        setBalance(Plan.compute(getBalance().getAmount()));
+    }
+
     /**
      * Return the summary of this account
      * @return a String combined with account type, account number, balance
