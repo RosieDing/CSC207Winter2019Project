@@ -64,13 +64,17 @@ public class RegularTrans extends Transaction{
      * @throws TransactionAmountOverLimitException
      */
     @Override
-    void begin() throws TransactionAmountOverLimitException{
-        if (getAmount().getAmount() > getFromAcc().getAvailableCredit().getAmount()) {
-            throw new TransactionAmountOverLimitException();
-        }
+    public void begin(){
         fromAcc.transferOut(getAmount());
         toAcc.transferIn(this.getAmount());
         setHappened(true);
+    }
+
+    public boolean possibleToBegin() throws TransactionAmountOverLimitException {
+        if (getAmount().getAmount() > getFromAcc().getAvailableCredit().getAmount()) {
+            throw new TransactionAmountOverLimitException();
+        }
+        return true;
     }
 
     /**
