@@ -35,18 +35,42 @@ public class UserMakeTransaction extends JFrame {
 		contentPane.add(lblTrans);
 		
 		JButton btnRegularTransaction = new JButton("Regular Transaction");
+		btnRegularTransaction.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserMakeTransaction.this.dispose();
+				new UserTransactionRegular().setVisible(true);
+			}
+		});
 		btnRegularTransaction.setBounds(28, 55, 157, 29);
 		contentPane.add(btnRegularTransaction);
 		
 		JButton btnDeposit = new JButton("Deposit");
+		btnDeposit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserMakeTransaction.this.dispose();
+				new UserTransactionDeposit().setVisible(true);
+			}
+		});
 		btnDeposit.setBounds(246, 55, 144, 29);
 		contentPane.add(btnDeposit);
 		
 		JButton btnWithdraw = new JButton("Withdraw");
+		btnDeposit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserMakeTransaction.this.dispose();
+				new UserTransactionWithdrawal().setVisible(true);
+			}
+		});
 		btnWithdraw.setBounds(28, 141, 144, 29);
 		contentPane.add(btnWithdraw);
 		
 		JButton btnPayBill = new JButton("Pay Bill");
+		btnDeposit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserMakeTransaction.this.dispose();
+				new UserTransactionPayBill().setVisible(true);
+			}
+		});
 		btnPayBill.setBounds(246, 141, 144, 29);
 		contentPane.add(btnPayBill);
 		
