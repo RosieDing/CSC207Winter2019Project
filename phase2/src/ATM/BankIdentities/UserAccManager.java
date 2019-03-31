@@ -93,6 +93,19 @@ public class UserAccManager implements Serializable, Iterable<Account> {
     }
 
     /**
+     * Return a String with account detail of all the accounts in given ArrayList
+     */
+    public String getAccountsDetails(ArrayList<Account> accounts){
+        StringBuilder result = new StringBuilder();
+        int i = 1;
+        for (Account acc : accounts) {
+            result.append(i + " ").append(acc.toString()).append("\n");
+            i += 1;
+        }
+        return result.toString();
+    }
+
+    /**
      * Get the summary of all the accounts this user has
      * Will put summary of accounts that are of the same type together
      */
