@@ -1,12 +1,19 @@
 package ATM.GUI.Manager;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import ATM.BankIdentities.*;
 import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
+import ATM.Machine.Money;
+import ATM.Transactions.NoTransactionException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -94,7 +101,6 @@ public class ManagerMainMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
                 passwordManager.logout();
                 ManagerMainMenu.this.dispose();
-                infoManager.saveToFile();
 			}
 		});
 		btnLogout.setBounds(16, 203, 125, 29);

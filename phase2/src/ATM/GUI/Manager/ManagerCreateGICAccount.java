@@ -1,15 +1,20 @@
 package ATM.GUI.Manager;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import ATM.BankIdentities.AccountCreator;
 import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
+import ATM.Accounts.Plans.GICPlans.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -91,32 +96,8 @@ public class ManagerCreateGICAccount extends JFrame {
 		rdbtnINR.setBounds(380, 67, 70, 23);
 		contentPane.add(rdbtnINR);
 		
-		JButton btnCreateGicAccount = new JButton("Create GIC Account");
-		btnCreateGicAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String type = rdbtnCAD.getText();
-				if (rdbtnCAD.isSelected()) {
-					type = rdbtnCAD.getText();
-				}else if (rdbtnUSD.isSelected()) {
-					type = rdbtnUSD.getText();
-				}else if (rdbtnCNY.isSelected()) {
-					type = rdbtnCNY.getText();
-				}else if (rdbtnEUR.isSelected()) {
-					type = rdbtnEUR.getText();
-				}else if (rdbtnGBP.isSelected()) {
-					type = rdbtnGBP.getText();
-				}else if (rdbtnINR.isSelected()) {
-					type = rdbtnINR.getText();
-				}
-				String ID = txtID.getText();
-				InfoStorer infoStorer = infoManager.getInfoStorer();
-				User user = infoStorer.getUserMap().get(ID);
-				AccountCreator creater = new AccountCreator(user, infoStorer, type);
-				creater.createNewGICAccount(plan, principle);
-			}
-		});
-		btnCreateGicAccount.setBounds(221, 225, 191, 29);
-		contentPane.add(btnCreateGicAccount);
+		
+
 		
 		JLabel lblChoosePlan = new JLabel("Choose Plan:");
 		lblChoosePlan.setBounds(6, 102, 188, 16);
@@ -143,5 +124,54 @@ public class ManagerCreateGICAccount extends JFrame {
 		txtAmount.setBounds(181, 160, 130, 26);
 		contentPane.add(txtAmount);
 		txtAmount.setColumns(10);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnCAD);
+		group.add(rdbtnUSD);
+		group.add(rdbtnCNY);
+		group.add(rdbtnEUR);
+		group.add(rdbtnGBP);
+		group.add(rdbtnINR);
+		
+		ButtonGroup group2 = new ButtonGroup();
+		group2.add(rdbtnAnnualInterest);
+		group2.add(rdbtnTwoYearInterest);
+		group2.add(rdbtnFiveYearInterest);
+		
+		JButton btnCreateGicAccount = new JButton("Create GIC Account");
+		btnCreateGicAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String type = rdbtnCAD.getText();
+				if (rdbtnCAD.isSelected()) {
+					type = rdbtnCAD.getText();
+				}else if (rdbtnUSD.isSelected()) {
+					type = rdbtnUSD.getText();
+				}else if (rdbtnCNY.isSelected()) {
+					type = rdbtnCNY.getText();
+				}else if (rdbtnEUR.isSelected()) {
+					type = rdbtnEUR.getText();
+				}else if (rdbtnGBP.isSelected()) {
+					type = rdbtnGBP.getText();
+				}else if (rdbtnINR.isSelected()) {
+					type = rdbtnINR.getText();
+				}
+				GICPlan plan = new AnnualInterest();
+				if (rdbtnAnnualInterest.isSelected()) {
+					plan = new AnnualInterest();
+				}else if (rdbtnTwoYearInterest.isSelected()) {
+					 plan = new TwoYearInterest();
+				}else if (rdbtnCNY.isSelected()) {
+					plan = new FiveYearInterest();
+				}
+				String ID = txtID.getText();
+				Double principle = Double.valueOf(txtAmount.getText());
+				InfoStorer infoStorer = infoManager.getInfoStorer();
+				User user = infoStorer.getUserMap().get(ID);
+				AccountCreator creater = new AccountCreator(user, infoStorer, type);
+				creater.createNewGICAccount(plan, principle);
+			}
+		});
+		btnCreateGicAccount.setBounds(221, 225, 191, 29);
+		contentPane.add(btnCreateGicAccount);
 	}
 }

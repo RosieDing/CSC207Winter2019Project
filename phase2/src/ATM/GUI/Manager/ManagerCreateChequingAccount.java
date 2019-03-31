@@ -1,5 +1,8 @@
 package ATM.GUI.Manager;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 import ATM.BankIdentities.*;
@@ -10,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
@@ -18,7 +22,6 @@ public class ManagerCreateChequingAccount extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtUserID;
-	private JTextField txtJoint;
 
 
 	/**
@@ -56,11 +59,6 @@ public class ManagerCreateChequingAccount extends JFrame {
 		btnBack.setBounds(34, 132, 117, 29);
 		contentPane.add(btnBack);
 		
-		txtJoint = new JTextField();
-		txtJoint.setColumns(10);
-		txtJoint.setBounds(285, 21, 130, 26);
-		contentPane.add(txtJoint);
-		
 		JRadioButton rdbtnUSD = new JRadioButton("USD");
 		rdbtnUSD.setBounds(82, 82, 70, 23);
 		contentPane.add(rdbtnUSD);
@@ -90,9 +88,18 @@ public class ManagerCreateChequingAccount extends JFrame {
 		rdbtnINR.setBounds(380, 82, 70, 23);
 		contentPane.add(rdbtnINR);
 		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnCAD);
+		group.add(rdbtnUSD);
+		group.add(rdbtnCNY);
+		group.add(rdbtnEUR);
+		group.add(rdbtnGBP);
+		group.add(rdbtnINR);
+		
 		JButton btnCreateChequingAccount = new JButton("Create Chequing Account");
 		btnCreateChequingAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				String type = rdbtnCAD.getText();
 				if (rdbtnCAD.isSelected()) {
 					type = rdbtnCAD.getText();

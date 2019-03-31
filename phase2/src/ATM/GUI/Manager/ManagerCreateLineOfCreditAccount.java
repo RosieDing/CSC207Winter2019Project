@@ -1,5 +1,8 @@
 package ATM.GUI.Manager;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import ATM.BankIdentities.AccountCreator;
 import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
@@ -10,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -99,6 +103,14 @@ public class ManagerCreateLineOfCreditAccount extends JFrame {
 		JRadioButton rdbtnINR = new JRadioButton("INR");
 		rdbtnINR.setBounds(380, 67, 70, 23);
 		contentPane.add(rdbtnINR);
+		
+		ButtonGroup group = new ButtonGroup();
+		group.add(rdbtnCAD);
+		group.add(rdbtnUSD);
+		group.add(rdbtnCNY);
+		group.add(rdbtnEUR);
+		group.add(rdbtnGBP);
+		group.add(rdbtnINR);
 		
 		JButton btnCreateLineOf = new JButton("Create Line of Credit Account");
 		btnCreateLineOf.addActionListener(new ActionListener() {

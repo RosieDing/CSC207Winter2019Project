@@ -7,6 +7,7 @@ import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 import ATM.BankIdentities.*;
 import ATM.Transactions.*;
+import ATM.Machine.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ public class ManagerUndoAccountTrans extends JFrame {
 		InfoStorer infoStorer = infoManager.getInfoStorer();
 		BankManager bankManager = infoStorer.getBankManagerMap().get(id);
 		TransactionManager transaction = new TransactionManager(infoStorer.getAccTransMap(),infoStorer.getUserTransMap());
+		CashMachine cashMachine = new CashMachine();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -57,7 +59,7 @@ public class ManagerUndoAccountTrans extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String accNum = txtID.getText();
 				int times = Integer.valueOf(txtTrans.getText());
-				bankManager.undoAccRecentTrans(accNum, transaction, times);
+				bankManager.undoAccRecentTrans(accNum, transaction, cashMachine, times);
 			}
 		});
 		btnUndo.setBounds(274, 214, 117, 29);
