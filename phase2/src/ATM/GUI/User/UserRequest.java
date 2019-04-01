@@ -49,7 +49,7 @@ public class UserRequest extends JFrame {
 		JButton btnRequest = new JButton("Request");
 		btnRequest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (txtRequest.getText()!="") {
+				if (txtRequest.getText()=="") {
 					JOptionPane.showMessageDialog(null, "Empty input.");
 				} else {
 					JOptionPane.showMessageDialog(null, "Successful request");

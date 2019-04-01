@@ -25,7 +25,8 @@ Bank Manager:
     After log into your account you have options to do things list below(Click the button):
         1. Create User: After click this button you will have to choice a currency type for
         this user's initial chequing account then click the create button.
-        2. Restock: After click this button you will
+        2. Restock: After click this button you will see a menu of all value of money please put value in every single
+        blank.
         3. Create Stuff: Same as create user.
         4. Create Account: After you click this button you will see several options refer to different type of account.
            Choice the one you want to create and a new windows will bump out and you will have to input the user id and
