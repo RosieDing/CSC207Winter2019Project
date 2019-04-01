@@ -1,19 +1,13 @@
 package ATM.GUI.Manager;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import ATM.BankIdentities.*;
+import ATM.GUI.ResetPassword;
 import ATM.InfoHandling.InfoManager;
-import ATM.InfoHandling.InfoStorer;
-import ATM.Machine.Money;
-import ATM.Transactions.NoTransactionException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -101,12 +95,20 @@ public class ManagerMainMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
                 passwordManager.logout();
                 ManagerMainMenu.this.dispose();
+				infoManager.saveToFile();
+
 			}
 		});
 		btnLogout.setBounds(321, 243, 125, 29);
 		contentPane.add(btnLogout);
 		
 		JButton btnCreatestaff = new JButton("Create Staff");
+		btnCreatestaff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManagerMainMenu.this.dispose();
+				new ManagerCreateStaff(id, infoManager).setVisible(true);
+			}
+		});
 		btnCreatestaff.setBounds(16, 94, 117, 29);
 		contentPane.add(btnCreatestaff);
 		
@@ -129,5 +131,15 @@ public class ManagerMainMenu extends JFrame {
 		});
 		btnAddUserTo.setBounds(145, 204, 164, 29);
 		contentPane.add(btnAddUserTo);
+
+		JButton btnResetPassword = new JButton("Reset Password");
+		btnResetPassword.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManagerMainMenu.this.dispose();
+				new ResetPassword(id, infoManager).setVisible(true);
+			}
+		});
+		btnResetPassword.setBounds(321, 204, 125, 29);
+		contentPane.add(btnResetPassword);
 	}
 }

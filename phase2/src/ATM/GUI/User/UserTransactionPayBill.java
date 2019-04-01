@@ -55,9 +55,9 @@ public class UserTransactionPayBill extends JFrame {
 		txtAmount.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 				try {
-					long number = Long.parseLong(txtAmount.getText());
+					double number = Double.parseDouble(txtAmount.getText());
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(rootPane, "Only Numbers Allowed");
+					JOptionPane.showMessageDialog(rootPane, "Only Decimal Allowed");
 					txtAmount.setText("");
 				}
 			}

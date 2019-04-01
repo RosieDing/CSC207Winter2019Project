@@ -9,12 +9,8 @@ import ATM.BankIdentities.*;
 import ATM.Transactions.*;
 import ATM.Machine.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -50,7 +46,13 @@ public class ManagerUndoUserTrans extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String ID = txtID.getText();
 				int times = Integer.valueOf(txtTrans.getText());
-				//bankManager.undoUserRecentTrans(ID, transaction, cashMachine, times);
+				try{
+					bankManager.undoUserRecentTrans(ID, transaction, cashMachine, times);
+				} catch (NullPointerException ex) {
+					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+				}
 			}
 		});
 		btnUndo.setBounds(292, 222, 117, 29);
