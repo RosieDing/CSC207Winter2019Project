@@ -107,6 +107,12 @@ public class ManagerMainMenu extends JFrame {
 		contentPane.add(btnLogout);
 		
 		JButton btnCreatestaff = new JButton("Create Staff");
+		btnCreatestaff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManagerMainMenu.this.dispose();
+				new ManagerCreateStaff(id, infoManager).setVisible(true);
+			}
+		});
 		btnCreatestaff.setBounds(16, 94, 117, 29);
 		contentPane.add(btnCreatestaff);
 		
