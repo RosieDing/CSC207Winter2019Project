@@ -90,8 +90,8 @@ public class UserTransactionWithdrawal extends JFrame {
 		contentPane.add(btnBack);
 
 		JButton btnTransfer = new JButton("Withdraw");
-		btnTransfer.addKeyListener(new KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+		btnTransfer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				try {
 					transMap.put("fromAccount", comboBox.getSelectedItem());
 					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
@@ -100,13 +100,14 @@ public class UserTransactionWithdrawal extends JFrame {
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Withdraw successful!");
 					}
-				} catch (NullPointerException e) {
+				} catch (NullPointerException e1) {
 					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(rootPane, e1.getMessage());
 				}
 			}
 		});
+
 		btnTransfer.setBounds(131, 216, 117, 29);
 		contentPane.add(btnTransfer);
 	}

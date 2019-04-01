@@ -94,8 +94,8 @@ public class UserTransactionPayBill extends JFrame {
 		JButton button = new JButton("Pay");
 		button.setBounds(131, 218, 117, 29);
 		contentPane.add(button);
-		button.addKeyListener(new KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				try {
 					transMap.put("to", txtTo.getText());
 					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
@@ -105,10 +105,10 @@ public class UserTransactionPayBill extends JFrame {
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Pay Bill successful!");
 					}
-				} catch (NullPointerException e) {
+				} catch (NullPointerException e1) {
 					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(rootPane, e1.getMessage());
 				}
 			}
 		});
