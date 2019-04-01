@@ -2,9 +2,10 @@ package ATM.Accounts;
 
 import ATM.org.openexchangerates.oerjava.OpenExchangeRates;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Currency {
+public class Currency implements Serializable {
 
     private String type = "CAD";
     private double amount;

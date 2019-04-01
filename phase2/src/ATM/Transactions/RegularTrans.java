@@ -89,7 +89,7 @@ public class RegularTrans extends Transaction{
      */
     @Override
     public RegularTrans reverse() throws ReverseNotPossibleException{
-        TransferInable toAcc = getFromAcc();
+        TransferInable toAcc = (TransferInable)getFromAcc();
         TransferOutable from;
         if (getToAcc() instanceof TransferOutable){
             from = (TransferOutable)getToAcc();
