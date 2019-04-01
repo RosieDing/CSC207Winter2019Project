@@ -74,11 +74,11 @@ public class UserMainMenu extends JFrame {
 		btnMakeTransaction.setBounds(16, 155, 148, 29);
 		contentPane.add(btnMakeTransaction);
 		
-		JButton btnRequestForAccount = new JButton("Request for account creation");
+		JButton btnRequestForAccount = new JButton("Send Request to Manager");
 		btnRequestForAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserMainMenu.this.dispose();
-				new UserRequestCreationOfAccount(id, infoManager).setVisible(true);
+				new UserRequest(id, infoManager).setVisible(true);
 			}
 		});
 		btnRequestForAccount.setBounds(176, 155, 225, 29);

@@ -9,6 +9,10 @@ public class Currency {
     private String type = "CAD";
     private double amount;
 
+    public Currency(double amount){
+        this.amount = amount;
+    }
+
     public Currency(String type, double amount){
         this.type = type;
         this.amount = amount;

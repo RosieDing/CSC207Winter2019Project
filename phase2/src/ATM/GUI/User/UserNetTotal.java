@@ -50,7 +50,7 @@ public class UserNetTotal extends JFrame {
 		btnBack.setBounds(163, 212, 117, 29);
 		contentPane.add(btnBack);
 		
-		lblNetTotal.setText(Double.toString(manager.getNetTotal()));
+		lblNetTotal.setText(String.valueOf(manager.getNetTotal()));
 	}
 
 }
