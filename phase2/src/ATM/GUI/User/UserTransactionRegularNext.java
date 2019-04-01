@@ -1,7 +1,13 @@
 package ATM.GUI.User;
 
+import ATM.BankIdentities.UserAccManager;
+import ATM.InfoHandling.InfoManager;
+import ATM.Machine.CashMachine;
+import ATM.Transactions.TransactionManager;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,7 +27,8 @@ public class UserTransactionRegularNext extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserTransactionRegularNext() {
+	public UserTransactionRegularNext(Map<String, Object> transMap, UserAccManager uam, TransactionManager tm,
+									  CashMachine machine, String id, InfoManager infoManager) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
