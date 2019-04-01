@@ -43,7 +43,7 @@ public abstract class GICPlan implements Plan, Serializable {
         if(!isEnd){
             LocalDate current = Date.getDate().getSystemCurrentTime();
             Period p = Period.between(dateOfCreation, current);
-            int month = p.getMonths() + 1;
+            int month = p.getMonths();
             return month * computeMonthlyInterest(amount);
         }
         else {return computeTotalInterest(amount);}
@@ -68,9 +68,9 @@ public abstract class GICPlan implements Plan, Serializable {
     public int getMonthpassed(LocalDate dateOfCreation){
         LocalDate current = Date.getDate().getSystemCurrentTime();
         Period p = Period.between(dateOfCreation, current);
-        int years = p.getYears();
-        int months = p.getMonths();
-        return (years+1) *12 + months+1;
+        int years = p.getYears()+1;
+        int months = p.getMonths()+1;
+        return (years) *12 + months;
     }
 
     public abstract String toString();

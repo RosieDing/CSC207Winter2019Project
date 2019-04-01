@@ -115,6 +115,7 @@ public class DateMenu extends JFrame {
 				int monthint = Integer.valueOf(month);
 				int dayint = Integer.valueOf(day);
 				if (infoManager.getDate().setDateOfCreation(dayint, monthint, yearint)){
+					//System.out.println(infoManager.getDate());
 					infoManager.interestCompound();
 					DateMenu.this.dispose();
 					new IDMenu(infoManager).setVisible(true);
@@ -131,6 +132,7 @@ public class DateMenu extends JFrame {
 				int month = infoManager.getDate().getSystemCurrentTime().getMonthValue();
 				int year = infoManager.getDate().getSystemCurrentTime().getYear();
 				if (infoManager.getDate().setDateOfCreation(day, month, year)){
+					//System.out.println(infoManager.getDate());
 					infoManager.interestCompound();
 					DateMenu.this.dispose();
 					new IDMenu(infoManager).setVisible(true);
