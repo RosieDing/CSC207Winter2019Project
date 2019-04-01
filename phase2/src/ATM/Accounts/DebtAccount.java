@@ -26,7 +26,7 @@ public abstract class DebtAccount extends BasicAccount {
     public DebtAccount(ArrayList<String> ownerID, double limit, String type){
         super(ownerID);
         this.limit = limit;
-        this.balance = new Currency(type, limit);
+        this.balance = new Currency(type, 0);
     }
 
     /**Getter method for account balance
