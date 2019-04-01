@@ -101,7 +101,7 @@ public class RegularTrans extends Transaction{
         } else {
             throw new ReverseNotPossibleException();
         }
-        return new RegularTrans(from, toAcc, this.getAmount());
+        return new RegularTrans(from, to, this.getAmount());
     }
 
 
