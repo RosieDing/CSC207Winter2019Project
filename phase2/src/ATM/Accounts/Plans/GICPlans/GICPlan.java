@@ -3,10 +3,11 @@ package ATM.Accounts.Plans.GICPlans;
 import ATM.Accounts.Plans.Plan;
 import ATM.BankSystem.Date;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
-public abstract class GICPlan implements Plan {
+public abstract class GICPlan implements Plan, Serializable {
 
     private double interestRate;
     private int periodOfMonth;
