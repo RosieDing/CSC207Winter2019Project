@@ -2,9 +2,12 @@ package ATM.GUI.Staff;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
+import ATM.Machine.CashMachine;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -61,8 +64,24 @@ public class StaffCheckCashmachine extends JFrame {
         contentPane.add(lblFiveR);
 
         JButton btnBack = new JButton("Back");
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                StaffCheckCashmachine.this.dispose();
+                new StaffMainMenu(id, infoManager).setVisible(true);
+            }
+        });
         btnBack.setBounds(315, 216, 117, 29);
         contentPane.add(btnBack);
+
+        CashMachine machine = infoManager.getCashMachine();
+        String five = String.valueOf(machine.getNumFiveD());
+        String ten = String.valueOf(machine.getNumTenD());
+        String twenty = String.valueOf(machine.getNumTwentyD());
+        String fifty = String.valueOf(machine.getNumFiftyD());
+        lblFiveR.setText(five);
+        lblTenR.setText(ten);
+        lblFiftyR.setText(fifty);
+        lblTwentyR.setText(twenty);
     }
 
 }
