@@ -101,7 +101,7 @@ public class UserTransactionDeposit extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserTransactionDeposit.this.dispose();
-				new UserMainMenu(id, infoManager).setVisible(true);
+				new UserMakeTransaction(id, infoManager).setVisible(true);
 			}
 		});
 		btnBack.setBounds(19, 219, 117, 29);

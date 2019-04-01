@@ -54,7 +54,7 @@ public class UserMakeTransaction extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				transMap.put("Type", "Regular");
 				UserMakeTransaction.this.dispose();
-				new UserTransactionRegular(transMap, uam, tm, machine).setVisible(true);
+				new UserTransactionRegular(transMap, uam, tm, machine, id, infoManager).setVisible(true);
 			}
 		});
 		btnRegularTransaction.setBounds(28, 55, 157, 29);
@@ -76,7 +76,7 @@ public class UserMakeTransaction extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				transMap.put("Type", "Withdrawal");
 				UserMakeTransaction.this.dispose();
-				new UserTransactionWithdrawal(transMap, uam, tm, machine).setVisible(true);
+				new UserTransactionWithdrawal(transMap, uam, tm, machine, id, infoManager).setVisible(true);
 			}
 		});
 		btnWithdraw.setBounds(28, 141, 144, 29);
@@ -87,7 +87,7 @@ public class UserMakeTransaction extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				transMap.put("Type", "PayBill");
 				UserMakeTransaction.this.dispose();
-				new UserTransactionPayBill(transMap, uam, tm, machine).setVisible(true);
+				new UserTransactionPayBill(transMap, uam, tm, machine, id, infoManager).setVisible(true);
 			}
 		});
 		btnPayBill.setBounds(246, 141, 144, 29);
