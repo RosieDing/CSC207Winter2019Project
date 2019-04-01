@@ -37,27 +37,17 @@ public class StaffMainMenu extends JFrame {
 		btnCreateUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StaffMainMenu.this.dispose();
-				new ManagerCreaterUser(id, infoManager).setVisible(true);
+				new StaffCreateUser(id, infoManager).setVisible(true);
 			}
 		});
 		btnCreateUser.setBounds(28, 25, 117, 29);
 		contentPane.add(btnCreateUser);
 		
-		JButton btnCreateAccount = new JButton("Create Account");
-		btnCreateAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				StaffMainMenu.this.dispose();
-				new ManagerCreateAccount(id, infoManager).setVisible(true);
-			}
-		});
-		btnCreateAccount.setBounds(28, 87, 140, 29);
-		contentPane.add(btnCreateAccount);
-		
 		JButton btnRestock = new JButton("Restock");
 		btnRestock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StaffMainMenu.this.dispose();
-				new ManagerRestock(id, infoManager).setVisible(true);
+				new StaffRestock(id, infoManager).setVisible(true);
 			}
 		});
 		btnRestock.setBounds(197, 146, 140, 29);
@@ -91,7 +81,7 @@ public class StaffMainMenu extends JFrame {
 		btnCheckMachineBalance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StaffMainMenu.this.dispose();
-				new ManagerCheckMachineBalance(id, infoManager).setVisible(true);
+				new StaffCheckCashmachine(id, infoManager).setVisible(true);
 			}
 		});
 		btnCheckMachineBalance.setBounds(197, 87, 200, 29);
