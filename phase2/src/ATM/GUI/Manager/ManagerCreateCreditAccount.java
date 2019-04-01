@@ -8,16 +8,11 @@ import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
+import java.awt.event.KeyAdapter;
 
 public class ManagerCreateCreditAccount extends JFrame {
 
@@ -45,6 +40,17 @@ public class ManagerCreateCreditAccount extends JFrame {
 		contentPane.add(lblID);
 		
 		txtID = new JTextField();
+		txtID.addKeyListener(new KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				try {
+					long number = Long.parseLong(txtID.getText());
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(rootPane, "Only Numbers Allowed");
+					txtID.setText("");
+				}
+			}
+
+		});
 		txtID.setColumns(10);
 		txtID.setBounds(160, 6, 130, 26);
 		contentPane.add(txtID);
@@ -58,13 +64,6 @@ public class ManagerCreateCreditAccount extends JFrame {
 		});
 		btnBack.setBounds(50, 190, 117, 29);
 		contentPane.add(btnBack);
-		
-		
-		
-		txtJoint = new JTextField();
-		txtJoint.setColumns(10);
-		txtJoint.setBounds(302, 6, 130, 26);
-		contentPane.add(txtJoint);
 		
 		JLabel lblLimit = new JLabel("Limit:");
 		lblLimit.setBounds(6, 131, 61, 16);

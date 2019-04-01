@@ -50,7 +50,7 @@ public class ManagerUndoUserTrans extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String ID = txtID.getText();
 				int times = Integer.valueOf(txtTrans.getText());
-				bankManager.undoUserRecentTrans(ID, transaction, cashMachine, times);
+				//bankManager.undoUserRecentTrans(ID, transaction, cashMachine, times);
 			}
 		});
 		btnUndo.setBounds(292, 222, 117, 29);

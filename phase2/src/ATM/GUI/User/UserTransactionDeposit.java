@@ -79,7 +79,7 @@ public class UserTransactionDeposit extends JFrame {
 		Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
 		transMap.put("amount", amount);
 
-		JButton btnTransfer = new JButton("Transfer");
+		JButton btnTransfer = new JButton("Deposit");
 		btnTransfer.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 				try {

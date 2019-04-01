@@ -43,6 +43,7 @@ public class UserSummary extends JFrame {
 		txtSummary.setEditable(false);
 		txtSummary.setBounds(79, 6, 277, 200);
 		contentPane.add(txtSummary);
+		txtSummary.setText(manager.getSummary());
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {

@@ -59,14 +59,7 @@ public class ManagerCreateGICAccount extends JFrame {
 		});
 		btnBack.setBounds(41, 225, 117, 29);
 		contentPane.add(btnBack);
-		
-		txtJoint = new JTextField();
-		txtJoint.setColumns(10);
-		txtJoint.setBounds(300, 6, 130, 26);
-		contentPane.add(txtJoint);
-		
-		
-		
+
 		JRadioButton rdbtnCAD = new JRadioButton("CAD");
 		rdbtnCAD.setSelected(true);
 		rdbtnCAD.setBounds(0, 67, 70, 23);

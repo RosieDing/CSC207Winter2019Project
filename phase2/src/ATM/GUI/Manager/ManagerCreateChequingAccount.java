@@ -7,16 +7,11 @@ import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 import ATM.BankIdentities.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
+import java.awt.event.KeyAdapter;
 
 public class ManagerCreateChequingAccount extends JFrame {
 
@@ -43,6 +38,17 @@ public class ManagerCreateChequingAccount extends JFrame {
 		contentPane.add(lblPleaseEnterUser);
 		
 		txtUserID = new JTextField();
+		txtUserID.addKeyListener(new KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				try {
+					long number = Long.parseLong(txtUserID.getText());
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(rootPane, "Only Numbers Allowed");
+					txtUserID.setText("");
+				}
+			}
+
+		});
 		txtUserID.setBounds(143, 21, 130, 26);
 		contentPane.add(txtUserID);
 		txtUserID.setColumns(10);
