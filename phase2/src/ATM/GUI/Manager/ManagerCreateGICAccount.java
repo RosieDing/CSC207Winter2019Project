@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import ATM.BankIdentities.AccountCreator;
+import ATM.BankIdentities.AccountOwnable;
 import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
@@ -153,7 +154,13 @@ public class ManagerCreateGICAccount extends JFrame {
 				String ID = txtID.getText();
 				Double principle = Double.valueOf(txtAmount.getText());
 				InfoStorer infoStorer = infoManager.getInfoStorer();
-				User user = infoStorer.getUserMap().get(ID);
+				AccountOwnable user;
+				if(infoManager.getStaffMap().containsKey(ID)){
+					user = infoManager.getStaffMap().get(ID);
+				}
+				else{
+					user = infoManager.getUser(ID);
+				}
 				AccountCreator creater = new AccountCreator(user, infoStorer, type);
 				creater.createNewGICAccount(plan, principle);
 				JOptionPane.showMessageDialog(null, "GIC Account Created");

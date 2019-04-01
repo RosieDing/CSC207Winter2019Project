@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import ATM.BankIdentities.AccountCreator;
+import ATM.BankIdentities.AccountOwnable;
 import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
@@ -132,7 +133,13 @@ public class ManagerCreateLineOfCreditAccount extends JFrame {
 				String limit = txtLimit.getText();
 				int limitint = Integer.valueOf(limit);
 				InfoStorer infoStorer = infoManager.getInfoStorer();
-				User user = infoStorer.getUserMap().get(ID);
+				AccountOwnable user;
+				if(infoManager.getStaffMap().containsKey(ID)){
+					user = infoManager.getStaffMap().get(ID);
+				}
+				else{
+					user = infoManager.getUser(ID);
+				}
 				AccountCreator creater = new AccountCreator(user, infoStorer, type);
 				
 				creater.createNewLineOfCredit(limitint);

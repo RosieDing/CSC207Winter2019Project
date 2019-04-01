@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import ATM.Accounts.Plans.MonthlySavingPlans.*;
 import ATM.BankIdentities.AccountCreator;
+import ATM.BankIdentities.AccountOwnable;
 import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
@@ -144,7 +145,13 @@ public class ManagerCreateSavingAccount extends JFrame {
 				}
 				String ID = txtID.getText();
 				InfoStorer infoStorer = infoManager.getInfoStorer();
-				User user = infoStorer.getUserMap().get(ID);
+				AccountOwnable user;
+				if(infoManager.getStaffMap().containsKey(ID)){
+					user = infoManager.getStaffMap().get(ID);
+				}
+				else{
+					user = infoManager.getUser(ID);
+				}
 				AccountCreator creater = new AccountCreator(user, infoStorer, type);
 				creater.createNewSavingAccount(plan);
 				JOptionPane.showMessageDialog(null, "Saving Account Created");

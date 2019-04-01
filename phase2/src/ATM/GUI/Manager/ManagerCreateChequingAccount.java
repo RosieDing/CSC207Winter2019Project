@@ -23,7 +23,7 @@ public class ManagerCreateChequingAccount extends JFrame {
 	 * Create the frame.
 	 */
 	public ManagerCreateChequingAccount(String id, InfoManager infoManager) {
-		
+
 		InfoStorer infoStorer = infoManager.getInfoStorer();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,8 +121,13 @@ public class ManagerCreateChequingAccount extends JFrame {
 					type = rdbtnINR.getText();
 				}
 				String ID = txtUserID.getText();
-				InfoStorer infoStorer = infoManager.getInfoStorer();
-				User user = infoStorer.getUserMap().get(ID);
+				AccountOwnable user;
+				if(infoManager.getStaffMap().containsKey(ID)){
+					user = infoManager.getStaffMap().get(ID);
+				}
+				else{
+					user = infoManager.getUser(ID);
+				}
 				AccountCreator creater = new AccountCreator(user, infoStorer, type);
 				creater.createNewChequingAccount();
 				JOptionPane.showMessageDialog(null, "Chequing Account Created");
