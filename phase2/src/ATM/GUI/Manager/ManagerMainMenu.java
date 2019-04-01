@@ -93,7 +93,7 @@ public class ManagerMainMenu extends JFrame {
 				new ManagerRestock(id, infoManager).setVisible(true);
 			}
 		});
-		btnRestock.setBounds(145, 203, 125, 29);
+		btnRestock.setBounds(16, 204, 125, 29);
 		contentPane.add(btnRestock);
 		
 		JButton btnLogout = new JButton("Logout");
@@ -103,7 +103,7 @@ public class ManagerMainMenu extends JFrame {
                 ManagerMainMenu.this.dispose();
 			}
 		});
-		btnLogout.setBounds(16, 203, 125, 29);
+		btnLogout.setBounds(321, 243, 125, 29);
 		contentPane.add(btnLogout);
 		
 		JButton btnCreatestaff = new JButton("Create Staff");
@@ -119,5 +119,15 @@ public class ManagerMainMenu extends JFrame {
 		});
 		btnCheckMachineBalance.setBounds(145, 148, 180, 29);
 		contentPane.add(btnCheckMachineBalance);
+
+		JButton btnAddUserTo = new JButton("Add user to account");
+		btnAddUserTo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManagerMainMenu.this.dispose();
+				new ManagerJointAccount(id, infoManager).setVisible(true);
+			}
+		});
+		btnAddUserTo.setBounds(145, 204, 164, 29);
+		contentPane.add(btnAddUserTo);
 	}
 }

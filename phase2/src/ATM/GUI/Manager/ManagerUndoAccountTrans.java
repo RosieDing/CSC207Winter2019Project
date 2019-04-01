@@ -59,7 +59,7 @@ public class ManagerUndoAccountTrans extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String accNum = txtID.getText();
 				int times = Integer.valueOf(txtTrans.getText());
-				bankManager.undoAccRecentTrans(accNum, transaction, cashMachine, times);
+				//bankManager.undoAccRecentTrans(accNum, transaction, cashMachine, times);
 			}
 		});
 		btnUndo.setBounds(274, 214, 117, 29);
