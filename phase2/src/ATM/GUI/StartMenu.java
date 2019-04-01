@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ATM.BankIdentities.User;
+import ATM.BankSystem.Date;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 
@@ -63,7 +64,7 @@ public class StartMenu extends JFrame {
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StartMenu.this.dispose();
-				new IDMenu().setVisible(true);
+				new DateMenu().setVisible(true);
 			}
 		});
 		btnStart.setBounds(135, 144, 189, 82);

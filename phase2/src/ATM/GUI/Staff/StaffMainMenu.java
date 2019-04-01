@@ -1,5 +1,6 @@
 package ATM.GUI.Staff;
 
+import ATM.GUI.IDMenu;
 import ATM.GUI.Manager.*;
 import ATM.GUI.PasswordMenu;
 import ATM.GUI.StartMenu;
@@ -78,7 +79,7 @@ public class StaffMainMenu extends JFrame {
 				passwordManager.logout();
 				StaffMainMenu.this.dispose();
 				infoManager.saveToFile();
-				new StartMenu().setVisible(true);
+				new IDMenu(infoManager).setVisible(true);
 
 
 			}
