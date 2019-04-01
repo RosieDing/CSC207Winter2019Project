@@ -9,16 +9,11 @@ import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
+import java.awt.event.KeyAdapter;
 
 public class ManagerCreateSavingAccount extends JFrame {
 
@@ -44,6 +39,17 @@ public class ManagerCreateSavingAccount extends JFrame {
 		contentPane.add(lblID);
 		
 		txtID = new JTextField();
+		txtID.addKeyListener(new KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				try {
+					long number = Long.parseLong(txtID.getText());
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(rootPane, "Only Numbers Allowed");
+					txtID.setText("");
+				}
+			}
+
+		});
 		txtID.setColumns(10);
 		txtID.setBounds(174, 6, 130, 26);
 		contentPane.add(txtID);
@@ -57,14 +63,7 @@ public class ManagerCreateSavingAccount extends JFrame {
 		});
 		btnBack.setBounds(37, 217, 117, 29);
 		contentPane.add(btnBack);
-		
-		
-		
-		txtJoint = new JTextField();
-		txtJoint.setColumns(10);
-		txtJoint.setBounds(312, 6, 130, 26);
-		contentPane.add(txtJoint);
-		
+
 		JRadioButton rdbtnCAD = new JRadioButton("CAD");
 		rdbtnCAD.setSelected(true);
 		rdbtnCAD.setBounds(0, 72, 70, 23);
