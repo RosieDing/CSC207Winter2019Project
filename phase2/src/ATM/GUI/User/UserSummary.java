@@ -40,6 +40,7 @@ public class UserSummary extends JFrame {
 		contentPane.add(scrollBar);
 		
 		JTextArea txtSummary = new JTextArea();
+		txtSummary.setWrapStyleWord(true);
 		txtSummary.setEditable(false);
 		txtSummary.setBounds(79, 6, 800, 200);
 		contentPane.add(txtSummary);
