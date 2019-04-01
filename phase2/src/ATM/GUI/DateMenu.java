@@ -55,7 +55,7 @@ public class DateMenu extends JFrame {
 		contentPane.add(txtYear);
 		txtYear.setColumns(10);
 		
-		JLabel lblLeaveEmptyTo = new JLabel("Leave empty to use system date");
+		JLabel lblLeaveEmptyTo = new JLabel("Press use system time button to use system time");
 		lblLeaveEmptyTo.setBounds(33, 6, 305, 16);
 		contentPane.add(lblLeaveEmptyTo);
 		
@@ -110,6 +110,7 @@ public class DateMenu extends JFrame {
 				String year = txtYear.getText();
 				String month = txtMonth.getText();
 				String day = txtDay.getText();
+
 				int yearint = Integer.valueOf(year);
 				int monthint = Integer.valueOf(month);
 				int dayint = Integer.valueOf(day);
@@ -122,5 +123,21 @@ public class DateMenu extends JFrame {
 		});
 		btnNext.setBounds(295, 220, 117, 29);
 		contentPane.add(btnNext);
+
+		JButton btnUseSystemDate = new JButton("Use System Date");
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int day = infoManager.getDate().getSystemCurrentTime().getDayOfMonth();
+				int month = infoManager.getDate().getSystemCurrentTime().getMonthValue();
+				int year = infoManager.getDate().getSystemCurrentTime().getYear();
+				if (infoManager.getDate().setDateOfCreation(day, month, year)){
+					infoManager.interestCompound();
+					DateMenu.this.dispose();
+					new IDMenu(infoManager).setVisible(true);
+				}
+			}
+		});
+		btnUseSystemDate.setBounds(295, 107, 135, 29);
+		contentPane.add(btnUseSystemDate);
 	}
 }
