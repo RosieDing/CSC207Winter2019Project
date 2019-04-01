@@ -18,7 +18,7 @@ public class PayBill extends Transaction{
     private final String to;
     private final Payable fromAcc;
     private final Account toAcc;
-    private final LocalDate time;
+    private LocalDate time = Date.getDate().getSystemCurrentTime();
     private final Currency amount;
     private  BillWriter writer = new BillWriter();
 
@@ -34,7 +34,6 @@ public class PayBill extends Transaction{
         this.fromAcc = fromAccount;
         this.toAcc = null;
         this.to = to;
-        this.time = Date.getDate().getSystemCurrentTime();
     }
 
     public Currency getAmount() {

@@ -14,8 +14,7 @@ import java.util.ArrayList;
 public abstract class Account implements Serializable {
 
     /**The date when an account is created */
-    Date date = Date.getDate();
-    private final LocalDate dateOfCreation = date.getSystemCurrentTime();
+    private LocalDate dateOfCreation = Date.getDate().getSystemCurrentTime();
 
     /**The number of owners*/
     private int numOwner;

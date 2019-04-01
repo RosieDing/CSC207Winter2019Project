@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Withdrawal extends Transaction {
     private final Withdrawable fromAcc;
     private final Account toAcc;
-    private final LocalDate date;
+    private LocalDate date = Date.getDate().getSystemCurrentTime();
     private final Currency amount;
 
     /**
@@ -27,7 +27,6 @@ public class Withdrawal extends Transaction {
         this.amount = amount;
         this.fromAcc = fromAcc;
         this.toAcc = null;
-        this.date = Date.getDate().getSystemCurrentTime();
     }
 
     public Currency getAmount() {

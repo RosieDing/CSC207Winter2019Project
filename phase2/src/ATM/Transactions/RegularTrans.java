@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class RegularTrans extends Transaction{
     private final TransferOutable fromAcc;
     private final TransferInable toAcc;
-    private final LocalDate time;
+    private LocalDate time = Date.getDate().getSystemCurrentTime();
     private final Currency amount;
 
     /**
@@ -27,7 +27,6 @@ public class RegularTrans extends Transaction{
         this.amount = amount;
         this.fromAcc = fromAcc;
         this.toAcc = toAcc;
-        time = Date.getDate().getSystemCurrentTime();
     }
 
     public Currency getAmount() {
