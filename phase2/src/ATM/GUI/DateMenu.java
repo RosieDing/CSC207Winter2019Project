@@ -125,7 +125,7 @@ public class DateMenu extends JFrame {
 		contentPane.add(btnNext);
 
 		JButton btnUseSystemDate = new JButton("Use System Date");
-		btnNext.addActionListener(new ActionListener() {
+		btnUseSystemDate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int day = infoManager.getDate().getSystemCurrentTime().getDayOfMonth();
 				int month = infoManager.getDate().getSystemCurrentTime().getMonthValue();
