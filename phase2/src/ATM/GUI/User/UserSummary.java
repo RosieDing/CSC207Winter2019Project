@@ -41,7 +41,7 @@ public class UserSummary extends JFrame {
 		
 		JTextArea txtSummary = new JTextArea();
 		txtSummary.setEditable(false);
-		txtSummary.setBounds(79, 6, 277, 200);
+		txtSummary.setBounds(79, 6, 500, 200);
 		contentPane.add(txtSummary);
 		txtSummary.setText(manager.getSummary());
 		
