@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GICAccount extends InvestmentAccount {
 
     private String accountNum;
-    private String gic_code = "005";
+    private String gicCode = "005";
     private double perspectTotalInterest;
     private double perspectiveBalance;
     private Currency balance;
@@ -32,7 +32,7 @@ public class GICAccount extends InvestmentAccount {
     public GICAccount(ArrayList<String> ownerID, int totalNumAcc, GICPlan s, double principle, String type) {
         super(ownerID, s);
         this.principle = new Currency(type,principle);
-        this.accountNum = gic_code + (totalNumAcc + 1);
+        this.accountNum = gicCode + (totalNumAcc + 1);
         this.plan = s;
         this.termsOfMonth = plan.getPeriodMonth();
         Period p = Period.ofMonths(plan.getPeriodMonth());

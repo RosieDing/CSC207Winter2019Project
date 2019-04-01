@@ -15,7 +15,7 @@ public class SavingAccount extends AssetAccount implements TimeSensitive{
     /** The account number */
     private final String accountNum;
 
-    private final String saving_code = "004";
+    private final String savingCode = "004";
 
     /**
      * Constructor of saving account
@@ -29,7 +29,7 @@ public class SavingAccount extends AssetAccount implements TimeSensitive{
     public SavingAccount(ArrayList<String> ownerID, Plan plan, int totalNumAcc, String type){
         super(ownerID, type);
         this.Plan = plan;
-        this.accountNum = saving_code +  (totalNumAcc + 1);
+        this.accountNum = savingCode +  (totalNumAcc + 1);
         setBalance(Plan.compute(getBalance().getAmount()));
     }
 
