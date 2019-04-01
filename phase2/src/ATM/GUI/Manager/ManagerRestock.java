@@ -137,10 +137,12 @@ public class ManagerRestock extends JFrame {
 				int numTen = Integer.valueOf(ten);
 				int numTwenty = Integer.valueOf(twenty);
 				int numFifty = Integer.valueOf(fifty);
-
-
-				Money m = new Money(numFive, numTen, numTwenty, numFifty);
-                bankManager.restock(infoManager.getCashMachine(), m);
+				if (five!="" | ten !="" | twenty !=""|fifty!="") {
+					Money m = new Money(numFive, numTen, numTwenty, numFifty);
+					bankManager.restock(infoManager.getCashMachine(), m);
+				} else{
+					JOptionPane.showMessageDialog(null, "Invalid Input");
+				}
 			}
 		});
 		btnRestock.setBounds(327, 239, 117, 29);

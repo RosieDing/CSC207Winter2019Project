@@ -1,5 +1,6 @@
-package ATM.GUI.User;
+package ATM.GUI;
 
+import ATM.GUI.User.UserMainMenu;
 import ATM.InfoHandling.*;
 
 import javax.swing.JFrame;
@@ -11,7 +12,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class UserResetPassword extends JFrame {
+public class ResetPassword extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtReset;
@@ -24,7 +25,7 @@ public class UserResetPassword extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserResetPassword(String id, InfoManager infoManager) {
+	public ResetPassword(String id, InfoManager infoManager) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -48,7 +49,7 @@ public class UserResetPassword extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserResetPassword.this.dispose();
+				ResetPassword.this.dispose();
 				new UserMainMenu(id, infoManager).setVisible(true);
 			}
 		});

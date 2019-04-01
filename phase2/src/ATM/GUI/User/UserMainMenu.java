@@ -1,6 +1,7 @@
 package ATM.GUI.User;
 
 import ATM.BankIdentities.*;
+import ATM.GUI.ResetPassword;
 import ATM.InfoHandling.InfoManager;
 
 import javax.swing.JFrame;
@@ -98,7 +99,7 @@ public class UserMainMenu extends JFrame {
 		btnChangePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserMainMenu.this.dispose();
-				new UserResetPassword(id, infoManager).setVisible(true);
+				new ResetPassword(id, infoManager).setVisible(true);
 			}
 		});
 		btnChangePassword.setBounds(16, 214, 148, 29);
