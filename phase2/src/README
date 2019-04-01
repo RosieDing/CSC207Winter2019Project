@@ -106,3 +106,8 @@ New features:
     6. All account have an instance called currency you can choose the currency when create(they are also transferable
     but when withdraw, you can only withdraw CAD, this means you can withdraw from Other currency account but the money
     you get will be CAD)
+
+
+*****************************************************************************************************************************
+Warning: For all blank block. Please make sure to input somtthing(0 if you want it to be empty), Otherwise it will not
+function correctly.
