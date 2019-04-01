@@ -1,5 +1,7 @@
 package ATM.GUI.Staff;
 
+import ATM.InfoHandling.InfoManager;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -21,7 +23,7 @@ public class StaffRestock extends JFrame {
     /**
      * Create the frame.
      */
-    public StaffRestock() {
+    public StaffRestock(String id, InfoManager infoManager) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
