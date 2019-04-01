@@ -105,7 +105,7 @@ import java.util.Map;
             } else {
                 double middleRate = latest().get(base).doubleValue();
                 double targetRate = latest().get(currency).doubleValue();
-                result = (targetRate / middleRate);
+                result = (middleRate / targetRate);
             }
             return result;
         }
@@ -140,6 +140,11 @@ import java.util.Map;
                 System.out.println(e.getMessage());
             }
             return rate;
+        }
+
+        public static void main(String[] args) {
+            OpenExchangeRates oer = new OpenExchangeRates();
+            System.out.println(oer.getExchangeRate("CAD", "CNY"));
         }
     }
 
