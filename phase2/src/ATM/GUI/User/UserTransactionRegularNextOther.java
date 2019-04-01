@@ -1,42 +1,94 @@
-package ATM.GUI.User;
+package ATM.GUI;
+
+import ATM.Accounts.Currency;
+import ATM.BankIdentities.NoSuchAccountException;
+import ATM.BankIdentities.UserAccManager;
+import ATM.InfoHandling.InfoManager;
+import ATM.Machine.CashMachine;
+import ATM.Transactions.Transaction;
+import ATM.Transactions.TransactionManager;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.KeyAdapter;
+import java.util.Map;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class UserTransactionRegularNextOther extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UserTransactionRegularNextOther frame = new UserTransactionRegularNextOther();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JTextField txtAmount;
+	private JTextField txtAccount;
 
 	/**
 	 * Create the frame.
 	 */
-	public UserTransactionRegularNextOther() {
+	public UserTransactionRegularNextOther(Map<String, Object> transMap, UserAccManager uam, TransactionManager tm,
+										   CashMachine machine, String id, InfoManager infoManager) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JButton btnTransfer = new JButton("Transfer");
+		btnTransfer.setBounds(250, 203, 117, 29);
+		contentPane.add(btnTransfer);
+		btnTransfer.addKeyListener(new KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				try {
+					transMap.put("toAccount", infoManager.getAccount(txtAccount.getText()));
+					Transaction trans = tm.makeTransaction(transMap, machine);
+					if (trans.isHappened()) {
+						JOptionPane.showMessageDialog(null, "Transaction successful!");
+					}
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				}
+			}
+		});
+
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(55, 203, 117, 29);
+		contentPane.add(btnBack);
+
+		txtAmount = new JTextField();
+		txtAmount.addKeyListener(new KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				try {
+					double number = Double.parseDouble(txtAmount.getText());
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(rootPane, "Only Decimal Allowed");
+					txtAmount.setText("");
+				}
+			}
+
+		});
+		txtAmount.setColumns(10);
+		txtAmount.setBounds(198, 83, 130, 26);
+		contentPane.add(txtAmount);
+		Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
+		transMap.put("amount", amount);
+
+		JLabel lblAmount = new JLabel("Enter Amount:");
+		lblAmount.setBounds(74, 88, 112, 16);
+		contentPane.add(lblAmount);
+
+
+		JLabel lblAccount = new JLabel("Account Number:");
+		lblAccount.setBounds(74, 28, 112, 16);
+		contentPane.add(lblAccount);
+
+		txtAccount = new JTextField();
+		txtAccount.setEditable(true);
+		txtAccount.setBounds(198, 23, 130, 26);
+		contentPane.add(txtAccount);
+		txtAccount.setColumns(10);
 	}
 
 }
