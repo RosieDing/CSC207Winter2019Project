@@ -98,14 +98,14 @@ import java.util.Map;
 
         }
 
-        private BigDecimal currency(String currency) throws UnavailableExchangeRateException {
-            BigDecimal result;
+        private double currency(String currency) throws UnavailableExchangeRateException {
+            double result;
             if (base.equals("USD")) {
-                result = latest().get(currency);
+                result = latest().get(currency).doubleValue();
             } else {
-                BigDecimal middleRate = latest().get(base);
-                BigDecimal targetRate = latest().get(currency);
-                result = (targetRate.divide(middleRate));
+                double middleRate = latest().get(base).doubleValue();
+                double targetRate = latest().get(currency).doubleValue();
+                result = (middleRate / targetRate);
             }
             return result;
         }
@@ -129,8 +129,8 @@ import java.util.Map;
          * @param toCurrency
          * @return exchange rate
          */
-        public BigDecimal getExchangeRate(String fromCurrency, String toCurrency){
-            BigDecimal rate = null;
+        public double getExchangeRate(String fromCurrency, String toCurrency){
+            double rate = 0.0;
             try {
                 if (!fromCurrency.equals(getBase())){
                     setBase(fromCurrency);
@@ -140,6 +140,11 @@ import java.util.Map;
                 System.out.println(e.getMessage());
             }
             return rate;
+        }
+
+        public static void main(String[] args) {
+            OpenExchangeRates oer = new OpenExchangeRates();
+            System.out.println(oer.getExchangeRate("CAD", "CNY"));
         }
     }
 

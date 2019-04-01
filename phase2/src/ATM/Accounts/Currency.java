@@ -47,8 +47,8 @@ public class Currency implements Serializable {
 
     protected double exchangeToBaseCurrency(String billsCurrency,String baseCurrency){
         OpenExchangeRates oer = new OpenExchangeRates();
-        BigDecimal rateDecial = oer.getExchangeRate(billsCurrency, baseCurrency);
-        return rateDecial.doubleValue();
+        double rateDecial = oer.getExchangeRate(billsCurrency, baseCurrency);
+        return rateDecial;
     }
     public String toString(){
         return this.type + ": " + this.amount;
