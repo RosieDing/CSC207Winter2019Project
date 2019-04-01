@@ -1,8 +1,9 @@
 package ATM.BankSystem;
+import java.io.Serializable;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class Date {
+public class Date implements Serializable {
     private static Date date;
     private int periodDay;
     private int periodMonth;
