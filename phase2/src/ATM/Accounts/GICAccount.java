@@ -1,6 +1,8 @@
 package ATM.Accounts;
 
 import ATM.Accounts.Plans.GICPlans.GICPlan;
+import ATM.BankSystem.Date;
+import ATM.GUI.Manager.ManagerCheckMachineBalance;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -22,7 +24,7 @@ public class GICAccount extends InvestmentAccount {
     private Currency principle;
 
     private boolean isEnd;
-   // private double principle;
+    // private double principle;
 
     private double penalty = 0.8;
 
@@ -36,18 +38,21 @@ public class GICAccount extends InvestmentAccount {
         this.plan = s;
         this.termsOfMonth = plan.getPeriodMonth();
         Period p = Period.ofMonths(plan.getPeriodMonth());
-        LocalDate maturityDate = getDateOfCreation().plus(p);
+
+        LocalDate maturityDate = Date.getDate().getSystemCurrentTime().plus(p);
+
         this.maturityDay = maturityDate.getDayOfMonth();
         this.maturityMonth = maturityDate.getMonthValue();
         this.maturityYear = maturityDate.getYear();
+
         this.isEnd = plan.isEnd(maturityDate);
-        this.monthLeft = plan.getMonthLeft(getDateOfCreation(), isEnd);
+        // this.monthLeft = plan.getMonthLeft(getDateOfCreation(), isEnd);
 
-        perspectTotalInterest = plan.getCurrentPerspectTotalInterest(principle, getDateOfCreation(), isEnd);
-        perspectiveBalance = plan.getCurrentPerspectBalance(principle,getDateOfCreation(),isEnd);
+        //perspectTotalInterest =
+        //perspectiveBalance = plan.getCurrentPerspectBalance(principle,isEnd);
 
-        balance = new Currency(type, perspectiveBalance);
-        availableCredit = new Currency(type,principle + perspectTotalInterest * penalty);
+        balance = new Currency(type, principle);
+        availableCredit = balance;
     }
 
     @Override
@@ -59,11 +64,20 @@ public class GICAccount extends InvestmentAccount {
     public void compute(){
         if (!isEnd) {
             LocalDate maturityDate = LocalDate.of(maturityYear,maturityMonth,maturityDay);
+            System.out.println(maturityDay);
             isEnd = plan.isEnd(maturityDate);
-            perspectTotalInterest = plan.getCurrentPerspectTotalInterest(principle.getAmount(), getDateOfCreation(), isEnd);
-            perspectiveBalance = plan.getCurrentPerspectBalance(principle.getAmount(),getDateOfCreation(),isEnd);
-            balance.setAmount(perspectiveBalance);
-            availableCredit.setAmount(principle.getAmount() + perspectTotalInterest * penalty);
+            if(isEnd){
+                double interest = plan.compute(principle.getAmount());
+                balance.setAmount(interest);
+                System.out.println(balance);
+                availableCredit = balance;
+            }
+//            perspectTotalInterest = plan.getCurrentPerspectTotalInterest(principle.getAmount(), isEnd);
+//            perspectiveBalance = plan.getCurrentPerspectBalance(principle.getAmount(),isEnd);
+//            balance.setAmount(perspectiveBalance);
+//            if(!isEnd){
+//            availableCredit.setAmount(principle.getAmount() + perspectTotalInterest * penalty);}
+//            else {availableCredit = balance;}
         }
     }
 
@@ -80,7 +94,7 @@ public class GICAccount extends InvestmentAccount {
 
 
     public Currency getBalance(){
-        return balance;
+        return availableCredit;
     }
 
 
@@ -97,8 +111,8 @@ public class GICAccount extends InvestmentAccount {
     @Override
     public String toString(){
         return this.getCurrencyType() + " GICAccount "+ this.accountNum + getBalance()+ "\n"
-                + plan + "maturityYear"+ maturityYear +"/" + maturityMonth +"/" +maturityDay + "\n"
-                + monthLeft +" months left";
+                + plan + "maturityYear"+ maturityYear +"/" + maturityMonth +"/" +maturityDay + "\n";
+//                + monthLeft +" months left";
     }
 
     @Override
@@ -112,5 +126,5 @@ public class GICAccount extends InvestmentAccount {
             balance.subtract(amount);
             availableCredit = balance;
         }
-        }
+    }
 }
