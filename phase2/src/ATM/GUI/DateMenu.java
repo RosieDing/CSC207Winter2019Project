@@ -56,7 +56,7 @@ public class DateMenu extends JFrame {
 		txtYear.setColumns(10);
 		
 		JLabel lblLeaveEmptyTo = new JLabel("Press use system time button to use system time");
-		lblLeaveEmptyTo.setBounds(33, 6, 305, 16);
+		lblLeaveEmptyTo.setBounds(33, 6, 400, 16);
 		contentPane.add(lblLeaveEmptyTo);
 		
 		txtMonth = new JTextField();
