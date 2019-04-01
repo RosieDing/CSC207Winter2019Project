@@ -100,6 +100,7 @@ public class UserTransactionRegularNextMy extends JFrame {
 						amount = new Currency(((Account)transMap.get("fromAccount")).getCurrencyType(),
 								Double.valueOf(txtAmount.getText()));
 					}
+					transMap.put("amount", amount);
 					Transaction trans = tm.makeTransaction(transMap, machine);
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Transaction successful!");

@@ -59,8 +59,9 @@ public class TransactionManager implements Serializable {
                 break;
             case "Regular":
                 e = new RegularTrans((TransferOutable)map.get("fromAccount"),
-                        (TransferInable)map.get("toAccount"), (Currency) map.get("amount"));
-                break;}
+                        (TransferInable)map.get("toAccount"), (Currency)map.get("amount"));
+                break;
+        }
         return makeTransaction(e, machine);
     }
 
