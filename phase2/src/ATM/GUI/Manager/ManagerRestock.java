@@ -137,7 +137,7 @@ public class ManagerRestock extends JFrame {
 				int numTen = Integer.valueOf(ten);
 				int numTwenty = Integer.valueOf(twenty);
 				int numFifty = Integer.valueOf(fifty);
-				if (five!="" && ten !="" && twenty !=""&& fifty!="") {
+				if (five!=null && ten != null && twenty != null && fifty!= null ) {
 					Money m = new Money(numFive, numTen, numTwenty, numFifty);
 					bankManager.restock(infoManager.getCashMachine(), m);
 					JOptionPane.showMessageDialog(null, "Restock Successful");
