@@ -1,17 +1,18 @@
 package ATM.GUI.User;
 
+import ATM.Accounts.Account;
 import ATM.BankIdentities.AlreadyPrimaryException;
+import ATM.BankIdentities.User;
 import ATM.BankIdentities.UserAccManager;
 import ATM.InfoHandling.*;
 import ATM.AccountTypeChecker.*;
+import ATM.Transactions.Transaction;
 
+import java.awt.event.KeyAdapter;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -26,6 +27,7 @@ public class UserSetPrimaryChequing extends JFrame {
 	public UserSetPrimaryChequing(String id, InfoManager infoManager) {
 		InfoStorer infoStorer = infoManager.getInfoStorer();
 		UserAccManager manager = new UserAccManager(id, infoStorer.getUserMap(), infoStorer.getStaffMap());
+		User user = infoManager.getUser(id);
 		ChequingChecker checker = new ChequingChecker();
 		
 		
@@ -45,8 +47,17 @@ public class UserSetPrimaryChequing extends JFrame {
 		}
 
 		JButton btnSet = new JButton("Set");
-		btnSet.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnSet.addKeyListener(new KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				try {
+					Account acc = (Account)comboBox.getSelectedItem();
+					user.setPrimaryChq(acc);
+					if (user.getPrimaryChq().getAccountNum().equals(acc.getAccountNum())) {
+						JOptionPane.showMessageDialog(null, "Reset successful!");
+					}
+				} catch (AlreadyPrimaryException e) {
+					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				}
 			}
 		});
 		btnSet.setBounds(251, 54, 117, 29);
