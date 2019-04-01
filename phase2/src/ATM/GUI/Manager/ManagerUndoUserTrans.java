@@ -48,21 +48,10 @@ public class ManagerUndoUserTrans extends JFrame {
 				int times = Integer.valueOf(txtTrans.getText());
 				try{
 					bankManager.undoUserRecentTrans(ID, transaction, cashMachine, times);
-				} catch(NoTransactionException exception){
-					JOptionPane.showMessageDialog(null, "This user do not own this account.");
-
-				}catch(ReverseNotPossibleException exception){
-
-				}catch(NotCADBaseAccountException exception){
-
-				}catch (NotEnoughMoneyException exception){
-
-				}catch (CashNotWithdrawableException exception){
-
-				}catch (TransactionAmountOverLimitException exception){
-
-				}catch(NullPointerException exception){
-
+				} catch (NullPointerException ex) {
+					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(rootPane, ex.getMessage());
 				}
 			}
 		});
