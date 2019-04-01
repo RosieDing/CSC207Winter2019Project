@@ -35,7 +35,7 @@ public class UserViewAccountInfo extends JFrame {
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserViewAccountInfo.this.dispose();
-				new UserViewAccountInfoNext(id, infoManager).setVisible(true);
+				//ew UserViewAccountInfoNext(id, infoManager).setVisible(true);
 
 			}
 		});
