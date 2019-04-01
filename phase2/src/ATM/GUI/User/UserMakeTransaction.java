@@ -4,6 +4,8 @@ import ATM.Accounts.Account;
 import ATM.BankIdentities.User;
 import ATM.BankIdentities.UserAccManager;
 import ATM.InfoHandling.*;
+import ATM.Machine.CashMachine;
+import ATM.Transactions.TransactionManager;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -30,9 +32,11 @@ public class UserMakeTransaction extends JFrame {
 	public UserMakeTransaction(String id, InfoManager infoManager) {
 		InfoStorer infoStorer = infoManager.getInfoStorer();
 		UserAccManager uam = new UserAccManager(id, infoStorer.getUserMap(), infoStorer.getStaffMap());
+		TransactionManager tm = new TransactionManager(infoManager.getAccTransMap(), infoManager.getUserTransMap());
 		User user = infoManager.getUser(id);
 		Map<String, Account> accountMap = infoStorer.getAccountMap();
 		Map<String, Object> transMap = new HashMap<>();
+		CashMachine machine = infoManager.getCashMachine();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -50,7 +54,7 @@ public class UserMakeTransaction extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				transMap.put("Type", "Regular");
 				UserMakeTransaction.this.dispose();
-				new UserTransactionRegular(transMap, uam).setVisible(true);
+				new UserTransactionRegular(transMap, uam, tm, machine).setVisible(true);
 			}
 		});
 		btnRegularTransaction.setBounds(28, 55, 157, 29);
@@ -61,7 +65,7 @@ public class UserMakeTransaction extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				transMap.put("Type", "Deposit");
 				UserMakeTransaction.this.dispose();
-				new UserTransactionDeposit(transMap, user).setVisible(true);
+				new UserTransactionDeposit(transMap, id, tm, machine, infoManager).setVisible(true);
 			}
 		});
 		btnDeposit.setBounds(246, 55, 144, 29);
@@ -72,7 +76,7 @@ public class UserMakeTransaction extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				transMap.put("Type", "Withdrawal");
 				UserMakeTransaction.this.dispose();
-				new UserTransactionWithdrawal(transMap, uam).setVisible(true);
+				new UserTransactionWithdrawal(transMap, uam, tm, machine).setVisible(true);
 			}
 		});
 		btnWithdraw.setBounds(28, 141, 144, 29);
@@ -83,7 +87,7 @@ public class UserMakeTransaction extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				transMap.put("Type", "PayBill");
 				UserMakeTransaction.this.dispose();
-				new UserTransactionPayBill(transMap, uam).setVisible(true);
+				new UserTransactionPayBill(transMap, uam, tm, machine).setVisible(true);
 			}
 		});
 		btnPayBill.setBounds(246, 141, 144, 29);
