@@ -47,7 +47,9 @@ User:
         2. Get Net total: After click this button, the net balance of all your accounts
         3. Set primary account: After click this button you will see some available accounts list by number and you can
          choose one by type in the number (1, 2, 3, 4).
-        4. Change Password: After click this button you will have to input the new password (NOTE!!!! DIGIT ONLY)
+        4. Change Password: After click this button you will have to input the new password
+        (NOTE!!!! DIGIT ONLY
+        ALSO DO NOT START PASSWORD WITH 0!!!!!!)
         5. Request: After click this you can input the string to send the request
             Format of this string:
                 you should specify your userID and whether you want to create new account or share an account with other
