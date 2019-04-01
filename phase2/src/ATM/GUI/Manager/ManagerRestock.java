@@ -140,6 +140,11 @@ public class ManagerRestock extends JFrame {
 				if (five!="" | ten !="" | twenty !=""|fifty!="") {
 					Money m = new Money(numFive, numTen, numTwenty, numFifty);
 					bankManager.restock(infoManager.getCashMachine(), m);
+					JOptionPane.showMessageDialog(null, "Restock Successful");
+					txtFive.setText("");
+					txtTen.setText("");
+					txtTwenty.setText("");
+					txtFifty.setText("");
 				} else{
 					JOptionPane.showMessageDialog(null, "Invalid Input");
 				}

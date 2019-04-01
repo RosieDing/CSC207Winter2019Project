@@ -136,6 +136,7 @@ public class ManagerCreateLineOfCreditAccount extends JFrame {
 				AccountCreator creater = new AccountCreator(user, infoStorer, type);
 				
 				creater.createNewLineOfCredit(limitint);
+				JOptionPane.showMessageDialog(null, "Line Of Credit Account Created");
 			}
 		});
 		btnCreateLineOf.setBounds(217, 150, 219, 29);

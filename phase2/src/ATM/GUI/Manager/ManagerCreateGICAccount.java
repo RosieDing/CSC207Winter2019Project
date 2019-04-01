@@ -9,16 +9,10 @@ import ATM.InfoHandling.InfoManager;
 import ATM.InfoHandling.InfoStorer;
 import ATM.Accounts.Plans.GICPlans.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JRadioButton;
 
 public class ManagerCreateGICAccount extends JFrame {
 
@@ -162,6 +156,7 @@ public class ManagerCreateGICAccount extends JFrame {
 				User user = infoStorer.getUserMap().get(ID);
 				AccountCreator creater = new AccountCreator(user, infoStorer, type);
 				creater.createNewGICAccount(plan, principle);
+				JOptionPane.showMessageDialog(null, "GIC Account Created");
 			}
 		});
 		btnCreateGicAccount.setBounds(221, 225, 191, 29);

@@ -125,6 +125,7 @@ public class ManagerCreateChequingAccount extends JFrame {
 				User user = infoStorer.getUserMap().get(ID);
 				AccountCreator creater = new AccountCreator(user, infoStorer, type);
 				creater.createNewChequingAccount();
+				JOptionPane.showMessageDialog(null, "Chequing Account Created");
 			}
 		});
 		btnCreateChequingAccount.setBounds(199, 132, 191, 29);

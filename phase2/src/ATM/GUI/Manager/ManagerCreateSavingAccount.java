@@ -147,6 +147,7 @@ public class ManagerCreateSavingAccount extends JFrame {
 				User user = infoStorer.getUserMap().get(ID);
 				AccountCreator creater = new AccountCreator(user, infoStorer, type);
 				creater.createNewSavingAccount(plan);
+				JOptionPane.showMessageDialog(null, "Saving Account Created");
 			}
 		});
 		btnCreateSavingAccount.setBounds(232, 217, 191, 29);
