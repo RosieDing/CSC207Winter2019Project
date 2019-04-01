@@ -62,6 +62,7 @@ public class ManagerJointAccount extends JFrame {
                 }
                 try {
                   bankManager.ShareAccount(user, account);
+                    JOptionPane.showMessageDialog(null, "Joint account created");
                 }catch (UserNotOwnAccountException exception){
                     JOptionPane.showMessageDialog(null, "This user do not own this account.");
 

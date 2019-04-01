@@ -135,6 +135,7 @@ public class ManagerCreateCreditAccount extends JFrame {
 				User user = infoStorer.getUserMap().get(ID);
 				AccountCreator creater = new AccountCreator(user, infoStorer, type);
 				creater.createNewCreditAccount(limitint);
+				JOptionPane.showMessageDialog(null, "Credit Account Created");
 			}
 		});
 		btnCreateCreditAccount.setBounds(221, 190, 191, 29);
