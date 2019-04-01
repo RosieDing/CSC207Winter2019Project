@@ -9,7 +9,7 @@ import ATM.Accounts.TransferTypes.Withdrawable;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class BasicAccount extends Account implements Withdrawable, TransferInable, Payable, Depositable, Serializable{
+public abstract class BasicAccount extends Account implements TransferInable, Withdrawable, Payable, Depositable, Serializable{
 
         /**
          * Constructor of BasicAccount
@@ -33,5 +33,8 @@ public abstract class BasicAccount extends Account implements Withdrawable, Tran
         @Override
         /**Abstract Method for withdraw money from account */
         public abstract void withdraw(Currency amount);
+
+        /**Abstract Method for transferring money to account */
+        public abstract void transferIn(Currency amount);
 
     }

@@ -56,11 +56,11 @@ public class UserMainMenu extends JFrame {
 		btnSummary.setBounds(16, 34, 117, 29);
 		contentPane.add(btnSummary);
 		
-		JButton btnYourAccounts = new JButton("Your Accounts");
+		JButton btnYourAccounts = new JButton("View Account Info");
 		btnYourAccounts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserMainMenu.this.dispose();
-				new UserYourAccounts(id, infoManager).setVisible(true);
+				new UserViewAccountInfo(id, infoManager).setVisible(true);
 			}
 		});
 		btnYourAccounts.setBounds(16, 94, 125, 29);

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * An abstract class that represents a bank account
  */
-public abstract class Account implements TransferInable, Serializable {
+public abstract class Account implements Serializable {
 
     /**The date when an account is created */
     Date date = Date.getDate();
@@ -72,9 +72,6 @@ public abstract class Account implements TransferInable, Serializable {
 
     /**Abstract Method for setting balance of account */
     public abstract void setBalance(double amount);
-
-    /**Abstract Method for transferring money to account */
-    public abstract void transferIn(Currency amount);
 
     public abstract String getSummary();
 
