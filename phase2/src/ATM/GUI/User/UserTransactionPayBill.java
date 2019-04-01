@@ -52,6 +52,7 @@ public class UserTransactionPayBill extends JFrame {
 		contentPane.add(lblAmount);
 
 		txtAmount = new JTextField();
+		txtAmount.setEditable(true);
 		txtAmount.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 				try {
