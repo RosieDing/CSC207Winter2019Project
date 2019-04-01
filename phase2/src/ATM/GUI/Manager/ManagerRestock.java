@@ -62,7 +62,7 @@ public class ManagerRestock extends JFrame {
 		lblFifty.setBounds(42, 206, 171, 16);
 		contentPane.add(lblFifty);
 		
-		txtFive = new JTextField();
+		txtFive = new JTextField("");
 		txtFive.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 	            try {
@@ -78,7 +78,7 @@ public class ManagerRestock extends JFrame {
 		contentPane.add(txtFive);
 		txtFive.setColumns(10);
 		
-		txtTen = new JTextField();
+		txtTen = new JTextField("");
 		txtTen.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 	            try {
@@ -94,7 +94,7 @@ public class ManagerRestock extends JFrame {
 		txtTen.setBounds(201, 107, 130, 26);
 		contentPane.add(txtTen);
 		
-		txtTwenty = new JTextField();
+		txtTwenty = new JTextField("");
 		txtTwenty.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 	            try {
@@ -110,7 +110,7 @@ public class ManagerRestock extends JFrame {
 		txtTwenty.setBounds(225, 153, 130, 26);
 		contentPane.add(txtTwenty);
 		
-		txtFifty = new JTextField();
+		txtFifty = new JTextField("");
 		txtFifty.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 	            try {
@@ -138,14 +138,19 @@ public class ManagerRestock extends JFrame {
 				int numTwenty = Integer.valueOf(twenty);
 				int numFifty = Integer.valueOf(fifty);
 				if (five!="" | ten !="" | twenty !=""|fifty!="") {
+					if (five == ""){
+						numFive = 0;
+					}else if (ten == ""){
+						numTen = 0;
+					}else if (twenty == ""){
+						numTwenty = 0;
+					}else if (fifty == ""){
+						numFifty = 0;
+					}
 					Money m = new Money(numFive, numTen, numTwenty, numFifty);
 					bankManager.restock(infoManager.getCashMachine(), m);
 					JOptionPane.showMessageDialog(null, "Restock Successful");
-					txtFive.setText("");
-					txtTen.setText("");
-					txtTwenty.setText("");
-					txtFifty.setText("");
-				} else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Invalid Input");
 				}
 			}
