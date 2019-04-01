@@ -54,7 +54,6 @@ public class UserTransactionRegularNextMy extends JFrame {
 		for (Object o : list) {
 			comboBox.addItem(o);
 		}
-		transMap.put("fromAccount", comboBox.getSelectedItem());
 
 		txtAmount = new JTextField();
 		txtAmount.addKeyListener(new KeyAdapter() {
@@ -71,8 +70,6 @@ public class UserTransactionRegularNextMy extends JFrame {
 		txtAmount.setBounds(184, 81, 130, 26);
 		contentPane.add(txtAmount);
 		txtAmount.setColumns(10);
-		Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
-		transMap.put("amount", amount);
 
 		JLabel lblEnterAmount = new JLabel("Enter Amount:");
 		lblEnterAmount.setBounds(60, 86, 112, 16);
@@ -94,6 +91,9 @@ public class UserTransactionRegularNextMy extends JFrame {
 		btnTransfer.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 				try {
+					transMap.put("fromAccount", comboBox.getSelectedItem());
+					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
+					transMap.put("amount", amount);
 					Transaction trans = tm.makeTransaction(transMap, machine);
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Transaction successful!");

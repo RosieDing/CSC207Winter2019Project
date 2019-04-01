@@ -76,13 +76,13 @@ public class UserTransactionDeposit extends JFrame {
 		txtAmount.setColumns(10);
 		txtAmount.setBounds(125, 134, 130, 26);
 		contentPane.add(txtAmount);
-		Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
-		transMap.put("amount", amount);
 
 		JButton btnTransfer = new JButton("Deposit");
 		btnTransfer.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 				try {
+					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
+					transMap.put("amount", amount);
 					Transaction trans = tm.makeTransaction(transMap, machine);
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Deposit successful!");

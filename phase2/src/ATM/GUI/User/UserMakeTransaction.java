@@ -72,18 +72,18 @@ public class UserMakeTransaction extends JFrame {
 		contentPane.add(btnDeposit);
 		
 		JButton btnWithdraw = new JButton("Withdrawal");
-		btnDeposit.addActionListener(new ActionListener() {
+		btnWithdraw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				transMap.put("Type", "Withdrawal");
 				UserMakeTransaction.this.dispose();
 				new UserTransactionWithdrawal(transMap, uam, tm, machine, id, infoManager).setVisible(true);
 			}
 		});
-		btnWithdraw.setBounds(28, 141, 144, 29);
+		btnWithdraw.setBounds(10, 141, 144, 29);
 		contentPane.add(btnWithdraw);
 		
 		JButton btnPayBill = new JButton("Pay Bill");
-		btnDeposit.addActionListener(new ActionListener() {
+		btnPayBill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				transMap.put("Type", "PayBill");
 				UserMakeTransaction.this.dispose();

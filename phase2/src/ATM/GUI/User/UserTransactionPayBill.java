@@ -66,8 +66,6 @@ public class UserTransactionPayBill extends JFrame {
 		txtAmount.setColumns(10);
 		txtAmount.setBounds(90, 136, 130, 26);
 		contentPane.add(txtAmount);
-		Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
-		transMap.put("amount", amount);
 		
 		JLabel lblFromAccount = new JLabel("From Account:");
 		lblFromAccount.setBounds(6, 82, 92, 16);
@@ -81,7 +79,6 @@ public class UserTransactionPayBill extends JFrame {
 		for (Object o : list) {
 			comboBox.addItem(o);
 		}
-		transMap.put("fromAccount", comboBox.getSelectedItem());
 		
 		JLabel lblTo = new JLabel("To:");
 		lblTo.setBounds(78, 110, 92, 16);
@@ -92,8 +89,6 @@ public class UserTransactionPayBill extends JFrame {
 		txtTo.setBounds(110, 105, 130, 26);
 		contentPane.add(txtTo);
 		txtTo.setColumns(10);
-		transMap.put("to", txtTo.getText());
-
 
 		JButton button = new JButton("Pay");
 		button.setBounds(131, 218, 117, 29);
@@ -101,6 +96,10 @@ public class UserTransactionPayBill extends JFrame {
 		button.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 				try {
+					transMap.put("to", txtTo.getText());
+					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
+					transMap.put("amount", amount);
+					transMap.put("fromAccount", comboBox.getSelectedItem());
 					Transaction trans = tm.makeTransaction(transMap, machine);
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Pay Bill successful!");

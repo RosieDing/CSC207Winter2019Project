@@ -57,13 +57,13 @@ public class UserTransactionRegular extends JFrame {
 		for (Object o : list) {
 			comboBox.addItem(o);
 		}
-		transMap.put("fromAccount", comboBox.getSelectedItem());
-		
+
 		JButton btnNext = new JButton("Next");
 		btnNext.setBounds(245, 168, 117, 29);
 		contentPane.add(btnNext);
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				transMap.put("fromAccount", comboBox.getSelectedItem());
 				UserTransactionRegular.this.dispose();
 				new UserTransactionRegularNext(transMap, uam, tm, machine, id, infoManager).setVisible(true);
 			}
