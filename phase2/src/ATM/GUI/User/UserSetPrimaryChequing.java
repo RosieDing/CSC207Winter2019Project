@@ -47,16 +47,17 @@ public class UserSetPrimaryChequing extends JFrame {
 		}
 
 		JButton btnSet = new JButton("Set");
-		btnSet.addKeyListener(new KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+		btnSet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				try {
+					System.out.println(comboBox.getSelectedItem());
 					Account acc = (Account)comboBox.getSelectedItem();
 					user.setPrimaryChq(acc);
 					if (user.getPrimaryChq().getAccountNum().equals(acc.getAccountNum())) {
 						JOptionPane.showMessageDialog(null, "Reset successful!");
 					}
-				} catch (AlreadyPrimaryException e) {
-					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				} catch (AlreadyPrimaryException e1) {
+					JOptionPane.showMessageDialog(rootPane, e1.getMessage());
 				}
 			}
 		});

@@ -1,5 +1,7 @@
 package ATM.GUI.User;
 
+import ATM.Accounts.Account;
+import ATM.BankIdentities.AlreadyPrimaryException;
 import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
 import ATM.Machine.CashMachine;
@@ -78,8 +80,8 @@ public class UserTransactionDeposit extends JFrame {
 		contentPane.add(txtAmount);
 
 		JButton btnTransfer = new JButton("Deposit");
-		btnTransfer.addKeyListener(new KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+		btnTransfer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				try {
 					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
 					transMap.put("amount", amount);
@@ -87,10 +89,10 @@ public class UserTransactionDeposit extends JFrame {
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Deposit successful!");
 					}
-				} catch (NullPointerException e) {
+				} catch (NullPointerException e1) {
 					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(rootPane, e1.getMessage());
 				}
 			}
 		});

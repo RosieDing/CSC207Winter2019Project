@@ -88,8 +88,8 @@ public class UserTransactionRegularNextMy extends JFrame {
 		JButton btnTransfer = new JButton("Transfer");
 		btnTransfer.setBounds(236, 201, 117, 29);
 		contentPane.add(btnTransfer);
-		btnTransfer.addKeyListener(new KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
+		btnTransfer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				try {
 					transMap.put("fromAccount", comboBox.getSelectedItem());
 					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
@@ -98,10 +98,10 @@ public class UserTransactionRegularNextMy extends JFrame {
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Transaction successful!");
 					}
-				} catch (NullPointerException e) {
+				} catch (NullPointerException e1) {
 					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(rootPane, e1.getMessage());
 				}
 			}
 		});
