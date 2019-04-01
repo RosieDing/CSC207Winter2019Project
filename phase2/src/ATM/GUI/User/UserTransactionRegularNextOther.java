@@ -1,5 +1,6 @@
 package ATM.GUI;
 
+import ATM.Accounts.Account;
 import ATM.Accounts.Currency;
 import ATM.BankIdentities.NoSuchAccountException;
 import ATM.BankIdentities.UserAccManager;
@@ -43,8 +44,13 @@ public class UserTransactionRegularNextOther extends JFrame {
 		btnTransfer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
-					transMap.put("amount", amount);
+					Currency amount;
+					if (((Account)transMap.get("fromAccount")).getCurrencyType().equals("CAD")) {
+						amount = new Currency(Double.valueOf(txtAmount.getText()));
+					} else {
+						amount = new Currency(((Account)transMap.get("fromAccount")).getCurrencyType(),
+								Double.valueOf(txtAmount.getText()));
+					}
 					transMap.put("toAccount", infoManager.getAccount(txtAccount.getText()));
 					Transaction trans = tm.makeTransaction(transMap, machine);
 					if (trans.isHappened()) {
