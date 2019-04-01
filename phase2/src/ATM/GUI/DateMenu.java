@@ -115,6 +115,7 @@ public class DateMenu extends JFrame {
 				int dayint = Integer.valueOf(day);
 				if (infoManager.getDate().setDateOfCreation(dayint, monthint, yearint)){
 					infoManager.interestCompound();
+					DateMenu.this.dispose();
 					new IDMenu(infoManager).setVisible(true);
 				};
 			}
