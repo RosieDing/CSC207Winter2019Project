@@ -76,6 +76,7 @@ public class ResetPassword extends JFrame {
 		btnReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				passwordManager.setPassword(txtReset.getText(), infoManager.getPasswordMap());
+				JOptionPane.showMessageDialog(null, "Reset Successful!");
 			}
 		});
 		btnReset.setBounds(298, 86, 117, 29);
