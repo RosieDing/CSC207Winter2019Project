@@ -176,6 +176,8 @@ public class InfoManager {
         return getStaffMap().size();
     }
 
+
+
     /**
      * Add a new bank manager to infoStorer.
      * @param id BankManger's id

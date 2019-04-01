@@ -121,7 +121,7 @@ public class BankManager extends BankEmployee implements PrivilegeLevelA{
      * It will create a default primary chequing account
      * At the same time, all the information is going to be updated to global information
      */
-    public String createUser(int Numuser, String type, InfoStorer infoStorer) {
+    public String createUser(String type, InfoStorer infoStorer) {
         String userID = super.createUser(type, infoStorer);
         return userID;
     }
