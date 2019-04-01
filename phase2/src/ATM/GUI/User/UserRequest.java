@@ -9,14 +9,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class UserRequestCreationOfAccount extends JFrame {
+public class UserRequest extends JFrame {
 
 	private JPanel contentPane;
 
 	/**
 	 * Create the frame.
 	 */
-	public UserRequestCreationOfAccount(String id, InfoManager infoManager) {
+	public UserRequest(String id, InfoManager infoManager) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -43,7 +43,7 @@ public class UserRequestCreationOfAccount extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserRequestCreationOfAccount.this.dispose();
+				UserRequest.this.dispose();
 				new UserMainMenu(id, infoManager).setVisible(true);
 
 			}
