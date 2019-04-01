@@ -37,7 +37,7 @@ public class StaffMainMenu extends JFrame {
 		btnCreateUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StaffMainMenu.this.dispose();
-				new StaffCreaterUser(id, infoManager).setVisible(true);
+				new StaffCreateUser(id, infoManager).setVisible(true);
 			}
 		});
 		btnCreateUser.setBounds(28, 25, 117, 29);
@@ -81,7 +81,7 @@ public class StaffMainMenu extends JFrame {
 		btnCheckMachineBalance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StaffMainMenu.this.dispose();
-				new StaffCheckMachineBalance(id, infoManager).setVisible(true);
+				new StaffCheckCashmachine(id, infoManager).setVisible(true);
 			}
 		});
 		btnCheckMachineBalance.setBounds(197, 87, 200, 29);
