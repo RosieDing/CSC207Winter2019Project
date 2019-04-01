@@ -1,6 +1,7 @@
 package ATM.GUI.User;
 
 import ATM.Accounts.Account;
+import ATM.BankIdentities.AccountOwnable;
 import ATM.BankIdentities.AlreadyPrimaryException;
 import ATM.BankIdentities.User;
 import ATM.InfoHandling.InfoManager;
@@ -35,7 +36,14 @@ public class UserTransactionDeposit extends JFrame {
 	 */
 	public UserTransactionDeposit(Map<String, Object> transMap, String id,
 								  TransactionManager tm, CashMachine machine, InfoManager infoManager) {
-		transMap.put("toAccount", infoManager.getUser(id).getPrimaryChq());
+		AccountOwnable user;
+		if(infoManager.getStaffMap().containsKey(id)){
+			user = infoManager.getStaffMap().get(id);
+		}
+		else{
+			user = infoManager.getUser(id);
+		}
+		transMap.put("toAccount", user.getPrimaryChq());
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -54,7 +62,7 @@ public class UserTransactionDeposit extends JFrame {
 		
 		txtID = new JTextField();
 		txtID.setEditable(false);
-		txtID.setText(infoManager.getUser(id).getPrimaryChq().toString());
+		txtID.setText(user.getPrimaryChq().toString());
 		txtID.setBounds(125, 75, 300, 26);
 		contentPane.add(txtID);
 		txtID.setColumns(10);

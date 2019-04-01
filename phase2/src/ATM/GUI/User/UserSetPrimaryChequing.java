@@ -1,9 +1,7 @@
 package ATM.GUI.User;
 
 import ATM.Accounts.Account;
-import ATM.BankIdentities.AlreadyPrimaryException;
-import ATM.BankIdentities.User;
-import ATM.BankIdentities.UserAccManager;
+import ATM.BankIdentities.*;
 import ATM.InfoHandling.*;
 import ATM.AccountTypeChecker.*;
 import ATM.Transactions.Transaction;
@@ -27,7 +25,13 @@ public class UserSetPrimaryChequing extends JFrame {
 	public UserSetPrimaryChequing(String id, InfoManager infoManager) {
 		InfoStorer infoStorer = infoManager.getInfoStorer();
 		UserAccManager manager = new UserAccManager(id, infoStorer.getUserMap(), infoStorer.getStaffMap());
-		User user = infoManager.getUser(id);
+		AccountOwnable user;
+		if(infoManager.getStaffMap().containsKey(id)){
+			 user = infoManager.getStaffMap().get(id);
+		}
+		else{
+			 user = infoManager.getUser(id);
+		}
 		ChequingChecker checker = new ChequingChecker();
 		
 		
