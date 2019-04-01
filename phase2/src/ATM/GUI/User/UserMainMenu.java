@@ -2,6 +2,7 @@ package ATM.GUI.User;
 
 import ATM.BankIdentities.*;
 import ATM.GUI.ResetPassword;
+import ATM.GUI.StartMenu;
 import ATM.InfoHandling.InfoManager;
 
 import javax.swing.JFrame;
@@ -111,6 +112,8 @@ public class UserMainMenu extends JFrame {
 				passwordManager.logout();
 				UserMainMenu.this.dispose();
 				infoManager.saveToFile();
+				new StartMenu().setVisible(true);
+
 			}
 		});
 		btnLogout.setBounds(176, 214, 148, 29);

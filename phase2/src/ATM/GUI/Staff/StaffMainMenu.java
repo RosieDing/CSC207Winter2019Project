@@ -2,6 +2,7 @@ package ATM.GUI.Staff;
 
 import ATM.GUI.Manager.*;
 import ATM.GUI.PasswordMenu;
+import ATM.GUI.StartMenu;
 import ATM.GUI.User.UserMainMenu;
 import ATM.InfoHandling.InfoManager;
 import ATM.BankIdentities.*;
@@ -77,6 +78,8 @@ public class StaffMainMenu extends JFrame {
 				passwordManager.logout();
 				StaffMainMenu.this.dispose();
 				infoManager.saveToFile();
+				new StartMenu().setVisible(true);
+
 
 			}
 		});

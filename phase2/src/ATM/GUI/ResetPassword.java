@@ -31,6 +31,8 @@ public class ResetPassword extends JFrame {
 		} else if (infoStorer.getStaffMap().containsKey(id)) {
 			ResetPassword.this.dispose();
 			new StaffMainMenu(id, infoManager).setVisible(true);
+		} else {
+			JOptionPane.showMessageDialog(null, "No such account");
 		}
 	}
 
@@ -38,7 +40,7 @@ public class ResetPassword extends JFrame {
 	 * Create the frame.
 	 */
 	public ResetPassword(String id, InfoManager infoManager) {
-		InfoStorer infoStorer = new InfoStorer();
+		InfoStorer infoStorer = infoManager.getInfoStorer();
 		PasswordManager passwordManager = new PasswordManager(id);
 
 
@@ -82,8 +84,6 @@ public class ResetPassword extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				ResetPassword.this.dispose();
 				identityLog(id, infoStorer, infoManager);
 			}
 		});
