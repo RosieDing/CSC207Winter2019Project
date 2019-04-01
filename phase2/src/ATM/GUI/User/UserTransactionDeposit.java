@@ -52,7 +52,7 @@ public class UserTransactionDeposit extends JFrame {
 		
 		txtID = new JTextField();
 		txtID.setEditable(false);
-		txtID.setText(user.getPrimaryChq().toString());
+		txtID.setText(infoManager.getUser(id).getPrimaryChq().toString());
 		txtID.setBounds(125, 75, 300, 26);
 		contentPane.add(txtID);
 		txtID.setColumns(10);
