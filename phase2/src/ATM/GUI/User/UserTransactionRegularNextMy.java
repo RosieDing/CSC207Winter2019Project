@@ -92,7 +92,7 @@ public class UserTransactionRegularNextMy extends JFrame {
 		btnTransfer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					transMap.put("fromAccount", comboBox.getSelectedItem());
+					transMap.put("toAccount", comboBox.getSelectedItem());
 					Currency amount;
 					if (((Account)transMap.get("fromAccount")).getCurrencyType().equals("CAD")) {
 						amount = new Currency(Double.valueOf(txtAmount.getText()));
