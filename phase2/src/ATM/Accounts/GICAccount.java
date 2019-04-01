@@ -96,7 +96,8 @@ public class GICAccount extends InvestmentAccount {
 
     @Override
     public String toString(){
-        return this.getCurrencyType() + " GICAccount "+ this.accountNum + plan + "maturityYear"+ maturityYear +"/" + maturityMonth +"/" +maturityDay
+        return this.getCurrencyType() + " GICAccount "+ this.accountNum + getBalance()+ "\n"
+                + plan + "maturityYear"+ maturityYear +"/" + maturityMonth +"/" +maturityDay + "\n"
                 + monthLeft +" months left";
     }
 
