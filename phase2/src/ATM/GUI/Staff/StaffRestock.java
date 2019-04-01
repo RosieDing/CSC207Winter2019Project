@@ -1,16 +1,20 @@
 package ATM.GUI.Staff;
 
+import ATM.BankIdentities.BankManager;
+import ATM.GUI.Manager.ManagerCheckMachineBalance;
+import ATM.GUI.Manager.ManagerMainMenu;
 import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
+import ATM.Machine.Money;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
 public class StaffRestock extends JFrame {
 
@@ -24,6 +28,9 @@ public class StaffRestock extends JFrame {
      * Create the frame.
      */
     public StaffRestock(String id, InfoManager infoManager) {
+        InfoStorer infoStorer = infoManager.getInfoStorer();
+        BankManager bankManager = infoStorer.getBankManagerMap().get(id);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
@@ -36,6 +43,17 @@ public class StaffRestock extends JFrame {
         contentPane.add(lblRestock);
 
         txtFive = new JTextField();
+        txtFive.addKeyListener(new KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                try {
+                    long number = Long.parseLong(txtFive.getText());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, "Only Numbers Allowed");
+                    txtFive.setText("");
+                }
+            }
+
+        });
         txtFive.setColumns(10);
         txtFive.setBounds(201, 45, 130, 26);
         contentPane.add(txtFive);
@@ -49,16 +67,49 @@ public class StaffRestock extends JFrame {
         contentPane.add(lblTen);
 
         txtTen = new JTextField();
+        txtTen.addKeyListener(new KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                try {
+                    long number = Long.parseLong(txtTen.getText());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, "Only Numbers Allowed");
+                    txtTen.setText("");
+                }
+            }
+
+        });
         txtTen.setColumns(10);
         txtTen.setBounds(201, 87, 130, 26);
         contentPane.add(txtTen);
 
         txtTwenty = new JTextField();
+        txtTwenty.addKeyListener(new KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                try {
+                    long number = Long.parseLong(txtTwenty.getText());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, "Only Numbers Allowed");
+                    txtTwenty.setText("");
+                }
+            }
+
+        });
         txtTwenty.setColumns(10);
         txtTwenty.setBounds(225, 133, 130, 26);
         contentPane.add(txtTwenty);
 
         txtFifty = new JTextField();
+        txtFifty.addKeyListener(new KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                try {
+                    long number = Long.parseLong(txtFifty.getText());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, "Only Numbers Allowed");
+                    txtFifty.setText("");
+                }
+            }
+
+        });
         txtFifty.setColumns(10);
         txtFifty.setBounds(201, 181, 130, 26);
         contentPane.add(txtFifty);
@@ -72,10 +123,60 @@ public class StaffRestock extends JFrame {
         contentPane.add(lblTwenty);
 
         JButton btnBack = new JButton("Back");
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                StaffRestock.this.dispose();
+                new StaffMainMenu(id, infoManager).setVisible(true);
+            }
+        });
         btnBack.setBounds(6, 219, 117, 29);
         contentPane.add(btnBack);
 
         JButton btnRestock = new JButton("Restock");
+        btnRestock.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String five = txtFive.getText();
+                String ten = txtTen.getText();
+                String twenty = txtTwenty.getText();
+                String fifty = txtFifty.getText();
+                int numFive;
+                int numTen;
+                int numTwenty;
+                int numFifty;
+                if (five == ""){
+                    numFive = 0;
+                } else{
+                    numFive = Integer.valueOf(five);
+                }
+                if (ten == ""){
+                    numTen = 0;
+                } else {
+                    numTen = Integer.valueOf(ten);
+                }
+                if (twenty == ""){
+                    numTwenty = 0;
+                } else {
+                    numTwenty = Integer.valueOf(twenty);
+                }
+                if (ten == ""){
+                    numFifty = 0;
+                } else {
+                    numFifty = Integer.valueOf(fifty);
+                }
+                if (five!=null && ten != null && twenty != null && fifty!= null ) {
+                    Money m = new Money(numFive, numTen, numTwenty, numFifty);
+                    bankManager.restock(infoManager.getCashMachine(), m);
+                    JOptionPane.showMessageDialog(null, "Restock Successful");
+                    txtFive.setText("");
+                    txtTen.setText("");
+                    txtTwenty.setText("");
+                    txtFifty.setText("");
+                } else if (txtFifty.getText().isEmpty() & txtTen.getText().isEmpty() &
+                        txtTwenty.getText().isEmpty() &txtTen.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Invalid Input");
+                }
+            }
+        });
         btnRestock.setBounds(327, 219, 117, 29);
         contentPane.add(btnRestock);
     }
