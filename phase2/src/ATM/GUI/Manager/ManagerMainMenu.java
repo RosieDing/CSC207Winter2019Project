@@ -101,6 +101,8 @@ public class ManagerMainMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {
                 passwordManager.logout();
                 ManagerMainMenu.this.dispose();
+				infoManager.saveToFile();
+
 			}
 		});
 		btnLogout.setBounds(321, 243, 125, 29);

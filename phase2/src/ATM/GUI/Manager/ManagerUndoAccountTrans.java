@@ -9,12 +9,8 @@ import ATM.BankIdentities.*;
 import ATM.Transactions.*;
 import ATM.Machine.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -59,7 +55,30 @@ public class ManagerUndoAccountTrans extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String accNum = txtID.getText();
 				int times = Integer.valueOf(txtTrans.getText());
-				//bankManager.undoAccRecentTrans(accNum, transaction, cashMachine, times);
+				try{
+					bankManager.undoAccRecentTrans(accNum, transaction, cashMachine, times);
+				} catch(NoTransactionException exception){
+					JOptionPane.showMessageDialog(null, "This user do not own this account.");
+
+				}catch(ReverseNotPossibleException exception){
+					JOptionPane.showMessageDialog(null, "This user do not own this account.");
+
+				}catch(NotCADBaseAccountException exception){
+					JOptionPane.showMessageDialog(null, "This user do not own this account.");
+
+				}catch (NotEnoughMoneyException exception){
+					JOptionPane.showMessageDialog(null, "This user do not own this account.");
+
+				}catch (CashNotWithdrawableException exception){
+					JOptionPane.showMessageDialog(null, "This user do not own this account.");
+
+				}catch (TransactionAmountOverLimitException exception){
+					JOptionPane.showMessageDialog(null, "This user do not own this account.");
+
+				}catch(NullPointerException exception){
+					JOptionPane.showMessageDialog(null, "This user do not own this account.");
+
+				}
 			}
 		});
 		btnUndo.setBounds(274, 214, 117, 29);
