@@ -107,9 +107,8 @@ public class ManagerCreaterUser extends JFrame {
 				}
 				
 				String ID = bankManager.createUser(infoManager.getUserNum(), type, infoStorer);
-            	if (ID != "") {
-            		JOptionPane.showMessageDialog(null, "New user created! user ID: " + ID);
-            	}
+				JOptionPane.showMessageDialog(null, "New user created! user ID: " + ID);
+
 			}
 			
 		});

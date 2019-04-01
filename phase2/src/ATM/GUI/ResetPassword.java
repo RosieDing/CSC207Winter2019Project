@@ -82,8 +82,6 @@ public class ResetPassword extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				ResetPassword.this.dispose();
 				identityLog(id, infoStorer, infoManager);
 			}
 		});
