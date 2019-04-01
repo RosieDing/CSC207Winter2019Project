@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -34,11 +34,11 @@ public class UserSummary extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(479, 6, 15, 200);
-		contentPane.add(scrollBar);
-		
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(79, 6, 277, 200);
+		contentPane.add(scrollPane);
+
 		JTextArea txtSummary = new JTextArea();
 		txtSummary.setWrapStyleWord(true);
 		txtSummary.setEditable(false);
