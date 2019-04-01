@@ -105,7 +105,7 @@ import java.util.Map;
             } else {
                 double middleRate = latest().get(base).doubleValue();
                 double targetRate = latest().get(currency).doubleValue();
-                result = (middleRate / targetRate);
+                result = (targetRate/middleRate);
             }
             return result;
         }
