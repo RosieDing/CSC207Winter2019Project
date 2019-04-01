@@ -3,6 +3,9 @@ package ATM.GUI.Staff;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import ATM.InfoHandling.InfoManager;
+import ATM.InfoHandling.InfoStorer;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,7 +20,7 @@ public class StaffCheckCashmachine extends JFrame {
     /**
      * Create the frame.
      */
-    public StaffCheckCashmachine() {
+    public StaffCheckCashmachine(String id, InfoManager infoManager) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
