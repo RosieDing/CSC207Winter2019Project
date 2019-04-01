@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class UserYourAccounts extends JFrame {
+public class UserViewAccountInfo extends JFrame {
 
 	private JPanel contentPane;
 
@@ -19,7 +19,7 @@ public class UserYourAccounts extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserYourAccounts(String id, InfoManager infoManager) {
+	public UserViewAccountInfo(String id, InfoManager infoManager) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -32,13 +32,20 @@ public class UserYourAccounts extends JFrame {
 		contentPane.add(comboBox);
 		
 		JButton btnNext = new JButton("Next");
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserViewAccountInfo.this.dispose();
+				new UserViewAccountInfoNext(id, infoManager).setVisible(true);
+
+			}
+		});
 		btnNext.setBounds(235, 48, 117, 29);
 		contentPane.add(btnNext);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UserYourAccounts.this.dispose();
+				UserViewAccountInfo.this.dispose();
 				new UserMainMenu(id, infoManager).setVisible(true);
 
 			}
