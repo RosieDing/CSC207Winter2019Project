@@ -38,24 +38,6 @@ public class UserTransactionWithdrawal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnTransfer = new JButton("Withdraw");
-		btnTransfer.addKeyListener(new KeyAdapter() {
-			public void keyReleased(java.awt.event.KeyEvent evt) {
-				try {
-					Transaction trans = tm.makeTransaction(transMap, machine);
-					if (trans.isHappened()) {
-						JOptionPane.showMessageDialog(null, "Withdraw successful!");
-					}
-				} catch (NullPointerException e) {
-					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(rootPane, e.getMessage());
-				}
-			}
-		});
-		btnTransfer.setBounds(131, 216, 117, 29);
-		contentPane.add(btnTransfer);
 
 		JLabel lblFromAccount = new JLabel("From Account:");
 		lblFromAccount.setBounds(6, 80, 110, 16);
@@ -71,7 +53,6 @@ public class UserTransactionWithdrawal extends JFrame {
 		for (Object o : list) {
 			comboBox.addItem(o);
 		}
-		transMap.put("fromAccount", comboBox.getSelectedItem());
 		
 		txtAmount = new JTextField();
 		txtAmount.addKeyListener(new KeyAdapter() {
@@ -107,6 +88,27 @@ public class UserTransactionWithdrawal extends JFrame {
 		});
 		btnBack.setBounds(19, 219, 117, 29);
 		contentPane.add(btnBack);
+
+		JButton btnTransfer = new JButton("Withdraw");
+		btnTransfer.addKeyListener(new KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				try {
+					transMap.put("fromAccount", comboBox.getSelectedItem());
+					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
+					transMap.put("amount", amount);
+					Transaction trans = tm.makeTransaction(transMap, machine);
+					if (trans.isHappened()) {
+						JOptionPane.showMessageDialog(null, "Withdraw successful!");
+					}
+				} catch (NullPointerException e) {
+					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(rootPane, e.getMessage());
+				}
+			}
+		});
+		btnTransfer.setBounds(131, 216, 117, 29);
+		contentPane.add(btnTransfer);
 	}
 
 }

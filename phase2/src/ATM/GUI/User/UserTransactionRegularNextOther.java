@@ -43,6 +43,8 @@ public class UserTransactionRegularNextOther extends JFrame {
 		btnTransfer.addKeyListener(new KeyAdapter() {
 			public void keyReleased(java.awt.event.KeyEvent evt) {
 				try {
+					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
+					transMap.put("amount", amount);
 					transMap.put("toAccount", infoManager.getAccount(txtAccount.getText()));
 					Transaction trans = tm.makeTransaction(transMap, machine);
 					if (trans.isHappened()) {
@@ -81,8 +83,6 @@ public class UserTransactionRegularNextOther extends JFrame {
 		txtAmount.setColumns(10);
 		txtAmount.setBounds(198, 83, 130, 26);
 		contentPane.add(txtAmount);
-		Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
-		transMap.put("amount", amount);
 
 		JLabel lblAmount = new JLabel("Enter Amount:");
 		lblAmount.setBounds(74, 88, 112, 16);
