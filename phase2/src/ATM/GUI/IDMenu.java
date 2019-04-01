@@ -50,7 +50,8 @@ public class IDMenu extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IDMenu(InfoManager infoManager) {
+	public IDMenu() {
+		InfoManager infoManager = new InfoManager();
 		InfoStorer infoStorer = infoManager.getInfoStorer();
 		
 		

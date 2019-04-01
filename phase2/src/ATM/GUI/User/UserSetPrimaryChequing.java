@@ -47,12 +47,6 @@ public class UserSetPrimaryChequing extends JFrame {
 		JButton btnSet = new JButton("Set");
 		btnSet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try{
-					
-				}
-	            catch (AlreadyPrimaryException e){
-	            	
-	            }
 			}
 		});
 		btnSet.setBounds(251, 54, 117, 29);
