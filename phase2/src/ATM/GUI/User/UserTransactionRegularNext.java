@@ -63,6 +63,12 @@ public class UserTransactionRegularNext extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(83, 176, 231, 29);
 		contentPane.add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserTransactionRegularNext.this.dispose();
+				new UserTransactionRegular(transMap, uam, tm, machine, id, infoManager).setVisible(true);
+			}
+		});
 	}
 
 }
