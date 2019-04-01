@@ -3,6 +3,7 @@ package ATM.GUI;
 import ATM.Accounts.Currency;
 import ATM.BankIdentities.NoSuchAccountException;
 import ATM.BankIdentities.UserAccManager;
+import ATM.GUI.User.UserTransactionRegularNext;
 import ATM.InfoHandling.InfoManager;
 import ATM.Machine.CashMachine;
 import ATM.Transactions.Transaction;
@@ -10,6 +11,8 @@ import ATM.Transactions.TransactionManager;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.util.Map;
 
@@ -56,6 +59,12 @@ public class UserTransactionRegularNextOther extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(55, 203, 117, 29);
 		contentPane.add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserTransactionRegularNextOther.this.dispose();
+				new UserTransactionRegularNext(transMap, uam, tm, machine, id, infoManager).setVisible(true);
+			}
+		});
 
 		txtAmount = new JTextField();
 		txtAmount.addKeyListener(new KeyAdapter() {
