@@ -1,31 +1,48 @@
 package ATM.GUI;
 
+import ATM.BankIdentities.PasswordManager;
+import ATM.BankIdentities.User;
+import ATM.GUI.Manager.ManagerMainMenu;
+import ATM.GUI.Staff.StaffMainMenu;
 import ATM.GUI.User.UserMainMenu;
 import ATM.InfoHandling.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
 
 public class ResetPassword extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtReset;
 
-	/**
-	 * Launch the application.
-	 */
+	public void identityLog(String id, InfoStorer infoStorer, InfoManager infoManager) {
 
+		if (infoStorer.getBankManagerMap().containsKey(id)) {
+			ResetPassword.this.dispose();
+			new ManagerMainMenu(id, infoManager).setVisible(true);
+
+		} else if (infoStorer.getUserMap().containsKey(id)) {
+			ResetPassword.this.dispose();
+			new UserMainMenu(id, infoManager).setVisible(true);
+
+		} else if (infoStorer.getStaffMap().containsKey(id)) {
+			ResetPassword.this.dispose();
+			new StaffMainMenu(id, infoManager).setVisible(true);
+		}
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public ResetPassword(String id, InfoManager infoManager) {
+		InfoStorer infoStorer = new InfoStorer();
+		PasswordManager passwordManager = new PasswordManager(id);
+
+
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -38,19 +55,36 @@ public class ResetPassword extends JFrame {
 		contentPane.add(lblResetPassword);
 		
 		txtReset = new JTextField();
+		txtReset.addKeyListener(new KeyAdapter() {
+			public void keyReleased(java.awt.event.KeyEvent evt) {
+				try {
+					long number = Long.parseLong(txtReset.getText());
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(rootPane, "Only Numbers Allowed");
+					txtReset.setText("");
+				}
+			}
+
+		});
 		txtReset.setBounds(159, 86, 130, 26);
 		contentPane.add(txtReset);
 		txtReset.setColumns(10);
 		
 		JButton btnReset = new JButton("Reset");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				passwordManager.setPassword(txtReset.getText(), infoManager.getPasswordMap());
+			}
+		});
 		btnReset.setBounds(298, 86, 117, 29);
 		contentPane.add(btnReset);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				ResetPassword.this.dispose();
-				new UserMainMenu(id, infoManager).setVisible(true);
+				identityLog(id, infoStorer, infoManager);
 			}
 		});
 		btnBack.setBounds(159, 197, 117, 29);
