@@ -88,8 +88,6 @@ public class GICAccount extends InvestmentAccount {
         this.principle.setAmount( amount);
     }
 
-    @Override
-    public void transferIn(Currency amount){this.principle.add(amount);}
 
     public String getSummary(){return this.toString() + " , Remaining Balance: " + getBalance();}
 
