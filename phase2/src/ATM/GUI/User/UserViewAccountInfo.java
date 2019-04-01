@@ -1,5 +1,9 @@
 package ATM.GUI.User;
 
+import ATM.AccountTypeChecker.PayableChecker;
+import ATM.AccountTypeChecker.TypeChecker;
+import ATM.Accounts.Account;
+import ATM.BankIdentities.UserAccManager;
 import ATM.InfoHandling.*;
 
 import javax.swing.JFrame;
@@ -9,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class UserViewAccountInfo extends JFrame {
 
@@ -20,6 +25,9 @@ public class UserViewAccountInfo extends JFrame {
 	 * Create the frame.
 	 */
 	public UserViewAccountInfo(String id, InfoManager infoManager) {
+		InfoStorer infoStorer = infoManager.getInfoStorer();
+		UserAccManager uam = new UserAccManager(id, infoStorer.getUserMap(), infoStorer.getStaffMap());
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -30,13 +38,16 @@ public class UserViewAccountInfo extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(62, 49, 166, 27);
 		contentPane.add(comboBox);
+		ArrayList list = uam.getAccountList();
+		for (Object o : list) {
+			comboBox.addItem(o);
+		}
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserViewAccountInfo.this.dispose();
-				//ew UserViewAccountInfoNext(id, infoManager).setVisible(true);
-
+				new UserViewAccountInfoNext(id, infoManager, (Account)comboBox.getSelectedItem()).setVisible(true);
 			}
 		});
 		btnNext.setBounds(235, 48, 117, 29);
