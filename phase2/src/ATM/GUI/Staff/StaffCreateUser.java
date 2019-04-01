@@ -45,7 +45,7 @@ public class StaffCreateUser extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StaffCreateUser.this.dispose();
-				new ManagerMainMenu(id, infoManager).setVisible(true);
+				new StaffMainMenu(id, infoManager).setVisible(true);
 			}
 		});
 		btnBack.setBounds(6, 68, 117, 29);
