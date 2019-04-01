@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Deposit extends Transaction{
     private final Account fromAcc;
     private final Depositable toAcc;
-    private final LocalDate date;
+    private LocalDate date = Date.getDate().getSystemCurrentTime();
     private final Currency amount;
 
 
@@ -29,8 +29,6 @@ public class Deposit extends Transaction{
         this.amount = amount;
         this.toAcc = toAccount;
         this.fromAcc = null;
-        this.date = Date.getDate().getSystemCurrentTime();
-
     }
 
     public Currency getAmount() {
