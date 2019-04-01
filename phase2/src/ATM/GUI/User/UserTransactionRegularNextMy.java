@@ -3,6 +3,7 @@ package ATM.GUI;
 import ATM.AccountTypeChecker.PayableChecker;
 import ATM.AccountTypeChecker.TransferInableChecker;
 import ATM.AccountTypeChecker.TypeChecker;
+import ATM.Accounts.Account;
 import ATM.Accounts.Currency;
 import ATM.BankIdentities.UserAccManager;
 import ATM.GUI.User.UserMakeTransaction;
@@ -91,9 +92,14 @@ public class UserTransactionRegularNextMy extends JFrame {
 		btnTransfer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					transMap.put("fromAccount", comboBox.getSelectedItem());
-					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
-					transMap.put("amount", amount);
+					transMap.put("toAccount", comboBox.getSelectedItem());
+					Currency amount;
+					if (((Account)transMap.get("fromAccount")).getCurrencyType().equals("CAD")) {
+						amount = new Currency(Double.valueOf(txtAmount.getText()));
+					} else {
+						amount = new Currency(((Account)transMap.get("fromAccount")).getCurrencyType(),
+								Double.valueOf(txtAmount.getText()));
+					}
 					Transaction trans = tm.makeTransaction(transMap, machine);
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Transaction successful!");

@@ -97,7 +97,7 @@ public class Withdrawal extends Transaction {
     boolean possibleToBegin() throws TransactionAmountOverLimitException{
         Account acc = getFromAcc();
         if (acc instanceof ChequingAccount) {
-            if (acc.getBalance().getAmount() < 0) {
+            if (acc.getBalance().getAmount() <= 0) {
                 throw new TransactionAmountOverLimitException();
             }
         }

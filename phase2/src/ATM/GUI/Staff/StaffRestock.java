@@ -1,6 +1,7 @@
 package ATM.GUI.Staff;
 
 import ATM.BankIdentities.BankManager;
+import ATM.BankIdentities.BankStaff;
 import ATM.GUI.Manager.ManagerCheckMachineBalance;
 import ATM.GUI.Manager.ManagerMainMenu;
 import ATM.InfoHandling.InfoManager;
@@ -29,7 +30,7 @@ public class StaffRestock extends JFrame {
      */
     public StaffRestock(String id, InfoManager infoManager) {
         InfoStorer infoStorer = infoManager.getInfoStorer();
-        BankManager bankManager = infoStorer.getBankManagerMap().get(id);
+        BankStaff bankStaff = infoStorer.getStaffMap().get(id);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -165,7 +166,7 @@ public class StaffRestock extends JFrame {
                 }
                 if (five!=null && ten != null && twenty != null && fifty!= null ) {
                     Money m = new Money(numFive, numTen, numTwenty, numFifty);
-                    bankManager.restock(infoManager.getCashMachine(), m);
+                    bankStaff.restock(infoManager.getCashMachine(), m);
                     JOptionPane.showMessageDialog(null, "Restock Successful");
                     txtFive.setText("");
                     txtTen.setText("");

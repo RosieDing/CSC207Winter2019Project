@@ -2,6 +2,7 @@ package ATM.GUI.User;
 
 import ATM.AccountTypeChecker.PayableChecker;
 import ATM.AccountTypeChecker.TypeChecker;
+import ATM.Accounts.Account;
 import ATM.Accounts.Currency;
 import ATM.BankIdentities.UserAccManager;
 import ATM.InfoHandling.InfoManager;
@@ -98,9 +99,15 @@ public class UserTransactionPayBill extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					transMap.put("to", txtTo.getText());
-					Currency amount = new Currency(Double.valueOf(txtAmount.getText()));
-					transMap.put("amount", amount);
 					transMap.put("fromAccount", comboBox.getSelectedItem());
+					Currency amount;
+					if (((Account)transMap.get("fromAccount")).getCurrencyType().equals("CAD")) {
+						amount = new Currency(Double.valueOf(txtAmount.getText()));
+					} else {
+						amount = new Currency(((Account)transMap.get("fromAccount")).getCurrencyType(),
+								Double.valueOf(txtAmount.getText()));
+					}
+					transMap.put("amount", amount);
 					Transaction trans = tm.makeTransaction(transMap, machine);
 					if (trans.isHappened()) {
 						JOptionPane.showMessageDialog(null, "Pay Bill successful!");

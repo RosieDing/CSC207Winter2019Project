@@ -60,7 +60,7 @@ public class ManagerUndoAccountTrans extends JFrame {
 				} catch (NullPointerException ex) {
 					JOptionPane.showMessageDialog(rootPane, "Transaction is not possible.");
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+					JOptionPane.showMessageDialog(rootPane, ex);
 				}
 			}
 		});
