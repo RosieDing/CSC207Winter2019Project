@@ -29,19 +29,19 @@ public class UserSummary extends JFrame {
 		UserAccManager manager = new UserAccManager(id, infoStorer.getUserMap(), infoStorer.getStaffMap());
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(341, 6, 15, 200);
+		scrollBar.setBounds(479, 6, 15, 200);
 		contentPane.add(scrollBar);
 		
 		JTextArea txtSummary = new JTextArea();
 		txtSummary.setEditable(false);
-		txtSummary.setBounds(79, 6, 500, 200);
+		txtSummary.setBounds(79, 6, 400, 200);
 		contentPane.add(txtSummary);
 		txtSummary.setText(manager.getSummary());
 		
