@@ -8,6 +8,7 @@ import ATM.GUI.User.UserMainMenu;
 import ATM.InfoHandling.InfoManager;
 import ATM.BankIdentities.*;
 
+import javax.sound.sampled.Line;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -24,35 +25,35 @@ public class StaffMainMenu extends JFrame {
 	 * Create the frame.
 	 */
 	public StaffMainMenu(String id, InfoManager infoManager) {
-		PasswordManager passwordManager =  new PasswordManager(id);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnCreateUser = new JButton("Create User");
-		btnCreateUser.addActionListener(new ActionListener() {
+
+		createUser(id, infoManager);
+		restock(id, infoManager);
+		accessUserOptions(id, infoManager);
+		logout(id, infoManager);
+		checkMachineBalance(id, infoManager);
+	}
+	private void logout(String id, InfoManager infoManager){
+		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				PasswordManager passwordManager =  new PasswordManager(id);
+				passwordManager.logout();
 				StaffMainMenu.this.dispose();
-				new StaffCreateUser(id, infoManager).setVisible(true);
+				infoManager.saveToFile();
+				new IDMenu(infoManager).setVisible(true);
 			}
 		});
-		btnCreateUser.setBounds(28, 25, 117, 29);
-		contentPane.add(btnCreateUser);
-		
-		JButton btnRestock = new JButton("Restock");
-		btnRestock.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				StaffMainMenu.this.dispose();
-				new StaffRestock(id, infoManager).setVisible(true);
-			}
-		});
-		btnRestock.setBounds(197, 146, 140, 29);
-		contentPane.add(btnRestock);
-		
+		btnLogout.setBounds(28, 146, 156, 29);
+		contentPane.add(btnLogout);
+	}
+
+	private void accessUserOptions(String id, InfoManager infoManager){
 		JButton btnAccessUserOption = new JButton("Access User Options");
 		btnAccessUserOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -62,21 +63,33 @@ public class StaffMainMenu extends JFrame {
 		});
 		btnAccessUserOption.setBounds(197, 25, 156, 29);
 		contentPane.add(btnAccessUserOption);
-		
-		JButton btnLogout = new JButton("Logout");
-		btnLogout.addActionListener(new ActionListener() {
+	}
+
+	private void createUser(String id, InfoManager infoManager){
+		JButton btnCreateUser = new JButton("Create User");
+		btnCreateUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				passwordManager.logout();
 				StaffMainMenu.this.dispose();
-				infoManager.saveToFile();
-				new IDMenu(infoManager).setVisible(true);
-
-
+				new StaffCreateUser(id, infoManager).setVisible(true);
 			}
 		});
-		btnLogout.setBounds(28, 146, 156, 29);
-		contentPane.add(btnLogout);
-		
+		btnCreateUser.setBounds(28, 25, 117, 29);
+		contentPane.add(btnCreateUser);
+	}
+
+	private void restock(String id, InfoManager infoManager){
+		JButton btnRestock = new JButton("Restock");
+		btnRestock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StaffMainMenu.this.dispose();
+				new StaffRestock(id, infoManager).setVisible(true);
+			}
+		});
+		btnRestock.setBounds(197, 146, 140, 29);
+		contentPane.add(btnRestock);
+	}
+
+	private void checkMachineBalance(String id, InfoManager infoManager){
 		JButton btnCheckMachineBalance = new JButton("Check Machine Balance");
 		btnCheckMachineBalance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
