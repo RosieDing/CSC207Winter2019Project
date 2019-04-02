@@ -4,17 +4,30 @@ This is a instruction of the ATM:
 **************************************************************************
 
  To start up the program(initial the ATM):
-    1. Run the main method(located at GUI package StartMenu). It will automatically create a bank manager with the
+    1. You need to import Maven when you first create the project, or add Maven support framework on module phase2 after
+    you have already created the project.*
+    2. Run the main method(located at GUI package StartMenu). It will automatically create a bank manager with the
     id of 5101 and the initial password of 1234.
-    2. Log into the initial BankManager account(ID: 5101, Password: 1234.  You can change your password to whatever you
-    want).
-    3. Create several user and their account(at least one user)
+    2. Log into the initial BankManager account(ID: 5101, Password: 1234.  You can change your password to any number
+    that you want: but not starting with 0).
+    3. Create several users and their accounts(at least one user).
     4. Restock the cash machine(Initial the amount of money in the cash machine) Note: this step is important if you
-     do not restock the cash machine won't have any money
+     do not restock the cash machine won't have any money.
 
     Now you are good to go!
 
-   Remember to log out, otherwise the initial will fail.
+   Remember to log out, otherwise some of the data just created may not be stored.
+
+   *The reason for this is that for our Currency rate calculation, we use a piece of code from an open-source currency
+       data API that contains a method called getExchangeRate() which will take in two currency types and
+       output the correct exchange rate based on real-time currency data.
+   The code that we use from that API is OpenExcangeRates.java located in our org.openexchangerates.oerjava package.
+       Our Currency class will use its method getExchangeRate() in our currency conversion.
+   The API that we use is from the website: https://github.com/dneto/oer-java,
+       formerly https://github.com/currencybot/open-exchange-rates.
+   We sign up for an App ID on https://openexchangerates.org
+       which grants us access to use the currency data with this open-source API.
+       Our App ID: 0c77a0ee69b54ab8ac28bb98edfea483.
 
 
 **************************************************************************
